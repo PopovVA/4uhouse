@@ -3,118 +3,74 @@
 - [**Provider** service description](#provider-service-description)
     - [Idea](#idea)
     - [Components](#components)
-        - [DriverRide](#driverride)
-
-
+        - [Item](#item)
+        - [Separator](#separator)
+        - [Button](#button)
+    - [Screen](#screen) 
+    
 ## Idea
 >>>
 Приложение состоит из набора экранов (screen). Каждый экран описывается в виде джейсона, который приходит в ответе на запрос.
-Каждый экран содержит список компонент в порядке их отображения и список кнопок.
+Экран содержит список компонент и кнопок.
 
 Сервер покрыт авторизацией.
 >>>
 
 ## Components
->>>
+
 ### Item
+>>>
+Ссылка на модель данных компоненты
+
+Макет компоненты, расписанный с данными
+
+#### Conditions
+```kotlin
+1. if (picture = null)
+    "key" сдвигать на место "picture"
+2. if (edit == "true")
+    "key" and "value" отображать ярким цветом
+   else
+    "key" and "value" отображать тусклым цветом
+3. if (request != null)
+    после "value" отображать знак ">"
+4. При нажатии на компоненту, по значению поля "request" отправляется запрос на получение экрана (screen)
+5. Зависимость отображения "value" от поля "typeValue" смотри в таблице ниже
+```
+Таблица зависимости отображения "value" от поля "typeValue"
+>>>
 
 ### Separator
+>>>
+Ссылка на модель данных компоненты
+
+Таблица зависимости отображения "separator" от поля "type"
+>>>
 
 ### Button
+>>>
+Ссылка на модель данных компоненты
+
+Таблица зависимости отображения "button" от поля "type"
+
+#### Conditions
+1. Кнопка становится доступной для нажатия при выполнении условий поля "able", иначе отображается недоступной 
+1. При нажатии кнопки
+    ```kotlin
+    if (type = "back")
+        осуществляется переход на предыдущий экран
+    else if (request != null)
+        по значению поля "request" отправляется запрос на получение экрана (screen)
+    ```
+>>>
 
 ## Screen
-
-
-## GET../driver/rides
 >>>
-### Request
+Ссылка на модель данных экрана
 
-```kotlin
-accessToken // authorization system
-```
+Макет экрана
 
-### Response
-
-```kotlin
-[DriverRide]
-```
-
-### Description
-
-1. Из `accessToken` получает `username`
-1. Из `WaterFlow` получает поездки водителя:
-
-    ```kotlin
-    GET../tasks
-
-    select = _taskClass["Case"]driver.login[username]endStatus[null]
-    ```
-2.  Для каждой поездки готовит driverRide для отправки на клиент
-
-    ```kotlin
-    driverRide.
-        caseId = Case.. //значения берет из аналогичных полей в Case
-        orderNum = Case..
-        rideNodes = Case..
-        rideDateTime = Case..
-        rating = accounts.getRideTrustRating(rideDateTime, Case.driver.choosingDriverDateTime) // округлить до 2х знаков после запятой
-        rideClass = Case..
-        maxPerson = Case..
-        maxLuggage = Case..
-        distance = Case..
-        time = Case..
-        fare = Case.driver.fare
-        cleintName = Case.client.name
-        statusRide = //расчет далее
-    ```
-3.  По данным из `WaterFlow` определяет `statusRide`: 
-
-    ```kotlin
-    GET../tasks
-
-    select = 
-    _taskClass["CheckReady"]["CheckArrive"]["CheckStart"]["CheckFinish"]_dateFinish[null]_caseId[caseId] 
-    ```
-    - по полученной задаче определяет `statusRide.name` согласно таблице:
-
-        | _taskClass  | statusRide.name |
-        | ----------- | --------------- |
-        | CheckReady  | Ready           |
-        | CheckArrive | Arrived         |
-        | CheckStart  | Start           |
-        | CheckFinish | Finish          |
-    - если `statusRide.name` не удалось определить, то поездку полностью исключает
-    - определяет поля `statusRide.active` и `statusRide.time`
-
-        ```kotlin
-        if (_dateStart > NOW) {
-            active = false
-            time = _dateStart - NOW
-        } else {
-            active = true
-            time = _duration – (NOW – _dateStart)
-        }
-        ```
+### Conditions
+1. Порядок отображения компонент соответствует порядку в списке "components"
+1. Порядок отображения кнопок внизу экрана соответствует порядку в списке "button" 
 >>>
-
-## GET../driver/market
->>>
-### Request
-
-```kotlin
-accessToken // authorization system
-```
-
-### Response
-
-```kotlin
-{
-  driverRides: [DriverRide]
-  marketRides: [DriverRide]
-}
-```
-
-### Description
-
-1. Из `accessToken` получает `username`
-2. Получает `driverRides` по `GET../driver/rides`
