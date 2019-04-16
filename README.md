@@ -22,7 +22,9 @@
 >>>
 Ссылка на модель данных компоненты
 
-Макет компоненты, расписанный с данными
+Макет компоненты
+
+![image](images/item.png)
 
 #### Conditions
 ```kotlin
@@ -38,6 +40,11 @@
 5. Зависимость отображения "value" от поля "typeValue" смотри в таблице ниже
 ```
 Таблица зависимости отображения "value" от поля "typeValue"
+
+typeValue | отображение "value"
+--------- | -----
+switch    | ![image](images/switch.png)
+date      | ![image](images/date.png)
 >>>
 
 ### Separator
