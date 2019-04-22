@@ -4,7 +4,6 @@
     - [Idea](#idea)
     - [Components](#components)
         - [Item](#item)
-        - [Separator](#separator)
         - [Button](#button)
     - [Screen](#screen) 
     
@@ -27,38 +26,37 @@
 ![image](images/item.png)
 
 #### Conditions
-```kotlin
-1. if (picture = null)
-    "key" сдвигать на место "picture"
-2. if (edit == "true")
-    "key" and "value" отображать ярким цветом
-   else
-    "key" and "value" отображать тусклым цветом
-3. if (request != null)
-    после "value" отображать знак ">"
-4. При нажатии на компоненту, по значению поля "request" отправляется запрос на получение экрана (screen)
-5. Зависимость отображения "value" от поля "typeValue" смотри в таблице ниже
-```
-Таблица зависимости отображения "value" от поля "typeValue"
+1. Отображение picture
+    ```kotlin    
+    if (picture = null)
+        "key" сдвигать на место "picture"
+    ```
+2. Цвет, переход на другой экран, редактирование
+    ```kotlin
+    if (screen == true)
+        после "value" отображать знак ">"
+        при нажатии отправить запрос на получение экрана: к "path" экрана добавить "id" компоненты
+    if (input == true)
+        "key" and "value" отображать ярким цветом
+        if (typeValue == switch)
+            при нажатии отправить PUT запрос (к "path" экрана добавить "/id" компоненты). В запросе отправить "id" и "value" компоненты
+        else
+            в зависимости от typeValue открыть экран ввода данных и по нажатию на "Save" отправить аналогичный PUT запрос
+    else
+        "key" and "value" отображать серым цветом
+    ```
+5. Зависимость отображения "value" от поля "typeValue" и открытие доп. экрана смотри в таблице ниже
 
-typeValue | отображение "value"
---------- | -----
-switch    | ![image](images/switch.png)
-date      | ![image](images/date.png)
+typeValue | отображение "value"         | экран для ввода
+--------- | --------------------------- | ---
+switch    | ![image](images/switch.png) | -
+date      | 01.01.2019                  | ![image](images/date_screen.png)
+money     | перед запятой начиная с конца каждые 3 знака отделять пробелом <br>если значений после запятой нет, отображать "00" <br> ex: 1 354 987.76 | ![image](images/money_screen.png)
+string    |                             | ![image](images/string_screen.png)
+int       |                             | ![image](images/money_screen.png)
+float     | если значений после запятой нет, отображать "00" | ![image](images/money_screen.png)
 >>>
 
-### Separator
->>>
-[Модель](https://gitlab.4u.house/4u/provider/provider-backend/blob/master/README.md#separator) данных компоненты
-
-Таблица зависимости отображения "separator" от поля "type"
-
-type         | отображение
------------- | ----
-text         | ![image](images/text.png)
-line         | ![image](images/line.png)
-textWithLine | ![image](images/textWithLine.png)
->>>
 
 ### Button
 >>>
@@ -82,7 +80,7 @@ textWithLine | ![image](images/textWithLine.png)
 ![image](images/screen.png)
 
 ### Conditions
-1. У каждого экрана в заголовке (левее "key") отображается кнопка возврата ">", по нажатию на которую осуществляется переход на предыдущий экран
+1. У каждого экрана в заголовке (левее "key") отображается кнопка возврата ">". По нажатию у "path" убрать последний параметр и запросить новый экран (возврат на предущий)
 1. Порядок отображения компонент соответствует порядку в списке "components"
 1. Порядок отображения кнопок внизу экрана соответствует порядку в списке "button" 
 >>>
