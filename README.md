@@ -54,9 +54,6 @@ typeValue | отображение "value"         | экран для ввод�
 switch    | ![image](images/switch.png) | -
 date      | 01.01.2019                  | ![image](images/date_screen.png)
 money     | перед запятой начиная с конца каждые 3 знака отделять пробелом <br>если значений после запятой нет, отображать "00" <br> ex: 1 354 987.76 | ![image](images/money_screen.png)
-string    |                             | ![image](images/string_screen.png)
-int       |                             | ![image](images/money_screen.png)
-float     | если значений после запятой нет, отображать "00" | ![image](images/money_screen.png)
 >>>
 
 
