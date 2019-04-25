@@ -1,4 +1,7 @@
 [PUT../provider/{num}/{taskClass}/{idField}]:https://gitlab.4u.house/4u/provider/provider-backend/tree/develop#putprovidernumtaskclassidfield
+[Item]:https://gitlab.4u.house/4u/provider/provider-backend/blob/develop/README.md#item
+[Button]:https://gitlab.4u.house/4u/provider/provider-backend/blob/develop/README.md#button
+[Screen]:https://gitlab.4u.house/4u/provider/provider-backend/blob/develop/README.md#sreen
 
 # **Provider** service description
 
@@ -21,7 +24,7 @@
 
 ### Item
 >>>
-[Модель](https://gitlab.4u.house/4u/provider/provider-backend/blob/master/README.md#item) данных компоненты
+Модель данных компоненты - [Item][]
 
 Макет компоненты
 
@@ -61,20 +64,20 @@ money     | перед запятой начиная с конца каждые 
 
 ### Button
 >>>
-[Модель](https://gitlab.4u.house/4u/provider/provider-backend/blob/master/README.md#button) данных компоненты
+Модель данных компоненты - [Button][]
 
 Макет компоненты
 
 ![image](images/_button.png)
 
 #### Conditions
-1. Кнопка доступна для нажатия при `able == true`, иначе отображается недоступной 
-1. При нажатии кнопки по значению поля "request" отправляется запрос на получение экрана (screen)
+1. Кнопка доступна для нажатия при `isAble == true`, иначе отображается недоступной 
+1. При нажатии кнопки отправить PUT запрос - [PUT../provider/{num}/{taskClass}/{idField}][]: к "path" экрана добавить "/id" компоненты. В запросе отправить "value" компоненты
 >>>
 
 ## Screen
 >>>
-[Модель](https://gitlab.4u.house/4u/provider/provider-backend/blob/master/README.md#screen) данных экрана
+Модель данных экрана - [Screen][]
 
 Макет экрана
 
