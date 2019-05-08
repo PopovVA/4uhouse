@@ -1,5 +1,6 @@
 [PUT../provider/{num}/{taskClass}/{idField}]:https://gitlab.4u.house/4u/provider/provider-backend/tree/develop#putprovidernumtaskclassidfield
 [Item]:https://gitlab.4u.house/4u/provider/provider-backend/blob/develop/README.md#item
+[Note]:https://gitlab.4u.house/4u/provider/provider-backend/blob/develop/README.md#note
 [Button]:https://gitlab.4u.house/4u/provider/provider-backend/blob/develop/README.md#button
 [Screen]:https://gitlab.4u.house/4u/provider/provider-backend/blob/develop/README.md#sreen
 
@@ -9,6 +10,7 @@
     - [Idea](#idea)
     - [Components](#components)
         - [Item](#item)
+        - [Note](#note)
         - [Button](#button)
     - [Screen](#screen) 
     
@@ -61,6 +63,14 @@ money     | значение делить на 100. Перед запятой н
 photo     | -                           | ![image](images/photo_screen.png) | в теле запроса передать параметр `img: file`, имя файла = `id компоненты`
 >>>
 
+### Note
+>>>
+Модель данных компоненты - [Note][]
+
+Макет компоненты
+
+![image](images/note.png)
+>>>
 
 ### Button
 >>>
