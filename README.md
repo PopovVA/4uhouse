@@ -1,6 +1,7 @@
 [PUT../provider/{num}/{taskClass}/{idField}]:https://gitlab.4u.house/4u/provider/provider-backend/tree/develop#putprovidernumtaskclassidfield
 [Item]:https://gitlab.4u.house/4u/provider/provider-backend/blob/develop/README.md#item
 [Note]:https://gitlab.4u.house/4u/provider/provider-backend/blob/develop/README.md#note
+[Property]:https://gitlab.4u.house/4u/provider/provider-backend/blob/develop/README.md#property
 [Button]:https://gitlab.4u.house/4u/provider/provider-backend/blob/develop/README.md#button
 [Screen]:https://gitlab.4u.house/4u/provider/provider-backend/blob/develop/README.md#sreen
 
@@ -11,6 +12,7 @@
     - [Components](#components)
         - [Item](#item)
         - [Note](#note)
+        - [Property](#property)
         - [Button](#button)
     - [Screen](#screen) 
     
@@ -70,6 +72,21 @@ photo     | -                           | ![image](images/photo_screen.png) | в
 Макет компоненты
 
 ![image](images/note.png)
+>>>
+
+### Property
+>>>
+Модель данных компоненты - [Property][]
+
+Макет компоненты
+
+example | template
+------- | --
+![image](images/listProperty.png) | ![image](images/listProperty_template.png)
+
+#### Conditions
+1. Цвет подложки статуса зависит от поля `statusColor` 
+1. if (`picture = null`), выводить сообщение: "Here will be your property"
 >>>
 
 ### Button
