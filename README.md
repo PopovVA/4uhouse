@@ -87,6 +87,7 @@ example | template
 #### Conditions
 1. Цвет подложки статуса зависит от поля `statusColor` 
 1. if (`picture = null`), выводить сообщение: "Here will be your property"
+1. При нажатии отправить запрос на получение экрана: к "path" экрана добавить "id" компоненты
 >>>
 
 ### Button
