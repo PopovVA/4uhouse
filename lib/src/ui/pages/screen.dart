@@ -29,6 +29,11 @@ class Screen extends StatefulWidget {
       this.scrollController = ScrollController(
           initialScrollOffset:
               initialScrollPosition != null ? initialScrollPosition : 0.0);
+    } else {
+      this.scrollController = ScrollController(
+          initialScrollOffset:
+          initialScrollPosition != null ? initialScrollPosition : 0.0);
+
     }
   }
 
@@ -56,8 +61,6 @@ class _ScreenState extends State<Screen> {
             body: buildComponents(snapshot),
             goBack: snapshot.data.path != null
                 ? () {
-                    print(
-                        '===> widget.scrollController.position: ${widget.scrollController.position}');
                     String path = snapshot.data.path;
                     Navigator.of(context).pushNamedAndRemoveUntil(
                       snapshot.data.path.substring(0, path.lastIndexOf('/')),
@@ -137,6 +140,7 @@ class _ScreenState extends State<Screen> {
   }
 
   makeTransition(context, id) {
+    print('===> widget.scrollController: ${widget.scrollController}');
     Navigator.of(context).pushNamedAndRemoveUntil(
       '${widget.route}${id is String ? '/$id' : ''}',
       (Route<dynamic> route) => false,
