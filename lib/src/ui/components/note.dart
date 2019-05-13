@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import '../../models/note_model.dart';
 
 class Note extends StatelessWidget {
-  Note(this.note);
+  Note(NoteModel note) : this.note = note, this.id = note.id;
 
   final NoteModel note;
+  final String id;
 
   static const int HIGHLIGHT_COLOR = 0xFFdeff0000;
 

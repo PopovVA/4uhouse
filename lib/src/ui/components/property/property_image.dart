@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert' show base64Decode;
 import 'dart:typed_data' show Uint8List;
 
-import '../../../../utils/type_check.dart' show isNotNull;
+import '../../../utils/type_check.dart' show isNotNull;
 
 class PropertyImage extends StatelessWidget {
   static const Radius radius = Radius.circular(3.0);

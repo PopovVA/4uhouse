@@ -15,11 +15,14 @@ import '../../helpers/money_controller.dart' show formatCost;
 
 class Item extends StatefulWidget {
   final ItemModel item;
+  final String id;
   final Function handleSave;
   final String path;
   final Function makeTransition;
 
-  Item(this.item, this.path, this.handleSave, this.makeTransition);
+  Item(ItemModel item, this.path, this.handleSave, this.makeTransition)
+      : this.item = item,
+        this.id = item.id;
 
   @override
   State<StatefulWidget> createState() {

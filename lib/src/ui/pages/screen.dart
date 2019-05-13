@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import '../../constants/layout.dart' show standardPadding;
 
@@ -13,7 +14,7 @@ import '../components/common/button.dart';
 import '../components/common/circular_progress.dart';
 import '../components/item/item.dart';
 import '../components/note.dart';
-import 'package:provider_mobile/src/ui/components/pickers/property/property.dart';
+import '../components/property/property.dart';
 import 'package:provider_mobile/src/ui/components/common/page_template.dart';
 
 class Screen extends StatefulWidget {
@@ -23,9 +24,7 @@ class Screen extends StatefulWidget {
 
   Screen(this.route, {Map<String, dynamic> arguments}) {
     if (arguments != null) {
-      print('===> arguments: ${arguments}');
       this.scrollToId = arguments['scrollToId'];
-      print('===> this.scrollToId: ${this.scrollToId}');
     }
   }
 
@@ -36,10 +35,18 @@ class Screen extends StatefulWidget {
 }
 
 class _ScreenState extends State<Screen> {
+  GlobalKey scrollItemKey;
+
   @override
   void initState() {
     bloc.fetchScreen(widget.route);
     super.initState();
+  }
+
+  void scrollToItem(GlobalKey key) {
+    if (key != null) {
+      Scrollable.ensureVisible(key.currentContext);
+    }
   }
 
   @override
@@ -58,7 +65,8 @@ class _ScreenState extends State<Screen> {
                       snapshot.data.path.substring(0, path.lastIndexOf('/')),
                       (Route<dynamic> route) => false,
                       arguments: {
-                        'scrollToId': widget.route.substring(widget.route.lastIndexOf('/') + 1),
+                        'scrollToId': widget.route
+                            .substring(widget.route.lastIndexOf('/') + 1),
                       },
                     );
                   }
@@ -80,7 +88,7 @@ class _ScreenState extends State<Screen> {
   Widget buildComponents(AsyncSnapshot<ScreenModel> snapshot) {
     dynamic data = snapshot.data;
     if (data is ScreenModel) {
-      List<dynamic> items = [];
+      List<Widget> items = [];
       List<Button> buttons = [];
       data.components.forEach((dynamic component) {
         if (component is ItemModel) {
@@ -103,7 +111,14 @@ class _ScreenState extends State<Screen> {
         }
       });
 
-    // if scrollToId - find id and set a key to elementfj
+      if (widget.scrollToId is String) {
+        dynamic scrollItemList = items
+            .where((dynamic item) => item.id == widget.scrollToId)
+            .toList();
+        scrollItemKey = scrollItemList.isEmpty ? null : scrollItemList[0].key;
+        SchedulerBinding.instance
+            .addPostFrameCallback((_) => scrollToItem(scrollItemKey));
+      }
 
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -111,12 +126,11 @@ class _ScreenState extends State<Screen> {
         children: <Widget>[
           Expanded(
             child: Container(
-              child: ListView.builder(
+              child: SingleChildScrollView(
                 controller: widget.scrollController,
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  return items[index];
-                },
+                child: Column(
+                  children: items,
+                ),
               ),
             ),
           ),
@@ -134,7 +148,6 @@ class _ScreenState extends State<Screen> {
   }
 
   makeTransition(context, id) {
-    print('===> widget.scrollController: ${widget.scrollController}');
     Navigator.of(context).pushNamedAndRemoveUntil(
       '${widget.route}${id is String ? '/$id' : ''}',
       (Route<dynamic> route) => false,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../utils/type_check.dart' show isNotNull;
+import '../../../utils/type_check.dart' show isNotNull;
 
 class PropertyFooter extends StatelessWidget {
   static const Color fontColor = Color(0xFF212121);
