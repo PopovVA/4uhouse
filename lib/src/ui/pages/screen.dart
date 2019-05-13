@@ -18,22 +18,14 @@ import 'package:provider_mobile/src/ui/components/common/page_template.dart';
 
 class Screen extends StatefulWidget {
   final String route;
-  ScrollController scrollController;
-  double prevScrollPosition;
-  double initialScrollPosition;
+  String scrollToId;
+  final ScrollController scrollController = ScrollController();
 
   Screen(this.route, {Map<String, dynamic> arguments}) {
     if (arguments != null) {
-      this.prevScrollPosition = arguments['prevScrollPosition'];
-      double initialScrollPosition = arguments['initialScrollPosition'];
-      this.scrollController = ScrollController(
-          initialScrollOffset:
-              initialScrollPosition != null ? initialScrollPosition : 0.0);
-    } else {
-      this.scrollController = ScrollController(
-          initialScrollOffset:
-          initialScrollPosition != null ? initialScrollPosition : 0.0);
-
+      print('===> arguments: ${arguments}');
+      this.scrollToId = arguments['scrollToId'];
+      print('===> this.scrollToId: ${this.scrollToId}');
     }
   }
 
@@ -66,7 +58,7 @@ class _ScreenState extends State<Screen> {
                       snapshot.data.path.substring(0, path.lastIndexOf('/')),
                       (Route<dynamic> route) => false,
                       arguments: {
-                        'initialScrollPosition': widget.prevScrollPosition,
+                        'scrollToId': widget.route.substring(widget.route.lastIndexOf('/') + 1),
                       },
                     );
                   }
@@ -111,6 +103,8 @@ class _ScreenState extends State<Screen> {
         }
       });
 
+    // if scrollToId - find id and set a key to elementfj
+
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,9 +138,6 @@ class _ScreenState extends State<Screen> {
     Navigator.of(context).pushNamedAndRemoveUntil(
       '${widget.route}${id is String ? '/$id' : ''}',
       (Route<dynamic> route) => false,
-      arguments: {
-        'prevScrollPosition': widget.scrollController.offset,
-      },
     );
   }
 

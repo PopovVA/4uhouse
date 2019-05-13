@@ -55,7 +55,6 @@ class ScreenApiProvider {
     final Uri uri = Uri.parse('$BASE_URL$route?value=${value.toString()}');
     print('---> query: $uri');
     if (body is File) {
-      print('===> body.lengthSync(): ${body.lengthSync()}');
       img.Image imageTmp = img.decodeImage(body.readAsBytesSync());
       var request = http.MultipartRequest('PUT', uri);
       var multipartFile = new http.MultipartFile.fromBytes(

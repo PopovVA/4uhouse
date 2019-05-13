@@ -14,7 +14,7 @@ class App extends StatelessWidget {
         primaryColor: primaryColor,
         textTheme: customTextTheme,
       ),
-      home: Screen('provider'),
+    home: Screen('user/property'),
       onGenerateRoute: (RouteSettings settings) => MaterialPageRoute(
           builder: (context) =>
               Screen(settings.name, arguments: settings.arguments)),
