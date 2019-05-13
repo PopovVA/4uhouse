@@ -62,8 +62,11 @@ class _ItemState extends State<Item> {
               openDataEntry(context);
               break;
             case 'photo':
-              openPhotoUploader(context, onLoad: (File photo) {
-                onChanged(item.value, body: photo);
+              openPhotoUploader(context, onLoad: (Future<File> cb) async {
+                File photo = await cb;
+                if (photo != null) {
+                  onChanged(item.value, body: photo);
+                }
               });
               break;
             case 'switch':

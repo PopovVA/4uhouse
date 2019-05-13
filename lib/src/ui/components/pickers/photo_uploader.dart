@@ -59,11 +59,9 @@ class _Uploader extends StatelessWidget {
         break;
     }
 
-    File photo = await ImagePicker.pickImage(source: source, maxWidth: 640);
-    if (photo != null) {
-      Navigator.of(context).pop();
-      onLoad(photo);
-    }
+    Future<File> cb = ImagePicker.pickImage(source: source, maxWidth: 640);
+    Navigator.of(context).pop();
+    onLoad(cb);
   }
 
   @override
