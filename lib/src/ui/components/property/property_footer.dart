@@ -3,23 +3,49 @@ import '../../../utils/type_check.dart' show isNotNull;
 
 class PropertyFooter extends StatelessWidget {
   static const Color fontColor = Color(0xFF212121);
-  static const TextStyle addInfoStyle = TextStyle(fontSize: 14.0, color: fontColor);
+  static const TextStyle addInfoStyle =
+      TextStyle(fontSize: 14.0, color: fontColor);
   static const TextStyle mainValueStyle =
       TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500, color: fontColor);
 
   PropertyFooter(
-      {this.mainValue1, this.mainValue2, this.addInfo1, this.addInfo2});
+      {this.currency,
+      this.costSale,
+      this.costRent,
+      this.paymentPeriod,
+      this.mainInfo,
+      this.address});
 
-  final String mainValue1;
-  final String mainValue2;
-  final String addInfo1;
-  final String addInfo2;
+  final String currency;
+  final int costSale;
+  final int costRent;
+  final String paymentPeriod;
+  final String mainInfo;
+  final String address;
 
-  buildMainValue(String value, double padding) {
-    if (value != null) {
+  buildMainValue(int value, double padding,
+      {bool includePaymentPeriod = false}) {
+    Widget renderPaymentPeriod() {
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          Text('/', style: mainValueStyle),
+          Padding(
+              padding: EdgeInsets.only(bottom: 2.0),
+              child: Text(paymentPeriod, style: TextStyle(fontSize: 12.0))),
+        ],
+      );
+    }
+
+    if (value is int) {
       return Padding(
         padding: EdgeInsets.only(bottom: padding),
-        child: Text(value, style: mainValueStyle),
+        child: Row(
+          children: <Widget>[
+            Text('$currency ${value.toString()}', style: mainValueStyle),
+            includePaymentPeriod ? renderPaymentPeriod() : null,
+          ].where(isNotNull).toList(),
+        ),
       );
     }
 
@@ -27,7 +53,7 @@ class PropertyFooter extends StatelessWidget {
   }
 
   buildAddInfo(String value, {bool addSeparator = false}) {
-    if (value != null) {
+    if (value is String) {
       return Row(
         children: <Widget>[
           Text(value, style: addInfoStyle),
@@ -51,12 +77,12 @@ class PropertyFooter extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          buildMainValue(mainValue1, 5.0),
-          buildMainValue(mainValue2, 16.0),
+          buildMainValue(costSale, 5.0),
+          buildMainValue(costRent, 16.0, includePaymentPeriod: true),
           Row(
             children: <Widget>[
-              buildAddInfo(addInfo1, addSeparator: true),
-              buildAddInfo(addInfo2),
+              buildAddInfo(mainInfo, addSeparator: true),
+              buildAddInfo(address),
             ].where(isNotNull).toList(),
           ),
         ].where(isNotNull).toList(),
