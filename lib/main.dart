@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'src/app.dart';
+import 'package:provider_mobile/src/auth.dart';
 import 'package:flutter/rendering.dart';
-
-import 'temp/newapp.dart';
 
 void main() async {
 //  debugPaintSizeEnabled=true;
-  runApp(App());
-//  runApp(NewApp());
+  runApp(Auth());
+//  runApp(App());
 }

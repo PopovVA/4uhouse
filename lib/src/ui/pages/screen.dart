@@ -62,7 +62,7 @@ class _ScreenState extends State<Screen> {
                 ? () {
                     String path = snapshot.data.path;
                     Navigator.of(context).pushNamedAndRemoveUntil(
-                      snapshot.data.path.substring(0, path.lastIndexOf('/')),
+                      path.substring(0, path.lastIndexOf('/')),
                       (Route<dynamic> route) => false,
                       arguments: {
                         'scrollToId': widget.route
