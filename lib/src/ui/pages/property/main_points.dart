@@ -9,7 +9,7 @@ class MainPoint extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 15.0, right: 15.0),
+      margin: EdgeInsets.only(left: 15.0, right: 15.0),
       child: Row(children: <Widget>[
         Container(
           padding: EdgeInsets.all(1.0),
@@ -24,7 +24,7 @@ class MainPoint extends StatelessWidget {
         ),
         Container(
             child: Flexible(
-                child: Container(
+                child: Padding(
                     padding: EdgeInsets.only(left: 15.0, right: 15.0),
                     child: Text(
                       _text,

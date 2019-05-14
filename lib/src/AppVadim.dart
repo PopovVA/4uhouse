@@ -19,39 +19,39 @@ class HomePage extends StatelessWidget {
         body: Column(
           children: <Widget>[
             Container(
-                padding: EdgeInsets.only(top: 21),
+                margin: EdgeInsets.only(top: 21),
                 width: 180,
                 height: 180,
                 child: SvgPicture.asset('lib/src/assets/dog.svg')),
-            Container(padding: EdgeInsets.only(top: 17), child: Description()),
-            Container(
+            Padding(padding: EdgeInsets.only(top: 17), child: Description()),
+            Padding(
                 padding: EdgeInsets.only(top: 16),
                 child: MainPoint(
                     'Fill in some property information and send it to us', 1)),
-            Container(
+            Padding(
                 padding: EdgeInsets.only(top: 12),
                 child: MainPoint(
                     'Choose a meeting time on the property and then we will do everything ourselves',
                     2)),
-            Container(
+            Padding(
                 padding: EdgeInsets.only(top: 12),
                 child: SubPoint('Prepare and sign a contract with you')),
-            Container(
+            Padding(
                 padding: EdgeInsets.only(right: 43),
                 child: SubPoint('Create a virtual property tour')),
-            Container(
+            Padding(
                 padding: EdgeInsets.only(right: 28),
                 child: SubPoint('Prepare a property specification')),
-            Container(
+            Padding(
                 padding: EdgeInsets.only(right: 13),
                 child: SubPoint('Prepare information for publication')),
-            Container(
+            Padding(
                 padding: EdgeInsets.only(top: 13),
                 child: MainPoint('Agree on information for publication', 3)),
-            Container(
-                padding: EdgeInsets.only(top: 22, left: 15.0, right: 15.0),
+            Padding(
+                padding: EdgeInsets.only(top: 9, left: 15.0, right: 15.0),
                 child: StyledButton(
-                  text: 'Add a property'.toUpperCase()
+                  text: 'Add a property'.toUpperCase(),
                 )),
           ],
         ));
