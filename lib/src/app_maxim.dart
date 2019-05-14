@@ -4,7 +4,7 @@ import './pallete.dart';
 import './typography.dart';
 import './ui/pages/screen.dart';
 
-class App extends StatelessWidget {
+class AppMaxim extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
