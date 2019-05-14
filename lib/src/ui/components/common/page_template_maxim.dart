@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider_mobile/temp/drawer_only.dart';
 import '../../../constants/layout.dart' show standardPadding;
 
-class PageTemplate extends StatelessWidget {
+class PageTemplateMaxim extends StatelessWidget {
   static const Color color = Color(0xFF585555);
   static const double height = 64.0;
   
@@ -11,8 +11,8 @@ class PageTemplate extends StatelessWidget {
   final Widget body;
   final Function goBack;
   final bool padding;
-  
-  PageTemplate({
+
+  PageTemplateMaxim ({
     this.title,
     this.note,
     this.body,
@@ -25,7 +25,7 @@ class PageTemplate extends StatelessWidget {
     double horizontalPadding = padding ? standardPadding : 0.0;
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        //automaticallyImplyLeading: false,
         backgroundColor: Color(0xFFe9e7e7),
         bottom: (note is String) ? PreferredSize(
           preferredSize: Size.fromHeight(54.0),

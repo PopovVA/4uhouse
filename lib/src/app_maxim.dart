@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider_mobile/src/ui/components/common/page_template_maxim.dart';
 
 import './pallete.dart';
 import './typography.dart';
-import './ui/pages/screen.dart';
 
 class AppMaxim extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '4u.house',
       theme: ThemeData(
         accentColor: accentColor,
         primaryColor: primaryColor,
         textTheme: customTextTheme,
       ),
-      home: Screen('user/property'),
-      onGenerateRoute: (RouteSettings settings) => MaterialPageRoute(
-          builder: (context) =>
-              Screen(settings.name, arguments: settings.arguments)),
-    );
+      home: PageTemplateMaxim(
+        title: "Maxim",
+      ));
   }
 }
