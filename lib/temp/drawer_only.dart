@@ -17,27 +17,50 @@ class DrawerOnly extends StatelessWidget {
           Divider(
             color: Color.fromRGBO(66, 65, 65, 0.38),
           ),
-          buildListTile("Market", Icon(OMIcons.search), null, 0, context),
+          buildListTile(context, "Market",
+              icon: Icon(OMIcons.search), position: 0),
+          buildListTile(context, "Likes",
+              icon: Icon(OMIcons.favoriteBorder), position: 1),
+          buildDivider(),
           buildListTile(
-              "Likes", Icon(OMIcons.favoriteBorder), null, 1, context),
+            context,
+            "Message",
+            icon: Icon(OMIcons.forum),
+            subtitle: "10/1",
+            position: 2,
+          ),
+          buildListTile(context, "Meeting at the property",
+              icon: Icon(OMIcons.supervisorAccount),
+              subtitle: "0",
+              position: 3),
           buildDivider(),
-          buildListTile("Message", Icon(OMIcons.forum), "10/1", 2, context),
-          buildListTile("Meeting at the property",
-              Icon(OMIcons.supervisorAccount), "0", 3, context),
+          buildListTile(context, "My property",
+              icon: Icon(OMIcons.image), position: 4),
+          buildListTile(context, "My tasks",
+              icon: Icon(OMIcons.checkBox), position: 5),
           buildDivider(),
-          buildListTile("My property", Icon(OMIcons.image), null, 4, context),
-          buildListTile("My tasks", Icon(OMIcons.checkBox), null, 5, context),
-          buildDivider(),
-          buildListTile("Settings", Icon(OMIcons.settings), null, 6, context),
-          buildListTile("Forum", Icon(OMIcons.speakerNotes), null, 7, context),
-          buildListTile("Sign out", Icon(OMIcons.exitToApp), null, 8, context),
+          buildListTile(context, "Settings",
+              icon: Icon(OMIcons.settings), position: 6),
+          buildListTile(
+            context,
+            "Forum",
+            icon: Icon(OMIcons.speakerNotes),
+            position: 7,
+          ),
+          buildListTile(context, "Sign out",
+              icon: Icon(OMIcons.exitToApp), position: 8),
         ],
       ),
     );
   }
 
-  Widget buildListTile(String title, Icon icon, String subtitle, int position,
-      BuildContext context) {
+  Widget buildListTile(
+    BuildContext context,
+    String title, {
+    Icon icon,
+    String subtitle,
+    int position,
+  }) {
     return subtitle != null
         ? ListTile(
             onTap: () {

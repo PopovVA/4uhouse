@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider_mobile/src/ui/components/common/page_template_maxim.dart';
+import 'ui/components/common/page_template_maxim.dart';
 
 import './pallete.dart';
 import './typography.dart';

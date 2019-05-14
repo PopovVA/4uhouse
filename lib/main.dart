@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider_mobile/src/app_maxim.dart';
-import 'src/app.dart';
-import 'package:flutter/rendering.dart';
+import 'src/app_maxim.dart';
 
 import 'temp/newapp.dart';
 
