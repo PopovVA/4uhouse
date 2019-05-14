@@ -1,0 +1,73 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import 'pallete.dart';
+import 'typography.dart';
+import 'ui/pages/screen.dart';
+import 'ui/components/common/page_template.dart';
+import 'ui/components/common/styled_button.dart';
+
+import 'ui/pages/property/description.dart';
+import 'ui/pages/property/main_points.dart';
+import 'ui/pages/property/sub_points.dart';
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return PageTemplate(
+        title: 'My property',
+        body: Column(
+          children: <Widget>[
+            Container(
+                padding: EdgeInsets.only(top: 21),
+                width: 180,
+                height: 180,
+                child: SvgPicture.asset('lib/src/assets/dog.svg')),
+            Container(padding: EdgeInsets.only(top: 17), child: Description()),
+            Container(
+                padding: EdgeInsets.only(top: 16),
+                child: MainPoint(
+                    'Fill in some property information and send it to us', 1)),
+            Container(
+                padding: EdgeInsets.only(top: 12),
+                child: MainPoint(
+                    'Choose a meeting time on the property and then we will do everything ourselves',
+                    2)),
+            Container(
+                padding: EdgeInsets.only(top: 12),
+                child: SubPoint('Prepare and sign a contract with you')),
+            Container(
+                padding: EdgeInsets.only(right: 43),
+                child: SubPoint('Create a virtual property tour')),
+            Container(
+                padding: EdgeInsets.only(right: 28),
+                child: SubPoint('Prepare a property specification')),
+            Container(
+                padding: EdgeInsets.only(right: 13),
+                child: SubPoint('Prepare information for publication')),
+            Container(
+                padding: EdgeInsets.only(top: 13),
+                child: MainPoint('Agree on information for publication', 3)),
+            Container(
+                padding: EdgeInsets.only(top: 22, left: 15.0, right: 15.0),
+                child: StyledButton(
+                  text: 'Add a property'.toUpperCase()
+                )),
+          ],
+        ));
+  }
+}
+
+class App extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: '4u.house',
+      theme: ThemeData(
+          accentColor: accentColor,
+          primaryColor: primaryColor,
+          textTheme: customTextTheme),
+      home: HomePage(),
+    );
+  }
+}
