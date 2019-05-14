@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
             Padding(
                 padding: EdgeInsets.only(top: 9, left: 15.0, right: 15.0),
                 child: StyledButton(
-                  text: 'Add a property'.toUpperCase(),
+                  text: 'Add a property',
                 )),
           ],
         ));
