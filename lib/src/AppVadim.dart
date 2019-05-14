@@ -10,6 +10,7 @@ import 'ui/components/common/styled_button.dart';
 import 'ui/pages/property/description.dart';
 import 'ui/pages/property/main_points.dart';
 import 'ui/pages/property/sub_points.dart';
+import 'package:provider_mobile/src/ui/pages/property/add/add_property.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -52,6 +53,12 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.only(top: 9, left: 15.0, right: 15.0),
                 child: StyledButton(
                   text: 'Add a property',
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => AddProperty(),
+                    ),
+                  ),
                 )),
           ],
         ));
