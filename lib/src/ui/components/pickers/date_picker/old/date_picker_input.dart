@@ -35,9 +35,7 @@ class _DatePickerInputState extends State<DatePickerInput> {
   initState() {
     if (widget.initialValue is String) {
       value = timestampToString(
-        DateTime
-          .parse(widget.initialValue)
-          .millisecondsSinceEpoch,
+        DateTime.parse(widget.initialValue).millisecondsSinceEpoch,
       );
     }
     super.initState();
@@ -50,11 +48,15 @@ class _DatePickerInputState extends State<DatePickerInput> {
   }
 
   handleDateTimeChanged(int timestamp) {
-    setState(() { value = timestampToString(timestamp); });
+    setState(() {
+      value = timestampToString(timestamp);
+    });
   }
 
   openBottomSheet(BuildContext context) async {
-    setState(() { bottomSheetOpen = true; });
+    setState(() {
+      bottomSheetOpen = true;
+    });
     await showModalBottomSheet(
       context: context,
       builder: (BuildContext bc) {
@@ -65,13 +67,17 @@ class _DatePickerInputState extends State<DatePickerInput> {
         );
       },
     );
-    setState(() { bottomSheetOpen = false; });
+    setState(() {
+      bottomSheetOpen = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () { openBottomSheet(context); },
+      onTap: () {
+        openBottomSheet(context);
+      },
       child: Container(
         child: Text(
           value,
@@ -82,19 +88,15 @@ class _DatePickerInputState extends State<DatePickerInput> {
           border: Border(
             bottom: BorderSide(
               color: bottomSheetOpen
-                ? Theme.of(context).primaryColor
-                : Theme.of(context).unselectedWidgetColor,
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).unselectedWidgetColor,
               width: bottomSheetOpen ? 2.0 : 1.0,
             ),
           ),
         ),
         width: double.infinity,
-        padding: EdgeInsets.only(
-          top: 8.0,
-          bottom: bottomSheetOpen ? 7.0 : 8.0
-        ),
+        padding: EdgeInsets.only(top: 8.0, bottom: bottomSheetOpen ? 7.0 : 8.0),
       ),
     );
   }
 }
-

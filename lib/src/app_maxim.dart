@@ -8,13 +8,13 @@ class AppMaxim extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        accentColor: accentColor,
-        primaryColor: primaryColor,
-        textTheme: customTextTheme,
-      ),
-      home: PageTemplateMaxim(
-        title: "Maxim",
-      ));
+        theme: ThemeData(
+          accentColor: accentColor,
+          primaryColor: primaryColor,
+          textTheme: customTextTheme,
+        ),
+        home: PageTemplateMaxim(
+          title: "Maxim",
+        ));
   }
 }

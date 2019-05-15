@@ -7,6 +7,6 @@ import 'temp/newapp.dart';
 void main() async {
 //  debugPaintSizeEnabled=true;
   runApp(App());
- // runApp(AppMaxim());
- //runApp(NewApp());
+  // runApp(AppMaxim());
+  //runApp(NewApp());
 }

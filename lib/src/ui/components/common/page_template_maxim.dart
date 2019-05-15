@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider_mobile/temp/drawer_only.dart';
+import 'package:provider_mobile/src/ui/components/common/drawer/drawer_only.dart';
 import '../../../constants/layout.dart' show standardPadding;
 
 class PageTemplateMaxim extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'drawer_only.dart';
+import 'package:provider_mobile/src/ui/components/common/drawer/drawer_only.dart';
 
 class NewApp extends StatelessWidget {
   @override
