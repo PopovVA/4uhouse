@@ -82,9 +82,9 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 9, left: 15.0, right: 15.0),
                 child: StyledButton(
                   text: 'Add property',
-                  onPressed: () => Navigator.push(context, SlideRoute(widget:AddProperty(), side:"left");
+                  onPressed: () => Navigator.push(context, SlideRoute(widget:AddProperty(), side: 'left'),
                 )),
-          ],
+            )],
         ));
   }
 }
