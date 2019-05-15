@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider_mobile/src/ui/components/common/page_template_maxim.dart';
+import 'package:provider_mobile/src/utils/rout_transition.dart';
 
 import 'pallete.dart';
 import 'typography.dart';
@@ -68,7 +69,10 @@ class App extends StatelessWidget {
           accentColor: accentColor,
           primaryColor: primaryColor,
           textTheme: customTextTheme),
-      home: HomePage(),
+      home: Screen("2"),
+      onGenerateRoute: (RouteSettings settings) {
+        return SlideRoute(widget: Screen(settings.name));
+      },
     );
   }
 }
