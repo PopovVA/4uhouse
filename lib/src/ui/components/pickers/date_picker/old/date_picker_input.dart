@@ -63,7 +63,7 @@ class _DatePickerInputState extends State<DatePickerInput> {
         return DatePicker(
           minimumDate: DateTime(2013, 5, 10),
           maximumDate: DateTime.now(),
-          onDateTimeChanged: handleDateTimeChanged,
+          onDateTimeChanged: handleDateTimeChanged, initialDateTime: null,
         );
       },
     );

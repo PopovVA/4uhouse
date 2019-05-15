@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
 class SlideRoute extends PageRouteBuilder {
-  final Widget widget;
-  final String side;
-
   SlideRoute({this.widget, this.side})
       : super(pageBuilder: (BuildContext context, Animation<double> animation,
             Animation<double> secondaryAnimation) {
@@ -12,20 +9,22 @@ class SlideRoute extends PageRouteBuilder {
             Animation<double> animation,
             Animation<double> secondaryAnimation,
             Widget child) {
-          return side == "left"
+          return side == 'left'
               ? SlideTransition(
-                  position: new Tween<Offset>(
+                  position: Tween<Offset>(
                     begin: const Offset(1.0, 0.0),
                     end: Offset.zero,
                   ).animate(animation),
                   child: child,
                 )
               : SlideTransition(
-                  position: new Tween<Offset>(
+                  position: Tween<Offset>(
                     begin: const Offset(-1.0, 0.0),
                     end: Offset.zero,
                   ).animate(animation),
                   child: child,
                 );
         });
+  final Widget widget;
+  final String side;
 }

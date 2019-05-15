@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider_mobile/src/ui/pages/example_page.dart';
-import 'package:provider_mobile/src/utils/rout_transition.dart';
+import 'package:provider_mobile/src/utils/route_transition.dart';
 
 class Header extends StatelessWidget {
   String name = "Roman";
