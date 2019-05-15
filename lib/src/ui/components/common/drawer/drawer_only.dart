@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
+import 'drawer_header.dart';
 
 class DrawerOnly extends StatelessWidget {
   Function changeDrawerPosition;
@@ -10,7 +11,7 @@ class DrawerOnly extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: <Widget>[
-          DrawerHeader(),
+          Header(),
           Divider(
             color: Color.fromRGBO(66, 65, 65, 0.38),
           ),

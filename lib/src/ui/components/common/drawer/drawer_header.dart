@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider_mobile/src/ui/pages/example_page.dart';
-import 'package:provider_mobile/src/utils/rout_transition.dart';
+import 'package:provider_mobile/src/utils/route_transition.dart';
 
 class Header extends StatelessWidget {
-  final String name = "Roman";
-  final String mail = "rom12@gmail.com";
-  final String number = "89160001122";
-
+  String name = "Roman";
+  String mail = "rom12@gmail.com";
+  String number = "89160001122";
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -54,8 +53,9 @@ class Header extends StatelessWidget {
                       color: Color.fromRGBO(218, 218, 218, 1),
                     ),
                     onPressed: () {
-                      Navigator.push(context,
-                          SlideRoute(widget: ExamplePage(), side: 'left'));
+                      Navigator.pushNamed(context, '2');
+                      /* Navigator.push(context,
+                          SlideRoute(widget: ExamplePage(), side: "left"));*/
                     })
               ],
             ),
