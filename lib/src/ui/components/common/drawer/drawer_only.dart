@@ -11,7 +11,7 @@ class DrawerOnly extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: <Widget>[
-          HeaderDrawer(),
+          Header(),
           Divider(
             color: Color.fromRGBO(66, 65, 65, 0.38),
           ),
