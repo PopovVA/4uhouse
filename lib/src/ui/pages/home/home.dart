@@ -6,6 +6,8 @@ import '../../components/common/styled_button.dart';
 import 'components/description.dart';
 import 'components/main_points.dart';
 import 'components/sub_points.dart';
+import '../property/add/add_property.dart';
+import '../../../utils/route_transition.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -76,10 +78,11 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-            const Padding(
-                padding: EdgeInsets.only(top: 9, left: 15.0, right: 15.0),
+            Padding(
+                padding: const EdgeInsets.only(top: 9, left: 15.0, right: 15.0),
                 child: StyledButton(
                   text: 'Add property',
+                  onPressed: () => Navigator.push(context, SlideRoute(widget:AddProperty(), side:"left");
                 )),
           ],
         ));
