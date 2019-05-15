@@ -17,9 +17,8 @@ class PropertyInfo extends StatelessWidget {
           height: 66,
           color: Color.fromRGBO(227, 227, 227, 1),
           child: Container(
-              width: 5,
-              height: 5,
-              child: SvgPicture.asset('lib/src/assets/photo.svg')),
+              padding: EdgeInsets.all(15.0),
+              child: SvgPicture.asset('lib/assets/photo.svg')),
         ),
         Container(
           child: Column(children: <Widget>[
@@ -34,7 +33,12 @@ class PropertyInfo extends StatelessWidget {
               ],
             ),
             Padding(
-                child: Text('Property data will be here', style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, fontStyle: FontStyle.normal, color: Color.fromRGBO(0, 0, 0, 0.87))),
+                child: Text('Property data will be here',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.normal,
+                        fontStyle: FontStyle.normal,
+                        color: Color.fromRGBO(0, 0, 0, 0.87))),
                 padding: EdgeInsets.only(right: 27.0, top: 6.0)),
           ]),
         )

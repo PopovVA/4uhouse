@@ -33,7 +33,7 @@ class Header extends StatelessWidget {
                 style: _fontStyle,
               ),
               Padding(
-                padding: EdgeInsets.only(left: 10.0),
+                padding: EdgeInsets.only(left: 25.0),
               ),
               Text(date, style: _fontStyle)
             ],
@@ -69,6 +69,7 @@ class Header extends StatelessWidget {
                 ],
               ),
               Container(
+                width: 30,
                 child: PopupMenuButton<String>(
                     onSelected: _someAction,
                     itemBuilder: (BuildContext context) {

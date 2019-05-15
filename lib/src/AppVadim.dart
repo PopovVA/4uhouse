@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
                 margin: EdgeInsets.only(top: 21),
                 width: 180,
                 height: 180,
-                child: SvgPicture.asset('lib/src/assets/dog.svg')),
+                child: SvgPicture.asset('lib/assets/dog.svg')),
             Padding(padding: EdgeInsets.only(top: 17), child: Description()),
             Padding(
                 padding: EdgeInsets.only(top: 16),

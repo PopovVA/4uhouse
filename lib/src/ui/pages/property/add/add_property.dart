@@ -30,7 +30,13 @@ class AddProperty extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
-                      Text('property process', style: TextStyle(fontWeight: FontWeight.normal, fontStyle: FontStyle.normal, fontSize: 12),),
+                      Text(
+                        'property process',
+                        style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 12),
+                      ),
                       Padding(padding: EdgeInsets.only(left: 3.0)),
                       Expanded(
                         child: Container(
