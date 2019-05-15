@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import './pallete.dart';
-import './typography.dart';
-import './ui/pages/screen.dart';
+import 'pallete.dart';
+import 'typography.dart';
+import 'ui/pages/home/home.dart';
 
 class App extends StatelessWidget {
   @override
@@ -10,14 +10,10 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: '4u.house',
       theme: ThemeData(
-        accentColor: accentColor,
-        primaryColor: primaryColor,
-        textTheme: customTextTheme,
-      ),
-    home: Screen('user/property'),
-      onGenerateRoute: (RouteSettings settings) => MaterialPageRoute(
-          builder: (context) =>
-              Screen(settings.name, arguments: settings.arguments)),
+          accentColor: accentColor,
+          primaryColor: primaryColor,
+          textTheme: customTextTheme),
+      home: HomePage(),
     );
   }
 }

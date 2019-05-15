@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_appauth/flutter_appauth.dart';
 
-import 'ui/pages/login.dart' show Login;
 import 'app.dart' show App;
-
 import 'resources/screen_api_provider.dart' show token;
+import 'ui/pages/login.dart' show Login;
 
 class Auth extends StatefulWidget {
   @override
@@ -21,14 +20,14 @@ class _AuthState extends State<Auth> {
   // Keycloak details
   final String _clientId = 'provider-mobile';
   final String _redirectUrl = 'house.a4u.providermobile:/oauthredirect';
-  final List<String> _scopes = const [
+  final List<String> _scopes = const <String>[
     'openid',
     'profile',
     'email',
     'offline_access',
   ];
 
-  AuthorizationServiceConfiguration _serviceConfiguration =
+  final AuthorizationServiceConfiguration _serviceConfiguration =
       AuthorizationServiceConfiguration(
           'https://dev.auth.4u.house/auth/realms/4uhouse/protocol/openid-connect/auth',
           'https://dev.auth.4u.house/auth/realms/4uhouse/protocol/openid-connect/token');
@@ -48,17 +47,17 @@ class _AuthState extends State<Auth> {
     });
   }
 
-  void _logout() async {
+  void logout() async {
     setLoadingState();
-    var httpResponse = await http.post(
+    final http.Response httpResponse = await http.post(
         'https://dev.auth.4u.house/auth/realms/4uhouse/protocol/openid-connect/logout',
-        body: {
-          "client_id": _clientId,
-          "refresh_token": _refreshToken
+        body: <String, String>{
+          'client_id': _clientId,
+          'refresh_token': _refreshToken
         },
-        headers: {
+        headers: <String, String>{
           'Authorization': 'Bearer $_accessToken',
-          "Content-type": 'application/x-www-form-urlencoded'
+          'Content-type': 'application/x-www-form-urlencoded'
         });
     if (httpResponse.statusCode == 204) {
       setState(() {
@@ -80,7 +79,8 @@ class _AuthState extends State<Auth> {
         isLoading: _isLoading,
         onLogin: () async {
           setLoadingState();
-          var result = await _appAuth.authorizeAndExchangeCode(
+          final AuthorizationTokenResponse result =
+              await _appAuth.authorizeAndExchangeCode(
             AuthorizationTokenRequest(
               _clientId,
               _redirectUrl,
@@ -92,7 +92,7 @@ class _AuthState extends State<Auth> {
             _processAuthTokenResponse(result);
           }
         },
-        onLogout: _logout,
+        onLogout: logout,
       );
     }
 
