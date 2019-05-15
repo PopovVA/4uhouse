@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import '../../models/note_model.dart';
 
 class Note extends StatelessWidget {
-  Note(NoteModel note) : this.note = note, this.id = note.id;
+  Note(NoteModel note)
+      : this.note = note,
+        this.id = note.id;
 
   final NoteModel note;
   final String id;
