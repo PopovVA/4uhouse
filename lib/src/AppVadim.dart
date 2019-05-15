@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider_mobile/src/ui/components/common/page_template_maxim.dart';
 
 import 'pallete.dart';
 import 'typography.dart';
@@ -14,7 +15,7 @@ import 'ui/pages/property/sub_points.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return PageTemplate(
+    return PageTemplateMaxim(
         title: 'My property',
         body: Column(
           children: <Widget>[
@@ -22,7 +23,7 @@ class HomePage extends StatelessWidget {
                 margin: EdgeInsets.only(top: 21),
                 width: 180,
                 height: 180,
-                child: SvgPicture.asset('lib/src/assets/dog.svg')),
+                child: SvgPicture.asset('lib/assets/dog.svg')),
             Padding(padding: EdgeInsets.only(top: 17), child: Description()),
             Padding(
                 padding: EdgeInsets.only(top: 16),

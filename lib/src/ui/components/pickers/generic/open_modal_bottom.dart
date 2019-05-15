@@ -5,10 +5,7 @@ Future<Widget> openModalBottom({BuildContext context, Widget child}) {
     context: context,
     builder: (BuildContext bc) {
       return GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: () {},
-        child: child
-      );
+          behavior: HitTestBehavior.opaque, onTap: () {}, child: child);
     },
   );
 }

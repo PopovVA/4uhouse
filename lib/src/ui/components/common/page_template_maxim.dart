@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider_mobile/src/ui/components/common/drawer/drawer_only.dart';
 import '../../../constants/layout.dart' show standardPadding;
 
-class PageTemplate extends StatelessWidget {
+class PageTemplateMaxim extends StatelessWidget {
   static const Color color = Color(0xFF585555);
   static const double height = 64.0;
 
@@ -11,7 +12,7 @@ class PageTemplate extends StatelessWidget {
   final Function goBack;
   final bool padding;
 
-  PageTemplate({
+  PageTemplateMaxim({
     this.title,
     this.note,
     this.body,
@@ -24,7 +25,6 @@ class PageTemplate extends StatelessWidget {
     double horizontalPadding = padding ? standardPadding : 0.0;
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         backgroundColor: Color(0xFFe9e7e7),
         bottom: (note is String)
             ? PreferredSize(
@@ -51,27 +51,20 @@ class PageTemplate extends StatelessWidget {
               )
             : null,
         iconTheme: IconThemeData(color: color),
-        leading: IconButton(
-          color: color,
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            if (goBack is Function) {
-              goBack();
-            } else {
-              if (Navigator.canPop(context)) {
-                Navigator.pop(context);
-              } else {
-                Navigator.pushReplacementNamed(context, '/');
-              }
-            }
-          },
-          tooltip: 'go back',
-        ),
+        leading: Navigator.canPop(context)
+            ? IconButton(
+                color: color,
+                tooltip: 'go back',
+                icon: Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  return goBack is Function ? goBack() : Navigator.pop(context);
+                })
+            : null,
         centerTitle: true,
         title: Text(title, style: TextStyle(color: color, fontSize: 20.0)),
       ),
+      drawer: DrawerOnly(),
       body: Container(
-//        padding: EdgeInsets.symmetric(vertical: standardPadding, horizontal: padding ? standardPadding : 0.0),
         padding: EdgeInsets.fromLTRB(
             horizontalPadding, 0.0, horizontalPadding, standardPadding),
         child: body,

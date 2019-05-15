@@ -1,8 +1,7 @@
 class ComponentModel {
-	String _component;
+  String _component;
 
-	ComponentModel.fromJson(String component)
-		: _component = component;
+  ComponentModel.fromJson(String component) : _component = component;
 
-	String get component => _component;
+  String get component => _component;
 }

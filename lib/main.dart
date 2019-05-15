@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'src/app.dart';
-import 'package:flutter/rendering.dart';
+import 'src/AppVadim.dart';
+import 'src/app_maxim.dart';
 
 import 'temp/newapp.dart';
 
 void main() async {
 //  debugPaintSizeEnabled=true;
   runApp(App());
-//  runApp(NewApp());
+  // runApp(AppMaxim());
+  //runApp(NewApp());
 }

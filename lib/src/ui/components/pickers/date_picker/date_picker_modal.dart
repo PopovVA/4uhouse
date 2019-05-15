@@ -15,7 +15,8 @@ DateTime _timestampToDateTime(timestamp) {
 
 int _value;
 
-openDatePicker(BuildContext context, {
+openDatePicker(
+  BuildContext context, {
   Function onDateTimeChanged,
   Function onOk,
   int initialDateTime,
@@ -27,12 +28,10 @@ openDatePicker(BuildContext context, {
   initialDateTime = isNotNull(initialDateTime)
       ? initialDateTime
       : isNotNull(minimumDate)
-      ? minimumDate
-      : isNotNull(maximumDate)
-      ? maximumDate
-      : DateTime(2000, 1, 1)
-        .toLocal()
-        .millisecondsSinceEpoch;
+          ? minimumDate
+          : isNotNull(maximumDate)
+              ? maximumDate
+              : DateTime(2000, 1, 1).toLocal().millisecondsSinceEpoch;
   _value = initialDateTime;
 
   return openModalBottom(
@@ -47,7 +46,8 @@ openDatePicker(BuildContext context, {
           FlatButton(
             onPressed: () {
               if (onOk is Function) {
-                print('timezone name ${DateTime.fromMillisecondsSinceEpoch(_value).timeZoneName}');
+                print(
+                    'timezone name ${DateTime.fromMillisecondsSinceEpoch(_value).timeZoneName}');
                 onOk(_value);
               }
               _value = null;
