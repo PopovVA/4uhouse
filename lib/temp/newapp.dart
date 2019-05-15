@@ -19,7 +19,7 @@ class PropertyPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          primary: true,
+          //primary: true,
           title: const Text('My property'),
           leading: Builder(
             builder: (BuildContext context) {
