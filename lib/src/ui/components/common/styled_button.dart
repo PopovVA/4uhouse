@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider_mobile/src/ui/components/common/circular_progress.dart';
 
 class StyledButton extends StatelessWidget {
+  const StyledButton({this.text = '', this.onPressed, this.loading = false});
+
   final String text;
   final Function onPressed;
   final bool loading;
-
-  StyledButton({this.text = '', this.onPressed, this.loading = false});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class StyledButton extends StatelessWidget {
       width: double.infinity,
       child: RaisedButton(
         color: Theme.of(context).primaryColor,
-        disabledColor: Color(0xE6CACACA),
+        disabledColor: const Color(0xE6CACACA),
         elevation: 8,
         onPressed: loading ? null : onPressed,
         child: buildChild(context),
