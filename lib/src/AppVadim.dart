@@ -69,9 +69,9 @@ class App extends StatelessWidget {
           accentColor: accentColor,
           primaryColor: primaryColor,
           textTheme: customTextTheme),
-      home: Screen("2"),
+      home: HomePage(),
       onGenerateRoute: (RouteSettings settings) {
-        return SlideRoute(widget: Screen(settings.name));
+        return SlideRoute(widget: Screen(settings.name), side: "left");
       },
     );
   }
