@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class InheritedAuth extends InheritedWidget {
-  InheritedAuth(this.userProfile, this.onLogin, this.onLogout);
+  InheritedAuth(
+  {this.userProfile, this.onLogin, this.onLogout, Key key, Widget child})
+      : super(key: key, child: child);
 
   Map<String, String> userProfile;
   Function onLogin, onLogout;
@@ -9,5 +11,9 @@ class InheritedAuth extends InheritedWidget {
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) {
     return true;
+  }
+
+  static InheritedAuth of(BuildContext context) {
+    return context.inheritFromWidgetOfExactType(InheritedAuth);
   }
 }

@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
+import '../../inherited_auth.dart';
 import 'drawer_header.dart' show Header;
 
-
-// ignore: must_be_immutable
 class DrawerOnly extends StatelessWidget {
   int _selectedDrawerIndex = 0;
-  Function onLogout;
-  Function onLogin;
-  Drawer drawer = Drawer();
 
   @override
   Widget build(BuildContext context) {
+    final inheritedAuth = InheritedAuth.of(context);
     return Drawer(
       child: ListView(
         children: <Widget>[
@@ -46,15 +43,15 @@ class DrawerOnly extends StatelessWidget {
             icon: const Icon(OMIcons.speakerNotes),
             position: 7,
           ),
-          onLogout != null
+          inheritedAuth.onLogout != null
               ? buildListTile(context, 'Log out',
                   icon: const Icon(OMIcons.exitToApp),
                   position: 8,
-                  onTap: onLogout)
+                  onTap: inheritedAuth.onLogout)
               : buildListTile(context, 'Sign in',
                   icon: const Icon(OMIcons.exitToApp),
                   position: 8,
-                  onTap: onLogout),
+                  onTap: inheritedAuth.onLogin),
         ],
       ),
     );

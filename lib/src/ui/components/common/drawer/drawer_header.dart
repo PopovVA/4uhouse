@@ -1,22 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
-import 'package:provider_mobile/src/models/user_profile.dart';
-import 'package:provider_mobile/src/ui/pages/example_page.dart';
-import 'package:provider_mobile/src/utils/route_transition.dart';
+import '../../../../models/user_profile.dart';
+import '../../../../utils/route_transition.dart';
+import '../../../pages/example_page.dart';
+import '../../inherited_auth.dart';
 
 class Header extends StatelessWidget {
-  // ignore: avoid_unused_constructor_parameters
-  Header({Map<String, String> userProfile});
-
-  Map<String, String> userProfile;
-
-  UserProfile user = UserProfile(
-      name: "Roman", email: "rom12@gmail.com", phone: "89160001122");
-
   @override
   Widget build(BuildContext context) {
-    userProfile = user.toMap();
-    return userProfile != null
+    final inheritedAuth = InheritedAuth.of(context);
+    return inheritedAuth.userProfile != null
         ? Padding(
             padding: const EdgeInsets.only(left: 14.0),
             child: Column(
@@ -26,7 +19,7 @@ class Header extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        user.name,
+                        UserProfile.fromMap(inheritedAuth.userProfile).name,
                         style: TextStyle(
                             fontSize: 20.0,
                             color: const Color.fromRGBO(88, 85, 85, 0.87)),
@@ -42,7 +35,7 @@ class Header extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    user.email,
+                    UserProfile.fromMap(inheritedAuth.userProfile).email,
                     style:
                         TextStyle(color: const Color.fromRGBO(0, 0, 0, 0.54)),
                   ),
@@ -50,7 +43,7 @@ class Header extends StatelessWidget {
                     children: <Widget>[
                       Container(
                         child: Text(
-                          user.phone,
+                          UserProfile.fromMap(inheritedAuth.userProfile).phone,
                           style: TextStyle(
                               fontSize: 16.0,
                               color: const Color.fromRGBO(95, 93, 93, 0.87)),
@@ -63,7 +56,7 @@ class Header extends StatelessWidget {
                             color: Color.fromRGBO(218, 218, 218, 1),
                           ),
                           onPressed: () {
-                            /*Navigator.pushNamedAndRemoveUntil(context, '/home',
+                            /* Navigator.pushNamedAndRemoveUntil(context, '/home',
                                 (Route<dynamic> route) => false);*/
                             Navigator.push(
                                 context,
