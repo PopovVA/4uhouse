@@ -99,6 +99,5 @@ class HomePage extends StatelessWidget {
                   ],
                 )))
         : const CircularProgress();
-    ;
   }
 }

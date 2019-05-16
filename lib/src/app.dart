@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider_mobile/src/ui/pages/screen.dart';
-import 'package:provider_mobile/src/utils/route_transition.dart';
-
+import 'ui/pages/home/home.dart';
+import 'ui/pages/screen.dart';
+import 'utils/route_transition.dart';
 import 'pallete.dart';
 import 'typography.dart';
-import 'ui/pages/home/home.dart';
 
 class App extends StatelessWidget {
   @override
