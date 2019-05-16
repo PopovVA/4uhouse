@@ -11,6 +11,7 @@ import 'components/sub_points.dart';
 
 class HomePage extends StatelessWidget {
   var user = UserProfile(
+      // ignore: prefer_single_quotes
       name: "Roman", email: "rom12@gmail.com", phone: "89160001122");
   bool isLoading = true;
 
