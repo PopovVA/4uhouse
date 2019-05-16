@@ -48,7 +48,7 @@ class AddProperty extends StatelessWidget {
                         Padding(padding: EdgeInsets.only(left: 3.0)),
                         Expanded(
                           child: Container(
-                            margin: EdgeInsets.only(top: 14.0, left: 8.0),
+                            margin: EdgeInsets.only(top: 10.0, left: 8.0),
                             decoration: BoxDecoration(
                               border: Border(
                                 bottom: BorderSide(
@@ -62,30 +62,33 @@ class AddProperty extends StatelessWidget {
                       ],
                     ),
                   ),
-//                SingleChildScrollView(
                   Column(
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.symmetric(vertical: 20.0),
+                          margin: EdgeInsets.symmetric(vertical: 18.0),
                           decoration: BoxDecoration(
+                              color: Colors.white,
                               borderRadius: BorderRadius.all(Radius.circular(30.0)),
                               border: Border.all(
-                                  width: 0.6,
+                                  width: 0.1,
                                   style: BorderStyle.solid,
-                                  color: Colors.black.withOpacity(0.3))),
+                                  color: Colors.black.withOpacity(0.3)),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(color: Colors.black.withOpacity(0.2),blurRadius: 0.5, offset: Offset(0.0, 2.0))
+                          ]),
                           child: Container(
                             decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 0.5,
-                                    style: BorderStyle.solid,
-                                    color: Colors.black.withOpacity(0.1)),
+//                                border: Border.all(
+//                                    width: 0.5,
+//                                    style: BorderStyle.solid,
+//                                    color: Colors.black.withOpacity(0.1)),
                                 borderRadius: BorderRadius.all(Radius.circular(30.0))),
                             child: Property(PropertyModel.fromJson(_getMapData(
                                 '1',
                                 _room_bs64,
                                 'To Do',
                                 '1',
-                                '1',
+                                r'$',
                                 250000,
                                 250000,
                                 '',
@@ -94,26 +97,30 @@ class AddProperty extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.symmetric(vertical: 20.0),
+                          margin: EdgeInsets.symmetric(vertical: 15.0),
                           decoration: BoxDecoration(
+                              color: Colors.white,
                               borderRadius: BorderRadius.all(Radius.circular(30.0)),
                               border: Border.all(
-                                  width: 0.6,
+                                  width: 0.1,
                                   style: BorderStyle.solid,
-                                  color: Colors.black.withOpacity(0.3))),
+                                  color: Colors.black.withOpacity(0.3)),
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(color: Colors.black.withOpacity(0.2),blurRadius: 0.5, offset: Offset(0.0, 2.0))
+                              ]),
                           child: Container(
                             decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 0.5,
-                                    style: BorderStyle.solid,
-                                    color: Colors.black.withOpacity(0.1)),
+//                                border: Border.all(
+//                                    width: 0.5,
+//                                    style: BorderStyle.solid,
+//                                    color: Colors.black.withOpacity(0.1)),
                                 borderRadius: BorderRadius.all(Radius.circular(30.0))),
                             child: Property(PropertyModel.fromJson(_getMapData(
                                 '1',
                                 _room_bs64,
                                 'To Do',
                                 '1',
-                                '1',
+                                r'$',
                                 250000,
                                 250000,
                                 '',
@@ -123,7 +130,6 @@ class AddProperty extends StatelessWidget {
                         )
                       ]
                   )
-//                  ),
                 ],
               )
             )));
