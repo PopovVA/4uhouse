@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'drawer_header.dart' show Header;
 
+
+// ignore: must_be_immutable
 class DrawerOnly extends StatelessWidget {
   int _selectedDrawerIndex = 0;
+  Function onLogout;
+  Function onLogin;
+  Drawer drawer = Drawer();
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +16,6 @@ class DrawerOnly extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           Header(),
-          Divider(
-            color: const Color.fromRGBO(66, 65, 65, 0.38),
-          ),
           buildListTile(context, 'Market',
               icon: const Icon(OMIcons.search), position: 0),
           buildListTile(context, 'Likes',
@@ -44,20 +46,22 @@ class DrawerOnly extends StatelessWidget {
             icon: const Icon(OMIcons.speakerNotes),
             position: 7,
           ),
-          buildListTile(context, 'Sign out',
-              icon: const Icon(OMIcons.exitToApp), position: 8),
+          onLogout != null
+              ? buildListTile(context, 'Log out',
+                  icon: const Icon(OMIcons.exitToApp),
+                  position: 8,
+                  onTap: onLogout)
+              : buildListTile(context, 'Sign in',
+                  icon: const Icon(OMIcons.exitToApp),
+                  position: 8,
+                  onTap: onLogout),
         ],
       ),
     );
   }
 
-  Widget buildListTile(
-    BuildContext context,
-    String title, {
-    Icon icon,
-    String subtitle,
-    int position,
-  }) {
+  Widget buildListTile(BuildContext context, String title,
+      {Icon icon, String subtitle, int position, Function onTap}) {
     return subtitle != null
         ? ListTile(
             onTap: () {
