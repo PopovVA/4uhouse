@@ -50,7 +50,7 @@ class Property extends StatelessWidget {
                 mainInfo: property.mainInfo,
                 address: property.address,
               ),
-              Container( height: 4.0),
+              Container(height: 4.0),
             ],
           ),
         ));

@@ -56,10 +56,10 @@ class PropertyImage extends StatelessWidget {
 
     if (picture != null) {
       return SizedBox.expand(
-          child: Image.memory(
-            picture,
-            fit: BoxFit.fitWidth,
-          ),
+        child: Image.memory(
+          picture,
+          fit: BoxFit.fitWidth,
+        ),
       );
     }
 
