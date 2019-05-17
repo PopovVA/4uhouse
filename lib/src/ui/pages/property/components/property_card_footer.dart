@@ -79,7 +79,7 @@ class PropertyFooter extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           buildMainValue(costSale, 5.0),
-          buildMainValue(costRent, 10.0, includePaymentPeriod: true),
+          buildMainValue(costRent, 13.0, includePaymentPeriod: true),
           Row(
             children: <Widget>[
               buildAddInfo(mainInfo, addSeparator: true),
