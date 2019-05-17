@@ -84,8 +84,8 @@ class _ItemState extends State<Item> {
 
  void  openDataEntry(BuildContext context) {
     Navigator.of(context).push(
-      // ignore: always_specify_types
-      MaterialPageRoute(
+
+      MaterialPageRoute<Widget>(
         builder: (BuildContext context) => DataEntry(
               widget.item,
               widget.handleSave,

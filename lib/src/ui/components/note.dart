@@ -38,8 +38,8 @@ class Note extends StatelessWidget {
             width: 1.0,
           ),
         ),
-        // ignore: always_specify_types
-        boxShadow: [
+
+        boxShadow:<BoxShadow> [
           BoxShadow(
             color:const  Color(0xFF40000000),
             spreadRadius: 4.0,

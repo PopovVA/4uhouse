@@ -18,7 +18,7 @@ class ScreenBloc {
   }
 
 
- // ignore: avoid_void_async
+ // ignore: avoid_void_async, always_declare_return_types
  sendItemValue(String route, dynamic value, {dynamic body}) async {
     final ScreenModel screenModel =
         await _repository.sendItemValue(route, value, body: body);

@@ -37,8 +37,8 @@ class _PickerState extends State<Picker> {
 
   static List<Widget> generateListOfItems(
       List<int> list, Function displayFunction, BuildContext context) {
-    // ignore: always_specify_types
-    Function renderer = (value) => value;
+
+    Function renderer = (Object value) => value;
 
     if (displayFunction is Function) {
       renderer = displayFunction;

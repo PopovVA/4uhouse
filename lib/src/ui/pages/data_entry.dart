@@ -10,8 +10,8 @@ import '../components/pickers/money_picker.dart';
 import '../helpers/money_controller.dart' show createMoneyController;
 
 class DataEntry extends StatefulWidget {
-  // ignore: prefer_const_constructors_in_immutables
-  DataEntry(this.item, this.handleSave, {this.onSuccess});
+
+const  DataEntry(this.item, this.handleSave, {this.onSuccess});
 
   final ItemModel item;
   final Function handleSave;

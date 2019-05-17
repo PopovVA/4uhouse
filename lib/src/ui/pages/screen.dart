@@ -53,8 +53,7 @@ class _ScreenState extends State<Screen> {
   @override
   Widget build(BuildContext context) {
     print('---> route: ${widget.route}');
-    // ignore: always_specify_types
-    return StreamBuilder(
+    return StreamBuilder<ScreenModel>(
       stream: bloc.screen,
       builder: (BuildContext context, AsyncSnapshot<ScreenModel> snapshot) {
         if (snapshot.hasData) {

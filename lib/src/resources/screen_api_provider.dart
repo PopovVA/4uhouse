@@ -29,8 +29,8 @@ class Token {
 Token token = Token();
 
 Map<String, dynamic> errorScreen(String message, {String title = 'Error'}) {
-  // ignore: always_specify_types
-  return {
+
+  return <String,dynamic>{
     'value': title,
     // ignore: always_specify_types
     'components': [
@@ -58,8 +58,8 @@ class ScreenApiProvider {
     print('---> query: $query');
 
     print('===> token: ${token.value}');
-    // ignore: always_specify_types
-    final response = await client.get(query, headers: {
+
+    final http.Response response = await client.get(query, headers: <String,String>{
       'Authorization': token.value,
     });
     print(response.body.toString());
@@ -78,10 +78,10 @@ class ScreenApiProvider {
     print('---> query: $uri');
     if (body is File) {
       final img.Image imageTmp = img.decodeImage(body.readAsBytesSync());
-      // ignore: always_specify_types
-      final request = http.MultipartRequest('PUT', uri);
-      // ignore: always_specify_types
-      final multipartFile =  http.MultipartFile.fromBytes(
+
+      final http.MultipartRequest request = http.MultipartRequest('PUT', uri);
+
+      final http.MultipartFile multipartFile =  http.MultipartFile.fromBytes(
         'img',
         img.encodeJpg(imageTmp),
         contentType: MediaType.parse('image/jpeg'),
@@ -92,10 +92,10 @@ class ScreenApiProvider {
       request.headers['Authorization'] = token.value;
       final http.StreamedResponse response = await request.send();
       if (response.statusCode == 200) {
-        // ignore: always_specify_types
-        final Completer completer = Completer();
-        // ignore: always_specify_types
-        response.stream.transform(utf8.decoder).listen((value) {
+
+        final Completer<Object> completer = Completer<Object>();
+
+        response.stream.transform(utf8.decoder).listen((Object value) {
           completer.complete(value);
         });
         final String result = await completer.future;
@@ -104,8 +104,8 @@ class ScreenApiProvider {
         throw Exception('Failed to upload image.');
       }
     } else {
-      // ignore: always_specify_types
-      final http.Response response = await client.put(uri, headers: {
+
+      final http.Response response = await client.put(uri, headers: <String,String>{
         'Authorization': token.value,
       });
       if (response.statusCode == 200) {
