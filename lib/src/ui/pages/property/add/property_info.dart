@@ -32,14 +32,14 @@ class PropertyInfo extends StatelessWidget {
                 Text(sale)
               ],
             ),
-            Padding(
+            const Padding(
                 child: Text('Property data will be here',
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
                         fontStyle: FontStyle.normal,
-                        color: const Color.fromRGBO(0, 0, 0, 0.87))),
-                padding: const EdgeInsets.only(right: 27.0, top: 6.0)),
+                        color: Color.fromRGBO(0, 0, 0, 0.87))),
+                padding: EdgeInsets.only(right: 27.0, top: 6.0)),
           ]),
         )
       ],

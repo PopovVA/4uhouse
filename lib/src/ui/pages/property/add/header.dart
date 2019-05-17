@@ -52,10 +52,10 @@ class Header extends StatelessWidget {
                       Container(
                         width: 8,
                         height: 8,
-                        decoration: BoxDecoration(
-                            color: const Color.fromRGBO(255, 167, 38, 1),
+                        decoration: const BoxDecoration(
+                            color: Color.fromRGBO(255, 167, 38, 1),
                             borderRadius:
-                            const BorderRadius.all(Radius.circular(40.0))),
+                            BorderRadius.all(Radius.circular(40.0))),
                       ),
                       const Padding(padding: EdgeInsets.only(left: 5.0)),
                       Text(inputProperty,
