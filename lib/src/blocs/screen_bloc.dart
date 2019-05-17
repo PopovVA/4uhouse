@@ -1,29 +1,33 @@
-import 'package:rxdart/rxdart.dart';
-import 'dart:convert';
 
-import '../resources/repository.dart';
+import 'package:rxdart/rxdart.dart';
+
 import '../models/screen_model.dart';
+import '../resources/repository.dart';
 
 class ScreenBloc {
-  final _repository = Repository();
+  final Repository _repository = Repository();
 
-  final _screen = PublishSubject<ScreenModel>();
+  final PublishSubject<ScreenModel> _screen = PublishSubject<ScreenModel>();
   Observable<ScreenModel> get screen => _screen.stream;
 
-  fetchScreen(String route) async {
-    ScreenModel screenModel = await _repository.fetchScreen(route);
+
+ // ignore: avoid_void_async
+ void fetchScreen(String route) async {
+    final ScreenModel screenModel = await _repository.fetchScreen(route);
     _screen.sink.add(screenModel);
   }
 
-  sendItemValue(String route, dynamic value, {dynamic body}) async {
-    ScreenModel screenModel =
+
+ // ignore: avoid_void_async, always_declare_return_types
+ sendItemValue(String route, dynamic value, {dynamic body}) async {
+    final ScreenModel screenModel =
         await _repository.sendItemValue(route, value, body: body);
     _screen.sink.add(screenModel);
   }
 
-  dispose() {
+ void dispose() {
     _screen.close();
   }
 }
 
-final bloc = ScreenBloc();
+final ScreenBloc bloc = ScreenBloc();

@@ -29,11 +29,11 @@ class MainPoint extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 15.0, right: 15.0),
                     child: Text(
                       _text,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontWeight: FontWeight.normal,
                           fontSize: 14,
                           fontStyle: FontStyle.normal,
-                          color: const Color.fromRGBO(115, 115, 115, 0.87)),
+                          color: Color.fromRGBO(115, 115, 115, 0.87)),
                     )))),
       ]),
     );

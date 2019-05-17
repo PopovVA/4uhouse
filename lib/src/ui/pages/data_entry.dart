@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 import '../../models/item_model.dart';
-import '../components/pickers/money_picker.dart';
 import '../components/common/page_template.dart';
 import '../components/common/styled_button.dart';
+import '../components/pickers/money_picker.dart';
+
 
 import '../helpers/money_controller.dart' show createMoneyController;
 
 class DataEntry extends StatefulWidget {
+
+const  DataEntry(this.item, this.handleSave, {this.onSuccess});
+
   final ItemModel item;
   final Function handleSave;
   final Function onSuccess;
 
-  DataEntry(this.item, this.handleSave, {this.onSuccess});
 
   @override
   State<StatefulWidget> createState() {
@@ -58,6 +61,7 @@ class _DataEntryState extends State<DataEntry> {
     );
   }
 
+  // ignore: always_declare_return_types
   buildDataEntryWidget() {
     print('---> buildDataEntry: ${widget.item.typeValue}');
     switch (widget.item.typeValue) {
@@ -69,7 +73,8 @@ class _DataEntryState extends State<DataEntry> {
     }
   }
 
-  _handleSubmit(context) => () async {
+  // ignore: always_declare_return_types
+  _handleSubmit(BuildContext context) => () async {
         setState(() => loading = true);
         dynamic value;
         switch (widget.item.typeValue) {

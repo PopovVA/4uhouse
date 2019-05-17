@@ -23,10 +23,10 @@ class StyledButton extends StatelessWidget {
     );
   }
 
-  buildChild(context) {
-    print('---> loading: ${loading}');
+  Widget buildChild(BuildContext context) {
+    print('---> loading: $loading');
     if (loading) {
-      return CircularProgress(size: 'small', color: Colors.white);
+      return const CircularProgress(size: 'small', color: Colors.white);
     }
 
     return Text(

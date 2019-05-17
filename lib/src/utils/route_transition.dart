@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: always_specify_types
 class SlideRoute extends PageRouteBuilder {
   SlideRoute({this.widget, this.side})
       : super(pageBuilder: (BuildContext context, Animation<double> animation,

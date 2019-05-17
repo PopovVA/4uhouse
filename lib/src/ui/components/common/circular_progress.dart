@@ -31,7 +31,7 @@ class CircularProgress extends StatelessWidget {
     );
   }
 
-  AlwaysStoppedAnimation<Color> getColor(BuildContext context, color) {
+  AlwaysStoppedAnimation<Color> getColor(BuildContext context, Color color) {
     final Color chosenColor =
         color is Color ? color : Theme.of(context).primaryColor;
     return AlwaysStoppedAnimation<Color>(chosenColor);
