@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../components/common/page_template.dart';
-import 'header.dart';
-import 'property_info.dart';
-import '../components/property.dart' show Property;
-import '../../../../models/property_model.dart' show PropertyModel;
-import '../../../../../temp/room_bs64.dart';
+import '../../components/common/page_template.dart';
+import 'components/property_header.dart';
+import 'components/property_info.dart';
+import 'components/property_body.dart' show Property;
+import '../../../models/property_model.dart' show PropertyModel;
+import '../../../../temp/room_bs64.dart';
 
 class AddProperty extends StatelessWidget {
 
@@ -39,7 +39,7 @@ class AddProperty extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
-                      Text(
+                      const Text(
                         'property process',
                         style: TextStyle(
                             fontWeight: FontWeight.normal,

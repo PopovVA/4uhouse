@@ -6,7 +6,7 @@ class Description extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Center(
+        child: const Center(
             child: Text(
       'Add a property in 3 steps',
       style: TextStyle(

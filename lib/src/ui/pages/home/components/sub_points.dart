@@ -18,11 +18,11 @@ class SubPoint extends StatelessWidget {
             Container(
               padding: const EdgeInsets.only(left: 11),
               child: Text(_text,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.w300,
                     fontSize: 12,
                     fontStyle: FontStyle.normal,
-                    color: const Color.fromRGBO(115, 115, 115, 1.0),
+                    color: Color.fromRGBO(115, 115, 115, 1.0),
                   )),
             )
           ],
