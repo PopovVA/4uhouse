@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
-  Header(
+  const Header(
       {@required this.id,
       @required this.date,
       this.initialDate,
       this.inputProperty});
 
-  String id;
-  String date;
-  String initialDate;
-  String inputProperty;
+  final String id;
+  final String date;
+  final String initialDate;
+  final String inputProperty;
 
   static const List<String> _popUpChoiceList = ['edit', 'remove'];
   static const TextStyle _fontStyle = TextStyle(
@@ -25,14 +25,14 @@ class Header extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.only(bottom: 15.0),
+          padding: const EdgeInsets.only(bottom: 15.0),
           child: Row(
             children: <Widget>[
               Text(
                 id,
                 style: _fontStyle,
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(left: 25.0),
               ),
               Text(date, style: _fontStyle)
@@ -52,14 +52,14 @@ class Header extends StatelessWidget {
                       Container(
                         width: 8,
                         height: 8,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             color: Color.fromRGBO(255, 167, 38, 1),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(40.0))),
                       ),
-                      Padding(padding: EdgeInsets.only(left: 5.0)),
+                      const Padding(padding: EdgeInsets.only(left: 5.0)),
                       Text(inputProperty,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.normal,
                               fontStyle: FontStyle.normal,

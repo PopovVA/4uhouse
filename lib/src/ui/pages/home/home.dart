@@ -6,7 +6,7 @@ import '../../components/common/styled_button.dart';
 import 'components/description.dart';
 import 'components/main_points.dart';
 import 'components/sub_points.dart';
-import '../property/add/add_property.dart';
+import 'package:provider_mobile/src/ui/pages/property/property.dart';
 import '../../../utils/route_transition.dart';
 
 class HomePage extends StatelessWidget {
