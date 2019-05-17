@@ -14,7 +14,7 @@ class AddProperty extends StatelessWidget {
     return PageTemplate(
         title: 'Add a property',
         body: Container(
-            margin: EdgeInsets.only(left: 16.0, right: 16.0),
+            margin: const EdgeInsets.only(left: 16.0, right: 16.0),
             child: SingleChildScrollView(
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -28,12 +28,12 @@ class AddProperty extends StatelessWidget {
                       inputProperty: 'input initial property'),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 22.0),
+                  padding: const EdgeInsets.only(top: 22.0),
                   child: PropertyInfo(
                       renta: r'Renta: $_____/month', sale: r'Sale: $_____'),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 24),
+                  padding: const EdgeInsets.only(top: 24),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
@@ -45,14 +45,14 @@ class AddProperty extends StatelessWidget {
                             fontStyle: FontStyle.normal,
                             fontSize: 12),
                       ),
-                      Padding(padding: EdgeInsets.only(left: 3.0)),
+                      const Padding(padding: EdgeInsets.only(left: 3.0)),
                       Expanded(
                         child: Container(
-                          margin: EdgeInsets.only(top: 10.0, left: 8.0),
+                          margin: const EdgeInsets.only(top: 10.0, left: 8.0),
                           decoration: BoxDecoration(
                             border: Border(
                               bottom: BorderSide(
-                                color: Color.fromRGBO(66, 65, 65, 0.38),
+                                color: const Color.fromRGBO(66, 65, 65, 0.38),
                                 width: 1.0,
                               ),
                             ),
@@ -64,10 +64,10 @@ class AddProperty extends StatelessWidget {
                 ),
                 Column(children: <Widget>[
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 18.0),
+                    margin: const EdgeInsets.symmetric(vertical: 18.0),
                     decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                        borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                         border: Border.all(
                             width: 0.1,
                             style: BorderStyle.solid,
@@ -76,12 +76,12 @@ class AddProperty extends StatelessWidget {
                           BoxShadow(
                               color: Colors.black.withOpacity(0.2),
                               blurRadius: 0.5,
-                              offset: Offset(0.0, 2.0))
+                              offset: const Offset(0.0, 2.0))
                         ]),
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius:
-                              BorderRadius.all(Radius.circular(30.0))),
+                          const BorderRadius.all(Radius.circular(30.0))),
                       child: Property(PropertyModel.fromJson(_getMapData(
                           '1',
                           _room_bs64,
@@ -96,10 +96,10 @@ class AddProperty extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 15.0),
+                    margin: const EdgeInsets.symmetric(vertical: 15.0),
                     decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                        borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                         border: Border.all(
                             width: 0.1,
                             style: BorderStyle.solid,
@@ -108,12 +108,12 @@ class AddProperty extends StatelessWidget {
                           BoxShadow(
                               color: Colors.black.withOpacity(0.2),
                               blurRadius: 0.5,
-                              offset: Offset(0.0, 2.0))
+                              offset: const Offset(0.0, 2.0))
                         ]),
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius:
-                              BorderRadius.all(Radius.circular(30.0))),
+                          const BorderRadius.all(Radius.circular(30.0))),
                       child: Property(PropertyModel.fromJson(_getMapData(
                           '2',
                           _room_bs64,
@@ -132,8 +132,8 @@ class AddProperty extends StatelessWidget {
             ))));
   }
 
-  Map<String, dynamic> _getMapData(id, picture, statusValue, statusColor,
-      currency, costSale, costRent, paymentPeriod, mainInfo, address) {
+  Map<String, dynamic> _getMapData(String id, String picture, String statusValue, String statusColor,
+      String currency, int costSale, int costRent, String paymentPeriod, String mainInfo, String address) {
     return {
       'id': id,
       'picture': picture,

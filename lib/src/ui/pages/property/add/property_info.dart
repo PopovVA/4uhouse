@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class PropertyInfo extends StatelessWidget {
-  PropertyInfo({this.renta, this.sale});
+  const PropertyInfo({this.renta, this.sale});
 
-  String renta;
-  String sale;
+  final String renta;
+  final String sale;
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +15,9 @@ class PropertyInfo extends StatelessWidget {
         Container(
           width: 110,
           height: 66,
-          color: Color.fromRGBO(227, 227, 227, 1),
+          color: const Color.fromRGBO(227, 227, 227, 1),
           child: Container(
-              padding: EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(15.0),
               child: SvgPicture.asset('lib/assets/photo.svg')),
         ),
         Container(
@@ -26,7 +26,7 @@ class PropertyInfo extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 Text(renta),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(left: 5.0),
                 ),
                 Text(sale)
@@ -38,8 +38,8 @@ class PropertyInfo extends StatelessWidget {
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
                         fontStyle: FontStyle.normal,
-                        color: Color.fromRGBO(0, 0, 0, 0.87))),
-                padding: EdgeInsets.only(right: 27.0, top: 6.0)),
+                        color: const Color.fromRGBO(0, 0, 0, 0.87))),
+                padding: const EdgeInsets.only(right: 27.0, top: 6.0)),
           ]),
         )
       ],

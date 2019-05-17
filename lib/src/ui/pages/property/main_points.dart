@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 class MainPoint extends StatelessWidget {
-  MainPoint(this._text, this._number);
+  const MainPoint(this._text, this._number);
 
-  String _text;
-  int _number;
+  final String _text;
+  final int _number;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 15.0, right: 15.0),
+      margin: const EdgeInsets.only(left: 15.0, right: 15.0),
       child: Row(children: <Widget>[
         Container(
-          padding: EdgeInsets.all(1.0),
-          decoration: BoxDecoration(
+          padding: const EdgeInsets.all(1.0),
+          decoration: const BoxDecoration(
             color: Color.fromRGBO(115, 115, 115, 1.0),
             shape: BoxShape.circle,
           ),
@@ -25,10 +25,10 @@ class MainPoint extends StatelessWidget {
         Container(
             child: Flexible(
                 child: Padding(
-                    padding: EdgeInsets.only(left: 15.0, right: 15.0),
+                    padding: const EdgeInsets.only(left: 15.0, right: 15.0),
                     child: Text(
                       _text,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontWeight: FontWeight.normal,
                           fontSize: 14,
                           fontStyle: FontStyle.normal,
