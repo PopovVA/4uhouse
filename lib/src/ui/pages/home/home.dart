@@ -12,17 +12,19 @@ import 'components/sub_points.dart';
 class HomePage extends StatelessWidget {
   var user = UserProfile(
       // ignore: prefer_single_quotes
-      name: "Roman", email: "rom12@gmail.com", phone: "89160001122");
+      name: "Roman",
+      email: "rom12@gmail.com",
+      phone: "89160001122");
   bool isLoading = true;
 
   @override
   Widget build(BuildContext context) {
-    return isLoading
-        ? InheritedAuth(
-            userProfile: user.toMap(),
-            onLogin: () {},
-            onLogout: () {},
-            child: PageTemplate(
+    return InheritedAuth(
+        userProfile: user.toMap(),
+        onLogin: () {},
+        onLogout: () {},
+        child: isLoading
+            ? PageTemplate(
                 title: 'My property',
                 body: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,7 +100,7 @@ class HomePage extends StatelessWidget {
                           text: 'Add property',
                         )),
                   ],
-                )))
-        : const CircularProgress();
+                ))
+            : const CircularProgress());
   }
 }
