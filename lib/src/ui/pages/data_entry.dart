@@ -61,8 +61,8 @@ class _DataEntryState extends State<DataEntry> {
     );
   }
 
-  // ignore: always_declare_return_types
-  buildDataEntryWidget() {
+
+ MoneyPicker buildDataEntryWidget() {
     print('---> buildDataEntry: ${widget.item.typeValue}');
     switch (widget.item.typeValue) {
       case 'money':
