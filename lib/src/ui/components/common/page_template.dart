@@ -42,7 +42,7 @@ class PageTemplate extends StatelessWidget {
       ),
       drawer: DrawerOnly(),
       body: Container(
-        color: const Color(0xFFEBECED),
+
         padding: EdgeInsets.fromLTRB(
             horizontalPadding, 0.0, horizontalPadding, standardPadding),
         child: body,

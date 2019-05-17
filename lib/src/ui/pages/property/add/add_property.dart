@@ -66,7 +66,7 @@ class AddProperty extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 18.0),
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: const Color(0xFFEBECED),
                         borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                         border: Border.all(
                             width: 0.1,
@@ -98,7 +98,7 @@ class AddProperty extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 15.0),
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: const Color(0xFFEBECED),
                         borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                         border: Border.all(
                             width: 0.1,
