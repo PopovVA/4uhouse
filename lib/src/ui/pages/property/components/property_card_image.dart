@@ -5,7 +5,6 @@ import 'dart:typed_data' show Uint8List;
 import '../../../../utils/type_check.dart' show isNotNull;
 
 class PropertyImage extends StatelessWidget {
-
   PropertyImage._(
       {this.id,
       this.statusColor,
@@ -87,7 +86,8 @@ class PropertyImage extends StatelessWidget {
               height: 22.0,
               padding: const EdgeInsets.symmetric(horizontal: 22.0),
               child: Text(statusValue,
-                  style: const TextStyle(fontSize: 14.0, color: Color(0xFFdeffffff))),
+                  style: const TextStyle(
+                      fontSize: 14.0, color: Color(0xFFdeffffff))),
             ),
           ],
         ),
@@ -118,9 +118,9 @@ class PropertyImage extends StatelessWidget {
           children: <Widget>[
             Container(
               padding: const EdgeInsets.fromLTRB(3.0, 4.0, 12.0, 3.0),
-              decoration: BoxDecoration(
-                color: const Color(0xFFcccccc),
-                borderRadius: const BorderRadius.all(radius),
+              decoration: const BoxDecoration(
+                color: Color(0xFFcccccc),
+                borderRadius: BorderRadius.all(radius),
               ),
               margin: const EdgeInsets.only(left: 16.0),
               child: Text('#$id',
@@ -141,7 +141,7 @@ class PropertyImage extends StatelessWidget {
       width: double.infinity,
       height: height,
       color: Colors.grey,
-      margin: const EdgeInsets.only(bottom: 8.0),
+      margin: const EdgeInsets.only(bottom: 1.0),
       child: Stack(
         children: <Widget>[
           buildImage(),

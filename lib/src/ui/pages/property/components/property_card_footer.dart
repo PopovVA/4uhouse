@@ -29,10 +29,11 @@ class PropertyFooter extends StatelessWidget {
       return Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
-          Text('/', style: mainValueStyle),
+          const Text('/', style: mainValueStyle),
           Padding(
-              padding: EdgeInsets.only(bottom: 2.0),
-              child: Text(paymentPeriod, style: TextStyle(fontSize: 12.0))),
+              padding: const EdgeInsets.only(bottom: 2.0),
+              child:
+                  Text(paymentPeriod, style: const TextStyle(fontSize: 12.0))),
         ],
       );
     }
@@ -58,7 +59,7 @@ class PropertyFooter extends StatelessWidget {
         children: <Widget>[
           Text(value, style: addInfoStyle),
           addSeparator
-              ? Padding(
+              ? const Padding(
                   padding: EdgeInsets.only(left: 23.0, right: 17.0),
                   child: Text('|', style: addInfoStyle),
                 )
@@ -78,7 +79,7 @@ class PropertyFooter extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           buildMainValue(costSale, 5.0),
-          buildMainValue(costRent, 16.0, includePaymentPeriod: true),
+          buildMainValue(costRent, 10.0, includePaymentPeriod: true),
           Row(
             children: <Widget>[
               buildAddInfo(mainInfo, addSeparator: true),

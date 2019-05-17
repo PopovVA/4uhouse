@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 
 import '../../../../models/property_model.dart' show PropertyModel;
 
-import 'property_footer.dart' show PropertyFooter;
-import 'property_image.dart' show PropertyImage;
+import 'property_card_footer.dart' show PropertyFooter;
+import 'property_card_image.dart' show PropertyImage;
 
-class Property extends StatelessWidget {
-  Property._(PropertyModel property, {this.makeTransition, GlobalKey key})
+class PropertyCard extends StatelessWidget {
+  PropertyCard._(PropertyModel property, {this.makeTransition, GlobalKey key})
       : this.property = property,
         this.id = property.id,
         this._key = key,
         super(key: key);
 
-  factory Property(PropertyModel property, {Function makeTransition}) {
-    return Property._(property,
+  factory PropertyCard(PropertyModel property, {Function makeTransition}) {
+    return PropertyCard._(property,
         makeTransition: makeTransition, key: GlobalKey());
   }
 

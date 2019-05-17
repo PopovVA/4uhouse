@@ -55,7 +55,7 @@ class Header extends StatelessWidget {
                         decoration: const BoxDecoration(
                             color: Color.fromRGBO(255, 167, 38, 1),
                             borderRadius:
-                            BorderRadius.all(Radius.circular(40.0))),
+                                BorderRadius.all(Radius.circular(40.0))),
                       ),
                       const Padding(padding: EdgeInsets.only(left: 5.0)),
                       Text(inputProperty,

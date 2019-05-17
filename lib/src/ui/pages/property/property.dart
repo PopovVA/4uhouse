@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import '../../components/common/page_template.dart';
 import 'components/property_header.dart';
 import 'components/property_info.dart';
-import 'components/property_body.dart' show Property;
+import 'components/property_card_body.dart' show PropertyCard;
 import '../../../models/property_model.dart' show PropertyModel;
 import '../../../../temp/room_bs64.dart';
 
 class AddProperty extends StatelessWidget {
-
   final String _roomBs64 = RoomBs64().room_bs64();
 
   @override
@@ -34,7 +33,7 @@ class AddProperty extends StatelessWidget {
                       renta: r'Renta: $_____/month', sale: r'Sale: $_____'),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 24),
+                  padding: const EdgeInsets.only(top: 20, bottom: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
@@ -65,10 +64,11 @@ class AddProperty extends StatelessWidget {
                 ),
                 Column(children: <Widget>[
                   Container(
-                    margin: const EdgeInsets.symmetric(vertical: 18.0),
+                    margin: const EdgeInsets.symmetric(vertical: 5.0),
                     decoration: BoxDecoration(
                         color: const Color(0xFFEBECED),
-                        borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(30.0)),
                         border: Border.all(
                             width: 0.1,
                             style: BorderStyle.solid,
@@ -82,8 +82,8 @@ class AddProperty extends StatelessWidget {
                     child: Container(
                       decoration: const BoxDecoration(
                           borderRadius:
-                          BorderRadius.all(Radius.circular(30.0))),
-                      child: Property(PropertyModel.fromJson(_getMapData(
+                              BorderRadius.all(Radius.circular(30.0))),
+                      child: PropertyCard(PropertyModel.fromJson(_getMapData(
                           '1',
                           _roomBs64,
                           'To Do',
@@ -100,7 +100,8 @@ class AddProperty extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(vertical: 15.0),
                     decoration: BoxDecoration(
                         color: const Color(0xFFEBECED),
-                        borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(30.0)),
                         border: Border.all(
                             width: 0.1,
                             style: BorderStyle.solid,
@@ -114,8 +115,8 @@ class AddProperty extends StatelessWidget {
                     child: Container(
                       decoration: const BoxDecoration(
                           borderRadius:
-                          BorderRadius.all(Radius.circular(30.0))),
-                      child: Property(PropertyModel.fromJson(_getMapData(
+                              BorderRadius.all(Radius.circular(30.0))),
+                      child: PropertyCard(PropertyModel.fromJson(_getMapData(
                           '2',
                           _roomBs64,
                           'To Do',
@@ -133,8 +134,17 @@ class AddProperty extends StatelessWidget {
             ))));
   }
 
-  Map<String, dynamic> _getMapData(String id, String picture, String statusValue, String statusColor,
-      String currency, int costSale, int costRent, String paymentPeriod, String mainInfo, String address) {
+  Map<String, dynamic> _getMapData(
+      String id,
+      String picture,
+      String statusValue,
+      String statusColor,
+      String currency,
+      int costSale,
+      int costRent,
+      String paymentPeriod,
+      String mainInfo,
+      String address) {
     return {
       'id': id,
       'picture': picture,
