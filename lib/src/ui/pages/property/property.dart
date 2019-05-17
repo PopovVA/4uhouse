@@ -80,14 +80,14 @@ class AddProperty extends StatelessWidget {
                               offset: const Offset(0.0, 2.0))
                         ]),
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           borderRadius:
-                          const BorderRadius.all(Radius.circular(30.0))),
+                          BorderRadius.all(Radius.circular(30.0))),
                       child: Property(PropertyModel.fromJson(_getMapData(
                           '1',
                           _roomBs64,
                           'To Do',
-                          '1',
+                          '0xDEFFA726',
                           r'$',
                           250000,
                           8000,
@@ -112,14 +112,14 @@ class AddProperty extends StatelessWidget {
                               offset: const Offset(0.0, 2.0))
                         ]),
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           borderRadius:
-                          const BorderRadius.all(Radius.circular(30.0))),
+                          BorderRadius.all(Radius.circular(30.0))),
                       child: Property(PropertyModel.fromJson(_getMapData(
                           '2',
                           _roomBs64,
                           'To Do',
-                          '1',
+                          '0xDEFFA726',
                           r'$',
                           250000,
                           8000,
