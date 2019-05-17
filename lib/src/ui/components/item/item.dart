@@ -1,28 +1,29 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show DateFormat;
-
-import '../../../models/item_model.dart';
-import '../../pages/data_entry.dart';
-import './item_layout.dart';
-import '../pickers/date_picker/date_picker_modal.dart' show openDatePicker;
 import 'package:provider_mobile/src/ui/components/pickers/photo_uploader.dart'
     show openPhotoUploader;
-import '../common/circular_progress.dart';
 
+import '../../../models/item_model.dart';
 import '../../../utils/type_check.dart' show isNotNull;
 import '../../helpers/money_controller.dart' show formatCost;
+import '../../pages/data_entry.dart';
+import '../common/circular_progress.dart';
+import '../pickers/date_picker/date_picker_modal.dart' show openDatePicker;
+import './item_layout.dart';
 
 class Item extends StatefulWidget {
+  Item(ItemModel item, this.path, this.handleSave, this.makeTransition)
+      // ignore: prefer_initializing_formals
+      : item = item,
+        id = item.id;
   final ItemModel item;
   final String id;
   final Function handleSave;
   final String path;
   final Function makeTransition;
 
-  Item(ItemModel item, this.path, this.handleSave, this.makeTransition)
-      : this.item = item,
-        this.id = item.id;
+
 
   @override
   State<StatefulWidget> createState() {
@@ -31,20 +32,23 @@ class Item extends StatefulWidget {
 }
 
 class _ItemState extends State<Item> {
-  final formatter = DateFormat('dd.MM.yyyy');
+  final DateFormat formatter = DateFormat('dd.MM.yyyy');
 
   bool loading = false;
 
+  // ignore: unnecessary_parenthesis
   bool get isTapable => (widget.item.isTransition || widget.item.isInput);
 
-  onChanged(dynamic value, {dynamic body}) async {
+  // ignore: avoid_void_async
+  void onChanged(dynamic value, {dynamic body}) async {
     setState(() => loading = true);
     await widget.handleSave(widget.item.id, value, body: body);
     setState(() => loading = false);
   }
 
-  onTap(context) => () {
-        ItemModel item = widget.item;
+ // ignore: always_declare_return_types
+ onTap(BuildContext context) => () {
+        final ItemModel item = widget.item;
         if (item.isTransition) {
           widget.makeTransition(context, item.id);
         } else {
@@ -63,7 +67,7 @@ class _ItemState extends State<Item> {
               break;
             case 'photo':
               openPhotoUploader(context, onLoad: (Future<File> cb) async {
-                File photo = await cb;
+                final File photo = await cb;
                 if (photo != null) {
                   onChanged(item.value, body: photo);
                 }
@@ -78,10 +82,11 @@ class _ItemState extends State<Item> {
         }
       };
 
-  openDataEntry(BuildContext context) {
+ void  openDataEntry(BuildContext context) {
     Navigator.of(context).push(
+      // ignore: always_specify_types
       MaterialPageRoute(
-        builder: (context) => DataEntry(
+        builder: (BuildContext context) => DataEntry(
               widget.item,
               widget.handleSave,
               onSuccess: () {
@@ -92,12 +97,13 @@ class _ItemState extends State<Item> {
     );
   }
 
+  // ignore: always_declare_return_types
   buildSuffix(BuildContext context) {
     if (loading) {
-      return CircularProgress(size: 'small');
+      return const CircularProgress(size: 'small');
     }
 
-    ItemModel item = widget.item;
+    final ItemModel item = widget.item;
     switch (item.typeValue) {
       case 'date':
         return isNotNull(item.value)
@@ -112,8 +118,8 @@ class _ItemState extends State<Item> {
     }
   }
 
-  renderSwitch(BuildContext context) {
-    ItemModel item = widget.item;
+  Switch renderSwitch(BuildContext context) {
+    final ItemModel item = widget.item;
     return Switch(
       activeColor: Theme.of(context).primaryColor,
       value: item.value,
@@ -123,7 +129,7 @@ class _ItemState extends State<Item> {
 
   @override
   Widget build(BuildContext context) {
-    ItemModel item = widget.item;
+    final ItemModel item = widget.item;
     return ItemLayout(
       picture: item.picture,
       body: item.key,

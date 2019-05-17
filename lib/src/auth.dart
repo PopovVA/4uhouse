@@ -47,6 +47,7 @@ class _AuthState extends State<Auth> {
     });
   }
 
+  // ignore: avoid_void_async
   void logout() async {
     setLoadingState();
     final http.Response httpResponse = await http.post(

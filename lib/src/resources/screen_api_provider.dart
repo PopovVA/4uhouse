@@ -1,6 +1,7 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:convert';
+import 'dart:io';
+
 
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
@@ -17,7 +18,7 @@ class Token {
   String _token;
 
   set value(String t) {
-    if (t != null && t.length > 0) {
+    if (t != null && t.isNotEmpty) {
       _token = t;
     }
   }
@@ -28,9 +29,12 @@ class Token {
 Token token = Token();
 
 Map<String, dynamic> errorScreen(String message, {String title = 'Error'}) {
+  // ignore: always_specify_types
   return {
     'value': title,
+    // ignore: always_specify_types
     'components': [
+      // ignore: always_specify_types
       {
         'component': 'item',
         'id': 'fail_item',
@@ -47,13 +51,14 @@ class ScreenApiProvider {
   http.Client client = http.Client();
 
   Future<ScreenModel> fetchScreen(String route) async {
-    print("entered $route");
-    final query = isNotNullableString(route)
+    print('entered $route');
+    final String query = isNotNullableString(route)
         ? '$BASE_URL$route'
         : '$BASE_URL\\myProperty';
-    print('---> query: ${query}');
+    print('---> query: $query');
 
     print('===> token: ${token.value}');
+    // ignore: always_specify_types
     final response = await client.get(query, headers: {
       'Authorization': token.value,
     });
@@ -72,9 +77,11 @@ class ScreenApiProvider {
     final Uri uri = Uri.parse('$BASE_URL$route?value=${value.toString()}');
     print('---> query: $uri');
     if (body is File) {
-      img.Image imageTmp = img.decodeImage(body.readAsBytesSync());
-      var request = http.MultipartRequest('PUT', uri);
-      var multipartFile = new http.MultipartFile.fromBytes(
+      final img.Image imageTmp = img.decodeImage(body.readAsBytesSync());
+      // ignore: always_specify_types
+      final request = http.MultipartRequest('PUT', uri);
+      // ignore: always_specify_types
+      final multipartFile =  http.MultipartFile.fromBytes(
         'img',
         img.encodeJpg(imageTmp),
         contentType: MediaType.parse('image/jpeg'),
@@ -83,19 +90,22 @@ class ScreenApiProvider {
       );
       request.files.add(multipartFile);
       request.headers['Authorization'] = token.value;
-      http.StreamedResponse response = await request.send();
+      final http.StreamedResponse response = await request.send();
       if (response.statusCode == 200) {
-        Completer completer = Completer();
+        // ignore: always_specify_types
+        final Completer completer = Completer();
+        // ignore: always_specify_types
         response.stream.transform(utf8.decoder).listen((value) {
           completer.complete(value);
         });
-        String result = await completer.future;
+        final String result = await completer.future;
         return ScreenModel.fromJson(json.decode(result)[0]);
       } else {
         throw Exception('Failed to upload image.');
       }
     } else {
-      http.Response response = await client.put(uri, headers: {
+      // ignore: always_specify_types
+      final http.Response response = await client.put(uri, headers: {
         'Authorization': token.value,
       });
       if (response.statusCode == 200) {

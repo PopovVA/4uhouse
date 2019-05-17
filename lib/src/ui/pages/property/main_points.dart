@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class MainPoint extends StatelessWidget {
+  // ignore: prefer_const_constructors_in_immutables
   MainPoint(this._text, this._number);
 
   String _text;
@@ -9,11 +11,11 @@ class MainPoint extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 15.0, right: 15.0),
+      margin:const  EdgeInsets.only(left: 15.0, right: 15.0),
       child: Row(children: <Widget>[
         Container(
-          padding: EdgeInsets.all(1.0),
-          decoration: BoxDecoration(
+          padding:const  EdgeInsets.all(1.0),
+          decoration:const  BoxDecoration(
             color: Color.fromRGBO(115, 115, 115, 1.0),
             shape: BoxShape.circle,
           ),
@@ -25,10 +27,10 @@ class MainPoint extends StatelessWidget {
         Container(
             child: Flexible(
                 child: Padding(
-                    padding: EdgeInsets.only(left: 15.0, right: 15.0),
+                    padding:const  EdgeInsets.only(left: 15.0, right: 15.0),
                     child: Text(
                       _text,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontWeight: FontWeight.normal,
                           fontSize: 14,
                           fontStyle: FontStyle.normal,

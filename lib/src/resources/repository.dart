@@ -1,10 +1,10 @@
 import 'dart:async';
-
-import 'screen_api_provider.dart';
 import '../models/screen_model.dart';
+import 'screen_api_provider.dart';
+
 
 class Repository {
-  final screenApiProvider = ScreenApiProvider();
+  final ScreenApiProvider screenApiProvider = ScreenApiProvider();
 
   Future<ScreenModel> fetchScreen(String route) =>
       screenApiProvider.fetchScreen(route);
@@ -14,4 +14,4 @@ class Repository {
   }
 }
 
-final repository = Repository();
+final Repository repository = Repository();

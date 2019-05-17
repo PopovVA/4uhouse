@@ -1,19 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import 'item_layout_container.dart';
 import '../../../typography.dart' show ACTIVE_COLOR, DISABLED_COLOR;
 import '../../../utils/type_check.dart' show isNotNull;
+import 'item_layout_container.dart';
 
 class ItemLayout extends StatelessWidget {
-  final String picture;
-  final String body;
-  final dynamic suffix;
-  final bool link;
-  final Function onTap;
-  final bool disabled;
-
+  // ignore: prefer_const_constructors_in_immutables
   ItemLayout({
     this.picture,
     this.body,
@@ -22,11 +15,19 @@ class ItemLayout extends StatelessWidget {
     this.onTap,
     this.disabled = false,
   });
+  final String picture;
+  final String body;
+  final dynamic suffix;
+  final bool link;
+  final Function onTap;
+  final bool disabled;
 
-  _buildPicture() {
+
+
+  Widget _buildPicture() {
     if (picture is String) {
       return Container(
-        margin: EdgeInsets.only(right: 8.0),
+        margin: const EdgeInsets.only(right: 8.0),
         child: Center(
           child: picture.startsWith('<svg')
               ? SvgPicture.string(picture)
@@ -40,7 +41,8 @@ class ItemLayout extends StatelessWidget {
     return null;
   }
 
-  _buildTextContent(context) {
+ // ignore: always_declare_return_types
+ _buildTextContent(BuildContext context) {
     if (body is String) {
       return Expanded(
         flex: 3,
@@ -51,6 +53,7 @@ class ItemLayout extends StatelessWidget {
     }
   }
 
+  // ignore: always_declare_return_types
   _buildSuffix() {
     if (isNotNull(suffix)) {
       return Expanded(
@@ -62,6 +65,7 @@ class ItemLayout extends StatelessWidget {
     }
   }
 
+  // ignore: always_declare_return_types
   _buildLink() {
     if (link) {
       return Icon(
@@ -71,14 +75,15 @@ class ItemLayout extends StatelessWidget {
     }
   }
 
+  // ignore: always_declare_return_types, always_specify_types
   renderText(value) {
     if (!(value is StatefulWidget) && !(value is StatelessWidget)) {
-      const fontSize = 16.0;
+      const double fontSize = 16.0;
       return Text(
         isNotNull(value) ? value.toString() : '--',
         style: disabled
-            ? TextStyle(fontSize: fontSize, color: ACTIVE_COLOR)
-            : TextStyle(fontSize: fontSize, color: DISABLED_COLOR),
+            ? const TextStyle(fontSize: fontSize, color: ACTIVE_COLOR)
+            : const TextStyle(fontSize: fontSize, color: DISABLED_COLOR),
       );
     }
 

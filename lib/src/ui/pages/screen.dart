@@ -17,10 +17,11 @@ import '../components/item/item.dart';
 import '../components/note.dart';
 import '../components/property/property.dart';
 
+// ignore: must_be_immutable
 class Screen extends StatefulWidget {
   Screen(this.route, {Map<String, dynamic> arguments}) {
     if (arguments != null) {
-      this.scrollToId = arguments['scrollToId'];
+      scrollToId = arguments['scrollToId'];
     }
   }
 
@@ -52,6 +53,7 @@ class _ScreenState extends State<Screen> {
   @override
   Widget build(BuildContext context) {
     print('---> route: ${widget.route}');
+    // ignore: always_specify_types
     return StreamBuilder(
       stream: bloc.screen,
       builder: (BuildContext context, AsyncSnapshot<ScreenModel> snapshot) {
@@ -64,6 +66,7 @@ class _ScreenState extends State<Screen> {
                     Navigator.of(context).pushNamedAndRemoveUntil(
                       path.substring(0, path.lastIndexOf('/')),
                       (Route<dynamic> route) => false,
+                      // ignore: always_specify_types
                       arguments: {
                         'scrollToId': widget.route
                             .substring(widget.route.lastIndexOf('/') + 1),
@@ -90,6 +93,7 @@ class _ScreenState extends State<Screen> {
     if (data is ScreenModel) {
       final List<Widget> items = <Widget>[];
       final List<Button> buttons = <Button>[];
+      // ignore: avoid_function_literals_in_foreach_calls
       data.components.forEach((dynamic component) {
         if (component is ItemModel) {
           items.add(Item(

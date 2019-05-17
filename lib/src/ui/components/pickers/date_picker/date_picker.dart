@@ -1,43 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart' show ReplaySubject;
-
-import 'date_picker_modal.dart' show DatePickerInput;
-import 'picker.dart' show Picker;
-
-import 'constants/months.dart' show MONTHS;
 import 'constants/initial_arrays.dart'
     show INITIAL_D_FULL_ARRAY, INITIAL_M_FULL_ARRAY;
+import 'constants/months.dart' show MONTHS;
 import 'helpers/generate_range_list.dart' show generateRangeList;
 import 'helpers/grey_color.dart' show greyColourInclude, greyColourBegin;
+import 'picker.dart' show Picker;
 
+// ignore: must_be_immutable
 class DatePicker extends StatefulWidget {
   DatePicker({
-    @required Function this.onDateTimeChanged,
+    @required this.onDateTimeChanged,
     @required DateTime initialDateTime,
     DateTime minimumDate,
     DateTime maximumDate,
     int minimumYear = 1970,
     int maximumYear = 2030,
   }) {
+    // ignore: prefer_asserts_in_initializer_lists
     assert(
         onDateTimeChanged != null, 'onDateTimeChanged argument is required!',);
+    // ignore: prefer_asserts_in_initializer_lists
     assert(minimumDate.isBefore(maximumDate),
         'Minimum date should be before maximum date.',);
 
     this.initialDateTime =
         initialDateTime is DateTime ? initialDateTime : DateTime(2000, 1, 1);
-    this.yFullArray = generateRangeList([
+    // ignore: always_specify_types
+    yFullArray = generateRangeList([
       (minimumDate is DateTime) ? minimumDate.year : minimumYear,
       (maximumDate is DateTime) ? maximumDate.year : maximumYear,
     ]);
 
-    this.dMin = minimumDate.day - 1;
-    this.mMin = minimumDate.month - 1;
-    this.yMin = 0;
+    dMin = minimumDate.day - 1;
+    mMin = minimumDate.month - 1;
+    yMin = 0;
 
-    this.dMax = maximumDate.day - 1;
-    this.mMax = maximumDate.month - 1;
-    this.yMax = this.yFullArray.length - 1;
+    dMax = maximumDate.day - 1;
+    mMax = maximumDate.month - 1;
+    yMax = yFullArray.length - 1;
   }
 
   final Function onDateTimeChanged;
@@ -76,11 +77,12 @@ class _DatePickerState extends State<DatePicker> {
   bool isPanning;
 
   @override
-  initState() {
+  void initState() {
     // Initialize indexes
     dIndex = widget.initialDateTime.day - 1;
     mIndex = widget.initialDateTime.month - 1;
-    int indexOfYear = widget.yFullArray.indexOf(widget.initialDateTime.year);
+    final int indexOfYear =
+        widget.yFullArray.indexOf(widget.initialDateTime.year);
     yIndex = indexOfYear != -1 ? indexOfYear : 0;
 
     dayScrollController = FixedExtentScrollController(initialItem: dIndex);
@@ -101,26 +103,33 @@ class _DatePickerState extends State<DatePicker> {
     dArray = INITIAL_D_FULL_ARRAY;
     mArray = INITIAL_M_FULL_ARRAY;
 
+    // ignore: always_specify_types
     if ([4, 6, 9, 11].contains(mIndex + 1)) {
       dArray = greyColourBegin(dArray, 30);
-      if (dIndex > 29) dIndex = 29;
+      if (dIndex > 29){
+        dIndex = 29;
+      }
     } else {
       if (mIndex + 1 == 2) {
         if (widget.yFullArray[yIndex] % 400 == 0 ||
             (widget.yFullArray[yIndex] % 100 != 0 &&
                 widget.yFullArray[yIndex] % 4 == 0)) {
           dArray = greyColourBegin(dArray, 29);
-          if (dIndex > 28) dIndex = 27;
+          if (dIndex > 28) {
+            dIndex = 27;
+          }
         }
       } else {
         dArray = greyColourBegin(dArray, 28);
-        if (dIndex > 27) dIndex = 27;
+        if (dIndex > 27) {
+          dIndex = 27;
+        }
       }
     }
 
-    int dMax = widget.dMax;
-    int mMax = widget.mMax;
-    int yMax = widget.yMax;
+    final int dMax = widget.dMax;
+    final int mMax = widget.mMax;
+    final int yMax = widget.yMax;
     if (yIndex >= yMax) {
       yIndex = yMax;
       mArray = greyColourBegin(mArray, mMax + 1);
@@ -133,9 +142,9 @@ class _DatePickerState extends State<DatePicker> {
       }
     }
 
-    int dMin = widget.dMin;
-    int mMin = widget.mMin;
-    int yMin = widget.yMin;
+    final int dMin = widget.dMin;
+    final int mMin = widget.mMin;
+    final int yMin = widget.yMin;
     if (yIndex <= yMin) {
       yIndex = yMin;
       mArray = greyColourInclude(mArray, mMin);
@@ -179,6 +188,7 @@ class _DatePickerState extends State<DatePicker> {
     return Picker(
       animateDuration: 1000,
       controller: monthScrollController,
+      // ignore: always_specify_types
       displayFunction: (value) => MONTHS[value - 1],
       index: mIndex,
       onSelectedItemChanged: (int index) {
@@ -208,6 +218,7 @@ class _DatePickerState extends State<DatePicker> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      // ignore: always_specify_types
       children: [
         buildDayPicker(),
         buildMonthPicker(),

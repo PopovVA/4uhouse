@@ -1,18 +1,6 @@
 import 'component_model.dart';
 
 class ItemModel extends ComponentModel {
-  String _id;
-  String _key;
-  String _picture;
-  bool _isTransition;
-  bool _isInput;
-  String _typeValue;
-  dynamic _value;
-
-  // date specific props
-  int _min;
-  int _max;
-
   ItemModel.fromJson(Map<String, dynamic> json)
       : _id = json['id'],
         _key = json['key'],
@@ -25,18 +13,37 @@ class ItemModel extends ComponentModel {
         _max = json['max'],
         super.fromJson(json['component']);
 
+  String _id;
+  String _key;
+  String _picture;
+  bool _isTransition;
+  bool _isInput;
+  String _typeValue;
+  dynamic _value;
+
+  // date specific props
+  int _min;
+  int _max;
+
   String get id => _id;
+
   String get key => _key;
+
   String get picture => _picture;
+
   bool get isTransition => _isTransition;
+
   bool get isInput => _isInput;
+
   String get typeValue => _typeValue;
+
   dynamic get value {
     return ((typeValue == 'money') && (_value is int))
         ? (_value / 100)
         : _value;
   }
 
+  // ignore: always_specify_types
   set value(value) {
     if (value is bool) {
       _value = value;
@@ -45,5 +52,6 @@ class ItemModel extends ComponentModel {
 
   // date specific props
   int get min => _min;
+
   int get max => _max;
 }

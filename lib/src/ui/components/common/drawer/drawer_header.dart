@@ -8,7 +8,7 @@ import '../../inherited_auth.dart';
 class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final inheritedAuth = InheritedAuth.of(context);
+    final InheritedAuth inheritedAuth = InheritedAuth.of(context);
     return inheritedAuth.userProfile != null
         ? Padding(
             padding: const EdgeInsets.only(left: 14.0),
@@ -20,9 +20,9 @@ class Header extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         UserProfile.fromMap(inheritedAuth.userProfile).name,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 20.0,
-                            color: const Color.fromRGBO(88, 85, 85, 0.87)),
+                            color: Color.fromRGBO(88, 85, 85, 0.87)),
                       ),
                       IconButton(
                           icon: const Icon(
@@ -37,16 +37,16 @@ class Header extends StatelessWidget {
                   Text(
                     UserProfile.fromMap(inheritedAuth.userProfile).email,
                     style:
-                        TextStyle(color: const Color.fromRGBO(0, 0, 0, 0.54)),
+                        const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.54)),
                   ),
                   Row(
                     children: <Widget>[
                       Container(
                         child: Text(
                           UserProfile.fromMap(inheritedAuth.userProfile).phone,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 16.0,
-                              color: const Color.fromRGBO(95, 93, 93, 0.87)),
+                              color: Color.fromRGBO(95, 93, 93, 0.87)),
                         ),
                         width: 132,
                       ),

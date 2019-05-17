@@ -1,12 +1,15 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-
-import 'date_picker.dart';
-import '../generic/open_modal_bottom.dart' show openModalBottom;
 import '../../../../utils/type_check.dart' show isNotNull;
+import '../generic/open_modal_bottom.dart' show openModalBottom;
+import 'date_picker.dart';
 
+
+// ignore: always_specify_types
 DateTime _timestampToDateTime(timestamp) {
   if (timestamp is int) {
-    DateTime ms = DateTime.fromMillisecondsSinceEpoch(timestamp);
+    final DateTime ms = DateTime.fromMillisecondsSinceEpoch(timestamp);
     return ms;
   }
 
@@ -15,6 +18,7 @@ DateTime _timestampToDateTime(timestamp) {
 
 int _value;
 
+// ignore: always_declare_return_types
 openDatePicker(
   BuildContext context, {
   Function onDateTimeChanged,
@@ -38,7 +42,7 @@ openDatePicker(
     context: context,
     child: Container(
       color: Colors.white,
-      padding: EdgeInsets.only(top: 8.0, right: 8.0, bottom: 8.0),
+      padding: const EdgeInsets.only(top: 8.0, right: 8.0, bottom: 8.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -51,6 +55,7 @@ openDatePicker(
                 onOk(_value);
               }
               _value = null;
+              // ignore: always_specify_types
               Future.delayed(Duration(milliseconds: 100), () {
                 Navigator.pop(context);
               });

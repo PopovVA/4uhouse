@@ -3,6 +3,13 @@ import 'package:provider_mobile/src/ui/components/common/drawer/drawer.dart';
 import '../../../constants/layout.dart' show standardPadding;
 
 class PageTemplate extends StatelessWidget {
+  const PageTemplate({
+    this.title,
+    this.note,
+    this.body,
+    this.goBack,
+    this.padding = false,
+  });
   static const Color color = Color(0xFF585555);
   static const double height = 64.0;
 
@@ -12,13 +19,7 @@ class PageTemplate extends StatelessWidget {
   final Function goBack;
   final bool padding;
 
-  const PageTemplate({
-    this.title,
-    this.note,
-    this.body,
-    this.goBack,
-    this.padding = false,
-  });
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class PageTemplate extends StatelessWidget {
                 })
             : null,
         centerTitle: true,
-        title: Text(title, style: TextStyle(color: color, fontSize: 20.0)),
+        title: Text(title, style: const TextStyle(color: color, fontSize: 20.0)),
       ),
       drawer: DrawerOnly(),
       body: Container(

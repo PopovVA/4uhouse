@@ -1,3 +1,4 @@
+// ignore: always_specify_types
 const List<String> MONTHS = [
   'January',
   'February',

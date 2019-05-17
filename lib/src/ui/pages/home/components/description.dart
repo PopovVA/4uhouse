@@ -7,7 +7,7 @@ class Description extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         child: Center(
-            child: Text(
+            child: const Text(
       'Add a property in 3 steps',
       style: TextStyle(
           fontSize: 18,

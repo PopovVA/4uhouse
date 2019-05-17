@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/button_model.dart';
-import 'package:provider_mobile/src/ui/components/common/styled_button.dart';
+import 'styled_button.dart';
 
 class Button extends StatefulWidget {
+  // ignore: prefer_const_constructors_in_immutables
+  Button(this.button, this.path, this.handleSave);
+
   final ButtonModel button;
   final String path;
   final Function handleSave;
 
-  Button(this.button, this.path, this.handleSave);
 
   @override
   State<StatefulWidget> createState() {
@@ -21,7 +23,7 @@ class _ButtonState extends State<Button> {
 
   @override
   Widget build(BuildContext context) {
-    ButtonModel button = widget.button;
+    final ButtonModel button = widget.button;
     print('===> widget.button: ${widget.button}');
     return StyledButton(
       text: button.key.toUpperCase(),

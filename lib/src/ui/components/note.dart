@@ -3,8 +3,9 @@ import '../../models/note_model.dart';
 
 class Note extends StatelessWidget {
   Note(NoteModel note)
-      : this.note = note,
-        this.id = note.id;
+      // ignore: prefer_initializing_formals
+      : note = note,
+        id = note.id;
 
   final NoteModel note;
   final String id;
@@ -17,29 +18,30 @@ class Note extends StatelessWidget {
       alignment: Alignment.centerLeft,
       width: double.infinity,
       height: 54.0,
-      padding: EdgeInsets.fromLTRB(16.0, 6.0, 16.0, 6.0),
+      padding:const  EdgeInsets.fromLTRB(16.0, 6.0, 16.0, 6.0),
       child: Text(
         note.value,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 16.0,
           color: Color(0xFFdeff0000),
         ),
       ),
       decoration: BoxDecoration(
-        color: Color(0xFFb5ffc5c5),
+        color:const  Color(0xFFb5ffc5c5),
         border: Border(
           left: BorderSide(
-            color: Color(0xFFd24444),
+            color: const Color(0xFFd24444),
             width: 4.0,
           ),
           bottom: BorderSide(
-            color: Color(0xFFecc3c3),
+            color: const Color(0xFFecc3c3),
             width: 1.0,
           ),
         ),
+        // ignore: always_specify_types
         boxShadow: [
           BoxShadow(
-            color: Color(0xFF40000000),
+            color:const  Color(0xFF40000000),
             spreadRadius: 4.0,
             blurRadius: 5.0,
           ),

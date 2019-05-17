@@ -4,13 +4,14 @@ import 'package:intl/intl.dart' show DateFormat;
 import '../date_picker.dart';
 
 class DatePickerInput extends StatefulWidget {
+  // ignore: prefer_const_constructors_in_immutables
   DatePickerInput({
-    @required String this.initialValue,
-    @required Function this.onDateTimeChanged,
-    String this.minimumDate,
-    String this.maximumDate,
-    String this.minimumYear,
-    String this.maximumYear,
+    @required this.initialValue,
+    @required this.onDateTimeChanged,
+    this.minimumDate,
+    this.maximumDate,
+    this.minimumYear,
+    this.maximumYear,
   });
 
   final String initialValue;
@@ -27,12 +28,12 @@ class DatePickerInput extends StatefulWidget {
 }
 
 class _DatePickerInputState extends State<DatePickerInput> {
-  final formatter = DateFormat('dd.MM.yyyy');
+  final DateFormat formatter = DateFormat('dd.MM.yyyy');
   bool bottomSheetOpen = false;
   String value = 'Choose a date';
 
   @override
-  initState() {
+ void  initState() {
     if (widget.initialValue is String) {
       value = timestampToString(
         DateTime.parse(widget.initialValue).millisecondsSinceEpoch,
@@ -41,18 +42,20 @@ class _DatePickerInputState extends State<DatePickerInput> {
     super.initState();
   }
 
+  // ignore: always_declare_return_types
   timestampToString(int timestamp) {
     return formatter.format(
       DateTime.fromMillisecondsSinceEpoch(timestamp),
     );
   }
 
-  handleDateTimeChanged(int timestamp) {
+ void  handleDateTimeChanged(int timestamp) {
     setState(() {
       value = timestampToString(timestamp);
     });
   }
 
+  // ignore: always_declare_return_types
   openBottomSheet(BuildContext context) async {
     setState(() {
       bottomSheetOpen = true;
@@ -63,7 +66,8 @@ class _DatePickerInputState extends State<DatePickerInput> {
         return DatePicker(
           minimumDate: DateTime(2013, 5, 10),
           maximumDate: DateTime.now(),
-          onDateTimeChanged: handleDateTimeChanged, initialDateTime: null,
+          onDateTimeChanged: handleDateTimeChanged,
+          initialDateTime: null,
         );
       },
     );

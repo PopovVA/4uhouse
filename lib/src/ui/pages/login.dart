@@ -7,6 +7,7 @@ import '../components/common/page_template.dart';
 import '../components/common/styled_button.dart';
 
 class Login extends StatelessWidget {
+  // ignore: prefer_const_constructors_in_immutables
   Login({this.onLogin, this.onLogout, this.isLoading});
 
   final Function onLogin;
@@ -28,7 +29,7 @@ class Login extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(bottom: 8.0),
+              margin:const  EdgeInsets.only(bottom: 8.0),
               child: StyledButton(
                 loading: isLoading,
                 text: 'log in',

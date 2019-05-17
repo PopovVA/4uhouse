@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../pallete.dart' show primaryColor;
 import 'generic/open_modal_bottom.dart' show openModalBottom;
 
+// ignore: always_declare_return_types
 openPhotoUploader(BuildContext context, {Function onLoad}) async {
   return openModalBottom(
     context: context,
@@ -14,6 +15,7 @@ openPhotoUploader(BuildContext context, {Function onLoad}) async {
 }
 
 class _UploaderButton extends StatelessWidget {
+  // ignore: prefer_const_constructors_in_immutables
   _UploaderButton({@required this.onTap, @required this.title});
 
   final Function onTap;
@@ -35,7 +37,7 @@ class _UploaderButton extends StatelessWidget {
                   : null,
             ),
           ),
-          Divider(height: 2.0),
+          const Divider(height: 2.0),
         ],
       ),
     );
@@ -43,11 +45,14 @@ class _UploaderButton extends StatelessWidget {
 }
 
 class _Uploader extends StatelessWidget {
+  // ignore: prefer_const_constructors_in_immutables
   _Uploader({@required this.onLoad});
 
   final Function onLoad;
 
+  // ignore: always_specify_types
   Future chooseImage(BuildContext context, String type) async {
+    // ignore: prefer_typing_uninitialized_variables, always_specify_types
     var source;
 
     switch (type) {
@@ -59,7 +64,7 @@ class _Uploader extends StatelessWidget {
         break;
     }
 
-    Future<File> cb = ImagePicker.pickImage(source: source, maxWidth: 640);
+    final Future<File> cb = ImagePicker.pickImage(source: source, maxWidth: 640);
     Navigator.of(context).pop();
     onLoad(cb);
   }
@@ -82,7 +87,7 @@ class _Uploader extends StatelessWidget {
               }),
         ],
       ),
-      padding: EdgeInsets.only(bottom: 12.0),
+      padding: const EdgeInsets.only(bottom: 12.0),
     );
   }
 }
