@@ -4,8 +4,7 @@ import '../../../models/button_model.dart';
 import 'styled_button.dart';
 
 class Button extends StatefulWidget {
-  // ignore: prefer_const_constructors_in_immutables
-  Button(this.button, this.path, this.handleSave);
+const   Button(this.button, this.path, this.handleSave);
 
   final ButtonModel button;
   final String path;

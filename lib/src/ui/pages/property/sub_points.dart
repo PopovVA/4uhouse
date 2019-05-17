@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
-class SubPoint extends StatelessWidget {
-  // ignore: prefer_const_constructors_in_immutables
-  SubPoint(this._text);
 
-  String _text;
+class SubPoint extends StatelessWidget {
+
+ const SubPoint(this._text);
+
+ final  String _text;
 
   @override
   Widget build(BuildContext context) {

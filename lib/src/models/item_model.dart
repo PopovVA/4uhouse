@@ -43,8 +43,8 @@ class ItemModel extends ComponentModel {
         : _value;
   }
 
-  // ignore: always_specify_types
-  set value(value) {
+
+  set value(Object value) {
     if (value is bool) {
       _value = value;
     }

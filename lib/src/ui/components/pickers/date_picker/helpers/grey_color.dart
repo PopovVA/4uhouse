@@ -1,8 +1,8 @@
 List<int> greyColourInclude(List<int> res, int n) {
-  // ignore: always_specify_types
-  final List<int> result = List.from(res);
-  // ignore: always_specify_types
-  for (var i = 0; i < n; i++) {
+
+  final List<int> result = List<int>.from(res);
+
+  for (int i = 0; i < n; i++) {
     result[i] = -result[i].abs();
   }
 
@@ -10,10 +10,10 @@ List<int> greyColourInclude(List<int> res, int n) {
 }
 
 List<int> greyColourBegin(List<int> res, int n) {
-  // ignore: always_specify_types
-  final List<int> result = List.from(res);
-  // ignore: always_specify_types
-  for (var i = n; i < res.length; i++) {
+
+  final List<int> result = List<int>.from(res);
+
+  for (int i = n; i < res.length; i++) {
     result[i] = -result[i].abs();
   }
 

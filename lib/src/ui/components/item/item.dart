@@ -97,8 +97,8 @@ class _ItemState extends State<Item> {
     );
   }
 
-  // ignore: always_declare_return_types
-  buildSuffix(BuildContext context) {
+
+ Object buildSuffix(BuildContext context) {
     if (loading) {
       return const CircularProgress(size: 'small');
     }

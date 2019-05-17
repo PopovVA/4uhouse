@@ -7,7 +7,6 @@ import 'helpers/generate_range_list.dart' show generateRangeList;
 import 'helpers/grey_color.dart' show greyColourInclude, greyColourBegin;
 import 'picker.dart' show Picker;
 
-// ignore: must_be_immutable
 class DatePicker extends StatefulWidget {
   DatePicker({
     @required this.onDateTimeChanged,
@@ -17,6 +16,7 @@ class DatePicker extends StatefulWidget {
     int minimumYear = 1970,
     int maximumYear = 2030,
   }) {
+
     // ignore: prefer_asserts_in_initializer_lists
     assert(
         onDateTimeChanged != null, 'onDateTimeChanged argument is required!',);
@@ -26,8 +26,9 @@ class DatePicker extends StatefulWidget {
 
     this.initialDateTime =
         initialDateTime is DateTime ? initialDateTime : DateTime(2000, 1, 1);
-    // ignore: always_specify_types
-    yFullArray = generateRangeList([
+
+
+    yFullArray = generateRangeList(<int>[
       (minimumDate is DateTime) ? minimumDate.year : minimumYear,
       (maximumDate is DateTime) ? maximumDate.year : maximumYear,
     ]);
@@ -103,10 +104,10 @@ class _DatePickerState extends State<DatePicker> {
     dArray = INITIAL_D_FULL_ARRAY;
     mArray = INITIAL_M_FULL_ARRAY;
 
-    // ignore: always_specify_types
-    if ([4, 6, 9, 11].contains(mIndex + 1)) {
+
+    if (<int>[4, 6, 9, 11].contains(mIndex + 1)) {
       dArray = greyColourBegin(dArray, 30);
-      if (dIndex > 29){
+      if (dIndex > 29) {
         dIndex = 29;
       }
     } else {
@@ -188,8 +189,7 @@ class _DatePickerState extends State<DatePicker> {
     return Picker(
       animateDuration: 1000,
       controller: monthScrollController,
-      // ignore: always_specify_types
-      displayFunction: (value) => MONTHS[value - 1],
+      displayFunction: (int value) => MONTHS[value - 1],
       index: mIndex,
       onSelectedItemChanged: (int index) {
         setState(() {
@@ -218,8 +218,7 @@ class _DatePickerState extends State<DatePicker> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      // ignore: always_specify_types
-      children: [
+      children:<Widget> [
         buildDayPicker(),
         buildMonthPicker(),
         buildYearPicker(),

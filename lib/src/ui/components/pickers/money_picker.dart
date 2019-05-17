@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MoneyPicker extends StatelessWidget {
-  // ignore: prefer_const_constructors_in_immutables
-  MoneyPicker(this._controller);
+
+ const MoneyPicker(this._controller);
 
   final TextEditingController _controller;
 

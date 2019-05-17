@@ -1,5 +1,5 @@
-// ignore: always_specify_types
-const INITIAL_D_FULL_ARRAY = [
+
+const List<int> INITIAL_D_FULL_ARRAY = <int>[
   1,
   2,
   3,
@@ -32,5 +32,5 @@ const INITIAL_D_FULL_ARRAY = [
   30,
   31
 ];
-// ignore: always_specify_types
-const INITIAL_M_FULL_ARRAY = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+const List<int>INITIAL_M_FULL_ARRAY = <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];

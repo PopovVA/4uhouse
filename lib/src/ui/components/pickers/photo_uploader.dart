@@ -6,8 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import '../../../pallete.dart' show primaryColor;
 import 'generic/open_modal_bottom.dart' show openModalBottom;
 
-// ignore: always_declare_return_types
-openPhotoUploader(BuildContext context, {Function onLoad}) async {
+
+Future<Widget> openPhotoUploader(BuildContext context, {Function onLoad}) async {
   return openModalBottom(
     context: context,
     child: _Uploader(onLoad: onLoad),
@@ -15,8 +15,8 @@ openPhotoUploader(BuildContext context, {Function onLoad}) async {
 }
 
 class _UploaderButton extends StatelessWidget {
-  // ignore: prefer_const_constructors_in_immutables
-  _UploaderButton({@required this.onTap, @required this.title});
+
+const  _UploaderButton({@required this.onTap, @required this.title});
 
   final Function onTap;
   final String title;
@@ -45,8 +45,8 @@ class _UploaderButton extends StatelessWidget {
 }
 
 class _Uploader extends StatelessWidget {
-  // ignore: prefer_const_constructors_in_immutables
-  _Uploader({@required this.onLoad});
+
+  const _Uploader({@required this.onLoad});
 
   final Function onLoad;
 

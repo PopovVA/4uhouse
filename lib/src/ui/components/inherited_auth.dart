@@ -5,8 +5,8 @@ class InheritedAuth extends InheritedWidget {
       {this.userProfile, this.onLogin, this.onLogout, Key key, Widget child})
       : super(key: key, child: child);
 
-  Map<String, String> userProfile;
-  Function onLogin, onLogout;
+ final  Map<String, String> userProfile;
+ final Function onLogin, onLogout;
 
   @override
   bool updateShouldNotify(InheritedAuth oldWidget) {

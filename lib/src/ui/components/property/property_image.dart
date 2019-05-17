@@ -44,8 +44,8 @@ class PropertyImage extends StatelessWidget {
   Uint8List picture;
   bool pictureDecodingError;
 
-  // ignore: always_declare_return_types
-  buildImage() {
+
+ Widget buildImage() {
     Widget greyContainer({Widget child}) => Container(
           color: const Color(0xFFe9e9e9),
           child: child,
@@ -68,8 +68,8 @@ class PropertyImage extends StatelessWidget {
     return greyContainer();
   }
 
-  // ignore: always_declare_return_types
-  buildStatus(double height) {
+
+Widget buildStatus(double height) {
     if (statusValue != null) {
       return Positioned(
         right: 0.0,
@@ -99,8 +99,8 @@ class PropertyImage extends StatelessWidget {
     return null;
   }
 
-  // ignore: always_declare_return_types
-  buildPlaceholder(double height) {
+
+ Widget buildPlaceholder(double height) {
     if (picture == null && !pictureDecodingError) {
       return Container(
         margin: EdgeInsets.only(top: height / 2, left: 16.0),
@@ -112,8 +112,8 @@ class PropertyImage extends StatelessWidget {
     return null;
   }
 
-  // ignore: always_declare_return_types
-  buildId(double height) {
+
+ Widget buildId(double height) {
     if (id != null) {
       return Positioned(
         bottom: height * 0.039,
@@ -122,9 +122,9 @@ class PropertyImage extends StatelessWidget {
           children: <Widget>[
             Container(
               padding: const EdgeInsets.fromLTRB(3.0, 4.0, 12.0, 3.0),
-              decoration: BoxDecoration(
-                color: const Color(0xFFcccccc),
-                borderRadius: const BorderRadius.all(radius),
+              decoration:const BoxDecoration(
+                color:  Color(0xFFcccccc),
+                borderRadius:BorderRadius.all(radius),
               ),
               margin: const EdgeInsets.only(left: 16.0),
               child: Text('#$id',

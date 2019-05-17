@@ -1,5 +1,5 @@
-// ignore: always_specify_types
-const List<String> MONTHS = [
+
+const List<String> MONTHS = <String>[
   'January',
   'February',
   'March',

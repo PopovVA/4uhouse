@@ -9,14 +9,10 @@ import 'components/description.dart';
 import 'components/main_points.dart';
 import 'components/sub_points.dart';
 
-// ignore: must_be_immutable
 class HomePage extends StatelessWidget {
-  // ignore: always_specify_types
-  var user = UserProfile(
-      name: 'Roman',
-      email: 'rom12@gmail.com',
-      phone: '89160001122');
-  bool isLoading = true;
+  final UserProfile user = UserProfile(
+      name: 'Roman', email: 'rom12@gmail.com', phone: '89160001122');
+  final bool isLoading = true;
 
   @override
   Widget build(BuildContext context) {

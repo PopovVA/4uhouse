@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
 
+
 class PropertyCard extends StatelessWidget {
-  TextStyle caption = TextStyle(
-    color: Color(0xFF000000),
+ final  TextStyle caption = const TextStyle(
+    color:  Color(0xFF000000),
     fontSize: 12.0,
   );
-  TextStyle captionBold = TextStyle(
+ final TextStyle captionBold = const TextStyle(
     color: Color(0xFFCC000000),
     fontSize: 12.0,
     fontWeight: FontWeight.w600,
   );
-  TextStyle body1 = TextStyle(
-    color: Color(0xFFCC000000),
+ final  TextStyle body1 = const  TextStyle(
+    color:  Color(0xFFCC000000),
     fontSize: 14.0,
   );
-  TextStyle heading = TextStyle(
+ final  TextStyle heading =const  TextStyle(
     color: Color(0xFFDD000000),
     fontSize: 20.0,
   );
 
-  _renderHeading(context) {
+  Widget _renderHeading(BuildContext context) {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints viewportConstraints) {
       return Container(
         height: 30.0,
-        margin: EdgeInsets.only(top: 12.0, right: 7.0, bottom: 22.0),
+        margin:const  EdgeInsets.only(top: 12.0, right: 7.0, bottom: 22.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,11 +36,11 @@ class PropertyCard extends StatelessWidget {
                 maxWidth: viewportConstraints.maxWidth / 2.3,
               ),
               child: Container(
-                margin: EdgeInsets.only(left: 16.0),
+                margin:const  EdgeInsets.only(left: 16.0),
                 child: Row(
                   children: <Widget>[
                     Container(
-                      margin: EdgeInsets.only(right: 10.0),
+                      margin:const  EdgeInsets.only(right: 10.0),
                       child: Text(
                         'ID 01123',
                         style: caption,
@@ -68,8 +69,8 @@ class PropertyCard extends StatelessWidget {
                           Container(
                             width: 8.0,
                             height: 8.0,
-                            margin: EdgeInsets.only(right: 4.0, top: 2.0),
-                            decoration: BoxDecoration(
+                            margin:const  EdgeInsets.only(right: 4.0, top: 2.0),
+                            decoration:const  BoxDecoration(
                               shape: BoxShape.circle,
                               color: Color(0xFFffa726),
                             ),
@@ -78,7 +79,7 @@ class PropertyCard extends StatelessWidget {
                         ],
                       ),
                     ],
-                  ),
+                  ),const
                   Icon(
                     Icons.more_vert,
                     color: Color(0xFF8a000000),
@@ -93,9 +94,9 @@ class PropertyCard extends StatelessWidget {
     });
   }
 
-  _renderBody(context) {
+  Widget _renderBody(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: 11.0),
+      padding:const  EdgeInsets.only(right: 11.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,7 +105,7 @@ class PropertyCard extends StatelessWidget {
           Container(
             width: 110.0,
             height: 66.0,
-            margin: EdgeInsets.only(right: 16.0),
+            margin:const  EdgeInsets.only(right: 16.0),
             child: Image.network(
               'https://images.homify.com/image/upload/a_0,c_limit,f_auto,h_1024,q_auto,w_1024/v1478609817/p/photo/image/1695561/Alman-ev-tasar%C4%B1m%C4%B1-natural-light-apartment-2-19.jpg',
             ),
@@ -118,14 +119,14 @@ class PropertyCard extends StatelessWidget {
               children: <Widget>[
                 /* header */
                 Container(
-                  margin: EdgeInsets.only(bottom: 8.0, right: 10.0),
+                  margin:const  EdgeInsets.only(bottom: 8.0, right: 10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Row(
                         children: <Widget>[
                           Text('Rent: \€1500/', style: captionBold),
-                          Text('month',
+                         const  Text('month',
                               style: TextStyle(
                                 fontSize: 10.0,
                                 color: Color(0xFF000000),
@@ -145,10 +146,10 @@ class PropertyCard extends StatelessWidget {
                 Text('Apartaments, 110 m2', style: heading),
                 /* bottom */
                 Container(
-                  margin: EdgeInsets.only(top: 4.0),
+                  margin:const  EdgeInsets.only(top: 4.0),
                   child: Row(
-                    children: <Widget>[
-                      Icon(
+                    children: const <Widget>[
+                       Icon(
                         Icons.location_on,
                         color: Color(0xFF5c5c5c),
                         size: 13.3,
@@ -167,19 +168,19 @@ class PropertyCard extends StatelessWidget {
     );
   }
 
-  _renderBottom(context) {
+ Widget _renderBottom(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
-        Text('property process',
-            style: TextStyle(color: Color(0xFFd4000000), fontSize: 14.0)),
+        const Text('property process',
+            style: TextStyle(color:Color(0xFFd4000000), fontSize: 14.0)),
         Expanded(
           child: Container(
-            margin: EdgeInsets.only(left: 8.0),
+            margin:const  EdgeInsets.only(left: 8.0),
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                  color: Color(0xFF61424141),
+                  color:const  Color(0xFF61424141),
                   width: 1.0,
                 ),
               ),
@@ -195,13 +196,13 @@ class PropertyCard extends StatelessWidget {
     return Container(
       height: 170.0,
       width: double.infinity,
-      margin: EdgeInsets.only(bottom: 21.0),
+      margin:const  EdgeInsets.only(bottom: 21.0),
       child: Column(
         children: <Widget>[
           _renderHeading(context),
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(left: 16.0),
+              margin:const  EdgeInsets.only(left: 16.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[

@@ -5,9 +5,7 @@ import '../../../../utils/type_check.dart' show isNotNull;
 import '../generic/open_modal_bottom.dart' show openModalBottom;
 import 'date_picker.dart';
 
-
-// ignore: always_specify_types
-DateTime _timestampToDateTime(timestamp) {
+DateTime _timestampToDateTime(Object timestamp) {
   if (timestamp is int) {
     final DateTime ms = DateTime.fromMillisecondsSinceEpoch(timestamp);
     return ms;
@@ -18,8 +16,8 @@ DateTime _timestampToDateTime(timestamp) {
 
 int _value;
 
-// ignore: always_declare_return_types
-openDatePicker(
+
+Future<Widget> openDatePicker(
   BuildContext context, {
   Function onDateTimeChanged,
   Function onOk,
@@ -55,8 +53,9 @@ openDatePicker(
                 onOk(_value);
               }
               _value = null;
-              // ignore: always_specify_types
-              Future.delayed(Duration(milliseconds: 100), () {
+
+
+             Future<int>.delayed(Duration(milliseconds: 100), () {
                 Navigator.pop(context);
               });
             },

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../utils/type_check.dart' show isNotNull;
 
 class PropertyFooter extends StatelessWidget {
-  // ignore: prefer_const_constructors_in_immutables
-  PropertyFooter(
+
+ const PropertyFooter(
       {this.currency,
         this.costSale,
         this.costRent,
@@ -25,8 +25,8 @@ class PropertyFooter extends StatelessWidget {
   final String mainInfo;
   final String address;
 
-  // ignore: always_declare_return_types
-  buildMainValue(int value, double padding,
+
+  Widget buildMainValue(int value, double padding,
       {bool includePaymentPeriod = false}) {
     Widget renderPaymentPeriod() {
       return Row(
@@ -55,8 +55,7 @@ class PropertyFooter extends StatelessWidget {
     return null;
   }
 
-  // ignore: always_declare_return_types
-  buildAddInfo(String value, {bool addSeparator = false}) {
+ Widget buildAddInfo(String value, {bool addSeparator = false}) {
     if (value is String) {
       return Row(
         children: <Widget>[

@@ -6,8 +6,8 @@ import '../../../utils/type_check.dart' show isNotNull;
 import 'item_layout_container.dart';
 
 class ItemLayout extends StatelessWidget {
-  // ignore: prefer_const_constructors_in_immutables
-  ItemLayout({
+
+ const ItemLayout({
     this.picture,
     this.body,
     this.suffix,
@@ -41,8 +41,8 @@ class ItemLayout extends StatelessWidget {
     return null;
   }
 
- // ignore: always_declare_return_types
- _buildTextContent(BuildContext context) {
+
+Widget _buildTextContent(BuildContext context) {
     if (body is String) {
       return Expanded(
         flex: 3,
@@ -50,11 +50,13 @@ class ItemLayout extends StatelessWidget {
           child: renderText(body),
         ),
       );
+    }else {
+     return null;
     }
   }
 
-  // ignore: always_declare_return_types
-  _buildSuffix() {
+
+ Widget _buildSuffix() {
     if (isNotNull(suffix)) {
       return Expanded(
         flex: 1,
@@ -62,21 +64,25 @@ class ItemLayout extends StatelessWidget {
           child: renderText(suffix),
         ),
       );
+    }else{
+      return null;
     }
   }
 
-  // ignore: always_declare_return_types
-  _buildLink() {
+
+ Widget  _buildLink() {
     if (link) {
       return Icon(
         Icons.chevron_right,
         color: disabled ? DISABLED_COLOR : ACTIVE_COLOR,
       );
     }
+    else{
+      return null;
+    }
   }
 
-  // ignore: always_declare_return_types, always_specify_types
-  renderText(value) {
+ Widget renderText(Object value) {
     if (!(value is StatefulWidget) && !(value is StatelessWidget)) {
       const double fontSize = 16.0;
       return Text(
