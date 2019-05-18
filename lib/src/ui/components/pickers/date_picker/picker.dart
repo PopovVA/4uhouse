@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart' show CupertinoPicker;
 import 'debouncer.dart';
 
 class Picker extends StatefulWidget {
-  Picker({
+
+ const Picker({
     @required this.controller,
     @required this.index,
     @required this.rangeList,
@@ -30,20 +31,22 @@ class Picker extends StatefulWidget {
 }
 
 class _PickerState extends State<Picker> {
-  final _debouncer = Debouncer(milliseconds: 700);
+  final Debouncer _debouncer = Debouncer(milliseconds: 700);
   int realIndex;
   bool isDragging;
 
   static List<Widget> generateListOfItems(
-      List<int> list, Function displayFunction, context) {
-    Function renderer = (value) => value;
+      List<int> list, Function displayFunction, BuildContext context) {
+
+    Function renderer = (Object value) => value;
 
     if (displayFunction is Function) {
       renderer = displayFunction;
     }
 
-    return List.generate(list.length, (int i) {
-      int value = list[i];
+
+    return List<Widget>.generate(list.length, (int i) {
+      final int value = list[i];
       return Container(
         height: 10.0,
         alignment: Alignment.center,
@@ -74,16 +77,17 @@ class _PickerState extends State<Picker> {
     super.didUpdateWidget(oldWidget);
   }
 
-  animateToRightIndex() {
+  void animateToRightIndex() {
     _debouncer.run(() {
       widget.controller.animateToItem(
         widget.index,
         duration: Duration(seconds: 1),
-        curve: Cubic(0, 0, 0.58, 1),
+        curve: const Cubic(0, 0, 0.58, 1),
       );
     });
   }
 
+  @override
   Widget build(BuildContext build) {
     return Expanded(
       flex: 1,

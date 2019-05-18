@@ -1,4 +1,5 @@
-const List<String> MONTHS = [
+
+const List<String> MONTHS = <String>[
   'January',
   'February',
   'March',

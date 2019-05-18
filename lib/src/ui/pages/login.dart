@@ -7,7 +7,8 @@ import '../components/common/page_template.dart';
 import '../components/common/styled_button.dart';
 
 class Login extends StatelessWidget {
-  Login({this.onLogin, this.onLogout, this.isLoading});
+
+const  Login({this.onLogin, this.onLogout, this.isLoading});
 
   final Function onLogin;
   final Function onLogout;
@@ -28,7 +29,7 @@ class Login extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(bottom: 8.0),
+              margin:const  EdgeInsets.only(bottom: 8.0),
               child: StyledButton(
                 loading: isLoading,
                 text: 'log in',

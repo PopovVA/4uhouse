@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-const ACTIVE_COLOR = Color(0x89000000);
-const DISABLED_COLOR = Color(0xDD000000);
+const Color ACTIVE_COLOR = Color(0x89000000);
+const Color DISABLED_COLOR = Color(0xDD000000);
 
-const customTextTheme = TextTheme(
+const TextTheme customTextTheme = TextTheme(
   title: TextStyle(
     fontSize: 20.0,
     color: ACTIVE_COLOR,

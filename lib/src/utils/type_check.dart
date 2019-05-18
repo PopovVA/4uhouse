@@ -2,6 +2,7 @@ bool isNotNull(Object o) {
   return o != null;
 }
 
-bool isNotNullableString(string) {
-  return (string is String) && (string.length > 0);
+
+bool isNotNullableString(Object string) {
+  return (string is String) && (string.isNotEmpty);
 }
