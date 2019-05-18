@@ -54,6 +54,7 @@ class _DatePickerInputState extends State<DatePickerInput> {
     });
   }
 
+ // ignore: avoid_void_async
  void openBottomSheet(BuildContext context) async {
     setState(() {
       bottomSheetOpen = true;

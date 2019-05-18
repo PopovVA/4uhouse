@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import '../../../../utils/type_check.dart' show isNotNull;
 
 class PropertyFooter extends StatelessWidget {
+  const PropertyFooter(
+      {this.currency,
+        this.costSale,
+        this.costRent,
+        this.paymentPeriod,
+        this.mainInfo,
+        this.address});
   static const Color fontColor = Color(0xFF212121);
   static const TextStyle addInfoStyle =
       TextStyle(fontSize: 14.0, color: fontColor);
   static const TextStyle mainValueStyle =
       TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500, color: fontColor);
 
-  PropertyFooter(
-      {this.currency,
-      this.costSale,
-      this.costRent,
-      this.paymentPeriod,
-      this.mainInfo,
-      this.address});
+
 
   final String currency;
   final int costSale;
@@ -23,7 +24,7 @@ class PropertyFooter extends StatelessWidget {
   final String mainInfo;
   final String address;
 
-  buildMainValue(int value, double padding,
+  Widget buildMainValue(int value, double padding,
       {bool includePaymentPeriod = false}) {
     Widget renderPaymentPeriod() {
       return Row(
@@ -53,7 +54,7 @@ class PropertyFooter extends StatelessWidget {
     return null;
   }
 
-  buildAddInfo(String value, {bool addSeparator = false}) {
+  Widget buildAddInfo(String value, {bool addSeparator = false}) {
     if (value is String) {
       return Row(
         children: <Widget>[

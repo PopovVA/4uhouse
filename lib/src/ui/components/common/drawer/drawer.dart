@@ -4,6 +4,7 @@ import '../../inherited_auth.dart';
 import 'drawer_header.dart' show Header;
 
 
+// ignore: must_be_immutable
 class DrawerOnly extends StatelessWidget {
  int _selectedDrawerIndex = 0;
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import '../../../../temp/room_bs64.dart';
+import '../../../models/property_model.dart' show PropertyModel;
 import '../../components/common/page_template.dart';
+import 'components/property_card_body.dart' show PropertyCard;
 import 'components/property_header.dart';
 import 'components/property_info.dart';
-import 'components/property_card_body.dart' show PropertyCard;
-import '../../../models/property_model.dart' show PropertyModel;
-import '../../../../temp/room_bs64.dart';
 
 class AddProperty extends StatelessWidget {
   final String _roomBs64 = RoomBs64().room_bs64();
@@ -157,7 +157,7 @@ class AddProperty extends StatelessWidget {
       String paymentPeriod,
       String mainInfo,
       String address) {
-    return {
+    return <String, Object>{
       'id': id,
       'picture': picture,
       'statusValue': statusValue,

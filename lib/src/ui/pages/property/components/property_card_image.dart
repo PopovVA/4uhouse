@@ -1,19 +1,11 @@
-import 'package:flutter/material.dart';
 import 'dart:convert' show base64Decode;
 import 'dart:typed_data' show Uint8List;
+import 'package:flutter/material.dart';
+
 
 import '../../../../utils/type_check.dart' show isNotNull;
 
 class PropertyImage extends StatelessWidget {
-  PropertyImage._(
-      {this.id,
-      this.statusColor,
-      this.statusValue,
-      this.picture,
-      this.pictureDecodingError});
-
-  static const Radius radius = Radius.circular(3.0);
-
   factory PropertyImage(
       {String id, String statusColor, String statusValue, String picture}) {
     bool pictureDecodingError = false;
@@ -35,15 +27,25 @@ class PropertyImage extends StatelessWidget {
       pictureDecodingError: pictureDecodingError,
     );
   }
+ const PropertyImage._(
+      {this.id,
+      this.statusColor,
+      this.statusValue,
+      this.picture,
+      this.pictureDecodingError});
+
+  static const Radius radius = Radius.circular(3.0);
+
+
 
   final String id;
   final String statusColor;
   final String statusValue;
 
-  Uint8List picture;
-  bool pictureDecodingError;
+  final Uint8List picture;
+  final bool pictureDecodingError;
 
-  buildImage() {
+ Widget buildImage() {
     Widget greyContainer({Widget child}) => Container(
           color: const Color(0xFFe9e9e9),
           child: child,
@@ -66,7 +68,7 @@ class PropertyImage extends StatelessWidget {
     return greyContainer();
   }
 
-  buildStatus(double height) {
+  Widget buildStatus(double height) {
     if (statusValue != null) {
       return Positioned(
         right: 0.0,
@@ -97,7 +99,7 @@ class PropertyImage extends StatelessWidget {
     return null;
   }
 
-  buildPlaceholder(double height) {
+  Widget buildPlaceholder(double height) {
     if (picture == null && !pictureDecodingError) {
       return Container(
         margin: EdgeInsets.only(top: height / 2, left: 16.0),
@@ -109,7 +111,7 @@ class PropertyImage extends StatelessWidget {
     return null;
   }
 
-  buildId(double height) {
+ Widget buildId(double height) {
     if (id != null) {
       return Positioned(
         bottom: height * 0.039,
@@ -136,7 +138,7 @@ class PropertyImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.width * 0.48;
+   final double height = MediaQuery.of(context).size.width * 0.48;
     return Container(
       width: double.infinity,
       height: height,

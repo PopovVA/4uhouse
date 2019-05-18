@@ -7,6 +7,7 @@ import 'helpers/generate_range_list.dart' show generateRangeList;
 import 'helpers/grey_color.dart' show greyColourInclude, greyColourBegin;
 import 'picker.dart' show Picker;
 
+// ignore: must_be_immutable
 class DatePicker extends StatefulWidget {
   DatePicker({
     @required this.onDateTimeChanged,
