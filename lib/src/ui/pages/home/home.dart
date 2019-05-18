@@ -6,7 +6,7 @@ import '../../components/common/circular_progress.dart';
 import '../../components/common/page_template.dart';
 import '../../components/common/styled_button.dart';
 import '../../components/inherited_auth.dart';
-import '../property/add/add_property.dart';
+import '../property/property.dart';
 import 'components/description.dart';
 import 'components/main_points.dart';
 import 'components/sub_points.dart';
