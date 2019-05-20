@@ -11,7 +11,7 @@ class PageTemplate extends StatelessWidget {
     this.padding = false,
   });
   static const Color color = Color(0xFF585555);
-  static const double height = 64.0;
+  static const double height = 68.0;
 
   final String title;
   final String note;
@@ -44,8 +44,8 @@ class PageTemplate extends StatelessWidget {
       drawer: DrawerOnly(),
       body: Container(
 
-        padding: EdgeInsets.fromLTRB(
-            horizontalPadding, 0.0, horizontalPadding, standardPadding),
+       /* padding: EdgeInsets.fromLTRB(
+            horizontalPadding, 0.0, horizontalPadding, standardPadding),*/
         child: body,
       ),
     );
