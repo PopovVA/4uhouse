@@ -1,18 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import '../../../models/user_profile.dart';
+import '../../../utils/route_transition.dart';
+import '../../components/common/circular_progress.dart';
 import '../../components/common/page_template.dart';
 import '../../components/common/styled_button.dart';
+import '../../components/inherited_auth.dart';
+import '../property/property.dart';
 import 'components/description.dart';
 import 'components/main_points.dart';
 import 'components/sub_points.dart';
-import 'package:provider_mobile/src/ui/pages/property/property.dart';
-import '../../../utils/route_transition.dart';
+
+
 
 class HomePage extends StatelessWidget {
+  final UserProfile user = UserProfile(
+    name: 'Roman', email: 'rom12@gmail.com', phone: '89160001122');
+  final bool isLoading = true;
   @override
   Widget build(BuildContext context) {
-    return PageTemplate(
+    return InheritedAuth(
+      userProfile: user.toMap(),
+      onLogout: (){},
+      onLogin: (){},
+      child: isLoading?PageTemplate(
         title: 'My property',
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,12 +90,17 @@ class HomePage extends StatelessWidget {
               ),
             ),
             Padding(
-                padding: const EdgeInsets.only(top: 9, left: 15.0, right: 15.0),
-                child: StyledButton(
+              padding: const EdgeInsets.only(top: 9, left: 15.0, right: 15.0),
+              child: StyledButton(
                   text: 'Add property',
-                  onPressed: () => Navigator.push(context, SlideRoute(widget:AddProperty(), side: 'left'),
-                )),
-            )],
-        ));
+                  onPressed: () => Navigator.push(
+                        context,
+                        SlideRoute(widget: AddProperty(), side: 'left'),
+                      )),
+            )
+          ],
+        )):const CircularProgress(),
+    );
+
   }
 }

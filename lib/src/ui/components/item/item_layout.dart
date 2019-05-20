@@ -1,20 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import 'item_layout_container.dart';
 import '../../../typography.dart' show ACTIVE_COLOR, DISABLED_COLOR;
 import '../../../utils/type_check.dart' show isNotNull;
+import 'item_layout_container.dart';
 
 class ItemLayout extends StatelessWidget {
-  final String picture;
-  final String body;
-  final dynamic suffix;
-  final bool link;
-  final Function onTap;
-  final bool disabled;
 
-  ItemLayout({
+ const ItemLayout({
     this.picture,
     this.body,
     this.suffix,
@@ -22,11 +15,19 @@ class ItemLayout extends StatelessWidget {
     this.onTap,
     this.disabled = false,
   });
+  final String picture;
+  final String body;
+  final dynamic suffix;
+  final bool link;
+  final Function onTap;
+  final bool disabled;
 
-  _buildPicture() {
+
+
+  Widget _buildPicture() {
     if (picture is String) {
       return Container(
-        margin: EdgeInsets.only(right: 8.0),
+        margin: const EdgeInsets.only(right: 8.0),
         child: Center(
           child: picture.startsWith('<svg')
               ? SvgPicture.string(picture)
@@ -40,7 +41,8 @@ class ItemLayout extends StatelessWidget {
     return null;
   }
 
-  _buildTextContent(context) {
+
+Widget _buildTextContent(BuildContext context) {
     if (body is String) {
       return Expanded(
         flex: 3,
@@ -48,10 +50,13 @@ class ItemLayout extends StatelessWidget {
           child: renderText(body),
         ),
       );
+    }else {
+     return null;
     }
   }
 
-  _buildSuffix() {
+
+ Widget _buildSuffix() {
     if (isNotNull(suffix)) {
       return Expanded(
         flex: 1,
@@ -59,26 +64,32 @@ class ItemLayout extends StatelessWidget {
           child: renderText(suffix),
         ),
       );
+    }else{
+      return null;
     }
   }
 
-  _buildLink() {
+
+ Widget  _buildLink() {
     if (link) {
       return Icon(
         Icons.chevron_right,
         color: disabled ? DISABLED_COLOR : ACTIVE_COLOR,
       );
     }
+    else{
+      return null;
+    }
   }
 
-  renderText(value) {
+ Widget renderText(Object value) {
     if (!(value is StatefulWidget) && !(value is StatelessWidget)) {
-      const fontSize = 16.0;
+      const double fontSize = 16.0;
       return Text(
         isNotNull(value) ? value.toString() : '--',
         style: disabled
-            ? TextStyle(fontSize: fontSize, color: ACTIVE_COLOR)
-            : TextStyle(fontSize: fontSize, color: DISABLED_COLOR),
+            ? const TextStyle(fontSize: fontSize, color: ACTIVE_COLOR)
+            : const TextStyle(fontSize: fontSize, color: DISABLED_COLOR),
       );
     }
 

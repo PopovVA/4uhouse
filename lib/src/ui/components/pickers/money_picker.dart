@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class MoneyPicker extends StatelessWidget {
+
+ const MoneyPicker(this._controller);
+
   final TextEditingController _controller;
 
-  MoneyPicker(this._controller);
 
   @override
   Widget build(BuildContext context) {

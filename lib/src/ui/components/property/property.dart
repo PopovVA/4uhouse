@@ -6,22 +6,26 @@ import 'property_footer.dart' show PropertyFooter;
 import 'property_image.dart' show PropertyImage;
 
 class Property extends StatelessWidget {
-  Property._(PropertyModel property, {this.makeTransition, GlobalKey key})
-      : this.property = property,
-        this.id = property.id,
-        this._key = key,
-        super(key: key);
-
   factory Property(PropertyModel property, {Function makeTransition}) {
     return Property._(property,
         makeTransition: makeTransition, key: GlobalKey());
   }
+  Property._(PropertyModel property, {this.makeTransition, GlobalKey key})
+      // ignore: prefer_initializing_formals
+      : property = property,
+        id = property.id,
+        _key = key,
+        super(key: key);
+
+
 
   final PropertyModel property;
   final Function makeTransition;
   final String id;
   final GlobalKey _key;
 
+  @override
+  // ignore: always_declare_return_types
   get key => _key;
 
   @override
@@ -48,7 +52,7 @@ class Property extends StatelessWidget {
             mainInfo: property.mainInfo,
             address: property.address,
           ),
-          Container(color: Color(0xFF91cdcdcd), height: 4.0),
+          Container(color: const Color(0xFF91cdcdcd), height: 4.0),
         ],
       ),
     );

@@ -1,8 +1,10 @@
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
+// ignore: always_specify_types
 MoneyMaskedTextController createMoneyController(initialValue,
+    // ignore: always_specify_types
     {defaultValue = '0.00'}) {
-  MoneyMaskedTextController _moneyController = MoneyMaskedTextController(
+  final MoneyMaskedTextController _moneyController = MoneyMaskedTextController(
     decimalSeparator: '.',
     thousandSeparator: ' ',
   );
@@ -17,7 +19,7 @@ String formatCost(double cost) {
     return null;
   }
 
-  MoneyMaskedTextController _controller =
+  final MoneyMaskedTextController _controller =
       createMoneyController(cost, defaultValue: null);
   return _controller.text;
 }

@@ -6,23 +6,24 @@ import 'property_card_footer.dart' show PropertyFooter;
 import 'property_card_image.dart' show PropertyImage;
 
 class PropertyCard extends StatelessWidget {
-  PropertyCard._(PropertyModel property, {this.makeTransition, GlobalKey key})
-      : this.property = property,
-        this.id = property.id,
-        this._key = key,
-        super(key: key);
-
   factory PropertyCard(PropertyModel property, {Function makeTransition}) {
     return PropertyCard._(property,
         makeTransition: makeTransition, key: GlobalKey());
   }
+
+  PropertyCard._(PropertyModel property, {this.makeTransition, GlobalKey key})
+      : property = property,
+        id = property.id,
+        _key = key,
+        super(key: key);
 
   final PropertyModel property;
   final Function makeTransition;
   final String id;
   final GlobalKey _key;
 
-  get key => _key;
+  @override
+  GlobalKey get key => _key;
 
   @override
   Widget build(BuildContext context) {

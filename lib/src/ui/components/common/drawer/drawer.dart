@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
+import '../../inherited_auth.dart';
 import 'drawer_header.dart' show Header;
 
+
+// ignore: must_be_immutable
 class DrawerOnly extends StatelessWidget {
-  int _selectedDrawerIndex = 0;
+ int _selectedDrawerIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    final InheritedAuth inheritedAuth = InheritedAuth.of(context);
     return Drawer(
       child: ListView(
         children: <Widget>[
           Header(),
-          Divider(
-            color: const Color.fromRGBO(66, 65, 65, 0.38),
-          ),
           buildListTile(context, 'Market',
               icon: const Icon(OMIcons.search), position: 0),
           buildListTile(context, 'Likes',
@@ -44,20 +45,22 @@ class DrawerOnly extends StatelessWidget {
             icon: const Icon(OMIcons.speakerNotes),
             position: 7,
           ),
-          buildListTile(context, 'Sign out',
-              icon: const Icon(OMIcons.exitToApp), position: 8),
+          inheritedAuth.onLogout != null
+              ? buildListTile(context, 'Log out',
+                  icon: const Icon(OMIcons.exitToApp),
+                  position: 8,
+                  onTap: inheritedAuth.onLogout)
+              : buildListTile(context, 'Sign in',
+                  icon: const Icon(OMIcons.exitToApp),
+                  position: 8,
+                  onTap: inheritedAuth.onLogin),
         ],
       ),
     );
   }
 
-  Widget buildListTile(
-    BuildContext context,
-    String title, {
-    Icon icon,
-    String subtitle,
-    int position,
-  }) {
+  Widget buildListTile(BuildContext context, String title,
+      {Icon icon, String subtitle, int position, Function onTap}) {
     return subtitle != null
         ? ListTile(
             onTap: () {
