@@ -3,8 +3,6 @@ import '../../../../temp/room_bs64.dart';
 import '../../../models/property_model.dart' show PropertyModel;
 import '../../components/common/page_template.dart';
 import 'components/property_card_body.dart' show PropertyCard;
-import 'components/property_header.dart';
-import 'components/property_info.dart';
 
 class AddProperty extends StatelessWidget {
   final String _roomBs64 = RoomBs64().room_bs64();
@@ -18,58 +16,6 @@ class AddProperty extends StatelessWidget {
             child: SingleChildScrollView(
                 child: Column(
               children: <Widget>[
-                Container(
-                  margin: const EdgeInsets.only(right: 16.0, left: 16.0),
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        child: const Header(
-                            id: '01123',
-                            date: '12.12.19',
-                            initialDate: '#inital property data',
-                            inputProperty: 'input initial property'),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 22.0),
-                        child: PropertyInfo(
-                            renta: r'Renta: $_____/month',
-                            sale: r'Sale: $_____'),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20, bottom: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            const Text(
-                              'property process',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 12),
-                            ),
-                            const Padding(padding: EdgeInsets.only(left: 3.0)),
-                            Expanded(
-                              child: Container(
-                                margin:
-                                    const EdgeInsets.only(top: 10.0, left: 8.0),
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                    bottom: BorderSide(
-                                      color: const Color.fromRGBO(
-                                          66, 65, 65, 0.38),
-                                      width: 1.0,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
                 Container(
                   color: const Color(0xFFEBECED),
                   padding: const EdgeInsets.only(right: 10.0, left: 10.0),
