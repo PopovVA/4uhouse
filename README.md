@@ -72,6 +72,9 @@ photo     | -                           | ![image](images/photo_screen.png) | в
 Макет компоненты
 
 ![image](images/note.png)
+
+#### Conditions
+Цвет фона для комментария и цвет текста зависят от поля `color`
 >>>
 
 ### Property
