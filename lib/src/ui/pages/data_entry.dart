@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
-import '../../models/item_model.dart';
+import '../../models/screen/components/item_model.dart';
 import '../components/common/page_template.dart';
 import '../components/common/styled_button.dart';
 import '../components/pickers/money_picker.dart';
 
-
 import '../helpers/money_controller.dart' show createMoneyController;
 
 class DataEntry extends StatefulWidget {
-
-const  DataEntry(this.item, this.handleSave, {this.onSuccess});
+  const DataEntry(this.item, this.handleSave, {this.onSuccess});
 
   final ItemModel item;
   final Function handleSave;
   final Function onSuccess;
-
 
   @override
   State<StatefulWidget> createState() {
@@ -40,7 +37,6 @@ class _DataEntryState extends State<DataEntry> {
 
   @override
   Widget build(BuildContext context) {
-    print('---> BUILD: ');
     return PageTemplate(
       title: widget.item.key,
       body: Column(
@@ -61,9 +57,7 @@ class _DataEntryState extends State<DataEntry> {
     );
   }
 
-
- MoneyPicker buildDataEntryWidget() {
-    print('---> buildDataEntry: ${widget.item.typeValue}');
+  MoneyPicker buildDataEntryWidget() {
     switch (widget.item.typeValue) {
       case 'money':
         return MoneyPicker(_moneyController);

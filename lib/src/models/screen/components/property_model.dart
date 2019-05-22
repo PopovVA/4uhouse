@@ -1,4 +1,5 @@
-import 'component_model.dart';
+import '../../../models/screen/components/component_model.dart'
+    show ComponentModel;
 
 class PropertyModel extends ComponentModel {
   PropertyModel.fromJson(Map<String, dynamic> json)

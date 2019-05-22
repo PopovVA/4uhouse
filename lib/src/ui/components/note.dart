@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../models/note_model.dart';
+import '../../models/screen/components/note_model.dart' show NoteModel;
 
 class Note extends StatelessWidget {
   Note(NoteModel note)

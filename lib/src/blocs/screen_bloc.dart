@@ -1,33 +1,48 @@
+import 'package:rxdart/rxdart.dart' show Observable, PublishSubject;
+import 'package:meta/meta.dart' show required;
 
-import 'package:rxdart/rxdart.dart';
-
-import '../models/screen_model.dart';
-import '../resources/repository.dart';
+import '../models/screen/screen_model.dart' show ScreenModel;
+import '../resources/auth_repository.dart' show AuthRepository;
+import '../resources/screen_repository.dart' show ScreenRepository;
 
 class ScreenBloc {
-  final Repository _repository = Repository();
+  ScreenBloc({@required this.authRepository, @required this.screenRepository});
+
+  final AuthRepository authRepository;
+  final ScreenRepository screenRepository;
 
   final PublishSubject<ScreenModel> _screen = PublishSubject<ScreenModel>();
+
   Observable<ScreenModel> get screen => _screen.stream;
 
-
- // ignore: avoid_void_async
- void fetchScreen(String route) async {
-    final ScreenModel screenModel = await _repository.fetchScreen(route);
-    _screen.sink.add(screenModel);
+  Future<String> get token async {
+    return authRepository.accessToken;
   }
 
-
- // ignore: avoid_void_async, always_declare_return_types
- sendItemValue(String route, dynamic value, {dynamic body}) async {
-    final ScreenModel screenModel =
-        await _repository.sendItemValue(route, value, body: body);
-    _screen.sink.add(screenModel);
+  Future<void> fetchScreen(String route) async {
+    final String token = await this.token;
+    if ((token is String) && token.isNotEmpty) {
+      final ScreenModel screenModel =
+          await screenRepository.fetchScreen(query: route, token: token);
+      _screen.sink.add(screenModel);
+    } else {
+      // TODO(Andrei): show snackbar error
+    }
   }
 
- void dispose() {
+  Future<void> sendItemValue(String route, dynamic value,
+      {dynamic body}) async {
+    final String token = await this.token;
+    if ((token is String) && token.isNotEmpty) {
+      final ScreenModel screenModel =
+          await screenRepository.sendItemValue(route, value, body: body);
+      _screen.sink.add(screenModel);
+    } else {
+      // TODO(Andrei): show snackbar error
+    }
+  }
+
+  void dispose() {
     _screen.close();
   }
 }
-
-final ScreenBloc bloc = ScreenBloc();

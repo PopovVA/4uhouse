@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/property_model.dart' show PropertyModel;
+import '../../../models/screen/components/property_model.dart'
+    show PropertyModel;
 
 import 'property_footer.dart' show PropertyFooter;
 import 'property_image.dart' show PropertyImage;
@@ -10,14 +11,13 @@ class Property extends StatelessWidget {
     return Property._(property,
         makeTransition: makeTransition, key: GlobalKey());
   }
+
   Property._(PropertyModel property, {this.makeTransition, GlobalKey key})
       // ignore: prefer_initializing_formals
       : property = property,
         id = property.id,
         _key = key,
         super(key: key);
-
-
 
   final PropertyModel property;
   final Function makeTransition;

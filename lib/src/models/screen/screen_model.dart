@@ -1,7 +1,7 @@
-import 'button_model.dart';
-import 'item_model.dart';
-import 'note_model.dart';
-import 'property_model.dart';
+import 'components/button_model.dart' show ButtonModel;
+import 'components/item_model.dart' show ItemModel;
+import 'components/note_model.dart' show NoteModel;
+import 'components/property_model.dart' show PropertyModel;
 
 class ScreenModel {
   ScreenModel.fromJson(Map<String, dynamic> json) {

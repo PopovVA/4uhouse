@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/button_model.dart';
+import '../../../models/screen/components/button_model.dart';
 import 'styled_button.dart';
 
 class Button extends StatefulWidget {
@@ -23,7 +23,6 @@ class _ButtonState extends State<Button> {
   @override
   Widget build(BuildContext context) {
     final ButtonModel button = widget.button;
-    print('===> widget.button: ${widget.button}');
     return StyledButton(
       text: button.key.toUpperCase(),
       onPressed: button.isAble

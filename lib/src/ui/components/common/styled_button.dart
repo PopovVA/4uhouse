@@ -24,7 +24,6 @@ class StyledButton extends StatelessWidget {
   }
 
   Widget buildChild(BuildContext context) {
-    print('---> loading: $loading');
     if (loading) {
       return const CircularProgress(size: 'small', color: Colors.white);
     }

@@ -4,7 +4,7 @@ import 'package:intl/intl.dart' show DateFormat;
 import 'package:provider_mobile/src/ui/components/pickers/photo_uploader.dart'
     show openPhotoUploader;
 
-import '../../../models/item_model.dart';
+import '../../../models/screen/components/item_model.dart';
 import '../../../utils/type_check.dart' show isNotNull;
 import '../../helpers/money_controller.dart' show formatCost;
 import '../../pages/data_entry.dart';

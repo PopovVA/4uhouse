@@ -6,11 +6,13 @@ import '../../../pages/example_page.dart';
 import '../../inherited_auth.dart';
 
 class Header extends StatelessWidget {
+  Header({@required this.userProfile});
+
+  final UserProfile userProfile;
+
   @override
   Widget build(BuildContext context) {
-    final InheritedAuth inheritedAuth = InheritedAuth.of(context);
-    return inheritedAuth.userProfile != null
-        ? Column(children: <Widget>[
+    return Column(children: <Widget>[
       Padding(
         padding: const EdgeInsets.only(left: 14.0),
         child: Column(
@@ -20,10 +22,9 @@ class Header extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    UserProfile.fromMap(inheritedAuth.userProfile).name,
+                    userProfile.preferredUsername,
                     style: const TextStyle(
-                        fontSize: 20.0,
-                        color: Color.fromRGBO(0, 0, 0, 0.87)),
+                        fontSize: 20.0, color: Color.fromRGBO(0, 0, 0, 0.87)),
                   ),
                   IconButton(
                       icon: const Icon(
@@ -36,18 +37,16 @@ class Header extends StatelessWidget {
                 ],
               ),
               Text(
-                UserProfile.fromMap(inheritedAuth.userProfile).email,
-                style:
-                const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.87)),
+                userProfile.email,
+                style: const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.87)),
               ),
               Row(
                 children: <Widget>[
                   Container(
                     child: Text(
-                      UserProfile.fromMap(inheritedAuth.userProfile).phone,
+                      '8 800 555 3535',
                       style: const TextStyle(
-                          fontSize: 16.0,
-                          color: Color.fromRGBO(0, 0, 0, 0.87)),
+                          fontSize: 16.0, color: Color.fromRGBO(0, 0, 0, 0.87)),
                     ),
                     width: 132,
                   ),
@@ -60,10 +59,8 @@ class Header extends StatelessWidget {
                       onPressed: () {
                         /* Navigator.pushNamedAndRemoveUntil(context, '/home',
                                 (Route<dynamic> route) => false);*/
-                        Navigator.push(
-                            context,
-                            SlideRoute(
-                                widget: ExamplePage(), side: 'left'));
+                        Navigator.push(context,
+                            SlideRoute(widget: ExamplePage(), side: 'left'));
                       })
                 ],
               ),
@@ -72,7 +69,6 @@ class Header extends StatelessWidget {
       Divider(
         color: const Color.fromRGBO(66, 65, 65, 0.38),
       ),
-    ],)
-        : Container();
+    ]);
   }
 }

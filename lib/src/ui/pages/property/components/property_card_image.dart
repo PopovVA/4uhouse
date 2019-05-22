@@ -14,7 +14,6 @@ class PropertyImage extends StatelessWidget {
       try {
         decodedPicture = base64Decode(picture);
       } catch (error) {
-        print('error');
         pictureDecodingError = true;
       }
     }
@@ -35,8 +34,6 @@ class PropertyImage extends StatelessWidget {
       this.pictureDecodingError});
 
   static const Radius radius = Radius.circular(3.0);
-
-
 
   final String id;
   final String statusColor;
@@ -138,7 +135,7 @@ class PropertyImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   final double height = MediaQuery.of(context).size.width * 0.48;
+   const double height = 140.0;
     return Container(
       width: double.infinity,
       height: height,

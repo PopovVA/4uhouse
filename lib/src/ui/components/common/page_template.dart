@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider_mobile/src/ui/components/common/drawer/drawer.dart';
+import 'package:provider_mobile/src/ui/components/common/drawer/drawer.dart'
+    show DrawerOnly;
 import '../../../constants/layout.dart' show standardPadding;
 
 class PageTemplate extends StatelessWidget {
@@ -10,6 +11,7 @@ class PageTemplate extends StatelessWidget {
     this.goBack,
     this.padding = false,
   });
+
   static const Color color = Color(0xFF585555);
   static const double height = 68.0;
 
@@ -18,8 +20,6 @@ class PageTemplate extends StatelessWidget {
   final Widget body;
   final Function goBack;
   final bool padding;
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +39,12 @@ class PageTemplate extends StatelessWidget {
                 })
             : null,
         centerTitle: true,
-        title: Text(title, style: const TextStyle(color: color, fontSize: 20.0)),
+        title:
+            Text(title, style: const TextStyle(color: color, fontSize: 20.0)),
       ),
       drawer: DrawerOnly(),
       body: Container(
-
-       /* padding: EdgeInsets.fromLTRB(
+        /* padding: EdgeInsets.fromLTRB(
             horizontalPadding, 0.0, horizontalPadding, standardPadding),*/
         child: body,
       ),

@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-
-import '../../blocs/screen_bloc.dart';
+import 'package:flutter/scheduler.dart' show SchedulerBinding;
 import '../../constants/layout.dart' show standardPadding;
 
-import '../../models/button_model.dart';
-import '../../models/item_model.dart';
-import '../../models/note_model.dart';
-import '../../models/property_model.dart';
-import '../../models/screen_model.dart';
+import '../../models/screen/components/button_model.dart' show ButtonModel;
+import '../../models/screen/components/item_model.dart' show ItemModel;
+import '../../models/screen/components/note_model.dart' show NoteModel;
+import '../../models/screen/components/property_model.dart' show PropertyModel;
+import '../../models/screen/screen_model.dart' show ScreenModel;
 
-import '../components/common/button.dart';
-import '../components/common/circular_progress.dart';
-import '../components/common/page_template.dart';
-import '../components/item/item.dart';
-import '../components/note.dart';
-import '../components/property/property.dart';
+import '../components/common/button.dart' show Button;
+import '../components/common/circular_progress.dart' show CircularProgress;
+import '../components/common/page_template.dart' show PageTemplate;
+import '../components/item/item.dart' show Item;
+import '../components/note.dart' show Note;
+import '../components/property/property.dart' show Property;
 
 // ignore: must_be_immutable
 class Screen extends StatefulWidget {
@@ -52,7 +50,6 @@ class _ScreenState extends State<Screen> {
 
   @override
   Widget build(BuildContext context) {
-    print('---> route: ${widget.route}');
     return StreamBuilder<ScreenModel>(
       stream: bloc.screen,
       builder: (BuildContext context, AsyncSnapshot<ScreenModel> snapshot) {
@@ -158,6 +155,6 @@ class _ScreenState extends State<Screen> {
   }
 
   Screen handleSendItemValue(String id, dynamic value, {dynamic body}) {
-    return bloc.sendItemValue('${widget.route}/$id', value, body: body);
+//    return bloc.sendItemValue('${widget.route}/$id', value, body: body);
   }
 }

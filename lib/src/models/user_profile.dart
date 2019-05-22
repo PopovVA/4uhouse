@@ -1,20 +1,30 @@
 class UserProfile {
-  UserProfile({this.name, this.phone, this.email});
-
-  UserProfile.fromMap(Map<String, String> map) {
-    name = map['name'];
-    phone = map['phone'];
-    email = map['email'];
+  UserProfile.fromJson(Map<String, dynamic> json) {
+    _sub = json['sub'];
+    _email = json['email'];
+    _emailVerified = json['email_verified'];
+    _preferredUsername = json['preferred_username'];
   }
 
-  String name, phone, email;
+  String _sub;
+  String _email;
+  bool _emailVerified;
+  String _preferredUsername;
 
-  Map<String, String> toMap() {
-    // ignore: prefer_collection_literals
-    final Map<String, String> data = Map<String, String>();
-    data['name'] = name;
-    data['phone'] = phone;
-    data['email'] = email;
-    return data;
+  String get sub => _sub;
+
+  String get email => _email;
+
+  bool get emailVerified => _emailVerified;
+
+  String get preferredUsername => _preferredUsername;
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'sub': sub,
+      'email_verified': emailVerified,
+      'preferred_username': preferredUsername,
+      'email': email,
+    };
   }
 }

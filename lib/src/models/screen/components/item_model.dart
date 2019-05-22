@@ -1,4 +1,5 @@
-import 'component_model.dart';
+import 'component_model.dart'
+    show ComponentModel;
 
 class ItemModel extends ComponentModel {
   ItemModel.fromJson(Map<String, dynamic> json)
@@ -42,7 +43,6 @@ class ItemModel extends ComponentModel {
         ? (_value / 100)
         : _value;
   }
-
 
   set value(Object value) {
     if (value is bool) {
