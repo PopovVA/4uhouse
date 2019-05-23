@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
 import '../../constants/layout.dart' show standardPadding;
 
+import '../../blocs/screen_bloc.dart' show ScreenBloc;
+import '../../resources/screen_repository.dart' show ScreenRepository;
+import '../../resources/auth_repository.dart' show AuthRepository;
+
 import '../../models/screen/components/button_model.dart' show ButtonModel;
 import '../../models/screen/components/item_model.dart' show ItemModel;
 import '../../models/screen/components/note_model.dart' show NoteModel;
@@ -35,10 +39,13 @@ class Screen extends StatefulWidget {
 
 class _ScreenState extends State<Screen> {
   GlobalKey scrollItemKey;
+  ScreenBloc screenBloc;
 
   @override
   void initState() {
-    bloc.fetchScreen(widget.route);
+    screenBloc = ScreenBloc(
+        authRepository: AuthRepository(), screenRepository: ScreenRepository());
+    screenBloc.fetchScreen(widget.route);
     super.initState();
   }
 
@@ -51,7 +58,7 @@ class _ScreenState extends State<Screen> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<ScreenModel>(
-      stream: bloc.screen,
+      stream: screenBloc.screen,
       builder: (BuildContext context, AsyncSnapshot<ScreenModel> snapshot) {
         if (snapshot.hasData) {
           return PageTemplate(
@@ -155,6 +162,6 @@ class _ScreenState extends State<Screen> {
   }
 
   Screen handleSendItemValue(String id, dynamic value, {dynamic body}) {
-//    return bloc.sendItemValue('${widget.route}/$id', value, body: body);
+//    return screenBloc.sendItemValue('${widget.route}/$id', value, body: body);
   }
 }

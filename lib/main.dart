@@ -4,6 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'src/app.dart' show App;
 import 'src/resources/auth_repository.dart' show AuthRepository;
 
+import 'temp/app_old.dart' show AppScreens;
+
 class AppBlocDelegate extends BlocDelegate {
 //  @override
 //  void onTransition(Bloc bloc, Transition transition) {
@@ -23,4 +25,5 @@ void main() async {
 //  debugPaintSizeEnabled = true;
   BlocSupervisor().delegate = AppBlocDelegate();
   runApp(App(authRepository: AuthRepository()));
+//  runApp(AppScreens());
 }
