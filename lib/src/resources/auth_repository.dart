@@ -1,5 +1,8 @@
 import 'dart:async' show Future;
-import 'dart:convert' show json;
+import 'dart:convert' show base64, json, utf8;
+import 'dart:math';
+import 'package:crypto/crypto.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:meta/meta.dart' show required;
 import 'package:flutter_appauth/flutter_appauth.dart'
@@ -77,5 +80,30 @@ class AuthRepository {
 
   Future<void> clearCredentials() async {
     await _storage.delete(key: _userProfile);
+  }
+
+  Future<void> generatePkce() async {
+    //Code Verifier
+    final Random random = Random.secure();
+    final List<int> bytes = List<int>.generate(32, (_) => random.nextInt(100));
+    final String verifier = base64.encode(bytes);
+    putData('verifier', verifier);
+  }
+
+  Future<String> readCodeVerifier() async{
+    //Code challenge
+    final String verifier = await getData('verifier');
+    final List<int> bytes_2 = verifier.codeUnits;
+    final List<int> digest = sha256.convert(bytes_2).bytes;
+    final String challenge = base64.encode(digest);
+    return challenge;
+  }
+
+  Future<void> putData(String key, String text) async {
+    await FlutterSecureStorage().write(key: key, value: text);
+  }
+
+  Future<String> getData(String key) async {
+    return await FlutterSecureStorage().read(key: key);
   }
 }
