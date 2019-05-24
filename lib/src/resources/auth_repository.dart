@@ -26,6 +26,7 @@ class AuthRepository {
   static const String _refresh = 'refreshToken';
   static const String _id = 'idToken';
   static const String _userProfile = 'userProfile';
+  static const String _verifier = 'verifier';
 
   /* Auth operations */
   Future<AuthorizationTokenResponse> login() {
@@ -87,23 +88,28 @@ class AuthRepository {
     final Random random = Random.secure();
     final List<int> bytes = List<int>.generate(32, (_) => random.nextInt(100));
     final String verifier = base64.encode(bytes);
-    putData('verifier', verifier);
+    putData(_verifier, verifier);
   }
 
-  Future<String> readCodeVerifier() async{
+  Future<String> readCodeVerifier() async {
     //Code challenge
-    final String verifier = await getData('verifier');
+    final String verifier = await getData(_verifier);
     final List<int> bytes_2 = verifier.codeUnits;
     final List<int> digest = sha256.convert(bytes_2).bytes;
     final String challenge = base64.encode(digest);
     return challenge;
   }
 
+  Future<String> wrapperPkce() async {
+    generatePkce();
+    return await readCodeVerifier();
+  }
+
   Future<void> putData(String key, String text) async {
-    await FlutterSecureStorage().write(key: key, value: text);
+    await _storage.write(key: key, value: text);
   }
 
   Future<String> getData(String key) async {
-    return await FlutterSecureStorage().read(key: key);
+    return await _storage.read(key: key);
   }
 }
