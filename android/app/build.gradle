@@ -33,14 +33,14 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "house.a4u.providermobile"
+        applicationId "house.a4u.usermobile"
         minSdkVersion 18
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
-                'appAuthRedirectScheme': 'house.a4u.providermobile'
+                'appAuthRedirectScheme': 'house.a4u.usermobile'
         ]
     }
 

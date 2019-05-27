@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider_mobile/src/ui/components/common/circular_progress.dart';
+import 'package:user_mobile/src/ui/components/common/circular_progress.dart';
 
 class StyledButton extends StatelessWidget {
   const StyledButton({this.text = '', this.onPressed, this.loading = false});

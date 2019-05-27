@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show DateFormat;
-import 'package:provider_mobile/src/ui/components/pickers/photo_uploader.dart'
+import 'package:user_mobile/src/ui/components/pickers/photo_uploader.dart'
     show openPhotoUploader;
 
 import '../../../models/screen/components/item_model.dart';

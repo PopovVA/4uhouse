@@ -16,12 +16,12 @@ class AuthApi {
   final FlutterAppAuth _appAuth = FlutterAppAuth();
 
   // Keycloak details
-  final String _clientId = 'provider-mobile';
+  final String _clientId = 'user-mobile';
 
   final String _discoveryUrl =
       'https://dev.auth.4u.house/auth/realms/4uhouse/.well-known/openid-configuration';
 
-  final String _redirectUrl = 'house.a4u.providermobile:/oauthredirect';
+  final String _redirectUrl = 'house.a4u.usermobile:/oauthredirect';
 
   final List<String> _scopes = const <String>[
     'openid',
@@ -55,7 +55,7 @@ class AuthApi {
           discoveryUrl: _discoveryUrl,
           scopes: _scopes));
 
-  Future<Map<String, dynamic>> logout(
+  Future<void> logout(
       {@required String accessToken, @required String refreshToken}) async {
     final http.Response response = await http.post(
         'https://dev.auth.4u.house/auth/realms/4uhouse/protocol/openid-connect/logout',

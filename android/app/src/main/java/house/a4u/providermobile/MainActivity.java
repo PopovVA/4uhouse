@@ -1,4 +1,4 @@
-package house.a4u.providermobile;
+package house.a4u.usermobile;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider_mobile/src/ui/components/common/drawer/drawer.dart'
+import 'package:user_mobile/src/ui/components/common/drawer/drawer.dart'
     show DrawerOnly;
 import '../../../constants/layout.dart' show standardPadding;
 

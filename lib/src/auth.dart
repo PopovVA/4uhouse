@@ -17,8 +17,8 @@
 //  String _refreshToken;
 //
 //  // Keycloak details
-//  final String _clientId = 'provider-mobile';
-//  final String _redirectUrl = 'house.a4u.providermobile:/oauthredirect';
+//  final String _clientId = 'user-mobile';
+//  final String _redirectUrl = 'house.a4u.usermobile:/oauthredirect';
 //  final List<String> _scopes = const <String>[
 //    'openid',
 //    'profile',

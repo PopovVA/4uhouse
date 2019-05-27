@@ -40,7 +40,7 @@ class AuthRepository {
         'auth_repository loadUserProfile: accessToken is not specified.');
   }
 
-  Future<Map<String, dynamic>> logout(
+  Future<void> logout(
       {@required String accessToken, @required String refreshToken}) async {
     if ((accessToken is String && accessToken.isNotEmpty) &&
         (refreshToken is String && refreshToken.isNotEmpty)) {
