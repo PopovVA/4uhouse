@@ -1,5 +1,8 @@
 import 'dart:async' show Future;
-import 'dart:convert' show json;
+import 'dart:convert' show base64, json, utf8;
+import 'dart:math';
+import 'package:crypto/crypto.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:meta/meta.dart' show required;
 import 'package:flutter_appauth/flutter_appauth.dart'
@@ -23,6 +26,7 @@ class AuthRepository {
   static const String _refresh = 'refreshToken';
   static const String _id = 'idToken';
   static const String _userProfile = 'userProfile';
+  static const String _verifier = 'verifier';
 
   /* Auth operations */
   Future<AuthorizationTokenResponse> login() {
@@ -77,5 +81,31 @@ class AuthRepository {
 
   Future<void> clearCredentials() async {
     await _storage.delete(key: _userProfile);
+  }
+
+  Future<String> generatePkce() async {
+    //Code Verifier
+    final Random random = Random.secure();
+    final List<int> bytes = List<int>.generate(32, (_) => random.nextInt(100));
+    final String verifier = base64.encode(bytes);
+    putData(_verifier, verifier);
+    //Code challenge
+    final List<int> bytesVerifier = verifier.codeUnits;
+    final List<int> digest = sha256.convert(bytesVerifier).bytes;
+    final String challenge = base64.encode(digest);
+    return challenge;
+  }
+
+  Future<String> readCodeVerifier() async {
+    final String verifier = await getData(_verifier);
+    return verifier;
+  }
+
+  Future<void> putData(String key, String text) async {
+    await _storage.write(key: key, value: text);
+  }
+
+  Future<String> getData(String key) async {
+    return await _storage.read(key: key);
   }
 }
