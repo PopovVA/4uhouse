@@ -83,26 +83,22 @@ class AuthRepository {
     await _storage.delete(key: _userProfile);
   }
 
-  Future<void> generatePkce() async {
+  Future<String> generatePkce() async {
     //Code Verifier
     final Random random = Random.secure();
     final List<int> bytes = List<int>.generate(32, (_) => random.nextInt(100));
     final String verifier = base64.encode(bytes);
     putData(_verifier, verifier);
-  }
-
-  Future<String> readCodeVerifier() async {
     //Code challenge
-    final String verifier = await getData(_verifier);
-    final List<int> bytes_2 = verifier.codeUnits;
-    final List<int> digest = sha256.convert(bytes_2).bytes;
+    final List<int> bytesVerifier = verifier.codeUnits;
+    final List<int> digest = sha256.convert(bytesVerifier).bytes;
     final String challenge = base64.encode(digest);
     return challenge;
   }
 
-  Future<String> wrapperPkce() async {
-    generatePkce();
-    return await readCodeVerifier();
+  Future<String> readCodeVerifier() async {
+    final String verifier = await getData(_verifier);
+    return verifier;
   }
 
   Future<void> putData(String key, String text) async {
