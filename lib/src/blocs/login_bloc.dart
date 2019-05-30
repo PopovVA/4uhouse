@@ -3,23 +3,22 @@ import '../../src/resources/auth_repository.dart';
 import 'auth/auth_bloc.dart';
 import 'auth/auth_state.dart';
 
-class LoginBloc extends Bloc<AuthRepository, AuthBloc> {
+class LoginBloc extends Bloc<AuthBloc, AuthRepository> {
   @override
-  AuthBloc get initialState => AuthBloc(authRepository: AuthRepository());
+  AuthRepository get initialState => AuthRepository();
 
   @override
-  Stream<AuthBloc> mapEventToState(AuthRepository event) async* {
+  Stream<AuthRepository> mapEventToState(AuthBloc event) async* {
     yield* SubmitPhoneTapped('phone');
   }
 
   @override
-  Stream<AuthBloc> SubmitPhoneTapped(String phone) async* {
-
-
+  Stream<AuthRepository> SubmitPhoneTapped(String phone) async* {
+    try {
+      AuthRepository().getOtp(phone, await AuthRepository().readCodeVerifier());
+    } catch (error) {}
   }
 
-
-
   @override
-  Stream<AuthBloc> SubmitCodeTapped(int code) async* {}
+  Stream<AuthRepository> SubmitCodeTapped(int code) async* {}
 }
