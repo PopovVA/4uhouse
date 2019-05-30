@@ -83,16 +83,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Stream<AuthState> _mapErrorLoginTap(String error) async* {
+    bool internet = await checkInternet();
+    print(internet);
     LoginError currentState;
-    switch (error) {
-      case 'phone':
-        yield currentState = PhoneError();
-        break;
-      case 'code':
-        yield currentState = CodeError();
-        break;
-      default:
-        yield currentState = LoginError();
+    if (internet) {
+      yield currentState = CodeError();
+    } else {
+      yield currentState = PhoneError();
     }
   }
 

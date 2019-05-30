@@ -9,6 +9,7 @@ import 'package:user_mobile/src/resources/auth_repository.dart';
 import 'package:user_mobile/src/ui/components/common/drawer/drawer.dart'
     show DrawerOnly;
 import '../../../constants/layout.dart' show standardPadding;
+import 'snackbar.dart';
 
 class PageTemplate extends StatelessWidget {
   PageTemplate({
@@ -61,9 +62,8 @@ class PageTemplate extends StatelessWidget {
         listener: (BuildContext context, AuthState state) {
           print('===> Pagetemplate==>state $state');
           if (state is PhoneError) {
-            Scaffold.of(context).showSnackBar(SnackBar(
-              content: Text('in $title ${state.toString()}'),
-              duration: Duration(milliseconds: 300),
+            Scaffold.of(context).showSnackBar(CustomSnackBar(
+              content: Text('Check your Internet in $title ${state.toString()}'),backgroundColor: Colors.redAccent,
             ));
           }
         },
