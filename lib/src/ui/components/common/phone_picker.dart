@@ -6,9 +6,6 @@ class PhonePicker extends StatelessWidget {
 
   ///RUS
   ///Колбэк который возвращает введенный номер телефона
-  ///
-  /// ENG
-  /// Callback which return inputted phone number
   final Function onSubmit;
 
   @override

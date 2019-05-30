@@ -13,7 +13,6 @@ import 'pallete.dart';
 import 'resources/auth_repository.dart' show AuthRepository;
 import 'typography.dart';
 import 'ui/pages/home/home.dart';
-import 'ui/pages/login/login.dart';
 
 class App extends StatefulWidget {
   const App({@required this.authRepository});
@@ -70,7 +69,7 @@ class _AppState extends State<App> {
               );
             }
 
-            return Login();
+            return HomePage();
           },
         ),
       ),
