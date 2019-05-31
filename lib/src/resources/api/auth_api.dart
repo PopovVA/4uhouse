@@ -87,7 +87,7 @@ class AuthApi {
     }
   }
 
-  Future<Map<String, dynamic>> requestOtp(
+  Future<void> requestOtp(
       String phone, String codeChallenge, String deviceId) async {
     final http.Response response = await http.post(
       'https://dev.auth.4u.house/auth/realms/4uhouse/protocol/openid-connect/logout',
