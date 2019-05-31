@@ -18,9 +18,9 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
     if (event is PhoneInitialized) {
       yield PhoneLoading();
       try {
-        final List<CountryPhoneData> list =
+        final List<CountryPhoneData> data =
             await repository.getCountriesPhoneData();
-        yield PhoneCountriesDataLoaded(list);
+        yield PhoneCountriesDataLoaded(data);
       } catch (error) {
         yield PhoneLoadingError();
       }
