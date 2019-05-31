@@ -36,18 +36,3 @@ class AuthUnauthorized extends AuthState {
   @override
   String toString() => 'AuthUnauthorized';
 }
-
-class LoginError extends AuthState {
-  @override
-  String toString() => 'LoginError';
-}
-
-class PhoneError extends LoginError {
-  @override
-  String toString() => 'PhoneError';
-}
-
-class CodeError extends LoginError {
-  @override
-  String toString() => 'CodeError';
-}

@@ -6,7 +6,6 @@ import 'package:flutter_appauth/flutter_appauth.dart'
     show AuthorizationTokenResponse, TokenResponse;
 import 'package:meta/meta.dart' show required;
 import 'package:bloc/bloc.dart' show Bloc;
-import 'package:connectivity/connectivity.dart';
 import '../../models/user_profile.dart' show UserProfile;
 import '../../resources/auth_repository.dart' show AuthRepository;
 import 'auth_event.dart'
@@ -17,10 +16,7 @@ import 'auth_state.dart'
         AuthCheckIfAuthorized,
         AuthState,
         AuthUnauthorized,
-        AuthUninitialized,
-        CodeError,
-        LoginError,
-        PhoneError;
+        AuthUninitialized;
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({@required this.authRepository}) : assert(authRepository != null);
@@ -63,7 +59,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     } else {
       // no token stored
       yield AuthUnauthorized();
-      yield* _mapErrorLoginTap('phone');
     }
   }
 
@@ -80,27 +75,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       // TODO(Andrei): show snackbar error
       throw Exception(error);
     }
-  }
-
-  Stream<AuthState> _mapErrorLoginTap(String error) async* {
-    bool internet = await checkInternet();
-    print(internet);
-    LoginError currentState;
-    if (internet) {
-      yield currentState = CodeError();
-    } else {
-      yield currentState = PhoneError();
-    }
-  }
-
-  Future<bool> checkInternet() async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile) {
-      return true;
-    } else if (connectivityResult == ConnectivityResult.wifi) {
-      return true;
-    }
-    return false;
   }
 
   Stream<AuthState> _mapLogoutButtonPressedToState() async* {

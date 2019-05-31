@@ -1,8 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart' show immutable;
 
-import '../../models/user_profile.dart' show UserProfile;
-
 @immutable
 abstract class LoginState extends Equatable {
   LoginState([List<dynamic> props = const <dynamic>[]]) : super(props);
@@ -16,7 +14,7 @@ class PhoneEntering extends LoginState {
   String toString() => 'PhoneEntering';
 }
 
-class isLoading extends LoginState {
+class IsLoading extends LoginState {
   @override
   String toString() => 'isLoading';
 }

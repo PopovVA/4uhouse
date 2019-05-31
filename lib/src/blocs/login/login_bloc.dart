@@ -15,14 +15,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    LoginState state;
     try {
       if (event is SubmitPhoneTapped) {
-        yield state = isLoading();
-        authRepository.generatePkce();
-        authRepository.getOtp(
-            event.phone, await authRepository.readCodeVerifier());
-        yield state = OtpSent();
+        yield IsLoading();
+        final String codeChallenge = await authRepository.generatePkce();
+        authRepository.getOtp(event.phone, codeChallenge);
+        yield OtpSent();
       } else if (event is SubmitCodeTapped) {}
     } catch (error) {
       yield* _mapErrorLoginTap(error);
@@ -30,13 +28,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Stream<LoginState> _mapErrorLoginTap(String error) async* {
-    bool internet = await checkInternet();
-    print(internet);
-    LoginError currentState;
+    final bool internet = await checkInternet();
     if (internet) {
-      yield currentState = CodeError();
+      yield CodeError();
     } else {
-      yield currentState = PhoneError();
+      yield PhoneError();
     }
   }
 
