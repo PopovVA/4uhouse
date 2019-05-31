@@ -21,9 +21,9 @@ class PhoneLoading extends PhoneState {
 }
 
 class PhoneCountriesDataLoaded extends PhoneState {
-  PhoneCountriesDataLoaded(this.list);
+  PhoneCountriesDataLoaded(this.data);
 
-  final List<CountryPhoneData> list;
+  final List<CountryPhoneData> data;
 
   @override
   String toString() => 'PhoneCountriesDataLoaded';
