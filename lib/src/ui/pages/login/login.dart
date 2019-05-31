@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../components/common/page_template.dart' show PageTemplate;
-import '../../components/common/phone_picker.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
 
 class Login extends StatefulWidget {
@@ -11,6 +10,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   bool _isAgree = false;
   bool _validPhone = false;
+  String dropdownValue = '+(357)';
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +29,55 @@ class _LoginState extends State<Login> {
   }
 
   Widget _buildPhonePicker() {
-    return Container(
-        margin: const EdgeInsets.only(bottom: 16.0),
-        child: PhonePicker(onSubmit: (String phoneNumber) {
-          setState(() {
-            phoneNumber.isNotEmpty ? _validPhone = true : _validPhone = false;
-          });
-        }));
+    return Row(children: <Widget>[
+      Container(
+        width: 150.0,
+        child: DropdownButton<String>(
+          isDense: true,
+          underline: Divider(color: const Color(0x0fffffff), height: 1.0,),
+          style: const TextStyle(fontSize: 16.0, color: Color(0xde000000)),
+          isExpanded: true,
+          value: dropdownValue,
+          onChanged: (String newValue) {
+            setState(() {
+              dropdownValue = newValue;
+            });
+          },
+          items: <String>[
+            'Russia +7',
+            'China +8',
+            'France +9',
+            'Usa +0'
+          ].map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value,
+                  style: const TextStyle(
+                      fontSize: 16.0, color: Color(0xde000000))),
+            );
+          }).toList(),
+        ),
+      ),
+      Container(
+        padding: const EdgeInsets.only(left: 12.0, top: 5.5),
+        width: 200.0,
+        child: TextField(
+          style: const TextStyle(fontSize: 16.0, color: Color(0xde000000)),
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+          decoration: InputDecoration.collapsed(
+              hintText: '26009875',
+              hintStyle:
+                  const TextStyle(color: Color(0xde000000), fontSize: 16.0),
+              border: UnderlineInputBorder(
+                  borderSide:
+                      BorderSide(width: 1.0, color: const Color(0x0fffffff)))),
+        ),
+      )
+    ]);
+  }
+
+  dynamic onChanged() {
+    print('test');
   }
 
   Widget _buildTittle() {
@@ -62,7 +104,8 @@ class _LoginState extends State<Login> {
         ),
         Row(
           children: <Widget>[
-            const Text('I accept the'),
+            const Text('I accept the',
+                style: TextStyle(color: Color(0xde000000))),
             const Padding(padding: EdgeInsets.only(left: 2.0)),
             Text(
               'Term and conditions,Privacy police',
@@ -82,7 +125,9 @@ class _LoginState extends State<Login> {
         child: StyledButton(
           loading: false,
           onPressed: _isAgree && _validPhone
-              ? () {print('some action');}
+              ? () {
+                  print('some action');
+                }
               : null,
           text: 'Submit',
         ),
