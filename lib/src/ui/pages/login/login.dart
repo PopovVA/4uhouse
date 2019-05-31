@@ -10,7 +10,20 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   bool _isAgree = false;
   bool _validPhone = false;
-  String dropdownValue = '+(357)';
+  String _countryCode = '+(357)';
+  final TextEditingController _phone = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _phone.addListener(_phoneListner);
+  }
+
+  void _phoneListner() {
+    setState(() {
+      _phone.text.isNotEmpty ? _validPhone = true : _validPhone = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +49,10 @@ class _LoginState extends State<Login> {
           isDense: true,
           style: const TextStyle(fontSize: 16.0, color: Color(0xde000000)),
           isExpanded: true,
-          value: dropdownValue,
+          value: _countryCode,
           onChanged: (String newValue) {
             setState(() {
-              dropdownValue = newValue;
+              _countryCode = newValue;
             });
           },
           items: <String>[
@@ -62,6 +75,7 @@ class _LoginState extends State<Login> {
         padding: const EdgeInsets.only(left: 12.0, top: 5.5),
         width: 200.0,
         child: TextField(
+          controller: _phone,
           style: const TextStyle(fontSize: 16.0, color: Color(0xde000000)),
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration.collapsed(
