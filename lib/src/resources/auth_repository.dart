@@ -2,7 +2,7 @@ import 'dart:async' show Future;
 import 'dart:convert' show base64, json, utf8;
 import 'dart:math';
 import 'package:crypto/crypto.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:device_info/device_info.dart';
 
 import 'package:meta/meta.dart' show required;
 import 'package:flutter_appauth/flutter_appauth.dart'
@@ -107,5 +107,21 @@ class AuthRepository {
 
   Future<String> getData(String key) async {
     return await _storage.read(key: key);
+  }
+
+  Future<String> getDeviceId() async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    print('Running on ${androidInfo.model}');
+
+    IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+    print('Running on ${iosInfo.utsname.machine}');
+
+    return androidInfo != null ? androidInfo.model : iosInfo.utsname.machine;
+  }
+
+  Future<void> getOtp(String phone, String codeChallenge) async {
+    String deviceId = await getDeviceId();
+    AuthApi().requestOtp(phone, codeChallenge, deviceId);
   }
 }

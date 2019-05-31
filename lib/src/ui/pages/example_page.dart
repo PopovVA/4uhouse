@@ -4,7 +4,7 @@ import 'package:user_mobile/src/ui/components/common/page_template.dart';
 class ExamplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const PageTemplate(
+    return  PageTemplate(
       title: 'Example Page',
     );
   }
