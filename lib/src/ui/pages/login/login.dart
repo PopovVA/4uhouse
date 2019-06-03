@@ -38,35 +38,34 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<PhoneEvent, PhoneState>(
-      bloc: _bloc,
-      listener: (BuildContext context, PhoneState state) {
-        if (state is PhoneLoadingError) {
-          Scaffold.of(context).showSnackBar(const CustomSnackBar(
-            content: Text('Something went wrong'),
-            backgroundColor: Colors.redAccent,
-          ));
-        }
-      },
-      child: BlocBuilder<PhoneEvent, PhoneState>(
-          bloc: _bloc,
-          builder: (BuildContext context, PhoneState state) {
-            return PageTemplate(
-                goBack: null,
-                title: 'Log in',
-                body: Container(
-                    padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                    margin: const EdgeInsets.only(bottom: 12.0),
-                    child: Column(children: <Widget>[
+    return PageTemplate(
+        goBack: null,
+        title: 'Log in',
+        body: Container(
+            padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+            margin: const EdgeInsets.only(bottom: 12.0),
+            child: BlocListener<PhoneEvent, PhoneState>(
+              bloc: _bloc,
+              listener: (BuildContext context, PhoneState state) {
+                print('=> $state');
+                if (state is PhoneLoadingError) {
+                  Scaffold.of(context).showSnackBar(const CustomSnackBar(
+                    content: Text('Something went wrong'),
+                    backgroundColor: Colors.redAccent,
+                  ));
+                }
+              },
+              child: BlocBuilder<PhoneEvent, PhoneState>(
+                  bloc: _bloc,
+                  builder: (BuildContext context, PhoneState state) {
+                    return Column(children: <Widget>[
                       _buildTittle(),
-                      _buildPhonePicker(),
+                       _buildPhonePicker(),
                       _buildTerms(),
                       _buildSubmit(),
-                    ])));
-          }),
-    );
-
-    ;
+                    ]);
+                  }),
+            )));
   }
 
   Widget _buildPhonePicker() {

@@ -16,6 +16,7 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
   @override
   Stream<PhoneState> mapEventToState(PhoneEvent event) async* {
     if (event is PhoneInitialized) {
+
       yield PhoneLoading();
       try {
         final List<CountryPhoneData> data =
