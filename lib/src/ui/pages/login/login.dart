@@ -72,7 +72,7 @@ class _LoginState extends State<Login> {
                       if (state is PhoneLoadingError) {
                         return Column(children: <Widget>[
                           _buildTittle(),
-                          Text(state.toString()),
+                          const Text('Something went wrong'),
                           _buildTerms(),
                           _buildSubmit(),
                         ]);
@@ -81,7 +81,7 @@ class _LoginState extends State<Login> {
                       if (state is PhoneUninitialized) {
                         return Column(children: <Widget>[
                           _buildTittle(),
-                          Text(state.toString()),
+                          const Text('Something went wrong'),
                           _buildTerms(),
                           _buildSubmit(),
                         ]);
