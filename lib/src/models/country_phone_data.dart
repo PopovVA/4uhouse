@@ -1,40 +1,42 @@
 class CountryPhoneData {
+  CountryPhoneData({countryId, code, name, length, example, numberPattern});
+
   CountryPhoneData.fromJson(Map<String, dynamic> json) {
-    _id = json['id'];
-    _countryName = json['countryName'];
-    _countryCode = json['countryCode'];
-    _flag = json['flag'];
+    _countryId = json['countryId'];
+    _code = json['code'];
+    _name = json['name'];
+    _length = json['length'].cast<int>();
     _example = json['example'];
-    _mask = json['mask'];
+    _numberPattern = json['numberPattern'];
   }
 
   Map<String, dynamic> toJson() {
-    return <String, dynamic>{
-      'id': id,
-      'countryName': countryName,
-      'countryCode': countryCode,
-      'flag': flag,
-      'example': example,
-      'mask': mask,
-    };
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['countryId'] = countryId;
+    data['code'] = code;
+    data['name'] = name;
+    data['length'] = length;
+    data['example'] = example;
+    data['numberPattern'] = numberPattern;
+    return data;
   }
 
-  String _id;
-  String _countryName;
-  bool _countryCode;
-  String _flag;
-  String _example;
-  String _mask;
+  String _countryId;
 
-  String get id => _id;
+  String get countryId => _countryId;
+  int _code;
+  String _name;
+  List<int> _length;
+  int _example;
+  String _numberPattern;
 
-  String get countryName => _countryName;
+  int get code => _code;
 
-  bool get countryCode => _countryCode;
+  String get name => _name;
 
-  String get flag => _flag;
+  List<int> get length => _length;
 
-  String get example => _example;
+  int get example => _example;
 
-  String get mask => _mask;
+  String get numberPattern => _numberPattern;
 }
