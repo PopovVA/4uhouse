@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../blocs/phone/phone_bloc.dart';
+import '../../../blocs/phone/phone_event.dart';
+import '../../../blocs/phone/phone_state.dart';
+import '../../../resources/phone_repository.dart';
 import '../../../utils/route_transition.dart' show SlideRoute;
 import '../../components/common/page_template.dart' show PageTemplate;
+import '../../components/common/snackbar.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
 import 'phone_search.dart';
-
 
 class Login extends StatefulWidget {
   @override
@@ -15,11 +20,14 @@ class _LoginState extends State<Login> {
   bool _validPhone = false;
   String _defaultCountryCode = '+(357)';
   final TextEditingController _phone = TextEditingController();
+  PhoneBloc _bloc;
 
   @override
   void initState() {
     super.initState();
     _phone.addListener(_phoneListner);
+    _bloc = PhoneBloc(PhoneRepository());
+    _bloc.dispatch(PhoneInitialized());
   }
 
   void _phoneListner() {
@@ -36,12 +44,28 @@ class _LoginState extends State<Login> {
         body: Container(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0),
             margin: const EdgeInsets.only(bottom: 12.0),
-            child: Column(children: <Widget>[
-              _buildTittle(),
-              _buildPhonePicker(),
-              _buildTerms(),
-              _buildSubmit(),
-            ])));
+            child: BlocListener<PhoneEvent, PhoneState>(
+              bloc: _bloc,
+              listener: (BuildContext context, PhoneState state) {
+                print('=> $state');
+                if (state is PhoneLoadingError) {
+                  Scaffold.of(context).showSnackBar(const CustomSnackBar(
+                    content: Text('Something went wrong'),
+                    backgroundColor: Colors.redAccent,
+                  ));
+                }
+              },
+              child: BlocBuilder<PhoneEvent, PhoneState>(
+                  bloc: _bloc,
+                  builder: (BuildContext context, PhoneState state) {
+                    return Column(children: <Widget>[
+                      _buildTittle(),
+                      _buildPhonePicker(),
+                      _buildTerms(),
+                      _buildSubmit(),
+                    ]);
+                  }),
+            )));
   }
 
   Widget _buildPhonePicker() {
@@ -53,15 +77,14 @@ class _LoginState extends State<Login> {
           decoration: InputDecoration.collapsed(
               hintText: _defaultCountryCode,
               hintStyle:
-              const TextStyle(color: Color(0xde000000), fontSize: 16.0),
+                  const TextStyle(color: Color(0xde000000), fontSize: 16.0),
               border: UnderlineInputBorder(
                   borderSide:
-                  BorderSide(width: 1.0, color: const Color(0x0fffffff)))),
+                      BorderSide(width: 1.0, color: const Color(0x0fffffff)))),
           onTap: () => Navigator.push(
-          context,
-          SlideRoute(
-              widget: PhoneSearch(), side: 'left'),
-        ),
+                context,
+                SlideRoute(widget: PhoneSearch(), side: 'left'),
+              ),
         ),
       ),
       Container(
