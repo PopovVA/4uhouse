@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:user_mobile/src/ui/components/common/drawer/drawer.dart'
     show DrawerOnly;
-import '../../../constants/layout.dart' show standardPadding;
 
 class PageTemplate extends StatelessWidget {
-  const PageTemplate({
+  PageTemplate({
     this.title,
     this.note,
     this.body,
@@ -23,7 +22,6 @@ class PageTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double horizontalPadding = padding ? standardPadding : 0.0;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -44,8 +42,6 @@ class PageTemplate extends StatelessWidget {
       ),
       drawer: DrawerOnly(),
       body: Container(
-        /* padding: EdgeInsets.fromLTRB(
-            horizontalPadding, 0.0, horizontalPadding, standardPadding),*/
         child: body,
       ),
     );

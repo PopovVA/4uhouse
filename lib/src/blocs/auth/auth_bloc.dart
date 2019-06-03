@@ -1,4 +1,4 @@
-import 'dart:async' show Stream;
+import 'dart:async' show Stream, StreamSubscription;
 
 import 'package:flutter/foundation.dart';
 
@@ -6,7 +6,6 @@ import 'package:flutter_appauth/flutter_appauth.dart'
     show AuthorizationTokenResponse, TokenResponse;
 import 'package:meta/meta.dart' show required;
 import 'package:bloc/bloc.dart' show Bloc;
-
 import '../../models/user_profile.dart' show UserProfile;
 import '../../resources/auth_repository.dart' show AuthRepository;
 import 'auth_event.dart'

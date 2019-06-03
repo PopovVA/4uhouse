@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart' show SvgPicture;
-
 import '../../../utils/route_transition.dart' show SlideRoute;
 import '../../components/common/circular_progress.dart' show CircularProgress;
 import '../../components/common/page_template.dart' show PageTemplate;
@@ -35,8 +34,8 @@ class HomePage extends StatelessWidget {
                               Container(
                                   margin: const EdgeInsets.only(top: 21),
                                   height: 130,
-                                  child:
-                                      SvgPicture.asset('lib/assets/dog.svg')),
+                                  child: SvgPicture.asset(
+                                      'lib/assets/dog.svg')),
                               const Padding(
                                   padding: EdgeInsets.only(top: 17),
                                   child: Description()),
@@ -64,8 +63,8 @@ class HomePage extends StatelessWidget {
                                     'Prepare and sign a contract with you')),
                             Padding(
                                 padding: EdgeInsets.only(right: 43),
-                                child:
-                                    SubPoint('Create a virtual property tour')),
+                                child: SubPoint(
+                                    'Create a virtual property tour')),
                             Padding(
                                 padding: EdgeInsets.only(right: 28),
                                 child: SubPoint(
@@ -77,7 +76,8 @@ class HomePage extends StatelessWidget {
                             Padding(
                                 padding: EdgeInsets.only(top: 13),
                                 child: MainPoint(
-                                    'Agree on information for publication', 3)),
+                                    'Agree on information for publication',
+                                    3)),
                           ],
                         ),
                       ),
@@ -90,12 +90,13 @@ class HomePage extends StatelessWidget {
                   child: StyledButton(
                       text: 'Add property',
                       onPressed: () => Navigator.push(
-                            context,
-                            SlideRoute(widget: AddProperty(), side: 'left'),
-                          )),
+                        context,
+                        SlideRoute(
+                            widget: AddProperty(), side: 'left'),
+                      )),
                 )
               ],
             ))
-        : const CircularProgress();
+        : const    CircularProgress();
   }
 }

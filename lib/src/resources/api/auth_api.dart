@@ -75,7 +75,8 @@ class AuthApi {
     }
   }
 
-  Future<Map<String, dynamic>> loadUserProfile({@required String accessToken}) async {
+  Future<Map<String, dynamic>> loadUserProfile(
+      {@required String accessToken}) async {
     final http.Response response = await http.get(_userInfoEndpoint,
         headers: <String, String>{'Authorization': 'Bearer $accessToken'});
 
@@ -83,6 +84,22 @@ class AuthApi {
       return json.decode(response.body);
     } else {
       throw Exception(response.body);
+    }
+  }
+
+  Future<void> requestOtp(
+      String phone, String codeChallenge, String deviceId) async {
+    final http.Response response = await http.post(
+      'https://dev.auth.4u.house/auth/realms/4uhouse/protocol/openid-connect/logout',
+      body: <String, String>{
+        'codeChallenge': codeChallenge,
+        'deviceId': deviceId,
+        'phone': phone
+      },
+    );
+    if (response.statusCode != 204) {
+      throw Exception(
+          'Logout error: ${response?.statusCode}, ${response?.body}');
     }
   }
 }
