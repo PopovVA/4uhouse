@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../blocs/phone/phone_bloc.dart';
 import '../../../blocs/phone/phone_event.dart';
 import '../../../blocs/phone/phone_state.dart';
-import 'package:user_mobile/src/resources/phone_repository.dart';
+import '../../../resources/phone_repository.dart';
+import '../../../utils/route_transition.dart' show SlideRoute;
 import '../../components/common/page_template.dart' show PageTemplate;
+import '../../components/common/snackbar.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
+import 'phone_search.dart';
 import 'phone_picker.dart';
 
 class Login extends StatefulWidget {
@@ -13,14 +17,15 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  PhoneBloc phoneBloc;
   bool _isAgree = false;
   bool _validPhone = false;
+  PhoneBloc _bloc;
 
   @override
   void initState() {
     super.initState();
-    phoneBloc.dispatch(PhoneInitialized());
+    _bloc = PhoneBloc(PhoneRepository());
+    _bloc.dispatch(PhoneInitialized());
   }
 
   @override
@@ -31,29 +36,46 @@ class _LoginState extends State<Login> {
         body: Container(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0),
             margin: const EdgeInsets.only(bottom: 12.0),
-            child: Column(children: <Widget>[
-              _buildTittle(),
-              StreamBuilder<PhoneState>(
-                stream: phoneBloc.state,
-                initialData: phoneBloc.initialState,
-                builder: (BuildContext context, snapshot) {
-                  print('=======================');
-                  print(snapshot.data);
-                  if (snapshot.data is PhoneLoading) {
-                    return PhonePicker();
-                  }
-                  if (snapshot.data is PhoneLoadingError) {
-                    PhoneState state = snapshot.data;
-                    return PhonePicker();
-                  }
-                  if (snapshot.data is PhoneCountriesDataLoaded) {
-                    return PhonePicker();
+            child: BlocListener<PhoneEvent, PhoneState>(
+                bloc: _bloc,
+                listener: (BuildContext context, PhoneState state) {
+                  print('=> $state');
+                  if (state is PhoneLoadingError) {
+                    Scaffold.of(context).showSnackBar(const CustomSnackBar(
+                      content: Text('Something went wrong'),
+                      backgroundColor: Colors.redAccent,
+                    ));
                   }
                 },
-              ),
-              _buildTerms(),
-              _buildSubmit(),
-            ])));
+                child: BlocBuilder<PhoneEvent, PhoneState>(
+                    bloc: _bloc,
+                    builder: (BuildContext context, PhoneState state) {
+                      if (state is PhoneLoading) {
+                        return Column(children: <Widget>[
+                          _buildTittle(),
+                          CircularProgressIndicator(
+                              backgroundColor: Theme.of(context).primaryColor),
+                          _buildTerms(),
+                          _buildSubmit(),
+                        ]);
+                      }
+                      if (state is PhoneCountriesDataLoaded) {
+                        return Column(children: <Widget>[
+                          _buildTittle(),
+                          PhonePicker(),
+                          _buildTerms(),
+                          _buildSubmit(),
+                        ]);
+                      }
+                      if (state is PhoneLoadingError) {
+                        return Column(children: <Widget>[
+                          _buildTittle(),
+                          PhonePicker(),
+                          _buildTerms(),
+                          _buildSubmit(),
+                        ]);
+                      }
+                    }))));
   }
 
   dynamic onChanged() {

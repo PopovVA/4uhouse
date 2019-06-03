@@ -3,9 +3,10 @@ import '../../../utils/route_transition.dart' show SlideRoute;
 import 'phone_search.dart';
 
 class PhonePicker extends StatefulWidget {
-  PhonePicker({this.favorites});
+  PhonePicker({this.favorites, this.rest});
 
   List<String> favorites;
+  List<String> rest;
 
   String defaultCountryCode;
   bool _isAgree = false;
@@ -39,7 +40,7 @@ class _PhonePickerState extends State<PhonePicker> {
         width: 100.0,
         child: TextField(
           decoration: InputDecoration.collapsed(
-              hintText: widget.defaultCountryCode,
+              hintText: '+357',
               hintStyle:
                   const TextStyle(color: Color(0xde000000), fontSize: 16.0),
               border: UnderlineInputBorder(

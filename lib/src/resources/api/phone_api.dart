@@ -9,9 +9,9 @@ import '../api/screen_api/constants/url.dart' show BASE_URL;
 class PhoneApi {
   Future<List<Map<String, dynamic>>> requestCountriesPhoneData() async {
     final String response =
-        await rootBundle.loadString('lib/temp/country_data.json');
+        await rootBundle.loadString('lib/assets/country_data.json.json');
     if (response.isNotEmpty) {
-      print(json.decode(response));
+      print(response);
       return json.decode(response);
     } else {
       throw Exception(ErrorMessage.fromJson(json.decode(response)));
