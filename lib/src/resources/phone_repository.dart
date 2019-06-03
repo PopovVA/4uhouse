@@ -4,6 +4,9 @@ import 'api/phone_api.dart';
 
 class PhoneRepository {
   Future<List<CountryPhoneData>> getCountriesPhoneData() async {
-    return await PhoneApi().requestCountriesPhoneData();
+    final List<CountryPhoneData> data = List<CountryPhoneData>();
+    data.add(CountryPhoneData.fromJson(
+        await PhoneApi().requestCountriesPhoneData()));
+    return data;
   }
 }
