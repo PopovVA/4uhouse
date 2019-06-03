@@ -62,10 +62,9 @@ class _LoginState extends State<Login> {
                       if (state is PhoneCountriesDataLoaded) {
                         return Column(children: <Widget>[
                           _buildTittle(),
-                          PhonePicker(rest: <String>[
-                            'United states +1',
-                            'Cyprus +354'
-                          ]),
+                          PhonePicker(
+                              rest: <String>['United states +1', 'Cyprus +354'],
+                              favorites: <String>['Russia + 7']),
                           _buildTerms(),
                           _buildSubmit(),
                         ]);

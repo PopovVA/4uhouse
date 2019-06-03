@@ -28,7 +28,8 @@ class _PhoneSearchState extends State<PhoneSearch> {
               onPressed: () {
                 showSearch(
                   context: context,
-                  delegate: CustomSearchDelegate(),
+                  delegate: CustomSearchDelegate(
+                      favorites: widget.favorites, rest: widget.rest),
                 );
               },
             ),
@@ -59,7 +60,7 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.arrow_back),
+      icon: const Icon(Icons.arrow_back),
       onPressed: () {
         close(context, null);
       },
@@ -70,13 +71,13 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     List<String> dummySearchList = List<String>();
     if (query.isNotEmpty) {
-      rest.forEach((item) {
+      rest.forEach((String item) {
         if (item.toLowerCase().contains(query.toLowerCase())) {
           dummySearchList.add(item);
         }
       });
       if (dummySearchList.isNotEmpty) {
-        return _buildRows(dummySearchList);
+        return _buildRows();
       }
     }
     if (dummySearchList.isEmpty) {
@@ -93,13 +94,30 @@ class CustomSearchDelegate extends SearchDelegate {
     }
   }
 
-  Widget _buildRows(List<String> list) {
+  Widget _buildRows() {
+    List<String> totalList = [];
+    if (favorites.isNotEmpty) {
+      totalList..addAll(favorites);
+    }
+    totalList..addAll(rest);
     return ListView.builder(
-        shrinkWrap: true,
-        itemCount: list.length,
-        itemBuilder: (context, index) {
+//        shrinkWrap: true,
+        itemCount: totalList.length,
+        itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            title: Text('${list[index]}'),
+            title: favorites.isNotEmpty && index <= favorites.length - 1
+                ? Text('${totalList[index]}')
+                : index == favorites.length
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          const Divider(height: 15.0, color: Colors.black),
+                          const Padding(padding: EdgeInsets.only(bottom: 15.0)),
+                          Text('${totalList[index]}')
+                        ],
+                      )
+                    : Text('${totalList[index]}'),
+            onTap: () => {print('Тут будет колбэк')},
           );
         });
   }
@@ -107,7 +125,7 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     if (query.isEmpty) {
-      return _buildRows(rest);
+      return _buildRows();
     } else
       return Container();
   }
