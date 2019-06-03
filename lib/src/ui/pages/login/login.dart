@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../../utils/route_transition.dart' show SlideRoute;
 import '../../components/common/page_template.dart' show PageTemplate;
 import '../../components/common/styled_button.dart' show StyledButton;
+import 'phone_picker.dart';
+
 
 class Login extends StatefulWidget {
   @override
@@ -10,7 +13,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   bool _isAgree = false;
   bool _validPhone = false;
-  String _countryCode = '+(357)';
+  String _defaultCountryCode = '+(357)';
   final TextEditingController _phone = TextEditingController();
 
   @override
@@ -44,36 +47,26 @@ class _LoginState extends State<Login> {
   Widget _buildPhonePicker() {
     return Row(children: <Widget>[
       Container(
-        width: 150.0,
-        child: DropdownButton<String>(
-          isDense: true,
-          style: const TextStyle(fontSize: 16.0, color: Color(0xde000000)),
-          isExpanded: true,
-          value: _countryCode,
-          onChanged: (String newValue) {
-            setState(() {
-              _countryCode = newValue;
-            });
-          },
-          items: <String>[
-            '+(357)',
-            'Russia +7',
-            'China +8',
-            'France +9',
-            'Usa +0'
-          ].map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value,
-                  style: const TextStyle(
-                      fontSize: 16.0, color: Color(0xde000000))),
-            );
-          }).toList(),
+        margin: EdgeInsets.only(left: 12.0),
+        width: 100.0,
+        child: TextField(
+          decoration: InputDecoration.collapsed(
+              hintText: _defaultCountryCode,
+              hintStyle:
+              const TextStyle(color: Color(0xde000000), fontSize: 16.0),
+              border: UnderlineInputBorder(
+                  borderSide:
+                  BorderSide(width: 1.0, color: const Color(0x0fffffff)))),
+          onTap: () => Navigator.push(
+          context,
+          SlideRoute(
+              widget: PhonePicker(), side: 'left'),
+        ),
         ),
       ),
       Container(
-        padding: const EdgeInsets.only(left: 12.0, top: 5.5),
-        width: 200.0,
+        padding: const EdgeInsets.only(left: 12.0),
+        width: 240,
         child: TextField(
           controller: _phone,
           style: const TextStyle(fontSize: 16.0, color: Color(0xde000000)),
