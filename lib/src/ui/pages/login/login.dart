@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../utils/route_transition.dart' show SlideRoute;
 import '../../components/common/page_template.dart' show PageTemplate;
 import '../../components/common/styled_button.dart' show StyledButton;
-import 'phone_picker.dart';
+import 'phone_search.dart';
 
 
 class Login extends StatefulWidget {
@@ -60,7 +60,7 @@ class _LoginState extends State<Login> {
           onTap: () => Navigator.push(
           context,
           SlideRoute(
-              widget: PhonePicker(), side: 'left'),
+              widget: PhoneSearch(), side: 'left'),
         ),
         ),
       ),
