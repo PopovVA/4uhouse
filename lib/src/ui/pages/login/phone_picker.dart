@@ -3,13 +3,12 @@ import '../../../utils/route_transition.dart' show SlideRoute;
 import 'phone_search.dart';
 
 class PhonePicker extends StatefulWidget {
-  PhonePicker({this.favorites, this.rest});
+  PhonePicker({this.favorites, this.rest, this.isAgree});
 
   List<String> favorites;
   List<String> rest;
+  bool isAgree;
 
-  String defaultCountryCode;
-  bool _isAgree = false;
   bool _validPhone = false;
   final TextEditingController _phone = TextEditingController();
 
