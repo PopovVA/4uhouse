@@ -3,11 +3,10 @@ import '../../../utils/route_transition.dart' show SlideRoute;
 import 'phone_search.dart';
 
 class PhonePicker extends StatefulWidget {
-  PhonePicker({this.favorites, this.rest, this.isAgree});
+  PhonePicker({this.favorites, @required this.rest});
 
   List<String> favorites;
   List<String> rest;
-  bool isAgree;
 
   bool _validPhone = false;
   final TextEditingController _phone = TextEditingController();
@@ -47,7 +46,10 @@ class _PhonePickerState extends State<PhonePicker> {
                       BorderSide(width: 1.0, color: const Color(0x0fffffff)))),
           onTap: () => Navigator.push(
                 context,
-                SlideRoute(widget: PhoneSearch(), side: 'left'),
+                SlideRoute(
+                    widget: PhoneSearch(
+                        favorites: widget.favorites, rest: widget.rest),
+                    side: 'left'),
               ),
         ),
       ),

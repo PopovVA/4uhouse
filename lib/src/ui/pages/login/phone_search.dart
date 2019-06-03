@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 class PhoneSearch extends StatefulWidget {
   @override
   _PhoneSearchState createState() => _PhoneSearchState();
+
+  PhoneSearch({this.favorites, @required this.rest});
+
+  List<String> favorites;
+  List<String> rest;
 }
 
 class _PhoneSearchState extends State<PhoneSearch> {
@@ -35,7 +40,9 @@ class _PhoneSearchState extends State<PhoneSearch> {
 }
 
 class CustomSearchDelegate extends SearchDelegate {
-  final List<String> _list = <String>['United states +1', 'Cyprus +357'];
+  CustomSearchDelegate({this.favorites, @required this.rest});
+  List<String> favorites;
+  List<String> rest;
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -63,7 +70,7 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     List<String> dummySearchList = List<String>();
     if (query.isNotEmpty) {
-      _list.forEach((item) {
+      rest.forEach((item) {
         if (item.toLowerCase().contains(query.toLowerCase())) {
           dummySearchList.add(item);
         }
@@ -100,7 +107,7 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     if (query.isEmpty) {
-      return _buildRows(_list);
+      return _buildRows(rest);
     } else
       return Container();
   }

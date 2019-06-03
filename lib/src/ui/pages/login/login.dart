@@ -62,7 +62,10 @@ class _LoginState extends State<Login> {
                       if (state is PhoneCountriesDataLoaded) {
                         return Column(children: <Widget>[
                           _buildTittle(),
-                          PhonePicker(),
+                          PhonePicker(rest: <String>[
+                            'United states +1',
+                            'Cyprus +354'
+                          ]),
                           _buildTerms(),
                           _buildSubmit(),
                         ]);
@@ -70,7 +73,7 @@ class _LoginState extends State<Login> {
                       if (state is PhoneLoadingError) {
                         return Column(children: <Widget>[
                           _buildTittle(),
-                          PhonePicker(),
+                          Text(state.toString()),
                           _buildTerms(),
                           _buildSubmit(),
                         ]);
