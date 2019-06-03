@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:user_mobile/src/blocs/phone/phone_bloc.dart';
-import 'package:user_mobile/src/blocs/phone/phone_event.dart';
-import 'package:user_mobile/src/blocs/phone/phone_state.dart';
-import 'package:user_mobile/src/resources/phone_repository.dart';
-import 'package:user_mobile/src/ui/components/common/snackbar.dart';
+import '../../../blocs/phone/phone_bloc.dart';
+import '../../../blocs/phone/phone_event.dart';
+import '../../../blocs/phone/phone_state.dart';
+import '../../../resources/phone_repository.dart';
 import '../../../utils/route_transition.dart' show SlideRoute;
 import '../../components/common/page_template.dart' show PageTemplate;
+import '../../components/common/snackbar.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
 import 'phone_search.dart';
 
@@ -60,7 +60,7 @@ class _LoginState extends State<Login> {
                   builder: (BuildContext context, PhoneState state) {
                     return Column(children: <Widget>[
                       _buildTittle(),
-                       _buildPhonePicker(),
+                      _buildPhonePicker(),
                       _buildTerms(),
                       _buildSubmit(),
                     ]);
