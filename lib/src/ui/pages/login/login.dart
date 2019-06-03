@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../../utils/route_transition.dart' show SlideRoute;
+import '../../../blocs/phone/phone_bloc.dart';
+import '../../../blocs/phone/phone_event.dart';
+import '../../../blocs/phone/phone_state.dart';
+import 'package:user_mobile/src/resources/phone_repository.dart';
 import '../../components/common/page_template.dart' show PageTemplate;
 import '../../components/common/styled_button.dart' show StyledButton;
-import 'phone_search.dart';
-
+import 'phone_picker.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -11,21 +13,14 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  PhoneBloc phoneBloc;
   bool _isAgree = false;
   bool _validPhone = false;
-  String _defaultCountryCode = '+(357)';
-  final TextEditingController _phone = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _phone.addListener(_phoneListner);
-  }
-
-  void _phoneListner() {
-    setState(() {
-      _phone.text.isNotEmpty ? _validPhone = true : _validPhone = false;
-    });
+    phoneBloc.dispatch(PhoneInitialized());
   }
 
   @override
@@ -38,49 +33,27 @@ class _LoginState extends State<Login> {
             margin: const EdgeInsets.only(bottom: 12.0),
             child: Column(children: <Widget>[
               _buildTittle(),
-              _buildPhonePicker(),
+              StreamBuilder<PhoneState>(
+                stream: phoneBloc.state,
+                initialData: phoneBloc.initialState,
+                builder: (BuildContext context, snapshot) {
+                  print('=======================');
+                  print(snapshot.data);
+                  if (snapshot.data is PhoneLoading) {
+                    return PhonePicker();
+                  }
+                  if (snapshot.data is PhoneLoadingError) {
+                    PhoneState state = snapshot.data;
+                    return PhonePicker();
+                  }
+                  if (snapshot.data is PhoneCountriesDataLoaded) {
+                    return PhonePicker();
+                  }
+                },
+              ),
               _buildTerms(),
               _buildSubmit(),
             ])));
-  }
-
-  Widget _buildPhonePicker() {
-    return Row(children: <Widget>[
-      Container(
-        margin: EdgeInsets.only(left: 12.0),
-        width: 100.0,
-        child: TextField(
-          decoration: InputDecoration.collapsed(
-              hintText: _defaultCountryCode,
-              hintStyle:
-              const TextStyle(color: Color(0xde000000), fontSize: 16.0),
-              border: UnderlineInputBorder(
-                  borderSide:
-                  BorderSide(width: 1.0, color: const Color(0x0fffffff)))),
-          onTap: () => Navigator.push(
-          context,
-          SlideRoute(
-              widget: PhoneSearch(), side: 'left'),
-        ),
-        ),
-      ),
-      Container(
-        padding: const EdgeInsets.only(left: 12.0),
-        width: 240,
-        child: TextField(
-          controller: _phone,
-          style: const TextStyle(fontSize: 16.0, color: Color(0xde000000)),
-          keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          decoration: InputDecoration.collapsed(
-              hintText: '26009875',
-              hintStyle:
-                  const TextStyle(color: Color(0xde000000), fontSize: 16.0),
-              border: UnderlineInputBorder(
-                  borderSide:
-                      BorderSide(width: 1.0, color: const Color(0x0fffffff)))),
-        ),
-      )
-    ]);
   }
 
   dynamic onChanged() {
