@@ -78,6 +78,15 @@ class _LoginState extends State<Login> {
                           _buildSubmit(),
                         ]);
                       }
+                      //В постаноке не увидел описание этого состояния, сделал по аналогии с PhoneLoadingError
+                      if (state is PhoneUninitialized) {
+                        return Column(children: <Widget>[
+                          _buildTittle(),
+                          Text(state.toString()),
+                          _buildTerms(),
+                          _buildSubmit(),
+                        ]);
+                      }
                     }))));
   }
 
