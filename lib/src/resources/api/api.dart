@@ -11,10 +11,12 @@ class Api {
         return AuthError();
         break;
       case 0:
-        final bool internet = await checkInternet();
+        final bool internet = await _checkInternet();
         if (internet) {
+          print(ConnectionError().message);
           return ConnectionError();
         } else {
+          print(NoInternetError().message);
           return NoInternetError();
         }
         break;
@@ -23,7 +25,7 @@ class Api {
     }
   }
 
-  Future<bool> checkInternet() async {
+  Future<bool> _checkInternet() async {
     final ConnectivityResult connectivityResult =
         await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile) {

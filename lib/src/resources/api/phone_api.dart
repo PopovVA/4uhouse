@@ -12,7 +12,7 @@ class PhoneApi extends Api {
     int statusCode = 0;
     try {
       final http.Response response =
-          await _client.get('${BASE_URL}accounts/country-phones-data');
+          await _client.put('https://bitbucket.org/4uhouse/provider-frontend/pull-requests/30/feature-error-handling/diff#chg-lib/src/models/errors/auth_error.dart');
       statusCode = response.statusCode;
       print(response.statusCode);
       if (response.statusCode == 200) {
