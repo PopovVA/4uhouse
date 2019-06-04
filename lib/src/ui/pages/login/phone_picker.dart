@@ -26,16 +26,16 @@ class _PhonePickerState extends State<PhonePicker> {
       if (phone.text.isEmpty) {
         validPhone = false;
       } else if (selectedItem != null) {
-        if (selectedItem.length[0] != phone.text.length) {
-          validPhone = false;
-        } else {
+        if (selectedItem.length[0] == phone.text.length) {
           validPhone = true;
+        } else {
+          validPhone = false;
         }
       } else {
-        if (widget.countryPhoneDataList.first.length[0] != phone.text.length) {
-          validPhone = false;
-        } else {
+        if (widget.countryPhoneDataList.first.length[0] == phone.text.length) {
           validPhone = true;
+        } else {
+          validPhone = false;
         }
       }
     });
@@ -75,6 +75,7 @@ class _PhonePickerState extends State<PhonePicker> {
               );
               setState(() {
                 selectedItem = result;
+                phone.text = '';
               });
             }),
       ),
