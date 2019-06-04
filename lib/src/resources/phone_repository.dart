@@ -3,14 +3,14 @@ import '../models/country_phone_data.dart';
 import 'api/phone_api.dart';
 
 class PhoneRepository {
-  PhoneApi phoneApi = PhoneApi();
+  final PhoneApi phoneApi = PhoneApi();
 
   Future<List<CountryPhoneData>> getCountriesPhoneData() async {
-    List<CountryPhoneData> list;
+    List<CountryPhoneData> list = <CountryPhoneData>[];
     final List<Map<String, dynamic>> data =
         await phoneApi.requestCountriesPhoneData();
-    data.forEach((Map<String, dynamic> counry) {
-      list.add(CountryPhoneData.fromJson(counry));
+    data.forEach((Map<String, dynamic> country) {
+      list.add(CountryPhoneData.fromJson(country));
     });
     return list;
   }

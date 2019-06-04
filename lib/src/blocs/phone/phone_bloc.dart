@@ -23,6 +23,7 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
             await repository.getCountriesPhoneData();
         yield PhoneCountriesDataLoaded(data);
       } catch (error) {
+        print('===> error: ${error}');
         yield PhoneLoadingError();
       }
     }
