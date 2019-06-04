@@ -26,13 +26,13 @@ class _PhonePickerState extends State<PhonePicker> {
       if (phone.text.isEmpty) {
         validPhone = false;
       } else if (selectedItem != null) {
-        if (selectedItem.length[0] > phone.text.length) {
+        if (selectedItem.length[0] != phone.text.length) {
           validPhone = false;
         } else {
           validPhone = true;
         }
       } else {
-        if (widget.countryPhoneDataList.first.length[0] > phone.text.length) {
+        if (widget.countryPhoneDataList.first.length[0] != phone.text.length) {
           validPhone = false;
         } else {
           validPhone = true;
