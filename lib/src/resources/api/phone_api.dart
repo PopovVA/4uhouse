@@ -9,17 +9,17 @@ class PhoneApi extends Api {
 
   Future<List<Map<String, dynamic>>> requestCountriesPhoneData() async {
     print('=> requestCountriesPhoneData');
-
+    int statusCode = 0;
     try {
-      http.Response response =
-          await _client.get('$BASE_URL/accounts/country-phones-data');
+      final http.Response response =
+          await _client.get('${BASE_URL}accounts/country-phones-data');
+      statusCode = response.statusCode;
+      print(response.statusCode);
       if (response.statusCode == 200) {
         return json.decode(response.body);
-      } else {
-        throw inferError(response.statusCode);
       }
     } catch (error) {
-      throw inferError(2);
+      throw inferError(statusCode);
     }
   }
 }
