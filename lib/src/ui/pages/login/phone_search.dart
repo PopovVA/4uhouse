@@ -3,9 +3,9 @@ import '../../../models/country_phone_data.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
   CustomSearchDelegate(
-      {this.favorites, @required this.rest, @required this.onSelected});
+      {this.favorites, @required this.countryPhoneDataList, @required this.onSelected});
   List<String> favorites;
-  List<CountryPhoneData> rest;
+  List<CountryPhoneData> countryPhoneDataList;
   Function onSelected;
 
   @override
@@ -34,7 +34,7 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     final List<CountryPhoneData> dummySearchList = <CountryPhoneData>[];
     if (query.isNotEmpty) {
-      dummySearchList.addAll(rest.where((CountryPhoneData item) =>
+      dummySearchList.addAll(countryPhoneDataList.where((CountryPhoneData item) =>
           item.name.toLowerCase().contains(query.toLowerCase())));
 
       if (dummySearchList.isNotEmpty) {
@@ -50,11 +50,11 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget _buildRows() {
     final List<CountryPhoneData> totalList = <CountryPhoneData>[];
     if (favorites.isNotEmpty) {
-      favorites.forEach((String fav) => totalList.addAll(rest.where(
+      favorites.forEach((String fav) => totalList.addAll(countryPhoneDataList.where(
           (CountryPhoneData item) =>
               item.countryId.toLowerCase().contains(fav.toLowerCase()))));
     }
-    totalList..addAll(rest);
+    totalList..addAll(countryPhoneDataList);
 
     return ListView.builder(
         itemCount: totalList.length,

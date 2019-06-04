@@ -8,6 +8,7 @@ import '../../../resources/phone_repository.dart';
 import '../../components/common/page_template.dart' show PageTemplate;
 import '../../components/common/snackbar.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
+import '../../../models/country_phone_data.dart';
 import 'phone_picker.dart';
 
 class Login extends StatefulWidget {
@@ -16,8 +17,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  bool _isAgree = false;
-  bool _validPhone = false;
+  bool isAgree = false;
+  bool validPhone = false;
   PhoneBloc _bloc;
 
   @override
@@ -62,7 +63,12 @@ class _LoginState extends State<Login> {
                         return Column(children: <Widget>[
                           _buildTittle(),
                           PhonePicker(
-                              rest: state.data,
+                            onSelected: (bool value){
+                              setState(() {
+                                validPhone = value;
+                              });
+                            },
+                              countryPhoneDataList: state.data,
                               favorites: <String>['RU', 'AL']),
                           _buildTerms(),
                           _buildSubmit(),
@@ -104,10 +110,10 @@ class _LoginState extends State<Login> {
         children: <Widget>[
           Checkbox(
             activeColor: Theme.of(context).primaryColor,
-            value: _isAgree,
+            value: isAgree,
             onChanged: (bool value) {
               setState(() {
-                _isAgree = !_isAgree;
+                isAgree = !isAgree;
               });
             },
           ),
@@ -134,7 +140,7 @@ class _LoginState extends State<Login> {
         alignment: FractionalOffset.bottomCenter,
         child: StyledButton(
           loading: false,
-          onPressed: _isAgree && _validPhone
+          onPressed: isAgree && validPhone
               ? () {
                   print('some action');
                 }
