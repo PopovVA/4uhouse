@@ -52,7 +52,6 @@ class CustomSearchDelegate extends SearchDelegate {
           (CountryPhoneData item) =>
               item.countryId.toLowerCase().contains(fav.toLowerCase()))));
     }
-    print(totalList);
     totalList..addAll(rest);
 
     return ListView.builder(
