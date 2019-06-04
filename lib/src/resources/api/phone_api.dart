@@ -9,7 +9,7 @@ class PhoneApi {
     final http.Response response =
         await http.Client().get('$BASE_URL/accounts/country-phones-data');
     if (response.statusCode == 200) {
-      return json.decode(response.body);
+      return List<Map<String, dynamic>>.from(json.decode(response.body));
     } else {
       throw Exception(ErrorMessage.fromJson(json.decode(response.body)));
     }
