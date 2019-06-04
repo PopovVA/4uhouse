@@ -1,0 +1,2 @@
+const String NO_CONNECTION_ERROR = 'NO_CONNECTION_ERROR';
+const String AUTH_ERROR = 'AUTH_ERROR';
