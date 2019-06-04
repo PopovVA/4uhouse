@@ -59,46 +59,55 @@ class AuthApi extends Api {
 
   Future<void> logout(
       {@required String accessToken, @required String refreshToken}) async {
-    final http.Response response = await http.post(
-        'https://dev.auth.4u.house/auth/realms/4uhouse/protocol/openid-connect/logout',
-        body: <String, String>{
-          'client_id': _clientId,
-          'refresh_token': refreshToken
-        },
-        headers: <String, String>{
-          'Authorization': 'Bearer $accessToken',
-          'Content-type': 'application/x-www-form-urlencoded'
-        });
-    // no response body, do not decode!
-    if (response.statusCode != 204) {
-      throw inferError(response.statusCode);
+    int statusCode = 0;
+    try {
+      final http.Response response = await http.post(
+          'https://dev.auth.4u.house/auth/realms/4uhouse/protocol/openid-connect/logout',
+          body: <String, String>{
+            'client_id': _clientId,
+            'refresh_token': refreshToken
+          },
+          headers: <String, String>{
+            'Authorization': 'Bearer $accessToken',
+            'Content-type': 'application/x-www-form-urlencoded'
+          });
+      statusCode = response.statusCode;
+    } catch (error) {
+      // no response body, do not decode!
+      throw inferError(statusCode);
     }
   }
 
   Future<Map<String, dynamic>> loadUserProfile(
       {@required String accessToken}) async {
-    final http.Response response = await http.get(_userInfoEndpoint,
-        headers: <String, String>{'Authorization': 'Bearer $accessToken'});
-
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
-      throw inferError(response.statusCode);
+    int statusCode = 0;
+    try {
+      final http.Response response = await http.get(_userInfoEndpoint,
+          headers: <String, String>{'Authorization': 'Bearer $accessToken'});
+      statusCode = response.statusCode;
+      if (response.statusCode == 200) {
+        return json.decode(response.body);
+      }
+    } catch (error) {
+      throw inferError(statusCode);
     }
   }
 
   Future<void> requestOtp(
       String phone, String codeChallenge, String deviceId) async {
-    final http.Response response = await http.post(
-      'https://dev.auth.4u.house/auth/realms/4uhouse/protocol/openid-connect/logout',
-      body: <String, String>{
-        'codeChallenge': codeChallenge,
-        'deviceId': deviceId,
-        'phone': phone
-      },
-    );
-    if (response.statusCode != 204) {
-      throw inferError(response.statusCode);
+    int statusCode = 0;
+    try {
+      final http.Response response = await http.post(
+        'https://dev.auth.4u.house/auth/realms/4uhouse/protocol/openid-connect/logout',
+        body: <String, String>{
+          'codeChallenge': codeChallenge,
+          'deviceId': deviceId,
+          'phone': phone
+        },
+      );
+      statusCode = response.statusCode;
+    } catch (error) {
+      throw inferError(statusCode);
     }
   }
 }

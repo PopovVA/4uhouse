@@ -7,7 +7,7 @@ import 'package:http_parser/http_parser.dart' show MediaType;
 import '../api.dart';
 import 'constants/url.dart' show BASE_URL;
 
-class ScreenApi extends Api{
+class ScreenApi extends Api {
   final http.Client client = http.Client();
 
   static String _formToken(String token) => 'Bearer $token';
@@ -17,16 +17,19 @@ class ScreenApi extends Api{
 
   Future<Map<String, dynamic>> fetchScreen(
       {@required String query, String token}) async {
-    final http.Response response =
-        await client.get('$BASE_URL$query', headers: <String, String>{
-      'Authorization': token,
-    });
-
-    print(response.body.toString());
-    if (response.statusCode == 200) {
-      return json.decode(response.body)[0];
-    } else {
-      throw inferError(response.statusCode);
+    int statusCode = 0;
+    try {
+      final http.Response response =
+          await client.get('$BASE_URL$query', headers: <String, String>{
+        'Authorization': token,
+      });
+      statusCode = response.statusCode;
+      print(response.body.toString());
+      if (response.statusCode == 200) {
+        return json.decode(response.body)[0];
+      }
+    } catch (error) {
+      throw inferError(statusCode);
     }
   }
 
@@ -41,14 +44,17 @@ class ScreenApi extends Api{
             <String, String>{
               'Authorization': _formToken(token),
             };
-    final http.Response response = await client
-        .put(_componentUri(route: query, value: value), headers: headers);
-
-    // Process response
-    if (response.statusCode == 200) {
-      return json.decode(response.body)[0];
-    }else {
-      throw inferError(response.statusCode);
+    int statusCode = 0;
+    try {
+      final http.Response response = await client
+          .put(_componentUri(route: query, value: value), headers: headers);
+      statusCode = response.statusCode;
+      // Process response
+      if (response.statusCode == 200) {
+        return json.decode(response.body)[0];
+      }
+    } catch (error) {
+      throw inferError(statusCode);
     }
   }
 
@@ -73,16 +79,20 @@ class ScreenApi extends Api{
     }
 
     // Send and process
-    final http.StreamedResponse response = await request.send();
-    if (response.statusCode == 200) {
-      final Completer<Object> completer = Completer<Object>();
-      response.stream.transform(utf8.decoder).listen((Object value) {
-        completer.complete(value);
-      });
-      final String result = await completer.future;
-      return json.decode(result)[0];
-    }else {
-      throw inferError(response.statusCode);
+    int statusCode = 0;
+    try {
+      final http.StreamedResponse response = await request.send();
+      statusCode = response.statusCode;
+      if (response.statusCode == 200) {
+        final Completer<Object> completer = Completer<Object>();
+        response.stream.transform(utf8.decoder).listen((Object value) {
+          completer.complete(value);
+        });
+        final String result = await completer.future;
+        return json.decode(result)[0];
+      }
+    }catch(error) {
+      throw inferError(statusCode);
     }
   }
 }

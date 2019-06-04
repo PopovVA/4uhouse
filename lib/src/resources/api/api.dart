@@ -1,22 +1,25 @@
 import 'package:connectivity/connectivity.dart';
-import 'package:http/http.dart' as http;
 import 'package:user_mobile/src/models/errors/auth_error.dart';
-import 'package:user_mobile/src/models/errors/no_connection_error.dart';
+import 'package:user_mobile/src/models/errors/connection_error.dart';
+import 'package:user_mobile/src/models/errors/no_internet_error.dart';
 
 class Api {
   Future<Exception> inferError(int statusCode) async {
     print('=> inferErrorv $statusCode');
-    final bool internet = await checkInternet();
-    if (internet) {
-      switch (statusCode) {
-        case 401:
-          return AuthError();
-        default:
-          return Exception();
-      }
-    } else {
-      print('no internet');
-      return NoConnectionError();
+    switch (statusCode) {
+      case 401:
+        return AuthError();
+        break;
+      case 0:
+        final bool internet = await checkInternet();
+        if (internet) {
+          return ConnectionError();
+        } else {
+          return NoInternetError();
+        }
+        break;
+      default:
+        return Exception();
     }
   }
 
