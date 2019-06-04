@@ -5,6 +5,7 @@ import 'package:user_mobile/src/models/errors/no_connection_error.dart';
 
 class Api {
   Future<Exception> inferError(int statusCode) async {
+    print('=> inferErrorv $statusCode');
     final bool internet = await checkInternet();
     if (internet) {
       switch (statusCode) {
@@ -14,6 +15,7 @@ class Api {
           return Exception();
       }
     } else {
+      print('no internet');
       return NoConnectionError();
     }
   }
