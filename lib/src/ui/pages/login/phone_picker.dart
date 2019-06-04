@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import '../../../models/country_phone_data.dart';
 import '../../../utils/route_transition.dart' show SlideRoute;
 import 'phone_search.dart';
+
 
 class PhonePicker extends StatefulWidget {
   PhonePicker({this.favorites, @required this.rest});
 
   List<String> favorites;
-  List<String> rest;
+  List<CountryPhoneData> rest;
 
   bool _validPhone = false;
   final TextEditingController _phone = TextEditingController();
@@ -38,7 +40,7 @@ class _PhonePickerState extends State<PhonePicker> {
         width: 100.0,
         child: TextField(
           decoration: InputDecoration.collapsed(
-              hintText: '+357',
+              hintText: '+${widget.rest[0].code.toString()}',
               hintStyle:
                   const TextStyle(color: Color(0xde000000), fontSize: 16.0),
               border: UnderlineInputBorder(
@@ -61,7 +63,7 @@ class _PhonePickerState extends State<PhonePicker> {
           style: const TextStyle(fontSize: 16.0, color: Color(0xde000000)),
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration.collapsed(
-              hintText: '26009875',
+              hintText: widget.rest[0].example.toString(),
               hintStyle:
                   const TextStyle(color: Color(0xde000000), fontSize: 16.0),
               border: UnderlineInputBorder(

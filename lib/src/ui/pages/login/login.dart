@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:user_mobile/src/resources/phone_repository_test.dart';
 import '../../../blocs/phone/phone_bloc.dart';
 import '../../../blocs/phone/phone_event.dart';
 import '../../../blocs/phone/phone_state.dart';
@@ -24,7 +25,7 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
-    _bloc = PhoneBloc(PhoneRepository());
+    _bloc = PhoneBloc(TestPhoneRepository());
     _bloc.dispatch(PhoneInitialized());
   }
 
@@ -60,10 +61,11 @@ class _LoginState extends State<Login> {
                         ]);
                       }
                       if (state is PhoneCountriesDataLoaded) {
+                        print(state.data);
                         return Column(children: <Widget>[
                           _buildTittle(),
                           PhonePicker(
-                              rest: <String>['United states +1', 'Cyprus +354'],
+                              rest: state.data,
                               favorites: <String>['Russia + 7']),
                           _buildTerms(),
                           _buildSubmit(),

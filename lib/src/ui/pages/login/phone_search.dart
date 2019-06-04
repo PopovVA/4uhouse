@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../models/country_phone_data.dart';
 
 class PhoneSearch extends StatefulWidget {
   @override
@@ -7,7 +8,7 @@ class PhoneSearch extends StatefulWidget {
   PhoneSearch({this.favorites, @required this.rest});
 
   List<String> favorites;
-  List<String> rest;
+  List<CountryPhoneData> rest;
 }
 
 class _PhoneSearchState extends State<PhoneSearch> {
@@ -43,7 +44,7 @@ class _PhoneSearchState extends State<PhoneSearch> {
 class CustomSearchDelegate extends SearchDelegate {
   CustomSearchDelegate({this.favorites, @required this.rest});
   List<String> favorites;
-  List<String> rest;
+  List<CountryPhoneData> rest;
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -71,9 +72,9 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     List<String> dummySearchList = List<String>();
     if (query.isNotEmpty) {
-      rest.forEach((String item) {
-        if (item.toLowerCase().contains(query.toLowerCase())) {
-          dummySearchList.add(item);
+      rest.forEach((CountryPhoneData item) {
+        if (item.name.toLowerCase().contains(query.toLowerCase())) {
+          dummySearchList.add(item.name);
         }
       });
       if (dummySearchList.isNotEmpty) {
@@ -99,26 +100,23 @@ class CustomSearchDelegate extends SearchDelegate {
     if (favorites.isNotEmpty) {
       totalList..addAll(favorites);
     }
-    totalList..addAll(rest);
+    rest.forEach((item) => totalList.add(item.name));
     return ListView.builder(
 //        shrinkWrap: true,
         itemCount: totalList.length,
         itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: favorites.isNotEmpty && index <= favorites.length - 1
-                ? Text('${totalList[index]}')
-                : index == favorites.length
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          const Divider(height: 15.0, color: Colors.black),
-                          const Padding(padding: EdgeInsets.only(bottom: 15.0)),
-                          Text('${totalList[index]}')
-                        ],
-                      )
-                    : Text('${totalList[index]}'),
-            onTap: () => {print('Тут будет колбэк')},
-          );
+          return favorites.isNotEmpty && index == favorites.length - 1
+              ? Column(
+                  children: <Widget>[
+                    ListTile(
+                        title: Text('${totalList[index]}'),
+                        onTap: () => {print('Тут будет колбэк')}),
+                    Divider(height: 10.0, color: Colors.black)
+                  ],
+                )
+              : ListTile(
+                  title: Text('${totalList[index]}'),
+                  onTap: () => {print('Тут будет колбэк')});
         });
   }
 
