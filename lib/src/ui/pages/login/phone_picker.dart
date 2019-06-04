@@ -3,7 +3,6 @@ import '../../../models/country_phone_data.dart';
 import '../../../utils/route_transition.dart' show SlideRoute;
 import 'phone_search.dart';
 
-
 class PhonePicker extends StatefulWidget {
   PhonePicker({this.favorites, @required this.rest});
 
@@ -39,21 +38,18 @@ class _PhonePickerState extends State<PhonePicker> {
         margin: const EdgeInsets.only(left: 12.0),
         width: 100.0,
         child: TextField(
-          decoration: InputDecoration.collapsed(
-              hintText: '+${widget.rest[0].code.toString()}',
-              hintStyle:
-                  const TextStyle(color: Color(0xde000000), fontSize: 16.0),
-              border: UnderlineInputBorder(
-                  borderSide:
-                      BorderSide(width: 1.0, color: const Color(0x0fffffff)))),
-          onTap: () => Navigator.push(
-                context,
-                SlideRoute(
-                    widget: PhoneSearch(
-                        favorites: widget.favorites, rest: widget.rest),
-                    side: 'left'),
-              ),
-        ),
+            decoration: InputDecoration.collapsed(
+                hintText: '+${widget.rest[0].code.toString()}',
+                hintStyle:
+                    const TextStyle(color: Color(0xde000000), fontSize: 16.0),
+                border: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        width: 1.0, color: const Color(0x0fffffff)))),
+            onTap: () => showSearch(
+                  context: context,
+                  delegate: CustomSearchDelegate(
+                      favorites: widget.favorites, rest: widget.rest),
+                )),
       ),
       Container(
         padding: const EdgeInsets.only(left: 12.0),

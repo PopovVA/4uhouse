@@ -61,12 +61,11 @@ class _LoginState extends State<Login> {
                         ]);
                       }
                       if (state is PhoneCountriesDataLoaded) {
-                        print(state.data);
                         return Column(children: <Widget>[
                           _buildTittle(),
                           PhonePicker(
                               rest: state.data,
-                              favorites: <String>['Russia + 7']),
+                              favorites: <String>['RU', 'AL']),
                           _buildTerms(),
                           _buildSubmit(),
                         ]);
