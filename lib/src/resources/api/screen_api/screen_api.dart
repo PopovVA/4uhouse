@@ -4,7 +4,6 @@ import 'package:meta/meta.dart' show required;
 
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart' show MediaType;
-import '../../../constants/errors.dart';
 import '../api.dart';
 import 'constants/url.dart' show BASE_URL;
 

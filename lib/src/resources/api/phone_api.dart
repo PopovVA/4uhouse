@@ -1,8 +1,6 @@
 import 'dart:async' show Future;
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:user_mobile/src/constants/errors.dart';
-import 'package:user_mobile/src/models/error.dart';
 import '../api/screen_api/constants/url.dart' show BASE_URL;
 import 'api.dart';
 

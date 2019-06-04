@@ -11,7 +11,6 @@ import 'package:flutter_appauth/flutter_appauth.dart'
         FlutterAppAuth,
         TokenRequest,
         TokenResponse;
-import 'package:user_mobile/src/constants/errors.dart';
 
 import 'api.dart';
 
