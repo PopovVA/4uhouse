@@ -9,8 +9,8 @@ class PhoneRepository {
     List<CountryPhoneData> list = <CountryPhoneData>[];
     final List<Map<String, dynamic>> data =
         await phoneApi.requestCountriesPhoneData();
-    data.forEach((Map<String, dynamic> counry) {
-      list.add(CountryPhoneData.fromJson(counry));
+    data.forEach((Map<String, dynamic> country) {
+      list.add(CountryPhoneData.fromJson(country));
     });
     return list;
   }
