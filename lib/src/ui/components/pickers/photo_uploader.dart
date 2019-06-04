@@ -6,8 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import '../../../pallete.dart' show primaryColor;
 import 'generic/open_modal_bottom.dart' show openModalBottom;
 
-
-Future<Widget> openPhotoUploader(BuildContext context, {Function onLoad}) async {
+Future<Widget> openPhotoUploader(BuildContext context,
+    {Function onLoad}) async {
   return openModalBottom(
     context: context,
     child: _Uploader(onLoad: onLoad),
@@ -15,8 +15,7 @@ Future<Widget> openPhotoUploader(BuildContext context, {Function onLoad}) async 
 }
 
 class _UploaderButton extends StatelessWidget {
-
-const  _UploaderButton({@required this.onTap, @required this.title});
+  const _UploaderButton({@required this.onTap, @required this.title});
 
   final Function onTap;
   final String title;
@@ -45,7 +44,6 @@ const  _UploaderButton({@required this.onTap, @required this.title});
 }
 
 class _Uploader extends StatelessWidget {
-
   const _Uploader({@required this.onLoad});
 
   final Function onLoad;
@@ -64,7 +62,8 @@ class _Uploader extends StatelessWidget {
         break;
     }
 
-    final Future<File> cb = ImagePicker.pickImage(source: source, maxWidth: 640);
+    final Future<File> cb =
+        ImagePicker.pickImage(source: source, maxWidth: 640);
     Navigator.of(context).pop();
     onLoad(cb);
   }

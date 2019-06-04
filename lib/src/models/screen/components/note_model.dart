@@ -6,10 +6,8 @@ class NoteModel extends ComponentModel {
         _value = json['value'],
         super.fromJson(json['component']);
 
-
   String _id;
   String _value;
-
 
   dynamic get value => _value;
   String get id => _id;

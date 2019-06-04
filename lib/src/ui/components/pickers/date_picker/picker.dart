@@ -4,8 +4,7 @@ import 'package:flutter/cupertino.dart' show CupertinoPicker;
 import 'debouncer.dart';
 
 class Picker extends StatefulWidget {
-
- const Picker({
+  const Picker({
     @required this.controller,
     @required this.index,
     @required this.rangeList,
@@ -37,13 +36,11 @@ class _PickerState extends State<Picker> {
 
   static List<Widget> generateListOfItems(
       List<int> list, Function displayFunction, BuildContext context) {
-
     Function renderer = (Object value) => value;
 
     if (displayFunction is Function) {
       renderer = displayFunction;
     }
-
 
     return List<Widget>.generate(list.length, (int i) {
       final int value = list[i];

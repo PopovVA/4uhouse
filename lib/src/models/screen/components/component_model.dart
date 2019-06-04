@@ -3,6 +3,5 @@ class ComponentModel {
 
   String _component;
 
-
   String get component => _component;
 }

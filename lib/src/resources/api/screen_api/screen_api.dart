@@ -91,7 +91,7 @@ class ScreenApi extends Api {
         final String result = await completer.future;
         return json.decode(result)[0];
       }
-    }catch(error) {
+    } catch (error) {
       throw inferError(statusCode);
     }
   }
