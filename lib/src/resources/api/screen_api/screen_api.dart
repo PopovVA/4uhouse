@@ -26,7 +26,7 @@ class ScreenApi extends Api{
     if (response.statusCode == 200) {
       return json.decode(response.body)[0];
     } else {
-      throw inferError(response);
+      throw inferError(response.statusCode);
     }
   }
 
@@ -48,7 +48,7 @@ class ScreenApi extends Api{
     if (response.statusCode == 200) {
       return json.decode(response.body)[0];
     }else {
-      throw inferError(response);
+      throw inferError(response.statusCode);
     }
   }
 
@@ -82,7 +82,7 @@ class ScreenApi extends Api{
       final String result = await completer.future;
       return json.decode(result)[0];
     }else {
-      //throw inferError();
+      throw inferError(response.statusCode);
     }
   }
 }

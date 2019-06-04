@@ -4,10 +4,10 @@ import 'package:user_mobile/src/models/errors/auth_error.dart';
 import 'package:user_mobile/src/models/errors/no_connection_error.dart';
 
 class Api {
-  Future<Exception> inferError(http.Response response) async {
+  Future<Exception> inferError(int statusCode) async {
     final bool internet = await checkInternet();
     if (internet) {
-      switch (response.statusCode) {
+      switch (statusCode) {
         case 401:
           return AuthError();
         default:
