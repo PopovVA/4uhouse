@@ -26,10 +26,8 @@ class ScreenApi extends Api{
     print(response.body.toString());
     if (response.statusCode == 200) {
       return json.decode(response.body)[0];
-    } else if (response.statusCode == 401) {
-      throw inferError(AUTH_ERROR);
     } else {
-      throw Exception(json.decode(response.body)[0]);
+      throw inferError(response);
     }
   }
 
@@ -50,10 +48,8 @@ class ScreenApi extends Api{
     // Process response
     if (response.statusCode == 200) {
       return json.decode(response.body)[0];
-    }else if (response.statusCode == 401) {
-      throw inferError(AUTH_ERROR);
-    } else {
-      throw Exception('Failed to save item value.');
+    }else {
+      throw inferError(response);
     }
   }
 
@@ -86,10 +82,8 @@ class ScreenApi extends Api{
       });
       final String result = await completer.future;
       return json.decode(result)[0];
-    }else if (response.statusCode == 401) {
-      throw inferError(AUTH_ERROR);
-    } else {
-      throw Exception(response.statusCode);
+    }else {
+      //throw inferError();
     }
   }
 }
