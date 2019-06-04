@@ -33,7 +33,7 @@ class _LoginState extends State<Login> {
         goBack: null,
         title: 'Log in',
         body: Container(
-            padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+            padding: const EdgeInsets.only(left: 14.0, right: 14.0),
             margin: const EdgeInsets.only(bottom: 12.0),
             child: BlocListener<PhoneEvent, PhoneState>(
                 bloc: _bloc,
@@ -99,30 +99,32 @@ class _LoginState extends State<Login> {
   }
 
   Widget _buildTerms() {
-    return Row(
-      children: <Widget>[
-        Checkbox(
-          activeColor: Theme.of(context).primaryColor,
-          value: _isAgree,
-          onChanged: (bool value) {
-            setState(() {
-              _isAgree = !_isAgree;
-            });
-          },
-        ),
-        Row(
-          children: <Widget>[
-            const Text('I accept the',
-                style: TextStyle(color: Color(0xde000000))),
-            const Padding(padding: EdgeInsets.only(left: 2.0)),
-            Text(
-              'Term and conditions,Privacy police',
-              style: TextStyle(color: Theme.of(context).primaryColor),
-            )
-          ],
-        )
-      ],
-    );
+    return Column(children: <Widget>[
+      Row(
+        children: <Widget>[
+          Checkbox(
+            activeColor: Theme.of(context).primaryColor,
+            value: _isAgree,
+            onChanged: (bool value) {
+              setState(() {
+                _isAgree = !_isAgree;
+              });
+            },
+          ),
+          const Text('I accept the',
+              style: TextStyle(color: Color(0xde000000))),
+          const Padding(padding: EdgeInsets.only(left: 5.0)),
+          Text(
+            'Term and conditions,',
+            style: TextStyle(color: Theme.of(context).primaryColor),
+          ),
+        ],
+      ),
+      Container(
+          margin: const EdgeInsets.only(right: 170.0),
+          child: Text('Privacy politics',
+              style: TextStyle(color: Theme.of(context).primaryColor))),
+    ]);
   }
 
   Widget _buildSubmit() {

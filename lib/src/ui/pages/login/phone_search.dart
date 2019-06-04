@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import '../../../models/country_phone_data.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
-  CustomSearchDelegate({this.favorites, @required this.rest});
+  CustomSearchDelegate(
+      {this.favorites, @required this.rest, @required this.onSelected});
   List<String> favorites;
   List<CountryPhoneData> rest;
+  Function onSelected;
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -63,14 +65,22 @@ class CustomSearchDelegate extends SearchDelegate {
                     ListTile(
                         title: Text(
                             '${totalList[index].name + ' +' + totalList[index].code.toString()}'),
-                        onTap: () => {print('Тут будет колбэк')}),
+                        onTap: () {
+                          return onSelected is Function
+                              ? onSelected(close(context,totalList[index]))
+                              : Navigator.pop(context);
+                        }),
                     const Divider(height: 10.0, color: Colors.black)
                   ],
                 )
               : ListTile(
                   title: Text(
                       '${totalList[index].name + ' +' + totalList[index].code.toString()}'),
-                  onTap: () => {print('Тут будет колбэк')});
+                  onTap: () {
+                    return onSelected is Function
+                        ? onSelected(close(context,totalList[index]))
+                        : Navigator.pop(context);
+                  });
         });
   }
 
@@ -81,7 +91,11 @@ class CustomSearchDelegate extends SearchDelegate {
           return ListTile(
               title: Text(
                   '${totalList[index].name + ' +' + totalList[index].code.toString()}'),
-              onTap: () => {print('Тут будет колбэк')});
+              onTap: () {
+                return onSelected is Function
+                    ? onSelected(close(context,totalList[index]))
+                    : Navigator.pop(context);
+              });
         });
   }
 
