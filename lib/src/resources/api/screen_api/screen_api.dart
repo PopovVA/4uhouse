@@ -8,7 +8,7 @@ import '../../../constants/errors.dart';
 import '../api.dart';
 import 'constants/url.dart' show BASE_URL;
 
-class ScreenApi {
+class ScreenApi extends Api{
   final http.Client client = http.Client();
 
   static String _formToken(String token) => 'Bearer $token';
@@ -27,7 +27,7 @@ class ScreenApi {
     if (response.statusCode == 200) {
       return json.decode(response.body)[0];
     } else if (response.statusCode == 401) {
-      throw Api().inferError(AUTH_ERROR);
+      throw inferError(AUTH_ERROR);
     } else {
       throw Exception(json.decode(response.body)[0]);
     }
@@ -51,7 +51,7 @@ class ScreenApi {
     if (response.statusCode == 200) {
       return json.decode(response.body)[0];
     }else if (response.statusCode == 401) {
-      throw Api().inferError(AUTH_ERROR);
+      throw inferError(AUTH_ERROR);
     } else {
       throw Exception('Failed to save item value.');
     }
@@ -87,7 +87,7 @@ class ScreenApi {
       final String result = await completer.future;
       return json.decode(result)[0];
     }else if (response.statusCode == 401) {
-      throw Api().inferError(AUTH_ERROR);
+      throw inferError(AUTH_ERROR);
     } else {
       throw Exception(response.statusCode);
     }

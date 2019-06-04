@@ -15,7 +15,7 @@ import 'package:user_mobile/src/constants/errors.dart';
 
 import 'api.dart';
 
-class AuthApi {
+class AuthApi extends Api{
   final FlutterAppAuth _appAuth = FlutterAppAuth();
 
   // Keycloak details
@@ -71,7 +71,7 @@ class AuthApi {
           'Content-type': 'application/x-www-form-urlencoded'
         });
     if (response.statusCode == 401) {
-      throw Api().inferError(AUTH_ERROR);
+      throw inferError(AUTH_ERROR);
     }
     // no response body, do not decode!
     else if (response.statusCode != 204) {
@@ -88,7 +88,7 @@ class AuthApi {
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else if (response.statusCode == 401) {
-      throw Api().inferError(AUTH_ERROR);
+      throw inferError(AUTH_ERROR);
     } else {
       throw Exception(response.body);
     }
@@ -105,7 +105,7 @@ class AuthApi {
       },
     );
     if (response.statusCode == 401) {
-      throw Api().inferError(AUTH_ERROR);
+      throw inferError(AUTH_ERROR);
     } else if (response.statusCode != 204) {
       throw Exception(
           'Logout error: ${response?.statusCode}, ${response?.body}');
