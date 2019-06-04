@@ -19,6 +19,7 @@ class PhoneApi extends Api {
         return json.decode(response.body);
       }
     } catch (error) {
+      print('=> requestCountriesPhoneData => $error');
       throw inferError(statusCode);
     }
   }

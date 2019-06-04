@@ -16,13 +16,13 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
   @override
   Stream<PhoneState> mapEventToState(PhoneEvent event) async* {
     if (event is PhoneInitialized) {
-
       yield PhoneLoading();
       try {
         final List<CountryPhoneData> data =
             await repository.getCountriesPhoneData();
         yield PhoneCountriesDataLoaded(data);
       } catch (error) {
+        print('=> PhoneState => $error');
         yield PhoneLoadingError();
       }
     }
