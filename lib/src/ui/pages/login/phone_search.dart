@@ -64,7 +64,7 @@ class CustomSearchDelegate extends SearchDelegate {
                   children: <Widget>[
                     ListTile(
                         title: Text(
-                            '${totalList[index].name + ' +' + totalList[index].code.toString()}'),
+                            '${"🇷🇺 " + totalList[index].name + ' +' + totalList[index].code.toString()}'),
                         onTap: () {
                           return onSelected is Function
                               ? onSelected(close(context,totalList[index]))
@@ -75,7 +75,7 @@ class CustomSearchDelegate extends SearchDelegate {
                 )
               : ListTile(
                   title: Text(
-                      '${totalList[index].name + ' +' + totalList[index].code.toString()}'),
+                      '${"🇷🇺 " + totalList[index].name + ' +' + totalList[index].code.toString()}'),
                   onTap: () {
                     return onSelected is Function
                         ? onSelected(close(context,totalList[index]))
@@ -90,7 +90,7 @@ class CustomSearchDelegate extends SearchDelegate {
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
               title: Text(
-                  '${totalList[index].name + ' +' + totalList[index].code.toString()}'),
+                  '${"🇷🇺 " + totalList[index].name + ' +' + totalList[index].code.toString()}'),
               onTap: () {
                 return onSelected is Function
                     ? onSelected(close(context,totalList[index]))
