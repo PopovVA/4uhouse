@@ -17,19 +17,17 @@ class ScreenApi extends Api {
 
   Future<Map<String, dynamic>> fetchScreen(
       {@required String query, String token}) async {
-    int statusCode = 0;
+    final http.Response response =
+    await client.get('$BASE_URL$query', headers: <String, String>{
+      'Authorization': token,
+    });
     try {
-      final http.Response response =
-          await client.get('$BASE_URL$query', headers: <String, String>{
-        'Authorization': token,
-      });
-      statusCode = response.statusCode;
       print(response.body.toString());
       if (response.statusCode == 200) {
         return json.decode(response.body)[0];
       }
     } catch (error) {
-      throw inferError(statusCode);
+      throw inferError(responce: response,error: error);
     }
   }
 
@@ -44,17 +42,15 @@ class ScreenApi extends Api {
             <String, String>{
               'Authorization': _formToken(token),
             };
-    int statusCode = 0;
+    final http.Response response = await client
+        .put(_componentUri(route: query, value: value), headers: headers);
     try {
-      final http.Response response = await client
-          .put(_componentUri(route: query, value: value), headers: headers);
-      statusCode = response.statusCode;
       // Process response
       if (response.statusCode == 200) {
         return json.decode(response.body)[0];
       }
     } catch (error) {
-      throw inferError(statusCode);
+      throw inferError(responce: response, error: error);
     }
   }
 
@@ -79,10 +75,8 @@ class ScreenApi extends Api {
     }
 
     // Send and process
-    int statusCode = 0;
+    final http.StreamedResponse response = await request.send();
     try {
-      final http.StreamedResponse response = await request.send();
-      statusCode = response.statusCode;
       if (response.statusCode == 200) {
         final Completer<Object> completer = Completer<Object>();
         response.stream.transform(utf8.decoder).listen((Object value) {
@@ -92,7 +86,7 @@ class ScreenApi extends Api {
         return json.decode(result)[0];
       }
     } catch (error) {
-      throw inferError(statusCode);
+      throw inferError(responce: response, error: error);
     }
   }
 }

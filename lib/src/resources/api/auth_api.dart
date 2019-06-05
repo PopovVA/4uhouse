@@ -74,7 +74,7 @@ class AuthApi extends Api {
       statusCode = response.statusCode;
     } catch (error) {
       // no response body, do not decode!
-      throw inferError(statusCode);
+      throw inferError();
     }
   }
 
@@ -89,13 +89,12 @@ class AuthApi extends Api {
         return json.decode(response.body);
       }
     } catch (error) {
-      throw inferError(statusCode);
+      throw inferError();
     }
   }
 
   Future<void> requestOtp(
       String phone, String codeChallenge, String deviceId) async {
-    int statusCode = 0;
     try {
       final http.Response response = await http.post(
         'https://dev.auth.4u.house/auth/realms/4uhouse/protocol/openid-connect/logout',
@@ -105,9 +104,8 @@ class AuthApi extends Api {
           'phone': phone
         },
       );
-      statusCode = response.statusCode;
     } catch (error) {
-      throw inferError(statusCode);
+      throw inferError(error: error);
     }
   }
 }
