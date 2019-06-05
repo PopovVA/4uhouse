@@ -18,32 +18,23 @@ class PhonePicker extends StatefulWidget {
 
 class _PhonePickerState extends State<PhonePicker> {
   TextEditingController phone = TextEditingController();
-  bool validPhone = false;
   CountryPhoneData selectedItem;
 
   void _phoneListner() {
-    setState(() {
-      if (phone.text.isEmpty) {
-        validPhone = false;
-      } else if (selectedItem != null) {
-        if (selectedItem.length[0] != phone.text.length) {
-          validPhone = false;
-        } else if (hasMatch(phone.text, selectedItem.numberPattern)) {
-          validPhone = true;
-        } else {
-          validPhone = false;
-        }
-      } else {
-        if (widget.countryPhoneDataList.first.length[0] != phone.text.length) {
-          validPhone = false;
-        } else if (hasMatch(
-            phone.text, widget.countryPhoneDataList.first.numberPattern)) {
-          validPhone = true;
-        } else {
-          validPhone = false;
-        }
-      }
-    });
+    if (widget.onSelected is Function) {
+      widget.onSelected(phone.text.isNotEmpty &&
+          selectedItem != null &&
+          _validLength(selectedItem.length, phone.text.length) &&
+          hasMatch(phone.text, selectedItem.numberPattern));
+    }
+  }
+
+  bool _validLength(List<int> lengthList, int length) {
+    return lengthList.firstWhere((int item) => item == length,
+                orElse: () => 0) >
+            0
+        ? true
+        : false;
   }
 
   bool hasMatch(String value, String reg) {
@@ -84,8 +75,9 @@ class _PhonePickerState extends State<PhonePicker> {
                       countryPhoneDataList: widget.countryPhoneDataList),
                 );
                 setState(() {
-                  selectedItem = result;
-                  phone.text = '';
+                  if (result != null) {
+                    selectedItem = result;
+                  }
                 });
               })),
       Container(
@@ -94,11 +86,11 @@ class _PhonePickerState extends State<PhonePicker> {
         child: TextField(
           autofocus: true,
           controller: phone,
-          onChanged: (String val) {
-            return widget.onSelected is Function && selectedItem != null
-                ? widget.onSelected(validPhone, selectedItem)
-                : null;
-          },
+//          onChanged: (String val) {
+//            return widget.onSelected is Function && selectedItem != null
+//                ? widget.onSelected(validPhone, selectedItem)
+//                : null;
+//          },
           style: const TextStyle(fontSize: 16.0, color: Color(0xde000000)),
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration.collapsed(
