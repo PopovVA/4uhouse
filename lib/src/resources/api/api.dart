@@ -23,8 +23,7 @@ class Api {
           return AuthError();
           break;
         default:
-          return Exception(
-              ErrorMessage.fromJson(await processResponse(object)));
+          return Exception(object.body.message);
       }
     }
   }
