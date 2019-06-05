@@ -1,55 +1,18 @@
 import 'package:flutter/material.dart';
-
-class PhoneSearch extends StatefulWidget {
-  @override
-  _PhoneSearchState createState() => _PhoneSearchState();
-
-  PhoneSearch({this.favorites, @required this.rest});
-
-  List<String> favorites;
-  List<String> rest;
-}
-
-class _PhoneSearchState extends State<PhoneSearch> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: CustomScrollView(
-      slivers: <Widget>[
-        SliverAppBar(
-          backgroundColor: const Color(0xFFe9e7e7),
-          floating: true,
-          forceElevated: true,
-          snap: true,
-          title: const Text("Select country"),
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () {
-                showSearch(
-                  context: context,
-                  delegate: CustomSearchDelegate(
-                      favorites: widget.favorites, rest: widget.rest),
-                );
-              },
-            ),
-          ],
-        )
-      ],
-    ));
-  }
-}
+import '../../../models/country_phone_data.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
-  CustomSearchDelegate({this.favorites, @required this.rest});
+  CustomSearchDelegate(
+      {this.favorites, @required this.countryPhoneDataList, @required this.onSelected});
   List<String> favorites;
-  List<String> rest;
+  List<CountryPhoneData> countryPhoneDataList;
+  Function onSelected;
 
   @override
   List<Widget> buildActions(BuildContext context) {
-    return [
+    return <Widget>[
       IconButton(
-        icon: Icon(Icons.clear),
+        icon: const Icon(Icons.clear),
         onPressed: () {
           query = '';
         },
@@ -69,56 +32,70 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    List<String> dummySearchList = List<String>();
+    final List<CountryPhoneData> dummySearchList = <CountryPhoneData>[];
     if (query.isNotEmpty) {
-      rest.forEach((String item) {
-        if (item.toLowerCase().contains(query.toLowerCase())) {
-          dummySearchList.add(item);
-        }
-      });
+      dummySearchList.addAll(countryPhoneDataList.where((CountryPhoneData item) =>
+          item.name.toLowerCase().contains(query.toLowerCase())));
+
       if (dummySearchList.isNotEmpty) {
-        return _buildRows();
+        return _buildSearchRows(dummySearchList);
       }
     }
     if (dummySearchList.isEmpty) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Center(
-            child: const Text(
-              "Country code is not fount",
-            ),
-          )
-        ],
-      );
+      return _buildRows();
     }
+    return Container();
   }
 
   Widget _buildRows() {
-    List<String> totalList = [];
+    final List<CountryPhoneData> totalList = <CountryPhoneData>[];
     if (favorites.isNotEmpty) {
-      totalList..addAll(favorites);
+      favorites.forEach((String fav) => totalList.addAll(countryPhoneDataList.where(
+          (CountryPhoneData item) =>
+              item.countryId.toLowerCase().contains(fav.toLowerCase()))));
     }
-    totalList..addAll(rest);
+    totalList..addAll(countryPhoneDataList);
+
     return ListView.builder(
-//        shrinkWrap: true,
+        itemCount: totalList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return favorites.isNotEmpty && index == favorites.length - 1
+              ? Column(
+                  children: <Widget>[
+                    ListTile(
+                        title: Text(
+                            '${totalList[index].name + ' +' + totalList[index].code.toString()}'),
+                        onTap: () {
+                          return onSelected is Function
+                              ? onSelected(close(context,totalList[index]))
+                              : Navigator.pop(context);
+                        }),
+                    const Divider(height: 10.0, color: Colors.black)
+                  ],
+                )
+              : ListTile(
+                  title: Text(
+                      '${totalList[index].name + ' +' + totalList[index].code.toString()}'),
+                  onTap: () {
+                    return onSelected is Function
+                        ? onSelected(close(context,totalList[index]))
+                        : Navigator.pop(context);
+                  });
+        });
+  }
+
+  Widget _buildSearchRows(List<CountryPhoneData> totalList) {
+    return ListView.builder(
         itemCount: totalList.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            title: favorites.isNotEmpty && index <= favorites.length - 1
-                ? Text('${totalList[index]}')
-                : index == favorites.length
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          const Divider(height: 15.0, color: Colors.black),
-                          const Padding(padding: EdgeInsets.only(bottom: 15.0)),
-                          Text('${totalList[index]}')
-                        ],
-                      )
-                    : Text('${totalList[index]}'),
-            onTap: () => {print('Тут будет колбэк')},
-          );
+              title: Text(
+                  '${totalList[index].name + ' +' + totalList[index].code.toString()}'),
+              onTap: () {
+                return onSelected is Function
+                    ? onSelected(close(context,totalList[index]))
+                    : Navigator.pop(context);
+              });
         });
   }
 

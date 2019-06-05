@@ -1,5 +1,5 @@
 {
-  "CountryPhoneData": [
+  "countryPhoneDataList": [
     {
       "countryId": "AF",
       "code": 93,

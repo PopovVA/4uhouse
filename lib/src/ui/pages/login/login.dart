@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:user_mobile/src/resources/phone_repository_test.dart';
 import '../../../blocs/phone/phone_bloc.dart';
 import '../../../blocs/phone/phone_event.dart';
 import '../../../blocs/phone/phone_state.dart';
 import '../../../resources/phone_repository.dart';
-import '../../../utils/route_transition.dart' show SlideRoute;
 import '../../components/common/page_template.dart' show PageTemplate;
 import '../../components/common/snackbar.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
-import 'phone_search.dart';
+import '../../../models/country_phone_data.dart';
 import 'phone_picker.dart';
+import 'package:flutter/gestures.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -17,14 +18,14 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  bool _isAgree = false;
-  bool _validPhone = false;
+  bool isAgree = false;
+  bool validPhone = false;
   PhoneBloc _bloc;
 
   @override
   void initState() {
     super.initState();
-    _bloc = PhoneBloc(PhoneRepository());
+    _bloc = PhoneBloc(TestPhoneRepository());
     _bloc.dispatch(PhoneInitialized());
   }
 
@@ -34,7 +35,7 @@ class _LoginState extends State<Login> {
         goBack: null,
         title: 'Log in',
         body: Container(
-            padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+            padding: const EdgeInsets.only(left: 14.0, right: 14.0),
             margin: const EdgeInsets.only(bottom: 12.0),
             child: BlocListener<PhoneEvent, PhoneState>(
                 bloc: _bloc,
@@ -63,8 +64,13 @@ class _LoginState extends State<Login> {
                         return Column(children: <Widget>[
                           _buildTittle(),
                           PhonePicker(
-                              rest: <String>['United states +1', 'Cyprus +354'],
-                              favorites: <String>['Russia + 7']),
+                              onSelected: (bool value) {
+                                setState(() {
+                                  validPhone = value;
+                                });
+                              },
+                              countryPhoneDataList: state.data,
+                              favorites: <String>['RU', 'AL']),
                           _buildTerms(),
                           _buildSubmit(),
                         ]);
@@ -72,7 +78,7 @@ class _LoginState extends State<Login> {
                       if (state is PhoneLoadingError) {
                         return Column(children: <Widget>[
                           _buildTittle(),
-                          Text(state.toString()),
+                          const Text('Something went wrong'),
                           _buildTerms(),
                           _buildSubmit(),
                         ]);
@@ -81,16 +87,12 @@ class _LoginState extends State<Login> {
                       if (state is PhoneUninitialized) {
                         return Column(children: <Widget>[
                           _buildTittle(),
-                          Text(state.toString()),
+                          const Text('Something went wrong'),
                           _buildTerms(),
                           _buildSubmit(),
                         ]);
                       }
                     }))));
-  }
-
-  dynamic onChanged() {
-    print('test');
   }
 
   Widget _buildTittle() {
@@ -105,29 +107,32 @@ class _LoginState extends State<Login> {
 
   Widget _buildTerms() {
     return Row(
-      children: <Widget>[
-        Checkbox(
-          activeColor: Theme.of(context).primaryColor,
-          value: _isAgree,
-          onChanged: (bool value) {
-            setState(() {
-              _isAgree = !_isAgree;
-            });
-          },
-        ),
-        Row(
-          children: <Widget>[
-            const Text('I accept the',
-                style: TextStyle(color: Color(0xde000000))),
-            const Padding(padding: EdgeInsets.only(left: 2.0)),
-            Text(
-              'Term and conditions,Privacy police',
-              style: TextStyle(color: Theme.of(context).primaryColor),
-            )
-          ],
-        )
-      ],
-    );
+      textBaseline: TextBaseline.ideographic,
+        children: <Widget>[
+          Checkbox(
+            activeColor: Theme.of(context).primaryColor,
+            value: isAgree,
+            onChanged: (bool value) {
+              setState(() {
+                isAgree = !isAgree;
+              });
+            },
+          ),
+          RichText(
+            text: TextSpan(
+              text: 'I accept the',
+              style: const TextStyle(color: Colors.black),
+              children: <TextSpan>[
+                TextSpan(
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                    text:
+                    ' Term and conditions, Privacy policy',
+                    recognizer: TapGestureRecognizer()
+                ),
+              ],
+            ),
+          ),
+    ]);
   }
 
   Widget _buildSubmit() {
@@ -137,7 +142,7 @@ class _LoginState extends State<Login> {
         alignment: FractionalOffset.bottomCenter,
         child: StyledButton(
           loading: false,
-          onPressed: _isAgree && _validPhone
+          onPressed: isAgree && validPhone
               ? () {
                   print('some action');
                 }
