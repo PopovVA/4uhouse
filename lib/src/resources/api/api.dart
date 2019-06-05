@@ -3,31 +3,32 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:connectivity/connectivity.dart';
-import 'package:user_mobile/src/models/errors/auth_error.dart';
-import 'package:user_mobile/src/models/errors/connection_error.dart';
-import 'package:user_mobile/src/models/errors/no_internet_error.dart';
+import '../../models/errors/auth_error.dart';
+import '../../models/errors/connection_error.dart';
+import '../../models/errors/no_internet_error.dart';
 
 class Api {
   Future<dynamic> inferError(
-      {http.BaseResponse responce, SocketException error}) async {
-    print('=> inferErrorv $error');
+      {http.BaseResponse response, SocketException error}) async {
+    print('=> inferErrorv =>Error is $error');
     if (error is SocketException) {
       final bool internet = await _checkInternet();
       if (internet) {
-        print(ConnectionError().message);
+        print(ConnectionError().toString());
         return ConnectionError();
       } else {
-        print(NoInternetError().message);
+        print(NoInternetError().toString());
         return NoInternetError();
       }
     } else {
-      switch (responce.statusCode) {
+      print('=> inferErrorv =>Response.StatusCode is ${response.statusCode}');
+      switch (response.statusCode) {
         case 401:
           return AuthError();
           break;
         default:
-          if (responce is http.Response) {
-            return Exception(responce.body);
+          if (response is http.Response) {
+            return Exception(response.body);
           }
       }
     }

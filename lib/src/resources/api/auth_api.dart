@@ -1,5 +1,4 @@
 import 'dart:async' show Future;
-import 'dart:convert' show json;
 import 'package:meta/meta.dart' show required;
 
 import 'package:http/http.dart' as http;
@@ -59,7 +58,6 @@ class AuthApi extends Api {
 
   Future<void> logout(
       {@required String accessToken, @required String refreshToken}) async {
-    int statusCode = 0;
     try {
       final http.Response response = await http.post(
           'https://dev.auth.4u.house/auth/realms/4uhouse/protocol/openid-connect/logout',
@@ -71,25 +69,29 @@ class AuthApi extends Api {
             'Authorization': 'Bearer $accessToken',
             'Content-type': 'application/x-www-form-urlencoded'
           });
-      statusCode = response.statusCode;
-    } catch (error) {
+
       // no response body, do not decode!
-      throw inferError();
+      if (response.statusCode != 204) {
+        throw inferError(response: response);
+      }
+    } catch (error) {
+      throw inferError(error: error);
     }
   }
 
   Future<Map<String, dynamic>> loadUserProfile(
       {@required String accessToken}) async {
-    int statusCode = 0;
     try {
       final http.Response response = await http.get(_userInfoEndpoint,
           headers: <String, String>{'Authorization': 'Bearer $accessToken'});
-      statusCode = response.statusCode;
+
       if (response.statusCode == 200) {
-        return json.decode(response.body);
+        return processResponse(response);
+      } else {
+        throw inferError(response: response);
       }
     } catch (error) {
-      throw inferError();
+      throw inferError(error: error);
     }
   }
 
@@ -104,6 +106,9 @@ class AuthApi extends Api {
           'phone': phone
         },
       );
+      if (response.statusCode != 204) {
+        throw inferError(response: response);
+      }
     } catch (error) {
       throw inferError(error: error);
     }
