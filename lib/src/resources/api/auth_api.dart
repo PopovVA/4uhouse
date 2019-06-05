@@ -72,10 +72,10 @@ class AuthApi extends Api {
 
       // no response body, do not decode!
       if (response.statusCode != 204) {
-        throw inferError(response: response);
+        throw response;
       }
     } catch (error) {
-      throw inferError(error: error);
+      throw inferError(error);
     }
   }
 
@@ -88,10 +88,10 @@ class AuthApi extends Api {
       if (response.statusCode == 200) {
         return processResponse(response);
       } else {
-        throw inferError(response: response);
+        throw response;
       }
     } catch (error) {
-      throw inferError(error: error);
+      throw inferError(error);
     }
   }
 
@@ -107,10 +107,10 @@ class AuthApi extends Api {
         },
       );
       if (response.statusCode != 204) {
-        throw inferError(response: response);
+        throw response;
       }
     } catch (error) {
-      throw inferError(error: error);
+      throw inferError(error);
     }
   }
 }

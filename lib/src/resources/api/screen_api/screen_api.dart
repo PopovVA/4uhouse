@@ -1,4 +1,5 @@
 import 'dart:async' show Completer, Future;
+import 'dart:convert' show json, utf8;
 import 'package:meta/meta.dart' show required;
 
 import 'package:http/http.dart' as http;
@@ -19,7 +20,7 @@ class ScreenApi extends Api {
       {@required String query, String token}) async {
     try {
       final http.Response response =
-      await client.get('$BASE_URL$query', headers: <String, String>{
+          await client.get('$BASE_URL$query', headers: <String, String>{
         'Authorization': token,
       });
 
@@ -27,10 +28,10 @@ class ScreenApi extends Api {
       if (response.statusCode == 200) {
         return processResponse(response);
       } else {
-        throw inferError(response: response);
+        throw response;
       }
     } catch (error) {
-      throw inferError(error: error);
+      throw inferError(error);
     }
   }
 
@@ -53,26 +54,27 @@ class ScreenApi extends Api {
       if (response.statusCode == 200) {
         return processResponse(response);
       } else {
-        throw inferError(response: response);
+        throw response;
       }
-    } catch (error) {
-      throw inferError(error: error);
+    }catch(error){
+      throw inferError(error);
     }
   }
 
-  Future<Map<String, dynamic>> uploadImage({@required String query,
-    @required dynamic value,
-    @required List<int> jpg,
-    String token}) async {
+  Future<Map<String, dynamic>> uploadImage(
+      {@required String query,
+      @required dynamic value,
+      @required List<int> jpg,
+      String token}) async {
     // Form request
     final http.MultipartRequest request =
-    http.MultipartRequest('PUT', _componentUri(route: query, value: value));
+        http.MultipartRequest('PUT', _componentUri(route: query, value: value));
     final http.MultipartFile multipartFile = http.MultipartFile.fromBytes(
       'img',
       jpg,
       contentType: MediaType.parse('image/jpeg'),
       filename:
-      '${query.substring(query.lastIndexOf('/') + 1)}.jpg', // Id of the item
+          '${query.substring(query.lastIndexOf('/') + 1)}.jpg', // Id of the item
     );
     request.files.add(multipartFile);
     if ((token is String) && token.isNotEmpty) {
@@ -85,10 +87,10 @@ class ScreenApi extends Api {
       if (response.statusCode == 200) {
         return processResponse(response);
       } else {
-        throw inferError(response: response);
+        throw Exception(response.statusCode);
       }
-    } catch (error) {
-      throw inferError(error: error);
+    }catch(error){
+      throw inferError(error);
     }
   }
 }
