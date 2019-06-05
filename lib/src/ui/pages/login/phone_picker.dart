@@ -96,6 +96,9 @@ class _PhonePickerState extends State<PhonePicker> {
         padding: const EdgeInsets.only(left: 12.0),
         width: 260,
         child: TextField(
+          maxLength: selectedItem == null
+              ? widget.countryPhoneDataList[0].length[0]
+              : selectedItem.length[0],
           autofocus: true,
           controller: phone,
           onChanged: (String val) {
