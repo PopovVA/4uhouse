@@ -26,7 +26,7 @@ class _PhonePickerState extends State<PhonePicker> {
       if (phone.text.isEmpty) {
         validPhone = false;
       } else if (selectedItem != null) {
-        if (selectedItem.length[0] == phone.text.length) {
+        if (selectedItem.length[0] != phone.text.length) {
           validPhone = false;
         } else if (hasMatch(phone.text, selectedItem.numberPattern)) {
           validPhone = true;
@@ -34,7 +34,7 @@ class _PhonePickerState extends State<PhonePicker> {
           validPhone = false;
         }
       } else {
-        if (widget.countryPhoneDataList.first.length[0] == phone.text.length) {
+        if (widget.countryPhoneDataList.first.length[0] != phone.text.length) {
           validPhone = false;
         } else if (hasMatch(
             phone.text, widget.countryPhoneDataList.first.numberPattern)) {
