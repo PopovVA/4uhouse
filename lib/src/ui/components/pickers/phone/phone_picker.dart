@@ -73,7 +73,7 @@ class _PhonePickerState extends State<PhonePicker> {
                     ? '+(${widget.countryPhoneDataList[0].code.toString()})'
                     : '+(${selectedItem.code.toString()})',
                 hintStyle:
-                    const TextStyle(color: Color(0xde000000), fontSize: 16.0),
+                    const TextStyle(color: Color(0x8a000000), fontSize: 16.0),
                 border: UnderlineInputBorder(
                     borderSide: BorderSide(
                         width: 1.0, color: const Color(0x0fffffff)))),
@@ -110,7 +110,7 @@ class _PhonePickerState extends State<PhonePicker> {
                   ? widget.countryPhoneDataList[0].example.toString()
                   : selectedItem.example.toString(),
               hintStyle:
-                  const TextStyle(color: Color(0xde000000), fontSize: 16.0),
+                  const TextStyle(color: Color(0x8a000000), fontSize: 16.0),
               border: UnderlineInputBorder(
                   borderSide:
                       BorderSide(width: 1.0, color: const Color(0x0fffffff)))),
