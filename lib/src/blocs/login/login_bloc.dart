@@ -15,16 +15,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    if (event is SubmitPhoneTapped) {
-      try {
-        yield IsLoading();
-        final String codeChallenge = await authRepository.generatePkce();
-        authRepository.getOtp(event.phone, codeChallenge);
-        yield OtpSent();
-      } catch (error) {
-        yield* _mapErrorLoginTap();
-      }
-    } else if (event is SubmitCodeTapped) {}
+    if (initialState == PhoneEntering()) {
+      if (event is SubmitPhoneTapped) {
+        try {
+          yield IsLoading();
+          final String codeChallenge = await authRepository.generatePkce();
+          authRepository.getOtp(event.phone, codeChallenge);
+          yield OtpSent();
+        } catch (error) {
+          yield* _mapErrorLoginTap();
+        }
+      } else if (event is SubmitCodeTapped) {}
+    }
   }
 
   Stream<LoginState> _mapErrorLoginTap() async* {
