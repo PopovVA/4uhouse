@@ -3,7 +3,9 @@ import '../../../../models/country_phone_data.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
   CustomSearchDelegate(
-      {this.favorites, @required this.countryPhoneDataList, @required this.onSelected});
+      {this.favorites,
+      @required this.countryPhoneDataList,
+      @required this.onSelected});
   List<String> favorites;
   List<CountryPhoneData> countryPhoneDataList;
   Function onSelected;
@@ -34,8 +36,9 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     final List<CountryPhoneData> dummySearchList = <CountryPhoneData>[];
     if (query.isNotEmpty) {
-      dummySearchList.addAll(countryPhoneDataList.where((CountryPhoneData item) =>
-          item.name.toLowerCase().contains(query.toLowerCase())));
+      dummySearchList.addAll(countryPhoneDataList.where(
+          (CountryPhoneData item) =>
+              item.name.toLowerCase().contains(query.toLowerCase())));
 
       if (dummySearchList.isNotEmpty) {
         return _buildSearchRows(dummySearchList);
@@ -50,8 +53,8 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget _buildRows() {
     final List<CountryPhoneData> totalList = <CountryPhoneData>[];
     if (favorites.isNotEmpty) {
-      favorites.forEach((String fav) => totalList.addAll(countryPhoneDataList.where(
-          (CountryPhoneData item) =>
+      favorites.forEach((String fav) => totalList.addAll(
+          countryPhoneDataList.where((CountryPhoneData item) =>
               item.countryId.toLowerCase().contains(fav.toLowerCase()))));
     }
     totalList..addAll(countryPhoneDataList);
@@ -67,7 +70,7 @@ class CustomSearchDelegate extends SearchDelegate {
                             '${"🇷🇺 " + totalList[index].name + ' +' + totalList[index].code.toString()}'),
                         onTap: () {
                           return onSelected is Function
-                              ? onSelected(close(context,totalList[index]))
+                              ? onSelected(close(context, totalList[index]))
                               : Navigator.pop(context);
                         }),
                     const Divider(height: 10.0, color: Colors.black)
@@ -78,7 +81,7 @@ class CustomSearchDelegate extends SearchDelegate {
                       '${"🇷🇺 " + totalList[index].name + ' +' + totalList[index].code.toString()}'),
                   onTap: () {
                     return onSelected is Function
-                        ? onSelected(close(context,totalList[index]))
+                        ? onSelected(close(context, totalList[index]))
                         : Navigator.pop(context);
                   });
         });
@@ -93,7 +96,7 @@ class CustomSearchDelegate extends SearchDelegate {
                   '${"🇷🇺 " + totalList[index].name + ' +' + totalList[index].code.toString()}'),
               onTap: () {
                 return onSelected is Function
-                    ? onSelected(close(context,totalList[index]))
+                    ? onSelected(close(context, totalList[index]))
                     : Navigator.pop(context);
               });
         });
@@ -103,7 +106,18 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     if (query.isEmpty) {
       return _buildRows();
-    } else
-      return Container();
+    } else {
+      final List<CountryPhoneData> dummySearchList = <CountryPhoneData>[];
+      if (query.isNotEmpty) {
+        dummySearchList.addAll(countryPhoneDataList.where(
+            (CountryPhoneData item) =>
+                item.name.toLowerCase().contains(query.toLowerCase())));
+
+        if (dummySearchList.isNotEmpty) {
+          return _buildSearchRows(dummySearchList);
+        }
+      }
+    }
+    return Container();
   }
 }
