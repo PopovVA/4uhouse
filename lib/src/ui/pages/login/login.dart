@@ -119,22 +119,25 @@ class _LoginState extends State<Login> {
           ),
           Padding(
               padding: const EdgeInsets.only(top: 16.0),
-              child: Column(children: <Widget>[
-                Row(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    const Text('I accept the',
-                        style: TextStyle(
-                            fontSize: 16.0, color: Color(0xde000000))),
-                    Text('Term and conditions,',
+                    Row(
+                      children: <Widget>[
+                        const Text('I accept the',
+                            style: TextStyle(
+                                fontSize: 16.0, color: Color(0xde000000))),
+                        Text('Term and conditions,',
+                            style: TextStyle(
+                                fontSize: 16.0,
+                                color: Theme.of(context).primaryColor))
+                      ],
+                    ),
+                    Text('Privacy policy',
                         style: TextStyle(
                             fontSize: 16.0,
-                            color: Theme.of(context).primaryColor))
-                  ],
-                ),
-                Text('Privacy policy',
-                    style: TextStyle(
-                        fontSize: 16.0, color: Theme.of(context).primaryColor)),
-              ])),
+                            color: Theme.of(context).primaryColor)),
+                  ])),
         ]));
   }
 
