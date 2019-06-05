@@ -27,18 +27,28 @@ class _PhonePickerState extends State<PhonePicker> {
         validPhone = false;
       } else if (selectedItem != null) {
         if (selectedItem.length[0] == phone.text.length) {
+          validPhone = false;
+        } else if (hasMatch(phone.text, selectedItem.numberPattern)) {
           validPhone = true;
         } else {
           validPhone = false;
         }
       } else {
         if (widget.countryPhoneDataList.first.length[0] == phone.text.length) {
+          validPhone = false;
+        } else if (hasMatch(
+            phone.text, widget.countryPhoneDataList.first.numberPattern)) {
           validPhone = true;
         } else {
           validPhone = false;
         }
       }
     });
+  }
+
+  bool hasMatch(String value, String reg) {
+    RegExp regExp = RegExp(reg);
+    return regExp.hasMatch(value);
   }
 
   @override
@@ -54,11 +64,14 @@ class _PhonePickerState extends State<PhonePicker> {
         margin: const EdgeInsets.only(left: 14.0),
         width: 70.0,
         child: TextField(
+            enableInteractiveSelection: true,
+            cursorWidth: 0.0,
+            autofocus: false,
             textAlign: TextAlign.left,
             decoration: InputDecoration.collapsed(
                 hintText: selectedItem == null
-                    ? '+${widget.countryPhoneDataList[0].code.toString()}'
-                    : selectedItem.code.toString(),
+                    ? '+(${widget.countryPhoneDataList[0].code.toString()})'
+                    : '+(${selectedItem.code.toString()})',
                 hintStyle:
                     const TextStyle(color: Color(0xde000000), fontSize: 16.0),
                 border: UnderlineInputBorder(
@@ -83,6 +96,7 @@ class _PhonePickerState extends State<PhonePicker> {
         padding: const EdgeInsets.only(left: 12.0),
         width: 260,
         child: TextField(
+          autofocus: true,
           controller: phone,
           onChanged: (String val) {
             return widget.onSelected is Function && selectedItem != null

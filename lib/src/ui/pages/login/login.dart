@@ -10,6 +10,7 @@ import '../../components/common/snackbar.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
 import '../../../models/country_phone_data.dart';
 import 'phone_picker.dart';
+import 'package:flutter/gestures.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -63,11 +64,11 @@ class _LoginState extends State<Login> {
                         return Column(children: <Widget>[
                           _buildTittle(),
                           PhonePicker(
-                            onSelected: (bool value){
-                              setState(() {
-                                validPhone = value;
-                              });
-                            },
+                              onSelected: (bool value) {
+                                setState(() {
+                                  validPhone = value;
+                                });
+                              },
                               countryPhoneDataList: state.data,
                               favorites: <String>['RU', 'AL']),
                           _buildTerms(),
@@ -105,8 +106,8 @@ class _LoginState extends State<Login> {
   }
 
   Widget _buildTerms() {
-    return Column(children: <Widget>[
-      Row(
+    return Row(
+      textBaseline: TextBaseline.ideographic,
         children: <Widget>[
           Checkbox(
             activeColor: Theme.of(context).primaryColor,
@@ -117,19 +118,20 @@ class _LoginState extends State<Login> {
               });
             },
           ),
-          const Text('I accept the',
-              style: TextStyle(color: Color(0xde000000))),
-          const Padding(padding: EdgeInsets.only(left: 5.0)),
-          Text(
-            'Term and conditions,',
-            style: TextStyle(color: Theme.of(context).primaryColor),
+          RichText(
+            text: TextSpan(
+              text: 'I accept the',
+              style: const TextStyle(color: Colors.black),
+              children: <TextSpan>[
+                TextSpan(
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                    text:
+                    ' Term and conditions, Privacy policy',
+                    recognizer: TapGestureRecognizer()
+                ),
+              ],
+            ),
           ),
-        ],
-      ),
-      Container(
-          margin: const EdgeInsets.only(right: 170.0),
-          child: Text('Privacy politics',
-              style: TextStyle(color: Theme.of(context).primaryColor))),
     ]);
   }
 
