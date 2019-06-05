@@ -25,7 +25,7 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
-    _bloc = PhoneBloc(PhoneRepository());
+    _bloc = PhoneBloc(TestPhoneRepository());
     _bloc.dispatch(PhoneInitialized());
   }
 
@@ -117,10 +117,24 @@ class _LoginState extends State<Login> {
               });
             },
           ),
-          const Padding(
-              padding: EdgeInsets.only(top: 15.0),
-              child: Text('I accept the Term and conditions,\nPrivacy policy',
-                  style: TextStyle(fontSize: 16.0, color: Color(0xde000000))))
+          Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Column(children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    const Text('I accept the',
+                        style: TextStyle(
+                            fontSize: 16.0, color: Color(0xde000000))),
+                    Text('Term and conditions,',
+                        style: TextStyle(
+                            fontSize: 16.0,
+                            color: Theme.of(context).primaryColor))
+                  ],
+                ),
+                Text('Privacy policy',
+                    style: TextStyle(
+                        fontSize: 16.0, color: Theme.of(context).primaryColor)),
+              ])),
         ]));
   }
 
