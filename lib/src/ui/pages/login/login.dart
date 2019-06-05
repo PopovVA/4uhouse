@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:user_mobile/src/resources/phone_repository_test.dart';
+import 'package:user_mobile/src/ui/components/pickers/phone/phone_picker.dart';
+import 'package:flutter/gestures.dart';
+import '../../../blocs/phone/phone_bloc.dart';
+import '../../../blocs/phone/phone_event.dart';
+import '../../../blocs/phone/phone_state.dart';
+import '../../../resources/phone_repository.dart';
 import '../../components/common/page_template.dart' show PageTemplate;
-import '../../components/common/phone_picker.dart';
+import '../../components/common/snackbar.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
+import '../../../models/country_phone_data.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -9,8 +18,16 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  bool _isAgree = false;
-  bool _validPhone = false;
+  bool isAgree = false;
+  bool validPhone = false;
+  PhoneBloc _bloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _bloc = PhoneBloc(TestPhoneRepository());
+    _bloc.dispatch(PhoneInitialized());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,60 +35,110 @@ class _LoginState extends State<Login> {
         goBack: null,
         title: 'Log in',
         body: Container(
-            padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+            padding: const EdgeInsets.only(left: 14.0, right: 14.0),
             margin: const EdgeInsets.only(bottom: 12.0),
-            child: Column(children: <Widget>[
-              _buildTittle(),
-              _buildPhonePicker(),
-              _buildTerms(),
-              _buildSubmit(),
-            ])));
-  }
-
-  Widget _buildPhonePicker() {
-    return Container(
-        margin: const EdgeInsets.only(bottom: 16.0),
-        child: PhonePicker(onSubmit: (String phoneNumber) {
-          setState(() {
-            phoneNumber.isNotEmpty ? _validPhone = true : _validPhone = false;
-          });
-        }));
+            child: BlocListener<PhoneEvent, PhoneState>(
+                bloc: _bloc,
+                listener: (BuildContext context, PhoneState state) {
+                  if (state is PhoneLoadingError) {
+                    Scaffold.of(context).showSnackBar(const CustomSnackBar(
+                      content: Text('Something went wrong'),
+                      backgroundColor: Colors.redAccent,
+                    ));
+                  }
+                },
+                child: BlocBuilder<PhoneEvent, PhoneState>(
+                    bloc: _bloc,
+                    builder: (BuildContext context, PhoneState state) {
+                      if (state is PhoneLoading) {
+                        return Column(children: <Widget>[
+                          _buildTittle(),
+                          CircularProgressIndicator(
+                              backgroundColor: Theme.of(context).primaryColor),
+                          _buildTerms(),
+                          _buildSubmit(),
+                        ]);
+                      }
+                      if (state is PhoneCountriesDataLoaded) {
+                        return Column(children: <Widget>[
+                          _buildTittle(),
+                          PhonePicker(
+                              onSelected: (bool value) {
+                                setState(() {
+                                  validPhone = value;
+                                });
+                              },
+                              countryPhoneDataList: state.data,
+                              favorites: <String>['RU', 'AL']),
+                          _buildTerms(),
+                          _buildSubmit(),
+                        ]);
+                      }
+                      if (state is PhoneLoadingError) {
+                        return Column(children: <Widget>[
+                          _buildTittle(),
+                          const Text('Something went wrong'),
+                          _buildTerms(),
+                          _buildSubmit(),
+                        ]);
+                      }
+                      //В постаноке не увидел описание этого состояния, сделал по аналогии с PhoneLoadingError
+                      if (state is PhoneUninitialized) {
+                        return Column(children: <Widget>[
+                          _buildTittle(),
+                          const Text('Something went wrong'),
+                          _buildTerms(),
+                          _buildSubmit(),
+                        ]);
+                      }
+                    }))));
   }
 
   Widget _buildTittle() {
     return Container(
-        margin: const EdgeInsets.only(top: 56.0, bottom: 16.0),
+      alignment: const Alignment(-1, 0),
+        margin: const EdgeInsets.only(top: 56.0, bottom: 16.0, left: 14.0),
         child: const Text(
           'Enter your phone number',
-          style: TextStyle(fontSize: 16),
-          textAlign: TextAlign.start,
+          style: TextStyle(fontSize: 16)
         ));
   }
 
   Widget _buildTerms() {
-    return Row(
-      children: <Widget>[
-        Checkbox(
-          activeColor: Theme.of(context).primaryColor,
-          value: _isAgree,
-          onChanged: (bool value) {
-            setState(() {
-              _isAgree = !_isAgree;
-            });
-          },
-        ),
-        Row(
-          children: <Widget>[
-            const Text('I accept the'),
-            const Padding(padding: EdgeInsets.only(left: 2.0)),
-            Text(
-              'Term and conditions,Privacy police',
-              style: TextStyle(color: Theme.of(context).primaryColor),
-            )
-          ],
-        )
-      ],
-    );
+    return Padding(
+        padding: const EdgeInsets.only(top: 16.0),
+        child: Row(children: <Widget>[
+          Checkbox(
+            activeColor: Theme.of(context).primaryColor,
+            value: isAgree,
+            onChanged: (bool value) {
+              setState(() {
+                isAgree = !isAgree;
+              });
+            },
+          ),
+          Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        const Text('I accept the',
+                            style: TextStyle(
+                                fontSize: 16.0, color: Color(0xde000000))),
+                        Text('Term and conditions,',
+                            style: TextStyle(
+                                fontSize: 16.0,
+                                color: Theme.of(context).primaryColor))
+                      ],
+                    ),
+                    Text('Privacy policy',
+                        style: TextStyle(
+                            fontSize: 16.0,
+                            color: Theme.of(context).primaryColor)),
+                  ])),
+        ]));
   }
 
   Widget _buildSubmit() {
@@ -81,8 +148,10 @@ class _LoginState extends State<Login> {
         alignment: FractionalOffset.bottomCenter,
         child: StyledButton(
           loading: false,
-          onPressed: _isAgree && _validPhone
-              ? () {print('some action');}
+          onPressed: isAgree && validPhone
+              ? () {
+                  print('some action');
+                }
               : null,
           text: 'Submit',
         ),

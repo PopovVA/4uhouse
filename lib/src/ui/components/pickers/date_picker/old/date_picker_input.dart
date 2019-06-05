@@ -4,8 +4,7 @@ import 'package:intl/intl.dart' show DateFormat;
 import '../date_picker.dart';
 
 class DatePickerInput extends StatefulWidget {
-
-const DatePickerInput({
+  const DatePickerInput({
     @required this.initialValue,
     @required this.onDateTimeChanged,
     this.minimumDate,
@@ -33,7 +32,7 @@ class _DatePickerInputState extends State<DatePickerInput> {
   String value = 'Choose a date';
 
   @override
- void  initState() {
+  void initState() {
     if (widget.initialValue is String) {
       value = timestampToString(
         DateTime.parse(widget.initialValue).millisecondsSinceEpoch,
@@ -42,20 +41,20 @@ class _DatePickerInputState extends State<DatePickerInput> {
     super.initState();
   }
 
- String timestampToString(int timestamp) {
+  String timestampToString(int timestamp) {
     return formatter.format(
       DateTime.fromMillisecondsSinceEpoch(timestamp),
     );
   }
 
- void  handleDateTimeChanged(int timestamp) {
+  void handleDateTimeChanged(int timestamp) {
     setState(() {
       value = timestampToString(timestamp);
     });
   }
 
- // ignore: avoid_void_async
- void openBottomSheet(BuildContext context) async {
+  // ignore: avoid_void_async
+  void openBottomSheet(BuildContext context) async {
     setState(() {
       bottomSheetOpen = true;
     });

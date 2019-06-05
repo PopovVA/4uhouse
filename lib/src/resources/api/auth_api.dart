@@ -1,5 +1,4 @@
 import 'dart:async' show Future;
-import 'dart:convert' show json;
 import 'package:meta/meta.dart' show required;
 
 import 'package:http/http.dart' as http;
@@ -12,7 +11,9 @@ import 'package:flutter_appauth/flutter_appauth.dart'
         TokenRequest,
         TokenResponse;
 
-class AuthApi {
+import 'api.dart';
+
+class AuthApi extends Api {
   final FlutterAppAuth _appAuth = FlutterAppAuth();
 
   // Keycloak details
@@ -57,49 +58,59 @@ class AuthApi {
 
   Future<void> logout(
       {@required String accessToken, @required String refreshToken}) async {
-    final http.Response response = await http.post(
-        'https://dev.auth.4u.house/auth/realms/4uhouse/protocol/openid-connect/logout',
-        body: <String, String>{
-          'client_id': _clientId,
-          'refresh_token': refreshToken
-        },
-        headers: <String, String>{
-          'Authorization': 'Bearer $accessToken',
-          'Content-type': 'application/x-www-form-urlencoded'
-        });
+    try {
+      final http.Response response = await http.post(
+          'https://dev.auth.4u.house/auth/realms/4uhouse/protocol/openid-connect/logout',
+          body: <String, String>{
+            'client_id': _clientId,
+            'refresh_token': refreshToken
+          },
+          headers: <String, String>{
+            'Authorization': 'Bearer $accessToken',
+            'Content-type': 'application/x-www-form-urlencoded'
+          });
 
-    // no response body, do not decode!
-    if (response.statusCode != 204) {
-      throw Exception(
-          'Logout error: ${response?.statusCode}, ${response?.body}');
+      // no response body, do not decode!
+      if (response.statusCode != 204) {
+        throw response;
+      }
+    } catch (error) {
+      throw inferError(error);
     }
   }
 
   Future<Map<String, dynamic>> loadUserProfile(
       {@required String accessToken}) async {
-    final http.Response response = await http.get(_userInfoEndpoint,
-        headers: <String, String>{'Authorization': 'Bearer $accessToken'});
+    try {
+      final http.Response response = await http.get(_userInfoEndpoint,
+          headers: <String, String>{'Authorization': 'Bearer $accessToken'});
 
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
-      throw Exception(response.body);
+      if (response.statusCode == 200) {
+        return processResponse(response);
+      } else {
+        throw response;
+      }
+    } catch (error) {
+      throw inferError(error);
     }
   }
 
   Future<void> requestOtp(
       String phone, String codeChallenge, String deviceId) async {
-    final http.Response response = await http.post(
-      'https://dev.auth.4u.house/auth/realms/4uhouse/protocol/openid-connect/logout',
-      body: <String, String>{
-        'codeChallenge': codeChallenge,
-        'deviceId': deviceId,
-        'phone': phone
-      },
-    );
-    if (response.statusCode != 204) {
-      throw Exception(
-          'Logout error: ${response?.statusCode}, ${response?.body}');
+    try {
+      final http.Response response = await http.post(
+        'https://dev.auth.4u.house/auth/realms/4uhouse/protocol/openid-connect/logout',
+        body: <String, String>{
+          'codeChallenge': codeChallenge,
+          'deviceId': deviceId,
+          'phone': phone
+        },
+      );
+      if (response.statusCode != 204) {
+        throw response;
+      }
+    } catch (error) {
+      throw inferError(error);
     }
   }
 }
