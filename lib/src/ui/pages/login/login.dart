@@ -12,7 +12,6 @@ import '../../components/common/snackbar.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
 import '../../../models/country_phone_data.dart';
 
-
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
@@ -106,9 +105,9 @@ class _LoginState extends State<Login> {
   }
 
   Widget _buildTerms() {
-    return Row(
-      textBaseline: TextBaseline.ideographic,
-        children: <Widget>[
+    return Padding(
+        padding: const EdgeInsets.only(top: 16.0),
+        child: Row(children: <Widget>[
           Checkbox(
             activeColor: Theme.of(context).primaryColor,
             value: isAgree,
@@ -118,21 +117,11 @@ class _LoginState extends State<Login> {
               });
             },
           ),
-          RichText(
-            text: TextSpan(
-              text: 'I accept the',
-              style: const TextStyle(color: Colors.black),
-              children: <TextSpan>[
-                TextSpan(
-                    style: TextStyle(color: Theme.of(context).primaryColor),
-                    text:
-                    ' Term and conditions, Privacy policy',
-                    recognizer: TapGestureRecognizer()
-                ),
-              ],
-            ),
-          ),
-    ]);
+          const Padding(
+              padding: EdgeInsets.only(top: 15.0),
+              child: Text('I accept the Term and conditions,\nPrivacy policy',
+                  style: TextStyle(fontSize: 16.0, color: Color(0xde000000))))
+        ]));
   }
 
   Widget _buildSubmit() {
