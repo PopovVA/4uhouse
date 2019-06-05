@@ -13,8 +13,6 @@ class ButtonModel extends ComponentModel {
   bool _isAble;
   dynamic _value;
 
-
-
   String get id => _id;
   String get key => _key;
   bool get isAble => _isAble;

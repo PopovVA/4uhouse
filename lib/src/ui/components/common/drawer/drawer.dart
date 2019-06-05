@@ -5,8 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart' show BlocProvider, BlocBuilder;
 import '../../../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../../../blocs/auth/auth_event.dart'
     show AuthEvent, LoginButtonPressed, LogoutButtonPressed;
-import '../../../../blocs/auth/auth_state.dart'
-    show AuthState, AuthAuthorized;
+import '../../../../blocs/auth/auth_state.dart' show AuthState, AuthAuthorized;
 
 import 'drawer_header.dart' show Header;
 
@@ -27,8 +26,9 @@ class DrawerOnly extends StatelessWidget {
                 Expanded(
                   child: ListView(
                     children: <Widget>[
-                      (state is AuthAuthorized) ? Header(
-                          userProfile: state.userProfile) : Container(),
+                      (state is AuthAuthorized)
+                          ? Header(userProfile: state.userProfile)
+                          : Container(),
                       buildListTile(context, 'Market',
                           icon: const Icon(OMIcons.search), position: 0),
                       buildListTile(context, 'Likes',
@@ -61,15 +61,15 @@ class DrawerOnly extends StatelessWidget {
                         buildDivider(),
                         state is AuthAuthorized
                             ? buildListTile(context, 'Sign out',
-                            icon: const Icon(OMIcons.exitToApp),
-                            position: 8, onTap: () {
-                              authBloc.dispatch(LogoutButtonPressed());
-                            })
+                                icon: const Icon(OMIcons.exitToApp),
+                                position: 8, onTap: () {
+                                authBloc.dispatch(LogoutButtonPressed());
+                              })
                             : buildListTile(context, 'Sign in',
-                            icon: const Icon(OMIcons.exitToApp),
-                            position: 8, onTap: () {
-                              authBloc.dispatch(LoginButtonPressed());
-                            }),
+                                icon: const Icon(OMIcons.exitToApp),
+                                position: 8, onTap: () {
+                                authBloc.dispatch(LoginButtonPressed());
+                              }),
                       ],
                     ),
                   ),
@@ -77,8 +77,7 @@ class DrawerOnly extends StatelessWidget {
               ],
             ),
           );
-        }
-    );
+        });
   }
 
   Widget buildListTile(BuildContext context, String title,

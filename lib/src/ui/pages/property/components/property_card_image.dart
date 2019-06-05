@@ -2,7 +2,6 @@ import 'dart:convert' show base64Decode;
 import 'dart:typed_data' show Uint8List;
 import 'package:flutter/material.dart';
 
-
 import '../../../../utils/type_check.dart' show isNotNull;
 
 class PropertyImage extends StatelessWidget {
@@ -26,7 +25,7 @@ class PropertyImage extends StatelessWidget {
       pictureDecodingError: pictureDecodingError,
     );
   }
- const PropertyImage._(
+  const PropertyImage._(
       {this.id,
       this.statusColor,
       this.statusValue,
@@ -42,7 +41,7 @@ class PropertyImage extends StatelessWidget {
   final Uint8List picture;
   final bool pictureDecodingError;
 
- Widget buildImage() {
+  Widget buildImage() {
     Widget greyContainer({Widget child}) => Container(
           color: const Color(0xFFe9e9e9),
           child: child,
@@ -108,7 +107,7 @@ class PropertyImage extends StatelessWidget {
     return null;
   }
 
- Widget buildId(double height) {
+  Widget buildId(double height) {
     if (id != null) {
       return Positioned(
         bottom: height * 0.039,
@@ -135,7 +134,7 @@ class PropertyImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   const double height = 140.0;
+    const double height = 140.0;
     return Container(
       width: double.infinity,
       height: height,

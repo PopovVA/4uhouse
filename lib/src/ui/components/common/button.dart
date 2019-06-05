@@ -4,12 +4,11 @@ import '../../../models/screen/components/button_model.dart';
 import 'styled_button.dart';
 
 class Button extends StatefulWidget {
-const   Button(this.button, this.path, this.handleSave);
+  const Button(this.button, this.path, this.handleSave);
 
   final ButtonModel button;
   final String path;
   final Function handleSave;
-
 
   @override
   State<StatefulWidget> createState() {

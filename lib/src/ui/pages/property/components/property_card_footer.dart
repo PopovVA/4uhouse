@@ -4,18 +4,16 @@ import '../../../../utils/type_check.dart' show isNotNull;
 class PropertyFooter extends StatelessWidget {
   const PropertyFooter(
       {this.currency,
-        this.costSale,
-        this.costRent,
-        this.paymentPeriod,
-        this.mainInfo,
-        this.address});
+      this.costSale,
+      this.costRent,
+      this.paymentPeriod,
+      this.mainInfo,
+      this.address});
   static const Color fontColor = Color(0xFF212121);
   static const TextStyle addInfoStyle =
       TextStyle(fontSize: 14.0, color: fontColor);
   static const TextStyle mainValueStyle =
       TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500, color: fontColor);
-
-
 
   final String currency;
   final int costSale;

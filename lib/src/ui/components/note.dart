@@ -18,7 +18,7 @@ class Note extends StatelessWidget {
       alignment: Alignment.centerLeft,
       width: double.infinity,
       height: 54.0,
-      padding:const  EdgeInsets.fromLTRB(16.0, 6.0, 16.0, 6.0),
+      padding: const EdgeInsets.fromLTRB(16.0, 6.0, 16.0, 6.0),
       child: Text(
         note.value,
         style: const TextStyle(
@@ -27,7 +27,7 @@ class Note extends StatelessWidget {
         ),
       ),
       decoration: BoxDecoration(
-        color:const  Color(0xFFb5ffc5c5),
+        color: const Color(0xFFb5ffc5c5),
         border: Border(
           left: BorderSide(
             color: const Color(0xFFd24444),
@@ -38,10 +38,9 @@ class Note extends StatelessWidget {
             width: 1.0,
           ),
         ),
-
-        boxShadow:<BoxShadow> [
+        boxShadow: <BoxShadow>[
           BoxShadow(
-            color:const  Color(0xFF40000000),
+            color: const Color(0xFF40000000),
             spreadRadius: 4.0,
             blurRadius: 5.0,
           ),

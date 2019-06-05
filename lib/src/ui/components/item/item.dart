@@ -23,8 +23,6 @@ class Item extends StatefulWidget {
   final String path;
   final Function makeTransition;
 
-
-
   @override
   State<StatefulWidget> createState() {
     return _ItemState();
@@ -46,8 +44,8 @@ class _ItemState extends State<Item> {
     setState(() => loading = false);
   }
 
- // ignore: always_declare_return_types
- onTap(BuildContext context) => () {
+  // ignore: always_declare_return_types
+  onTap(BuildContext context) => () {
         final ItemModel item = widget.item;
         if (item.isTransition) {
           widget.makeTransition(context, item.id);
@@ -82,9 +80,8 @@ class _ItemState extends State<Item> {
         }
       };
 
- void  openDataEntry(BuildContext context) {
+  void openDataEntry(BuildContext context) {
     Navigator.of(context).push(
-
       MaterialPageRoute<Widget>(
         builder: (BuildContext context) => DataEntry(
               widget.item,
@@ -97,8 +94,7 @@ class _ItemState extends State<Item> {
     );
   }
 
-
- Object buildSuffix(BuildContext context) {
+  Object buildSuffix(BuildContext context) {
     if (loading) {
       return const CircularProgress(size: 'small');
     }
