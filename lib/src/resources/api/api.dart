@@ -10,18 +10,14 @@ import '../../models/errors/no_internet_error.dart';
 
 class Api {
   Future<dynamic> inferError(dynamic object) async {
-    print(object);
     if (object is SocketException) {
       final bool internet = await _checkInternet();
       if (internet) {
-        print(ConnectionError().toString());
         return ConnectionError();
       } else {
-        print(NoInternetError().toString());
         return NoInternetError();
       }
     } else if (object is http.BaseResponse) {
-      print(object.statusCode);
       switch (object.statusCode) {
         case 401:
           return AuthError();
@@ -42,7 +38,7 @@ class Api {
         completer.complete(value);
       });
       final String result = await completer.future;
-      return json.decode(result)[0];
+      return json.decode(result);
     }
   }
 

@@ -87,7 +87,7 @@ class ScreenApi extends Api {
       if (response.statusCode == 200) {
         return processResponse(response);
       } else {
-        throw Exception(response.statusCode);
+        throw response;
       }
     }catch(error){
       throw inferError(error);
