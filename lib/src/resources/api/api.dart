@@ -23,7 +23,9 @@ class Api {
           return AuthError();
           break;
         default:
-          return Exception(object.body.message);
+          if (object is http.Response) {
+            return Exception(json.decode(object.body));
+          }
       }
     }
   }
