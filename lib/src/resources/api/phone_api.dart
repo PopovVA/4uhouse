@@ -9,8 +9,8 @@ class PhoneApi extends Api {
 
   Future<List<Map<String, dynamic>>> requestCountriesPhoneData() async {
     try {
-      final http.Response response =
-          await _client.put('http://seasonvar.ru/serial-9676-Fors-mazhory-4-sezon.html');
+      final http.Response response = await _client
+          .get('${BASE_URL}accounts/country-phones-data');
       if (response.statusCode == 200) {
         return json.decode(response.body);
       } else {

@@ -22,7 +22,7 @@ class Api {
           return AuthError();
           break;
         default:
-            return Exception(object.statusCode);
+          return Exception(processResponse(object));
       }
     }
   }
