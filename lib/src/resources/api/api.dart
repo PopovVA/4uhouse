@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:connectivity/connectivity.dart';
+import 'package:user_mobile/src/models/error.dart';
 import '../../models/errors/auth_error.dart';
 import '../../models/errors/connection_error.dart';
 import '../../models/errors/no_internet_error.dart';
@@ -22,7 +23,8 @@ class Api {
           return AuthError();
           break;
         default:
-          return Exception(processResponse(object));
+            return Exception(
+                ErrorMessage.fromJson(await processResponse(object)).message);
       }
     }
   }
