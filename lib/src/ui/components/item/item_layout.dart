@@ -6,8 +6,7 @@ import '../../../utils/type_check.dart' show isNotNull;
 import 'item_layout_container.dart';
 
 class ItemLayout extends StatelessWidget {
-
- const ItemLayout({
+  const ItemLayout({
     this.picture,
     this.body,
     this.suffix,
@@ -21,8 +20,6 @@ class ItemLayout extends StatelessWidget {
   final bool link;
   final Function onTap;
   final bool disabled;
-
-
 
   Widget _buildPicture() {
     if (picture is String) {
@@ -41,8 +38,7 @@ class ItemLayout extends StatelessWidget {
     return null;
   }
 
-
-Widget _buildTextContent(BuildContext context) {
+  Widget _buildTextContent(BuildContext context) {
     if (body is String) {
       return Expanded(
         flex: 3,
@@ -50,13 +46,12 @@ Widget _buildTextContent(BuildContext context) {
           child: renderText(body),
         ),
       );
-    }else {
-     return null;
+    } else {
+      return null;
     }
   }
 
-
- Widget _buildSuffix() {
+  Widget _buildSuffix() {
     if (isNotNull(suffix)) {
       return Expanded(
         flex: 1,
@@ -64,25 +59,23 @@ Widget _buildTextContent(BuildContext context) {
           child: renderText(suffix),
         ),
       );
-    }else{
+    } else {
       return null;
     }
   }
 
-
- Widget  _buildLink() {
+  Widget _buildLink() {
     if (link) {
       return Icon(
         Icons.chevron_right,
         color: disabled ? DISABLED_COLOR : ACTIVE_COLOR,
       );
-    }
-    else{
+    } else {
       return null;
     }
   }
 
- Widget renderText(Object value) {
+  Widget renderText(Object value) {
     if (!(value is StatefulWidget) && !(value is StatelessWidget)) {
       const double fontSize = 16.0;
       return Text(

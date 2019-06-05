@@ -16,7 +16,6 @@ DateTime _timestampToDateTime(Object timestamp) {
 
 int _value;
 
-
 Future<Widget> openDatePicker(
   BuildContext context, {
   Function onDateTimeChanged,
@@ -54,8 +53,7 @@ Future<Widget> openDatePicker(
               }
               _value = null;
 
-
-             Future<int>.delayed(Duration(milliseconds: 100), () {
+              Future<int>.delayed(Duration(milliseconds: 100), () {
                 Navigator.pop(context);
               });
             },

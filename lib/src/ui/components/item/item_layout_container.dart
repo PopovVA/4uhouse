@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import '../../../constants/layout.dart' show standardPadding;
 
 class ItemLayoutContainer extends StatelessWidget {
-
- const ItemLayoutContainer(this.child, {this.onTap});
+  const ItemLayoutContainer(this.child, {this.onTap});
 
   final Function onTap;
   final dynamic child;
-
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +19,7 @@ class ItemLayoutContainer extends StatelessWidget {
     return buildContainer(child);
   }
 
-
- Widget buildContainer(Widget child) {
+  Widget buildContainer(Widget child) {
     return ConstrainedBox(
       constraints: const BoxConstraints(
         minHeight: 52.0,

@@ -7,8 +7,6 @@ class Debouncer {
   VoidCallback action;
   Timer _timer;
 
-
-
   void run(VoidCallback action) {
     if (_timer != null) {
       _timer.cancel();

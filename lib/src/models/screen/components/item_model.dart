@@ -1,5 +1,4 @@
-import 'component_model.dart'
-    show ComponentModel;
+import 'component_model.dart' show ComponentModel;
 
 class ItemModel extends ComponentModel {
   ItemModel.fromJson(Map<String, dynamic> json)

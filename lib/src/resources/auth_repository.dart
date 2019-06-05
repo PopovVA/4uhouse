@@ -1,5 +1,5 @@
 import 'dart:async' show Future;
-import 'dart:convert' show base64, json, utf8;
+import 'dart:convert' show base64, json;
 import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:device_info/device_info.dart';
@@ -110,18 +110,18 @@ class AuthRepository {
   }
 
   Future<String> getDeviceId() async {
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    final AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
     print('Running on ${androidInfo.model}');
 
-    IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+    final IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
     print('Running on ${iosInfo.utsname.machine}');
 
     return androidInfo != null ? androidInfo.model : iosInfo.utsname.machine;
   }
 
   Future<void> getOtp(String phone, String codeChallenge) async {
-    String deviceId = await getDeviceId();
-    AuthApi().requestOtp(phone, codeChallenge, deviceId);
+    final String deviceId = await getDeviceId();
+    _authApi.requestOtp(phone, codeChallenge, deviceId);
   }
 }

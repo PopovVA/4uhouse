@@ -17,17 +17,19 @@ class DatePicker extends StatefulWidget {
     int minimumYear = 1970,
     int maximumYear = 2030,
   }) {
-
     // ignore: prefer_asserts_in_initializer_lists
     assert(
-        onDateTimeChanged != null, 'onDateTimeChanged argument is required!',);
+      onDateTimeChanged != null,
+      'onDateTimeChanged argument is required!',
+    );
     // ignore: prefer_asserts_in_initializer_lists
-    assert(minimumDate.isBefore(maximumDate),
-        'Minimum date should be before maximum date.',);
+    assert(
+      minimumDate.isBefore(maximumDate),
+      'Minimum date should be before maximum date.',
+    );
 
     this.initialDateTime =
         initialDateTime is DateTime ? initialDateTime : DateTime(2000, 1, 1);
-
 
     yFullArray = generateRangeList(<int>[
       (minimumDate is DateTime) ? minimumDate.year : minimumYear,
@@ -104,7 +106,6 @@ class _DatePickerState extends State<DatePicker> {
   void recalculateIndexes() {
     dArray = INITIAL_D_FULL_ARRAY;
     mArray = INITIAL_M_FULL_ARRAY;
-
 
     if (<int>[4, 6, 9, 11].contains(mIndex + 1)) {
       dArray = greyColourBegin(dArray, 30);
@@ -219,7 +220,7 @@ class _DatePickerState extends State<DatePicker> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children:<Widget> [
+      children: <Widget>[
         buildDayPicker(),
         buildMonthPicker(),
         buildYearPicker(),

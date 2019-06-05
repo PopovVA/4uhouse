@@ -44,8 +44,7 @@ class PropertyImage extends StatelessWidget {
   Uint8List picture;
   bool pictureDecodingError;
 
-
- Widget buildImage() {
+  Widget buildImage() {
     Widget greyContainer({Widget child}) => Container(
           color: const Color(0xFFe9e9e9),
           child: child,
@@ -53,7 +52,7 @@ class PropertyImage extends StatelessWidget {
 
     if (pictureDecodingError) {
       return greyContainer(
-          child: Center(child:const  Text('Error decoding image :(')));
+          child: Center(child: const Text('Error decoding image :(')));
     }
 
     if (picture != null) {
@@ -68,8 +67,7 @@ class PropertyImage extends StatelessWidget {
     return greyContainer();
   }
 
-
-Widget buildStatus(double height) {
+  Widget buildStatus(double height) {
     if (statusValue != null) {
       return Positioned(
         right: 0.0,
@@ -89,7 +87,8 @@ Widget buildStatus(double height) {
               height: 22.0,
               padding: const EdgeInsets.symmetric(horizontal: 22.0),
               child: Text(statusValue,
-                  style: const TextStyle(fontSize: 14.0, color:  Color(0xFFdeffffff))),
+                  style: const TextStyle(
+                      fontSize: 14.0, color: Color(0xFFdeffffff))),
             ),
           ],
         ),
@@ -99,8 +98,7 @@ Widget buildStatus(double height) {
     return null;
   }
 
-
- Widget buildPlaceholder(double height) {
+  Widget buildPlaceholder(double height) {
     if (picture == null && !pictureDecodingError) {
       return Container(
         margin: EdgeInsets.only(top: height / 2, left: 16.0),
@@ -112,8 +110,7 @@ Widget buildStatus(double height) {
     return null;
   }
 
-
- Widget buildId(double height) {
+  Widget buildId(double height) {
     if (id != null) {
       return Positioned(
         bottom: height * 0.039,
@@ -122,13 +119,13 @@ Widget buildStatus(double height) {
           children: <Widget>[
             Container(
               padding: const EdgeInsets.fromLTRB(3.0, 4.0, 12.0, 3.0),
-              decoration:const BoxDecoration(
-                color:  Color(0xFFcccccc),
-                borderRadius:BorderRadius.all(radius),
+              decoration: const BoxDecoration(
+                color: Color(0xFFcccccc),
+                borderRadius: BorderRadius.all(radius),
               ),
               margin: const EdgeInsets.only(left: 16.0),
               child: Text('#$id',
-                  style:const  TextStyle(fontSize: 10.0, color: Colors.white)),
+                  style: const TextStyle(fontSize: 10.0, color: Colors.white)),
             ),
           ],
         ),
