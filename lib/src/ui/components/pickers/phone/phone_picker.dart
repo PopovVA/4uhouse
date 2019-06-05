@@ -47,7 +47,7 @@ class _PhonePickerState extends State<PhonePicker> {
   }
 
   bool hasMatch(String value, String reg) {
-    RegExp regExp = RegExp(reg);
+    final RegExp regExp = RegExp(reg);
     return regExp.hasMatch(value);
   }
 
@@ -61,37 +61,33 @@ class _PhonePickerState extends State<PhonePicker> {
   Widget build(BuildContext context) {
     return Row(children: <Widget>[
       Container(
-        margin: const EdgeInsets.only(left: 14.0),
-        width: 70.0,
-        child: TextField(
-            enableInteractiveSelection: true,
-            cursorWidth: 0.0,
-            autofocus: false,
-            textAlign: TextAlign.left,
-            decoration: InputDecoration.collapsed(
-                hintText: selectedItem == null
-                    ? '+(${widget.countryPhoneDataList[0].code.toString()})'
-                    : '+(${selectedItem.code.toString()})',
-                hintStyle:
-                    const TextStyle(color: Color(0x8a000000), fontSize: 16.0),
-                border: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 1.0, color: const Color(0x0fffffff)))),
-            onTap: () async {
-              final result = await showSearch(
-                context: context,
-                delegate: CustomSearchDelegate(
-                    onSelected:
-                        (close(BuildContext context, CountryPhoneData item)) {},
-                    favorites: widget.favorites,
-                    countryPhoneDataList: widget.countryPhoneDataList),
-              );
-              setState(() {
-                selectedItem = result;
-                phone.text = '';
-              });
-            }),
-      ),
+          margin: const EdgeInsets.only(left: 14.0),
+          width: 70.0,
+          child: InkWell(
+              child: Container(
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(width: 1.0, color: Colors.black))),
+                  child: Text(
+                      selectedItem == null
+                          ? '+(${widget.countryPhoneDataList[0].code.toString()})'
+                          : '+(${selectedItem.code.toString()})',
+                      style: const TextStyle(
+                          color: Color(0x8a000000), fontSize: 16.0))),
+              onTap: () async {
+                final result = await showSearch(
+                  context: context,
+                  delegate: CustomSearchDelegate(
+                      onSelected: (close(
+                          BuildContext context, CountryPhoneData item)) {},
+                      favorites: widget.favorites,
+                      countryPhoneDataList: widget.countryPhoneDataList),
+                );
+                setState(() {
+                  selectedItem = result;
+                  phone.text = '';
+                });
+              })),
       Container(
         padding: const EdgeInsets.only(left: 12.0),
         width: 260,
@@ -100,7 +96,7 @@ class _PhonePickerState extends State<PhonePicker> {
           controller: phone,
           onChanged: (String val) {
             return widget.onSelected is Function && selectedItem != null
-                ? widget.onSelected(validPhone)
+                ? widget.onSelected(validPhone, selectedItem)
                 : null;
           },
           style: const TextStyle(fontSize: 16.0, color: Color(0xde000000)),

@@ -63,7 +63,7 @@ class _LoginState extends State<Login> {
                         return Column(children: <Widget>[
                           _buildTittle(),
                           PhonePicker(
-                              onSelected: (bool value) {
+                              onSelected: (bool value, CountryPhoneData item) {
                                 setState(() {
                                   validPhone = value;
                                 });
@@ -96,11 +96,11 @@ class _LoginState extends State<Login> {
 
   Widget _buildTittle() {
     return Container(
-        margin: const EdgeInsets.only(top: 56.0, bottom: 16.0),
+      alignment: const Alignment(-1, 0),
+        margin: const EdgeInsets.only(top: 56.0, bottom: 16.0, left: 14.0),
         child: const Text(
           'Enter your phone number',
-          style: TextStyle(fontSize: 16),
-          textAlign: TextAlign.start,
+          style: TextStyle(fontSize: 16)
         ));
   }
 
