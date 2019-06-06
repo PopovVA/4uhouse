@@ -35,17 +35,17 @@ class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
   @override
   Widget buildResults(BuildContext context) {
     final List<CountryPhoneData> dummySearchList = <CountryPhoneData>[];
-    if (query.isNotEmpty) {
+    if (query.isNotEmpty && query != '+') {
       dummySearchList.addAll(countryPhoneDataList.where(
           (CountryPhoneData item) =>
-              (item.name.toLowerCase() + item.code.toString())
+              (item.name.toLowerCase() + '+' + item.code.toString() )
                   .contains(query.toLowerCase())));
 
       if (dummySearchList.isNotEmpty) {
         return _buildSearchRows(dummySearchList);
       }
     }
-    if (dummySearchList.isEmpty) {
+    if (dummySearchList.isEmpty || query == '+') {
       return _buildRows();
     }
     return Container();
@@ -106,14 +106,14 @@ class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    if (query.isEmpty) {
+    if (query.isEmpty || query == '+') {
       return _buildRows();
     } else {
       final List<CountryPhoneData> dummySearchList = <CountryPhoneData>[];
       if (query.isNotEmpty) {
         dummySearchList.addAll(countryPhoneDataList.where(
             (CountryPhoneData item) =>
-                (item.name.toLowerCase() + item.code.toString())
+                (item.name.toLowerCase() + '+' + item.code.toString() )
                     .contains(query.toLowerCase())));
 
         if (dummySearchList.isNotEmpty) {
