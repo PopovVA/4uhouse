@@ -93,12 +93,10 @@ class _LoginState extends State<Login> {
 
   Widget _buildTittle() {
     return Container(
-      alignment: const Alignment(-1, 0),
+        alignment: const Alignment(-1, 0),
         margin: const EdgeInsets.only(top: 56.0, bottom: 16.0, left: 14.0),
-        child: const Text(
-          'Enter your phone number',
-          style: TextStyle(fontSize: 16)
-        ));
+        child: const Text('Enter your phone number',
+            style: TextStyle(fontSize: 16)));
   }
 
   Widget _buildTerms() {
