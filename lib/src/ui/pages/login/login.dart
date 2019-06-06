@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user_mobile/src/resources/phone_repository_test.dart';
 import 'package:user_mobile/src/ui/components/pickers/phone/phone_picker.dart';
-import 'package:flutter/gestures.dart';
 import '../../../blocs/phone/phone_bloc.dart';
 import '../../../blocs/phone/phone_event.dart';
 import '../../../blocs/phone/phone_state.dart';
-import '../../../resources/phone_repository.dart';
 import '../../components/common/page_template.dart' show PageTemplate;
 import '../../components/common/snackbar.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
-import '../../../models/country_phone_data.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -69,7 +66,7 @@ class _LoginState extends State<Login> {
                                 });
                               },
                               countryPhoneDataList: state.data,
-                              favorites: <String>['RU', 'AL']),
+                              favorites: const <String>['RU', 'AL']),
                           _buildTerms(),
                           _buildSubmit(),
                         ]);
@@ -96,12 +93,10 @@ class _LoginState extends State<Login> {
 
   Widget _buildTittle() {
     return Container(
-      alignment: const Alignment(-1, 0),
+        alignment: const Alignment(-1, 0),
         margin: const EdgeInsets.only(top: 56.0, bottom: 16.0, left: 14.0),
-        child: const Text(
-          'Enter your phone number',
-          style: TextStyle(fontSize: 16)
-        ));
+        child: const Text('Enter your phone number',
+            style: TextStyle(fontSize: 16)));
   }
 
   Widget _buildTerms() {
@@ -127,7 +122,7 @@ class _LoginState extends State<Login> {
                         const Text('I accept the',
                             style: TextStyle(
                                 fontSize: 16.0, color: Color(0xde000000))),
-                        Text('Term and conditions,',
+                        Text(' Term and conditions,',
                             style: TextStyle(
                                 fontSize: 16.0,
                                 color: Theme.of(context).primaryColor))

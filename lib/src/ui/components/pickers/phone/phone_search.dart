@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../models/country_phone_data.dart';
 
-class CustomSearchDelegate extends SearchDelegate {
+class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
   CustomSearchDelegate(
       {this.favorites,
       @required this.countryPhoneDataList,
@@ -35,16 +35,17 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     final List<CountryPhoneData> dummySearchList = <CountryPhoneData>[];
-    if (query.isNotEmpty) {
+    if (query.isNotEmpty && query != '+') {
       dummySearchList.addAll(countryPhoneDataList.where(
           (CountryPhoneData item) =>
-          (item.name.toLowerCase() + item.code.toString()).contains(query.toLowerCase())));
+              (item.name.toLowerCase() + '+' + item.code.toString() )
+                  .contains(query.toLowerCase())));
 
       if (dummySearchList.isNotEmpty) {
         return _buildSearchRows(dummySearchList);
       }
     }
-    if (dummySearchList.isEmpty) {
+    if (dummySearchList.isEmpty || query == '+') {
       return _buildRows();
     }
     return Container();
@@ -53,9 +54,10 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget _buildRows() {
     final List<CountryPhoneData> totalList = <CountryPhoneData>[];
     if (favorites.isNotEmpty) {
-      favorites.forEach((String fav) => totalList.addAll(
-          countryPhoneDataList.where((CountryPhoneData item) =>
-              item.countryId.toLowerCase().contains(fav.toLowerCase()))));
+      for (String fav in favorites) {
+        totalList.addAll(countryPhoneDataList.where((CountryPhoneData item) =>
+            item.countryId.toLowerCase().contains(fav.toLowerCase())));
+      }
     }
     totalList..addAll(countryPhoneDataList);
 
@@ -104,14 +106,15 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    if (query.isEmpty) {
+    if (query.isEmpty || query == '+') {
       return _buildRows();
     } else {
       final List<CountryPhoneData> dummySearchList = <CountryPhoneData>[];
       if (query.isNotEmpty) {
         dummySearchList.addAll(countryPhoneDataList.where(
             (CountryPhoneData item) =>
-                (item.name.toLowerCase() + item.code.toString()).contains(query.toLowerCase())));
+                (item.name.toLowerCase() + '+' + item.code.toString() )
+                    .contains(query.toLowerCase())));
 
         if (dummySearchList.isNotEmpty) {
           return _buildSearchRows(dummySearchList);

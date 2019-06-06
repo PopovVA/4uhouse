@@ -3,7 +3,7 @@ import '../../../../models/country_phone_data.dart';
 import 'phone_search.dart';
 
 class PhonePicker extends StatefulWidget {
-  PhonePicker(
+  const PhonePicker(
       {this.favorites,
       @required this.countryPhoneDataList,
       @required this.onSelected});
@@ -58,13 +58,16 @@ class _PhonePickerState extends State<PhonePicker> {
               child: Container(
                   decoration: BoxDecoration(
                       border: Border(
-                          bottom: BorderSide(width: 1.0, color: Colors.black))),
+                          bottom: BorderSide(
+                              width: 2.0,
+                              color:
+                                  const Color.fromRGBO(175, 173, 173, 0.4)))),
                   child: Text(
                       selectedItem == null
                           ? '+(${widget.countryPhoneDataList[0].code.toString()})'
                           : '+(${selectedItem.code.toString()})',
                       style: const TextStyle(
-                          color: Color(0x8a000000), fontSize: 16.0))),
+                          color: Color(0xde000000), fontSize: 16.0))),
               onTap: () async {
                 final result = await showSearch(
                   context: context,
@@ -86,11 +89,6 @@ class _PhonePickerState extends State<PhonePicker> {
         child: TextField(
           autofocus: true,
           controller: phone,
-//          onChanged: (String val) {
-//            return widget.onSelected is Function && selectedItem != null
-//                ? widget.onSelected(validPhone, selectedItem)
-//                : null;
-//          },
           style: const TextStyle(fontSize: 16.0, color: Color(0xde000000)),
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration.collapsed(
@@ -100,8 +98,9 @@ class _PhonePickerState extends State<PhonePicker> {
               hintStyle:
                   const TextStyle(color: Color(0x8a000000), fontSize: 16.0),
               border: UnderlineInputBorder(
-                  borderSide:
-                      BorderSide(width: 1.0, color: const Color(0x0fffffff)))),
+                  borderSide: BorderSide(
+                      width: 2.0,
+                      color: const Color.fromRGBO(175, 173, 173, 0.4)))),
         ),
       )
     ]);
