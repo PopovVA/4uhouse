@@ -15,6 +15,13 @@ class SubmitPhoneTapped extends LoginEvent {
   String toString() => 'SubmitPhoneTapped';
 }
 
+class ResendOtpTapped extends SubmitPhoneTapped {
+  ResendOtpTapped() : super('');
+
+  @override
+  String toString() => 'ResendOtpTapped';
+}
+
 class SubmitCodeTapped extends LoginEvent {
   SubmitCodeTapped(this.phone, this.code);
 
@@ -23,15 +30,6 @@ class SubmitCodeTapped extends LoginEvent {
 
   @override
   String toString() => 'SubmitCodeTapped';
-}
-
-class ResendOtpTapped extends LoginEvent {
-  ResendOtpTapped(this.phone);
-
-  final String phone;
-
-  @override
-  String toString() => 'ResendOtpTapped';
 }
 
 class CodeEnteringCanceled extends LoginEvent {
