@@ -67,7 +67,7 @@ class _PhonePickerState extends State<PhonePicker> {
                           ? '+(${widget.countryPhoneDataList[0].code.toString()})'
                           : '+(${selectedItem.code.toString()})',
                       style: const TextStyle(
-                          color: Color(0x8a000000), fontSize: 16.0))),
+                          color: Color(0xde000000), fontSize: 16.0))),
               onTap: () async {
                 final result = await showSearch(
                   context: context,
