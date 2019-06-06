@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../models/country_phone_data.dart';
 
-class CustomSearchDelegate extends SearchDelegate {
+class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
   CustomSearchDelegate(
       {this.favorites,
       @required this.countryPhoneDataList,
@@ -38,7 +38,8 @@ class CustomSearchDelegate extends SearchDelegate {
     if (query.isNotEmpty) {
       dummySearchList.addAll(countryPhoneDataList.where(
           (CountryPhoneData item) =>
-          (item.name.toLowerCase() + item.code.toString()).contains(query.toLowerCase())));
+              (item.name.toLowerCase() + item.code.toString())
+                  .contains(query.toLowerCase())));
 
       if (dummySearchList.isNotEmpty) {
         return _buildSearchRows(dummySearchList);
@@ -53,9 +54,10 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget _buildRows() {
     final List<CountryPhoneData> totalList = <CountryPhoneData>[];
     if (favorites.isNotEmpty) {
-      favorites.forEach((String fav) => totalList.addAll(
-          countryPhoneDataList.where((CountryPhoneData item) =>
-              item.countryId.toLowerCase().contains(fav.toLowerCase()))));
+      for (String fav in favorites) {
+        totalList.addAll(countryPhoneDataList.where((CountryPhoneData item) =>
+            item.countryId.toLowerCase().contains(fav.toLowerCase())));
+      }
     }
     totalList..addAll(countryPhoneDataList);
 
@@ -111,7 +113,8 @@ class CustomSearchDelegate extends SearchDelegate {
       if (query.isNotEmpty) {
         dummySearchList.addAll(countryPhoneDataList.where(
             (CountryPhoneData item) =>
-                (item.name.toLowerCase() + item.code.toString()).contains(query.toLowerCase())));
+                (item.name.toLowerCase() + item.code.toString())
+                    .contains(query.toLowerCase())));
 
         if (dummySearchList.isNotEmpty) {
           return _buildSearchRows(dummySearchList);

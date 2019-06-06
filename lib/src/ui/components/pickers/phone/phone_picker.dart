@@ -3,7 +3,7 @@ import '../../../../models/country_phone_data.dart';
 import 'phone_search.dart';
 
 class PhonePicker extends StatefulWidget {
-  PhonePicker(
+  const PhonePicker(
       {this.favorites,
       @required this.countryPhoneDataList,
       @required this.onSelected});

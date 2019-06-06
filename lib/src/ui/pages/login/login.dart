@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user_mobile/src/resources/phone_repository_test.dart';
 import 'package:user_mobile/src/ui/components/pickers/phone/phone_picker.dart';
-import 'package:flutter/gestures.dart';
 import '../../../blocs/phone/phone_bloc.dart';
 import '../../../blocs/phone/phone_event.dart';
 import '../../../blocs/phone/phone_state.dart';
-import '../../../resources/phone_repository.dart';
 import '../../components/common/page_template.dart' show PageTemplate;
 import '../../components/common/snackbar.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
-import '../../../models/country_phone_data.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -69,7 +66,7 @@ class _LoginState extends State<Login> {
                                 });
                               },
                               countryPhoneDataList: state.data,
-                              favorites: <String>['RU', 'AL']),
+                              favorites: const <String>['RU', 'AL']),
                           _buildTerms(),
                           _buildSubmit(),
                         ]);
