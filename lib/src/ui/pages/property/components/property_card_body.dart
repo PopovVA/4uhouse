@@ -12,9 +12,8 @@ class PropertyCard extends StatelessWidget {
         makeTransition: makeTransition, key: GlobalKey());
   }
 
-  PropertyCard._(PropertyModel property, {this.makeTransition, GlobalKey key})
-      : property = property,
-        id = property.id,
+  PropertyCard._(this.property, {this.makeTransition, GlobalKey key})
+      : id = property.id,
         _key = key,
         super(key: key);
 

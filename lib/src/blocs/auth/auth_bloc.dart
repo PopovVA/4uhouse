@@ -1,4 +1,4 @@
-import 'dart:async' show Stream, StreamSubscription;
+import 'dart:async' show Stream;
 
 import 'package:flutter/foundation.dart';
 

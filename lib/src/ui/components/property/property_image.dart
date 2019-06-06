@@ -52,7 +52,7 @@ class PropertyImage extends StatelessWidget {
 
     if (pictureDecodingError) {
       return greyContainer(
-          child: Center(child: const Text('Error decoding image :(')));
+          child: const Center(child: Text('Error decoding image :(')));
     }
 
     if (picture != null) {

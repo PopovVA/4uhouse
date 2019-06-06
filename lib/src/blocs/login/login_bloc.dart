@@ -18,33 +18,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (initialState == PhoneEntering()) {
       if (event is SubmitPhoneTapped) {
         try {
-          yield IsFetchingOtp();
+          yield IsLoading();
           final String codeChallenge = await authRepository.generatePkce();
           authRepository.getOtp(event.phone, codeChallenge);
           yield OtpSent();
         } catch (error) {
           yield* _mapErrorLoginTap();
         }
-      } else if (event is SubmitCodeTapped) {
-        try {
-          yield IsFetchingCode();
-        } catch (error) {
-          yield* _mapErrorLoginTap();
-        }
-      } else if (event is ResendOtpTapped) {
-        try {
-          yield IsFetchingOtp();
-          final String codeChallenge = await authRepository.generatePkce();
-          authRepository.getOtp(event.phone, codeChallenge);
-          yield OtpSent();
-        } catch (error) {
-          yield* _mapErrorLoginTap();
-        }
-      }
-    } else {
-      if (event is CodeEnteringCanceled) {
-        yield PhoneEntering();
-      }
+      } else if (event is SubmitCodeTapped) {}
     }
   }
 

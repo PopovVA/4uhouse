@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'src/app.dart' show App;
 import 'src/resources/auth_repository.dart' show AuthRepository;
 
-import 'temp/app_old.dart' show AppScreens;
+//import 'temp/app_old.dart' show AppScreens;
 
 class AppBlocDelegate extends BlocDelegate {
 //  @override
@@ -13,7 +13,8 @@ class AppBlocDelegate extends BlocDelegate {
 //  }
 
   @override
-  void onError(Bloc bloc, Object error, StackTrace stacktrace) {
+  void onError(Bloc<dynamic, dynamic> bloc, Object error,
+      StackTrace stacktrace) {
     // handle errors here
     print('bloc error: $error');
     super.onError(bloc, error, stacktrace);

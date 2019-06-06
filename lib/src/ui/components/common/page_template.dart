@@ -3,7 +3,7 @@ import 'package:user_mobile/src/ui/components/common/drawer/drawer.dart'
     show DrawerOnly;
 
 class PageTemplate extends StatelessWidget {
-  PageTemplate({
+  const PageTemplate({
     this.title,
     this.note,
     this.body,

@@ -38,7 +38,7 @@ class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
     if (query.isNotEmpty && query != '+') {
       dummySearchList.addAll(countryPhoneDataList.where(
           (CountryPhoneData item) =>
-              (item.name.toLowerCase() + '+' + item.code.toString() )
+              (item.name.toLowerCase() + '+' + item.code.toString())
                   .contains(query.toLowerCase())));
 
       if (dummySearchList.isNotEmpty) {
@@ -113,7 +113,7 @@ class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
       if (query.isNotEmpty) {
         dummySearchList.addAll(countryPhoneDataList.where(
             (CountryPhoneData item) =>
-                (item.name.toLowerCase() + '+' + item.code.toString() )
+                (item.name.toLowerCase() + '+' + item.code.toString())
                     .contains(query.toLowerCase())));
 
         if (dummySearchList.isNotEmpty) {

@@ -1,16 +1,14 @@
 class ErrorMessage {
-  ErrorMessage({message});
+  ErrorMessage({this.message});
 
   ErrorMessage.fromJson(Map<String, dynamic> json) {
-    _message = json['message'];
+    message = json['message'];
   }
 
-  String _message;
-
-  String get message => _message;
+  String message;
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['message'] = message;
     return data;
   }

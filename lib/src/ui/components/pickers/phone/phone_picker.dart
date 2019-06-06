@@ -69,7 +69,7 @@ class _PhonePickerState extends State<PhonePicker> {
                       style: const TextStyle(
                           color: Color(0xde000000), fontSize: 16.0))),
               onTap: () async {
-                final result = await showSearch(
+                final CountryPhoneData result = await showSearch(
                   context: context,
                   delegate: CustomSearchDelegate(
                       onSelected: (close(
