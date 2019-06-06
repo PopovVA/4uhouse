@@ -12,7 +12,7 @@ class OtpRequested extends LoginEvent {
   final String phone;
 
   @override
-  String toString() => 'SubmitPhoneTapped';
+  String toString() => 'OtpRequested';
 }
 
 
