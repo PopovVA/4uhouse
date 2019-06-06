@@ -3,10 +3,9 @@ import 'package:outline_material_icons/outline_material_icons.dart';
 import '../../../../models/user_profile.dart';
 import '../../../../utils/route_transition.dart';
 import '../../../pages/example_page.dart';
-import '../../inherited_auth.dart';
 
 class Header extends StatelessWidget {
-  Header({@required this.userProfile});
+  const Header({@required this.userProfile});
 
   final UserProfile userProfile;
 
@@ -43,9 +42,9 @@ class Header extends StatelessWidget {
               Row(
                 children: <Widget>[
                   Container(
-                    child: Text(
+                    child: const Text(
                       '8 800 555 3535',
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontSize: 16.0, color: Color.fromRGBO(0, 0, 0, 0.87)),
                     ),
                     width: 132,

@@ -1,17 +1,22 @@
 class CountryPhoneData {
-  CountryPhoneData({countryId, code, name, length, example, numberPattern});
+  CountryPhoneData({this.countryId,
+    this.code,
+    this.name,
+    this.length,
+    this.example,
+    this.numberPattern});
 
   CountryPhoneData.fromJson(Map<String, dynamic> json) {
-    _countryId = json['countryId'];
-    _code = json['code'];
-    _name = json['name'];
-    _length = json['length'].cast<int>();
-    _example = json['example'];
-    _numberPattern = json['numberPattern'];
+    countryId = json['countryId'];
+    code = json['code'];
+    name = json['name'];
+    length = json['length'].cast<int>();
+    example = json['example'];
+    numberPattern = json['numberPattern'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['countryId'] = countryId;
     data['code'] = code;
     data['name'] = name;
@@ -21,22 +26,11 @@ class CountryPhoneData {
     return data;
   }
 
-  String _countryId;
+  String countryId;
 
-  String get countryId => _countryId;
-  int _code;
-  String _name;
-  List<int> _length;
-  int _example;
-  String _numberPattern;
-
-  int get code => _code;
-
-  String get name => _name;
-
-  List<int> get length => _length;
-
-  int get example => _example;
-
-  String get numberPattern => _numberPattern;
+  int code;
+  String name;
+  List<int> length;
+  int example;
+  String numberPattern;
 }

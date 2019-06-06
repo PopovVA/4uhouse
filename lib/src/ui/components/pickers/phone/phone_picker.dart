@@ -22,15 +22,11 @@ class _PhonePickerState extends State<PhonePicker> {
 
   void _phoneListner() {
     if (widget.onSelected is Function) {
-      widget.onSelected(_isValid());
+      widget.onSelected(phone.text.isNotEmpty &&
+          selectedItem != null &&
+          _validLength(selectedItem.length, phone.text.length) &&
+          hasMatch(phone.text, selectedItem.numberPattern));
     }
-  }
-
-  bool _isValid() {
-    return phone.text.isNotEmpty &&
-        selectedItem != null &&
-        _validLength(selectedItem.length, phone.text.length) &&
-        hasMatch(phone.text, selectedItem.numberPattern);
   }
 
   bool _validLength(List<int> lengthList, int length) {
@@ -73,7 +69,7 @@ class _PhonePickerState extends State<PhonePicker> {
                       style: const TextStyle(
                           color: Color(0xde000000), fontSize: 16.0))),
               onTap: () async {
-                final dynamic result = await showSearch(
+                final CountryPhoneData result = await showSearch(
                   context: context,
                   delegate: CustomSearchDelegate(
                       onSelected: (close(
@@ -95,8 +91,7 @@ class _PhonePickerState extends State<PhonePicker> {
           controller: phone,
           style: const TextStyle(fontSize: 16.0, color: Color(0xde000000)),
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          decoration: InputDecoration(
-              contentPadding: const EdgeInsets.all(0.0),
+          decoration: InputDecoration.collapsed(
               hintText: selectedItem == null
                   ? widget.countryPhoneDataList[0].example.toString()
                   : selectedItem.example.toString(),
@@ -105,13 +100,7 @@ class _PhonePickerState extends State<PhonePicker> {
               border: UnderlineInputBorder(
                   borderSide: BorderSide(
                       width: 2.0,
-                      color: const Color.fromRGBO(175, 173, 173, 0.4))),
-              focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                      width: 2.0,
-                      color: _isValid()
-                          ? Theme.of(context).primaryColor
-                          : Colors.redAccent))),
+                      color: const Color.fromRGBO(175, 173, 173, 0.4)))),
         ),
       )
     ]);

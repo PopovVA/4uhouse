@@ -12,7 +12,6 @@ import 'blocs/auth/auth_state.dart'
 import 'pallete.dart';
 import 'resources/auth_repository.dart' show AuthRepository;
 import 'typography.dart';
-import 'ui/pages/home/home.dart';
 import 'ui/pages/login/login.dart';
 
 class App extends StatefulWidget {
@@ -32,7 +31,7 @@ class _AppState extends State<App> {
   @override
   void initState() {
     authBloc = AuthBloc(authRepository: authRepository);
-    Future.delayed(Duration(seconds: 2), () {
+    Future<dynamic>.delayed(Duration(seconds: 2), () {
       authBloc.dispatch(AppStarted());
     });
     super.initState();
@@ -57,7 +56,7 @@ class _AppState extends State<App> {
         home: BlocBuilder<AuthEvent, AuthState>(
           bloc: authBloc,
           builder: (BuildContext context, AuthState state) {
-            print('===> state: ${state}');
+            print('===> state: $state');
             if ((state is AuthUninitialized) ||
                 (state is AuthCheckIfAuthorized)) {
               // TODO(Andrei): add splash screen here
@@ -66,7 +65,8 @@ class _AppState extends State<App> {
                 width: double.infinity,
                 height: double.infinity,
                 color: Colors.white,
-                child: Container(height: 5.0, child: LinearProgressIndicator()),
+                child: Container(
+                    height: 5.0, child: const LinearProgressIndicator()),
               );
             }
 

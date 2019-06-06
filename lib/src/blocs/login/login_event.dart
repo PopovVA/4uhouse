@@ -6,14 +6,15 @@ abstract class LoginEvent extends Equatable {
   LoginEvent([List<dynamic> props = const <dynamic>[]]) : super(props);
 }
 
-class SubmitPhoneTapped extends LoginEvent {
-  SubmitPhoneTapped(this.phone);
+class OtpRequested extends LoginEvent {
+  OtpRequested(this.phone);
 
   final String phone;
 
   @override
-  String toString() => 'SubmitPhoneTapped';
+  String toString() => 'OtpRequested';
 }
+
 
 class SubmitCodeTapped extends LoginEvent {
   SubmitCodeTapped(this.phone, this.code);
@@ -23,4 +24,13 @@ class SubmitCodeTapped extends LoginEvent {
 
   @override
   String toString() => 'SubmitCodeTapped';
+}
+
+class CodeEnteringCanceled extends LoginEvent {
+  CodeEnteringCanceled(this.phone);
+
+  final String phone;
+
+  @override
+  String toString() => 'CodeEnteringCanceled';
 }
