@@ -28,6 +28,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       } else if (event is SubmitCodeTapped) {
         try {
           yield IsFetchingCode();
+          authRepository.getOtp(event.phone, event.code.toString());
+          yield OtpSent();
         } catch (error) {
           yield* _mapErrorLoginTap();
         }
