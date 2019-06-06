@@ -22,7 +22,7 @@ class _PhonePickerState extends State<PhonePicker> {
 
   void _phoneListner() {
     if (widget.onSelected is Function) {
-      widget.onSelected(_isValid());
+      widget.onSelected(_isValid(), selectedItem, phone.text);
     }
   }
 

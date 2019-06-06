@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user_mobile/src/resources/phone_repository_test.dart';
 import 'package:user_mobile/src/ui/components/pickers/phone/phone_picker.dart';
+import '../../../../src/utils/route_transition.dart' show SlideRoute;
 import '../../../blocs/phone/phone_bloc.dart';
 import '../../../blocs/phone/phone_event.dart';
 import '../../../blocs/phone/phone_state.dart';
+import '../../../models/country_phone_data.dart';
 import '../../components/common/page_template.dart' show PageTemplate;
 import '../../components/common/snackbar.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
+import 'otp.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -18,6 +21,8 @@ class _LoginState extends State<Login> {
   bool isAgree = false;
   bool validPhone = false;
   PhoneBloc _bloc;
+  CountryPhoneData selectedItem;
+  String phone;
 
   @override
   void initState() {
@@ -60,9 +65,11 @@ class _LoginState extends State<Login> {
                         return Column(children: <Widget>[
                           _buildTittle(),
                           PhonePicker(
-                              onSelected: (bool value) {
+                              onSelected: (bool value, CountryPhoneData countryPhone, String inputtedPhone) {
                                 setState(() {
                                   validPhone = value;
+                                  selectedItem = countryPhone;
+                                  phone = inputtedPhone;
                                 });
                               },
                               countryPhoneDataList: state.data,
@@ -82,7 +89,7 @@ class _LoginState extends State<Login> {
                       //В постаноке не увидел описание этого состояния, сделал по аналогии с PhoneLoadingError
                       if (state is PhoneUninitialized) {
                         return Column(children: <Widget>[
-                          _buildTittle(),
+                            _buildTittle(),
                           const Text('Something went wrong'),
                           _buildTerms(),
                           _buildSubmit(),
@@ -145,7 +152,8 @@ class _LoginState extends State<Login> {
           loading: false,
           onPressed: isAgree && validPhone
               ? () {
-                  print('some action');
+                  Navigator.push(
+                      context, SlideRoute(widget: OtpScreen(selectedItem: selectedItem, phone: phone), side: "left"));
                 }
               : null,
           text: 'Submit',
