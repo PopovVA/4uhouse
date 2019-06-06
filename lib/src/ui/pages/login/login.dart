@@ -127,7 +127,7 @@ class _LoginState extends State<Login> {
                         const Text('I accept the',
                             style: TextStyle(
                                 fontSize: 16.0, color: Color(0xde000000))),
-                        Text('Term and conditions,',
+                        Text(' Term and conditions,',
                             style: TextStyle(
                                 fontSize: 16.0,
                                 color: Theme.of(context).primaryColor))

@@ -86,11 +86,6 @@ class _PhonePickerState extends State<PhonePicker> {
         child: TextField(
           autofocus: true,
           controller: phone,
-//          onChanged: (String val) {
-//            return widget.onSelected is Function && selectedItem != null
-//                ? widget.onSelected(validPhone, selectedItem)
-//                : null;
-//          },
           style: const TextStyle(fontSize: 16.0, color: Color(0xde000000)),
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration.collapsed(
