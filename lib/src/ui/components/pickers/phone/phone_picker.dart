@@ -26,8 +26,8 @@ class _PhonePickerState extends State<PhonePicker> {
     }
   }
 
-  bool _isValid(){
-   return phone.text.isNotEmpty &&
+  bool _isValid() {
+    return phone.text.isNotEmpty &&
         selectedItem != null &&
         _validLength(selectedItem.length, phone.text.length) &&
         hasMatch(phone.text, selectedItem.numberPattern);
@@ -73,7 +73,7 @@ class _PhonePickerState extends State<PhonePicker> {
                       style: const TextStyle(
                           color: Color(0xde000000), fontSize: 16.0))),
               onTap: () async {
-                final result = await showSearch(
+                final dynamic result = await showSearch(
                   context: context,
                   delegate: CustomSearchDelegate(
                       onSelected: (close(
@@ -96,7 +96,7 @@ class _PhonePickerState extends State<PhonePicker> {
           style: const TextStyle(fontSize: 16.0, color: Color(0xde000000)),
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.all(0.0),
+              contentPadding: const EdgeInsets.all(0.0),
               hintText: selectedItem == null
                   ? widget.countryPhoneDataList[0].example.toString()
                   : selectedItem.example.toString(),
@@ -109,7 +109,9 @@ class _PhonePickerState extends State<PhonePicker> {
               focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
                       width: 2.0,
-                      color: _isValid() ? Theme.of(context).primaryColor : Colors.redAccent))),
+                      color: _isValid()
+                          ? Theme.of(context).primaryColor
+                          : Colors.redAccent))),
         ),
       )
     ]);
