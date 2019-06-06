@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:user_mobile/src/blocs/auth/auth_bloc.dart';
 import 'package:user_mobile/src/resources/auth_repository.dart';
 
@@ -16,31 +15,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     if (initialState == PhoneEntering()) {
-      if (event is SubmitPhoneTapped) {
+      if (event is SubmitPhoneTapped /*|| event is ResendOtpTapped*/) {
         try {
           yield IsFetchingOtp();
           final String codeChallenge = await authRepository.generatePkce();
           authRepository.getOtp(event.phone, codeChallenge);
           yield OtpSent();
         } catch (error) {
-          yield* _mapErrorLoginTap();
+          yield PhoneError();
         }
       } else if (event is SubmitCodeTapped) {
         try {
           yield IsFetchingCode();
-          authRepository.getOtp(event.phone, event.code.toString());
-          yield OtpSent();
         } catch (error) {
-          yield* _mapErrorLoginTap();
-        }
-      } else if (event is ResendOtpTapped) {
-        try {
-          yield IsFetchingOtp();
-          final String codeChallenge = await authRepository.generatePkce();
-          authRepository.getOtp(event.phone, codeChallenge);
-          yield OtpSent();
-        } catch (error) {
-          yield* _mapErrorLoginTap();
+          yield CodeError();
         }
       }
     } else {
@@ -50,7 +38,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
-  Stream<LoginState> _mapErrorLoginTap() async* {
+/* Stream<LoginState> _mapErrorLoginTap() async* {
     final bool internet = await checkInternet();
     if (internet) {
       yield CodeError();
@@ -68,5 +56,5 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       return true;
     }
     return false;
-  }
+  }*/
 }
