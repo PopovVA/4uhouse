@@ -63,7 +63,7 @@ class _OtpScreenState extends State<OtpScreen> {
   }
 
   void _codeListner() {
-    print(code.text);
+    print(code);
   }
 
   @override
@@ -79,7 +79,7 @@ class _OtpScreenState extends State<OtpScreen> {
             BlocListener<LoginEvent, LoginState>(
               bloc: _bloc,
               listener: (BuildContext context, LoginState state) {
-                print(state.toString());
+                print('===> state listener name : ' + state.toString());
                 if (state is PhoneError || state is CodeError) {
                   Scaffold.of(context).showSnackBar(const CustomSnackBar(
                     content: Text('Something went wrong'),
@@ -106,6 +106,7 @@ class _OtpScreenState extends State<OtpScreen> {
               child: BlocBuilder<LoginEvent, LoginState>(
                   bloc: _bloc,
                   builder: (BuildContext context, LoginState state) {
+                    print('===> state builder name : ' + state.toString());
                     if (state is OtpSent) {
                       return _buildCodeInput();
                     }
