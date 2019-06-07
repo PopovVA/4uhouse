@@ -27,6 +27,12 @@ class _LoginState extends State<Login> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _bloc.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return PageTemplate(
         goBack: null,

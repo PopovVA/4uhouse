@@ -9,8 +9,12 @@ import '../../../../blocs/auth/auth_state.dart' show AuthState, AuthAuthorized;
 
 import 'drawer_header.dart' show Header;
 
-// ignore: must_be_immutable
-class DrawerOnly extends StatelessWidget {
+class DrawerOnly extends StatefulWidget {
+  @override
+  State createState() => DrawerState();
+}
+
+class DrawerState extends State<DrawerOnly> {
   int _selectedDrawerIndex = 0;
 
   @override
