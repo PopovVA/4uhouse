@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:user_mobile/src/resources/phone_repository_test.dart';
+import 'package:user_mobile/src/resources/auth_repository.dart';
 import 'package:user_mobile/src/ui/components/pickers/phone/phone_picker.dart';
 import '../../../blocs/auth/auth_state.dart';
 import '../../../blocs/login/login_bloc.dart';
@@ -56,13 +56,13 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   void initState() {
     super.initState();
-    _bloc = LoginBloc();
+    _bloc = LoginBloc(AuthRepository());
     _bloc.dispatch(OtpRequested(widget.phone));
-    code.addListener(_codeListner);
+    code.addListener(_codeListener);
     startTimer();
   }
 
-  void _codeListner() {
+  void _codeListener() {
     print(code);
   }
 
@@ -88,6 +88,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 }
                 if (state is CodeError) {
                   //Очищаешь TextField.
+                  print('CodeError');
                   setState(() {
                     code.clear();
                   });
@@ -107,6 +108,10 @@ class _OtpScreenState extends State<OtpScreen> {
                   bloc: _bloc,
                   builder: (BuildContext context, LoginState state) {
                     print('===> state builder name : ' + state.toString());
+                    if (state is PhoneEntering){
+                      // Если убрать это из билдера то ошибка
+                      return Container();
+                    }
                     if (state is OtpSent) {
                       return _buildCodeInput();
                     }
