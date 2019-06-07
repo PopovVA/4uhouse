@@ -15,8 +15,9 @@ class AppScreens extends StatelessWidget {
         textTheme: customTextTheme,
       ),
       home: Screen('user/property'),
-      onGenerateRoute: (RouteSettings settings) => MaterialPageRoute(
-          builder: (context) =>
+      onGenerateRoute: (RouteSettings settings) =>
+          MaterialPageRoute<dynamic>(
+              builder: (BuildContext context) =>
               Screen(settings.name, arguments: settings.arguments)),
     );
   }

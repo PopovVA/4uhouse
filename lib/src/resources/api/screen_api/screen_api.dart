@@ -1,5 +1,4 @@
-import 'dart:async' show Completer, Future;
-import 'dart:convert' show json, utf8;
+import 'dart:async' show Future;
 import 'package:meta/meta.dart' show required;
 
 import 'package:http/http.dart' as http;
@@ -56,7 +55,7 @@ class ScreenApi extends Api {
       } else {
         throw response;
       }
-    }catch(error){
+    } catch (error) {
       throw inferError(error);
     }
   }
@@ -89,7 +88,7 @@ class ScreenApi extends Api {
       } else {
         throw response;
       }
-    }catch(error){
+    } catch (error) {
       throw inferError(error);
     }
   }

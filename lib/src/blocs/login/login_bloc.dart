@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:user_mobile/src/blocs/auth/auth_bloc.dart';
 import 'package:user_mobile/src/resources/auth_repository.dart';
 
@@ -16,20 +15,30 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     if (initialState == PhoneEntering()) {
-      if (event is SubmitPhoneTapped) {
+      if (event is OtpRequested) {
         try {
-          yield IsLoading();
+          yield IsFetchingOtp();
           final String codeChallenge = await authRepository.generatePkce();
           authRepository.getOtp(event.phone, codeChallenge);
           yield OtpSent();
         } catch (error) {
-          yield* _mapErrorLoginTap();
+          yield PhoneError();
         }
-      } else if (event is SubmitCodeTapped) {}
+      } else if (event is SubmitCodeTapped) {
+        try {
+          yield IsFetchingCode();
+        } catch (error) {
+          yield CodeError();
+        }
+      }
+    } else {
+      if (event is CodeEnteringCanceled) {
+        yield PhoneEntering();
+      }
     }
   }
 
-  Stream<LoginState> _mapErrorLoginTap() async* {
+/* Stream<LoginState> _mapErrorLoginTap() async* {
     final bool internet = await checkInternet();
     if (internet) {
       yield CodeError();
@@ -47,5 +56,5 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       return true;
     }
     return false;
-  }
+  }*/
 }

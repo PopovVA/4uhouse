@@ -1,6 +1,5 @@
 import 'dart:async' show Future;
 import 'package:meta/meta.dart' show required;
-
 import 'package:http/http.dart' as http;
 import 'package:flutter_appauth/flutter_appauth.dart'
     show
@@ -10,7 +9,7 @@ import 'package:flutter_appauth/flutter_appauth.dart'
         FlutterAppAuth,
         TokenRequest,
         TokenResponse;
-
+import '../api/screen_api/constants/url.dart' show BASE_URL;
 import 'api.dart';
 
 class AuthApi extends Api {
@@ -99,7 +98,7 @@ class AuthApi extends Api {
       String phone, String codeChallenge, String deviceId) async {
     try {
       final http.Response response = await http.post(
-        'https://dev.auth.4u.house/auth/realms/4uhouse/protocol/openid-connect/logout',
+        '${BASE_URL}otp',
         body: <String, String>{
           'codeChallenge': codeChallenge,
           'deviceId': deviceId,

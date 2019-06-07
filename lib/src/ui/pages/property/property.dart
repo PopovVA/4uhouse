@@ -7,7 +7,7 @@ import '../../components/common/page_template.dart';
 import 'components/property_card_body.dart' show PropertyCard;
 
 class AddProperty extends StatelessWidget {
-  final String _roomBs64 = RoomBs64().room_bs64();
+  final String _roomBs64 = RoomBs64().roomBs64();
 
   @override
   Widget build(BuildContext context) {

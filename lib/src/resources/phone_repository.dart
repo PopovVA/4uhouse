@@ -6,12 +6,12 @@ class PhoneRepository {
   final PhoneApi phoneApi = PhoneApi();
 
   Future<List<CountryPhoneData>> getCountriesPhoneData() async {
-    List<CountryPhoneData> list = <CountryPhoneData>[];
+    final List<CountryPhoneData> list = <CountryPhoneData>[];
     final List<Map<String, dynamic>> data =
         await phoneApi.requestCountriesPhoneData();
-    data.forEach((Map<String, dynamic> country) {
+    for (Map<String, dynamic> country in data) {
       list.add(CountryPhoneData.fromJson(country));
-    });
+    }
     return list;
   }
 }

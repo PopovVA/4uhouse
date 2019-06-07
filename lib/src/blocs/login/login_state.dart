@@ -14,9 +14,14 @@ class PhoneEntering extends LoginState {
   String toString() => 'PhoneEntering';
 }
 
-class IsLoading extends LoginState {
+class IsFetchingOtp extends LoginState {
   @override
-  String toString() => 'isLoading';
+  String toString() => 'isFetchingOtp';
+}
+
+class IsFetchingCode extends LoginState {
+  @override
+  String toString() => 'isFetchingCode';
 }
 
 class OtpSent extends LoginState {
