@@ -5,16 +5,19 @@ class Note extends StatelessWidget {
   Note(NoteModel note)
       // ignore: prefer_initializing_formals
       : note = note,
-        id = note.id;
+        id = note.id,
+        color = note.color;
 
   final NoteModel note;
   final String id;
+  final int color;
 
   static const int HIGHLIGHT_COLOR = 0xFFdeff0000;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Color(color),
       alignment: Alignment.centerLeft,
       width: double.infinity,
       height: 54.0,
