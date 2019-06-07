@@ -21,7 +21,4 @@ class PhoneApi extends Api {
     }
   }
 
-  countryLookUp() {
-
-  }
 }
