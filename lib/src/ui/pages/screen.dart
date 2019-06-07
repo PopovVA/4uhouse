@@ -46,6 +46,11 @@ class _ScreenState extends State<Screen> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    screenBloc.dispose();
+  }
   void scrollToItem(GlobalKey key) {
     if (key != null) {
       Scrollable.ensureVisible(key.currentContext);
