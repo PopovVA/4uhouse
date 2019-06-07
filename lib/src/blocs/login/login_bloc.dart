@@ -16,14 +16,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     if (initialState == PhoneEntering()) {
       if (event is OtpRequested) {
-        try {
-          yield IsFetchingOtp();
-          final String codeChallenge = await authRepository.generatePkce();
-          authRepository.getOtp(event.phone, codeChallenge);
+//        try {
+//          yield IsFetchingOtp();
+//          final String codeChallenge = await authRepository.generatePkce();
+//          authRepository.getOtp(event.phone, codeChallenge);
           yield OtpSent();
-        } catch (error) {
-          yield PhoneError();
-        }
+//        } catch (error) {
+//          yield PhoneError();
+//        }
       } else if (event is SubmitCodeTapped) {
         try {
           yield IsFetchingCode();
