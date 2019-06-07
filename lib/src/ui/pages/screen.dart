@@ -114,7 +114,8 @@ class _ScreenState extends State<Screen> {
         } else if (component is NoteModel) {
           items.add(Note(component));
         } else if (component is PropertyModel) {
-          items.add(Property(component, makeTransition: makeTransition));
+          items.add(Property(component,
+              makeTransition: component.isTransition ? makeTransition : null));
         } else if (component is ButtonModel) {
           buttons.add(Button(
             component,
