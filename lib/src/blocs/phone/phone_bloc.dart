@@ -20,6 +20,8 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
       try {
         final List<CountryPhoneData> data =
             await repository.getCountriesPhoneData();
+        final String countryCode = await repository.getCountryByIp();
+        print('Your countryCode is $countryCode');
         yield PhoneCountriesDataLoaded(data);
       } catch (error) {
         print('=> PhoneState => $error');
