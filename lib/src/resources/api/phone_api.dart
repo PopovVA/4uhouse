@@ -1,5 +1,4 @@
 import 'dart:async' show Future;
-import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:user_mobile/src/models/location.dart';
 import '../api/screen_api/constants/url.dart' show BASE_URL;
