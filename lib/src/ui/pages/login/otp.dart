@@ -35,12 +35,16 @@ class _OtpScreenState extends State<OtpScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    const Text('Verification code was sent'),
-                    const Text('to the number'),
-                    Text('+ (' +
-                        widget.selectedItem.code.toString() +
-                        ') ' +
-                        widget.phone)
+                    const Text('Verification code was sent',
+                        style: TextStyle(fontSize: 16.0)),
+                    const Text('to the number',
+                        style: TextStyle(fontSize: 16.0)),
+                    Text(
+                        '+ (' +
+                            widget.selectedItem.code.toString() +
+                            ') ' +
+                            widget.phone,
+                        style: const TextStyle(fontSize: 16.0))
                   ],
                 )),
             Container(
