@@ -42,7 +42,6 @@ class _ScreenState extends State<Screen> {
 
   @override
   void initState() {
-    print('dsadsadasdasdsadas');
     screenBloc = ScreenBloc(
         authRepository: AuthRepository(),
         screenRepository: TestScreenRepository());

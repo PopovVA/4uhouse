@@ -13,6 +13,8 @@ class PropertyModel extends ComponentModel {
         _paymentPeriod = json['paymentPeriod'],
         _mainInfo = json['mainInfo'],
         _address = json['address'],
+        _isTransition = json['isTransition'],
+        _isInput = json['isInput'],
         super.fromJson(json['component']);
 
   String _id;
@@ -25,6 +27,8 @@ class PropertyModel extends ComponentModel {
   String _paymentPeriod;
   String _mainInfo;
   String _address;
+  bool _isTransition;
+  bool _isInput;
 
   String get id => _id;
 
@@ -45,4 +49,8 @@ class PropertyModel extends ComponentModel {
   String get mainInfo => _mainInfo;
 
   String get address => _address;
+
+  bool get isTransition => _isTransition;
+
+  bool get isInput => _isInput;
 }

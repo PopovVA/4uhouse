@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 import '../../src/models/screen/screen_model.dart';
-
 import 'screen_repository.dart';
 
 class TestScreenRepository extends ScreenRepository {
