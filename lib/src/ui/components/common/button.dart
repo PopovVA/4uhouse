@@ -21,8 +21,7 @@ class _ButtonState extends State<Button> {
 
   @override
   Widget build(BuildContext context) {
-    final ButtonModel button = widget.button;
-    print(widget.path);
+    final ButtonModel button = widget.button;z
     return StyledButton(
       text: button.key.toUpperCase(),
       onPressed: button.isAble
