@@ -31,11 +31,13 @@ class Property extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        if (makeTransition is Function) {
-          makeTransition(context, property.id);
-        }
-      },
+      onTap: property.isTransition
+          ? () {
+              if (makeTransition is Function) {
+                makeTransition(context, property.id);
+              }
+            }
+          : null,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
