@@ -93,9 +93,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 if (state is CodeError) {
                   //Очищаешь TextField.
                   print('CodeError');
-                  setState(() {
-                    code.clear();
-                  });
+                  code.clear();
                 }
                 if (state is PhoneEntering) {
                   //Убиваем рут (возвращаемся на экран ввода номера телефона).
