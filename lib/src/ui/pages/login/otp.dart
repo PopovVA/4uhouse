@@ -82,10 +82,6 @@ class _OtpScreenState extends State<OtpScreen> {
                 bloc: widget.loginBloc,
                 builder: (BuildContext context, LoginState state) {
                   print('===> state builder name : ' + state.toString());
-//                  if (state is PhoneEntering) {
-//                    // В постановке этот стейт есть только в BlocListener
-//                    return Container();
-//                  }
                   if (state is OtpSent) {
                     return Column(children: <Widget>[
                       _buildHeadLine(),
