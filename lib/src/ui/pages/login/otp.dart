@@ -6,7 +6,7 @@ import '../../../blocs/login/login_event.dart';
 import '../../../blocs/login/login_state.dart';
 import '../../../models/country_phone_data.dart';
 import '../../components/common/page_template.dart' show PageTemplate;
-import '../../components/common/resend.dart';
+import 'package:user_mobile/src/ui/components/resend.dart';
 import '../../components/common/snackbar.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
 
