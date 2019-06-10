@@ -6,7 +6,6 @@ import '../../../../src/utils/route_transition.dart' show SlideRoute;
 import '../../../blocs/auth/auth_bloc.dart';
 import '../../../blocs/login/login_bloc.dart';
 import '../../../blocs/login/login_event.dart';
-import '../../../blocs/login/login_state.dart';
 import '../../../blocs/phone/phone_bloc.dart';
 import '../../../blocs/phone/phone_event.dart';
 import '../../../blocs/phone/phone_state.dart';

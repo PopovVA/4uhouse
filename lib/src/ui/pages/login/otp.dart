@@ -1,18 +1,14 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:user_mobile/src/resources/auth_repository.dart';
-import '../../../blocs/auth/auth_bloc.dart';
 import '../../../blocs/auth/auth_state.dart';
 import '../../../blocs/login/login_bloc.dart';
 import '../../../blocs/login/login_event.dart';
 import '../../../blocs/login/login_state.dart';
 import '../../../models/country_phone_data.dart';
-import '../../../resources/auth_repository.dart';
 import '../../components/common/page_template.dart' show PageTemplate;
+import '../../components/common/resend.dart';
 import '../../components/common/snackbar.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
-import '../../components/common/resend.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen(
