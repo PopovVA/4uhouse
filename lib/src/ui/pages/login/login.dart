@@ -3,16 +3,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user_mobile/src/resources/phone_repository_test.dart';
 import 'package:user_mobile/src/ui/components/pickers/phone/phone_picker.dart';
 import '../../../../src/utils/route_transition.dart' show SlideRoute;
+import '../../../blocs/auth/auth_bloc.dart';
+import '../../../blocs/login/login_bloc.dart';
+import '../../../blocs/login/login_event.dart';
+import '../../../blocs/login/login_state.dart';
 import '../../../blocs/phone/phone_bloc.dart';
 import '../../../blocs/phone/phone_event.dart';
 import '../../../blocs/phone/phone_state.dart';
 import '../../../models/country_phone_data.dart';
+import '../../../resources/auth_repository.dart';
 import '../../components/common/page_template.dart' show PageTemplate;
 import '../../components/common/snackbar.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
 import 'otp.dart';
 
 class Login extends StatefulWidget {
+  const Login({@required this.authBloc});
+
+  final AuthBloc authBloc;
+
   @override
   _LoginState createState() => _LoginState();
 }
@@ -21,6 +30,7 @@ class _LoginState extends State<Login> {
   bool isAgree = false;
   bool validPhone = false;
   PhoneBloc _bloc;
+  LoginBloc _loginBloc;
   CountryPhoneData selectedItem;
   String phone;
 
@@ -29,6 +39,7 @@ class _LoginState extends State<Login> {
     super.initState();
     _bloc = PhoneBloc(TestPhoneRepository());
     _bloc.dispatch(PhoneInitialized());
+    _loginBloc = LoginBloc(widget.authBloc, AuthRepository());
   }
 
   @override
@@ -65,7 +76,9 @@ class _LoginState extends State<Login> {
                         return Column(children: <Widget>[
                           _buildTittle(),
                           PhonePicker(
-                              onSelected: (bool value, CountryPhoneData countryPhone, String inputtedPhone) {
+                              onSelected: (bool value,
+                                  CountryPhoneData countryPhone,
+                                  String inputtedPhone) {
                                 setState(() {
                                   validPhone = value;
                                   selectedItem = countryPhone;
@@ -89,7 +102,7 @@ class _LoginState extends State<Login> {
                       //В постаноке не увидел описание этого состояния, сделал по аналогии с PhoneLoadingError
                       if (state is PhoneUninitialized) {
                         return Column(children: <Widget>[
-                            _buildTittle(),
+                          _buildTittle(),
                           const Text('Something went wrong'),
                           _buildTerms(),
                           _buildSubmit(),
@@ -152,8 +165,13 @@ class _LoginState extends State<Login> {
           loading: false,
           onPressed: isAgree && validPhone
               ? () {
+                _loginBloc.dispatch(OtpRequested(phone));
                   Navigator.push(
-                      context, SlideRoute(widget: OtpScreen(selectedItem: selectedItem, phone: phone), side: "left"));
+                      context,
+                      SlideRoute(
+                          widget: OtpScreen(loginBloc:_loginBloc,
+                              selectedItem: selectedItem, phone: phone),
+                          side: "left"));
                 }
               : null,
           text: 'Submit',

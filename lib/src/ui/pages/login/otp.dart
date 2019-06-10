@@ -15,54 +15,25 @@ import '../../components/common/styled_button.dart' show StyledButton;
 import '../../components/common/resend.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({@required this.selectedItem, @required this.phone});
+  const OtpScreen({@required this.loginBloc,@required this.selectedItem, @required this.phone});
 
   final CountryPhoneData selectedItem;
   final String phone;
+  final LoginBloc loginBloc;
 
   @override
   _OtpScreenState createState() => _OtpScreenState();
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-  LoginBloc _bloc;
   bool isFetchingCode = false;
   final int maxLength = 6;
   TextEditingController code = TextEditingController();
-  Timer timer;
-  int start;
-
-  void startTimer() {
-    start = 60;
-    const Duration oneSec = Duration(seconds: 1);
-    timer = Timer.periodic(
-      oneSec,
-      (Timer timer) => setState(
-            () {
-              if (start < 1) {
-                timer.cancel();
-              } else {
-                start = start - 1;
-              }
-            },
-          ),
-    );
-  }
-
-  @override
-  void dispose() {
-    timer.cancel();
-    super.dispose();
-  }
 
   @override
   void initState() {
     super.initState();
-    _bloc =
-        LoginBloc(AuthBloc(authRepository: AuthRepository()), AuthRepository());
-    _bloc.dispatch(OtpRequested(widget.phone));
     code.addListener(_codeListener);
-    startTimer();
   }
 
   void _codeListener() {
@@ -73,7 +44,7 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget build(BuildContext context) {
     return PageTemplate(
         goBack: () {
-          _bloc.dispatch(CodeEnteringCanceled(widget.phone));
+          widget.loginBloc.dispatch(CodeEnteringCanceled(widget.phone));
           Navigator.pop(context);
         },
         title: 'Confirm',
@@ -81,7 +52,7 @@ class _OtpScreenState extends State<OtpScreen> {
           padding: const EdgeInsets.only(left: 14.0, right: 14.0),
           margin: const EdgeInsets.only(bottom: 12.0),
           child: BlocListener<LoginEvent, LoginState>(
-            bloc: _bloc,
+            bloc: widget.loginBloc,
             listener: (BuildContext context, LoginState state) {
               print('===> state listener name : ' + state.toString());
               if (state is PhoneError || state is CodeError) {
@@ -98,8 +69,7 @@ class _OtpScreenState extends State<OtpScreen> {
               if (state is PhoneEntering) {
                 //Убиваем рут (возвращаемся на экран ввода номера телефона).
                 print('PhoneEntering');
-                //Так как это стартовый стейт в LoginBloc роут закрывается при открытии, поэтому закоментил, возможно в постановке ошибка?
-                //Navigator.pop(context);
+                Navigator.pop(context);
               }
               if (state is AuthAuthorized) {
                 //Убиваем оба рута (страница ввода номера телефона, страница ввода sms-кода).
@@ -109,13 +79,13 @@ class _OtpScreenState extends State<OtpScreen> {
               }
             },
             child: BlocBuilder<LoginEvent, LoginState>(
-                bloc: _bloc,
+                bloc: widget.loginBloc,
                 builder: (BuildContext context, LoginState state) {
                   print('===> state builder name : ' + state.toString());
-                  if (state is PhoneEntering) {
-                    // В постановке этот стейт есть только в BlocListener
-                    return Container();
-                  }
+//                  if (state is PhoneEntering) {
+//                    // В постановке этот стейт есть только в BlocListener
+//                    return Container();
+//                  }
                   if (state is OtpSent) {
                     return Column(children: <Widget>[
                       _buildHeadLine(),
@@ -123,7 +93,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       Resend(
                           type: 'Timer',
                           onPressed: () {
-                            _bloc.dispatch(OtpRequested(widget.phone));
+                            widget.loginBloc.dispatch(OtpRequested(widget.phone));
                           }),
                       _buildSendButton()
                     ]);
@@ -146,7 +116,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       Resend(
                           type: 'Timer',
                           onPressed: () {
-                            _bloc.dispatch(OtpRequested(widget.phone));
+                            widget.loginBloc.dispatch(OtpRequested(widget.phone));
                           }),
                       _buildSendButton()
                     ]);
@@ -155,27 +125,6 @@ class _OtpScreenState extends State<OtpScreen> {
           ),
         ));
   }
-
-//  Widget _buildResentCode() {
-//    return Container(
-//        margin: start != 0
-//            ? const EdgeInsets.only(top: 18.0)
-//            : const EdgeInsets.only(top: 2.0),
-//        child: start != 0
-//            ? Text('Resend code through 00.$start sec',
-//                style: const TextStyle(fontSize: 14, color: Color(0x8a000000)))
-//            : FlatButton(
-//                onPressed: () {
-//                  _bloc.dispatch(OtpRequested(widget.phone));
-//                  setState(() {
-//                    startTimer();
-//                  });
-//                },
-//                child: Text('Resent code',
-//                    style: TextStyle(
-//                        fontSize: 14.0,
-//                        color: Theme.of(context).primaryColor))));
-//  }
 
   Widget _buildHeadLine() {
     return Container(
@@ -207,7 +156,7 @@ class _OtpScreenState extends State<OtpScreen> {
           onPressed: isFetchingCode == false && code.text.length != maxLength
               ? null
               : () {
-                  _bloc.dispatch(
+            widget.loginBloc.dispatch(
                       SubmitCodeTapped(widget.phone, int.parse(code.text)));
                 },
           text: 'Send',

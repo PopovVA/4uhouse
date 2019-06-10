@@ -19,9 +19,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (initialState == PhoneEntering()) {
       if (event is OtpRequested) {
         try {
-          yield IsFetchingOtp();
-          final String codeChallenge = await authRepository.generatePkce();
-          authRepository.getOtp(event.phone, codeChallenge);
+//          yield IsFetchingOtp();
+//          final String codeChallenge = await authRepository.generatePkce();
+//          authRepository.getOtp(event.phone, codeChallenge);
           yield OtpSent();
         } catch (error) {
           yield PhoneError();

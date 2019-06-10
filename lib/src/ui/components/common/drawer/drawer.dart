@@ -72,7 +72,9 @@ class DrawerOnly extends StatelessWidget {
                                 position: 8, onTap: () {
                                 Navigator.push(
                                   context,
-                                  SlideRoute(widget: Login(), side: 'left'),
+                                  SlideRoute(
+                                      widget: Login(authBloc: authBloc),
+                                      side: 'left'),
                                 );
                                 //authBloc.dispatch(LoginButtonPressed());
                               }),
