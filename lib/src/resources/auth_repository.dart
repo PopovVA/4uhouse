@@ -36,7 +36,7 @@ class AuthRepository {
   Future<UserProfile> loadUserProfile({@required String accessToken}) async {
     if (accessToken is String && accessToken.isNotEmpty) {
       final Map<String, dynamic> decodedUserProfile =
-          await _authApi.loadUserProfile(accessToken: accessToken);
+      await _authApi.loadUserProfile(accessToken: accessToken);
       return UserProfile.fromJson(decodedUserProfile);
     }
 
@@ -111,13 +111,15 @@ class AuthRepository {
 
   Future<String> getDeviceId() async {
     final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    final AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-    print('Running on ${androidInfo.model}');
-
-    final IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
-    print('Running on ${iosInfo.utsname.machine}');
-
-    return androidInfo != null ? androidInfo.model : iosInfo.utsname.machine;
+    try {
+      final IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+      print('Running on ${iosInfo.utsname.machine}');
+      return iosInfo.utsname.machine;
+    } catch (error) {
+      final AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      print('Running on ${androidInfo.model}');
+      return androidInfo.model;
+    }
   }
 
   Future<void> getOtp(String phone, String codeChallenge) async {

@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user_mobile/src/resources/auth_repository.dart';
 import 'package:user_mobile/src/ui/components/pickers/phone/phone_picker.dart';
+import '../../../blocs/auth/auth_bloc.dart';
 import '../../../blocs/auth/auth_state.dart';
 import '../../../blocs/login/login_bloc.dart';
 import '../../../blocs/login/login_event.dart';
 import '../../../blocs/login/login_state.dart';
 import '../../../models/country_phone_data.dart';
+import '../../../resources/auth_repository.dart';
 import '../../components/common/page_template.dart' show PageTemplate;
 import '../../components/common/snackbar.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
@@ -35,15 +37,15 @@ class _OtpScreenState extends State<OtpScreen> {
     const Duration oneSec = Duration(seconds: 1);
     timer = Timer.periodic(
       oneSec,
-      (Timer timer) => setState(
+          (Timer timer) => setState(
             () {
-              if (start < 1) {
-                timer.cancel();
-              } else {
-                start = start - 1;
-              }
-            },
-          ),
+          if (start < 1) {
+            timer.cancel();
+          } else {
+            start = start - 1;
+          }
+        },
+      ),
     );
   }
 
@@ -56,7 +58,7 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   void initState() {
     super.initState();
-    _bloc = LoginBloc(AuthRepository());
+    _bloc = LoginBloc(AuthBloc(authRepository: AuthRepository()), AuthRepository());
     _bloc.dispatch(OtpRequested(widget.phone));
     code.addListener(_codeListener);
     startTimer();
@@ -109,7 +111,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   builder: (BuildContext context, LoginState state) {
                     print('===> state builder name : ' + state.toString());
                     if (state is PhoneEntering){
-                      // Если убрать это из билдера то ошибка
+                      // В постановке этот стейт есть только в BlocListener
                       return Container();
                     }
                     if (state is OtpSent) {
@@ -140,18 +142,18 @@ class _OtpScreenState extends State<OtpScreen> {
         margin: const EdgeInsets.only(top: 18.0),
         child: start != 0
             ? Text('Resend code through 00.$start sec',
-                style: const TextStyle(fontSize: 14, color: Color(0x8a000000)))
+            style: const TextStyle(fontSize: 14, color: Color(0x8a000000)))
             : InkWell(
-                onTap: () {
-                  _bloc.dispatch(OtpRequested(widget.phone));
-                  setState(() {
-                    startTimer();
-                  });
-                },
-                child: Text('Resent code',
-                    style: TextStyle(
-                        fontSize: 14.0,
-                        color: Theme.of(context).primaryColor))));
+            onTap: () {
+              _bloc.dispatch(OtpRequested(widget.phone));
+              setState(() {
+                startTimer();
+              });
+            },
+            child: Text('Resent code',
+                style: TextStyle(
+                    fontSize: 14.0,
+                    color: Theme.of(context).primaryColor))));
   }
 
   Widget _buildHeadLine() {
@@ -177,19 +179,19 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget _buildSendButton() {
     return Container(
         child: Expanded(
-      child: Align(
-        alignment: FractionalOffset.bottomCenter,
-        child: StyledButton(
-          loading: isFetchingCode ? true : false,
-          onPressed: isFetchingCode == false && code.text.length != maxLength
-              ? null
-              : () {
-                  print('test');
-                },
-          text: 'Send',
-        ),
-      ),
-    ));
+          child: Align(
+            alignment: FractionalOffset.bottomCenter,
+            child: StyledButton(
+              loading: isFetchingCode ? true : false,
+              onPressed: isFetchingCode == false && code.text.length != maxLength
+                  ? null
+                  : () {
+                print('test');
+              },
+              text: 'Send',
+            ),
+          ),
+        ));
   }
 
   Widget _buildCodeInput() {
