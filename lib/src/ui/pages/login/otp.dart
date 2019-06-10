@@ -73,7 +73,10 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     return PageTemplate(
-        goBack: () => _bloc.dispatch(CodeEnteringCanceled(widget.phone)),
+        goBack: () {
+          _bloc.dispatch(CodeEnteringCanceled(widget.phone));
+          Navigator.pop(context);
+        },
         title: 'Confirm',
         body: Container(
           padding: const EdgeInsets.only(left: 14.0, right: 14.0),
