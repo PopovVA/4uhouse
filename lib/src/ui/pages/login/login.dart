@@ -37,6 +37,7 @@ class _LoginState extends State<Login> {
             child: BlocListener<PhoneEvent, PhoneState>(
                 bloc: _bloc,
                 listener: (BuildContext context, PhoneState state) {
+                  print('===> state listener name : ' + state.toString());
                   if (state is PhoneLoadingError) {
                     Scaffold.of(context).showSnackBar(const CustomSnackBar(
                       content: Text('Something went wrong'),
@@ -47,6 +48,7 @@ class _LoginState extends State<Login> {
                 child: BlocBuilder<PhoneEvent, PhoneState>(
                     bloc: _bloc,
                     builder: (BuildContext context, PhoneState state) {
+                      print('===> state builder name : ' + state.toString());
                       if (state is PhoneLoading) {
                         return Column(children: <Widget>[
                           _buildTittle(),
