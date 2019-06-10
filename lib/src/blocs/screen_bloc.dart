@@ -43,21 +43,23 @@ class ScreenBloc {
       _screen.sink.add(screenModel);
     } else {
       _screen.sink.add(testModel);
-
+sendItemValue('fsdfdsfdsf', 'sdfdsfdsf', 'PUT');
       // TODO(Andrei): show snackbar error
     }
   }
 
-  Future<void> sendItemValue(String route, dynamic value,
+  Future<void> sendItemValue(String route, dynamic value,String typeQuery,
       {dynamic body}) async {
-    final String token = await this.token;
-    if ((token is String) && token.isNotEmpty) {
+    print('dsfdsfdsf');
+    //final String token = await this.token;
+    //if ((token is String) && token.isNotEmpty) {
       final ScreenModel screenModel =
-          await screenRepository.sendItemValue(route, value, body: body);
+          await screenRepository.sendItemValue(route, value,typeQuery, body: body,);
       _screen.sink.add(screenModel);
-    } else {
+    //} else {
+
       // TODO(Andrei): show snackbar error
-    }
+    //}
   }
 
   void dispose() {
