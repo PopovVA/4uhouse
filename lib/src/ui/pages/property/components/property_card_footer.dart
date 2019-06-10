@@ -25,7 +25,6 @@ class PropertyFooter extends StatelessWidget {
         return TextStyle(
             fontSize: 14.0, color: isInput&&isInput!=null ? ACTIVE_COLOR : DISABLED_COLOR);
 
-        break;
       default:
         return TextStyle(
             fontSize: 20.0,
