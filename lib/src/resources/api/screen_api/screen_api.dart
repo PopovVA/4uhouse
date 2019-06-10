@@ -45,8 +45,6 @@ class ScreenApi extends Api {
       String token,
       String typeQuery}) async {
     // Form and send request
-    print(          _componentUri(route: query, value: value, typeQuery: typeQuery),
-    );
     final Map<String, String> headers =
         ((token is String) && token.isNotEmpty) ??
             <String, String>{

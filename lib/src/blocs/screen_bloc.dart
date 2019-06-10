@@ -16,20 +16,6 @@ class ScreenBloc {
 
   Observable<ScreenModel> get screen => _screen.stream;
 
-  final ScreenModel testModel = ScreenModel.fromJson({
-    'value': 'My button',
-    'path': '=> path test my button',
-    'components': [
-      {
-        'key': 'MyKey',
-        'typeQuery': 'PUT',
-        'id': 'myId',
-        'isAble': true,
-        'value': 'tesst value in button',
-        'component': 'button'
-      }
-    ]
-  });
 
   Future<String> get token async {
     return authRepository.accessToken;
@@ -42,24 +28,21 @@ class ScreenBloc {
           await screenRepository.fetchScreen(query: route, token: token);
       _screen.sink.add(screenModel);
     } else {
-      _screen.sink.add(testModel);
-sendItemValue('fsdfdsfdsf', 'sdfdsfdsf', 'PUT');
-      // TODO(Andrei): show snackbar error
+       // TODO(Andrei): show snackbar error
     }
   }
 
   Future<void> sendItemValue(String route, dynamic value,String typeQuery,
       {dynamic body}) async {
-    print('dsfdsfdsf');
-    //final String token = await this.token;
-    //if ((token is String) && token.isNotEmpty) {
+    final String token = await this.token;
+    if ((token is String) && token.isNotEmpty) {
       final ScreenModel screenModel =
           await screenRepository.sendItemValue(route, value,typeQuery, body: body,);
       _screen.sink.add(screenModel);
-    //} else {
+    } else {
 
       // TODO(Andrei): show snackbar error
-    //}
+    }
   }
 
   void dispose() {
