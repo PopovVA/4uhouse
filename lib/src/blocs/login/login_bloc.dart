@@ -17,7 +17,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     if (initialState == PhoneEntering()) {
-      print('here1');
       if (event is OtpRequested) {
         try {
           yield IsFetchingOtp();
@@ -29,7 +28,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         }
       } else if (event is SubmitCodeTapped) {
         try {
-          print('here2');
           yield IsFetchingCode();
         } catch (error) {
           yield CodeError();
@@ -37,7 +35,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
     } else {
       if (event is CodeEnteringCanceled) {
-        print('here3');
         yield PhoneEntering();
       }
     }
