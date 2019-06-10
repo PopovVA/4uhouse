@@ -7,8 +7,7 @@ import '../../../../blocs/auth/auth_event.dart'
     show AuthEvent, LoginButtonPressed, LogoutButtonPressed;
 import '../../../../blocs/auth/auth_state.dart' show AuthState, AuthAuthorized;
 import '../../../../utils/route_transition.dart' show SlideRoute;
-import '../../../pages/login/login.dart' show Login;
-
+import '../../../pages/login/login.dart';
 
 import 'drawer_header.dart' show Header;
 
@@ -71,11 +70,11 @@ class DrawerOnly extends StatelessWidget {
                             : buildListTile(context, 'Sign in',
                                 icon: const Icon(OMIcons.exitToApp),
                                 position: 8, onTap: () {
-                                authBloc.dispatch(LoginButtonPressed());
                                 Navigator.push(
                                   context,
                                   SlideRoute(widget: Login(), side: 'left'),
                                 );
+                                //authBloc.dispatch(LoginButtonPressed());
                               }),
                       ],
                     ),
@@ -93,7 +92,7 @@ class DrawerOnly extends StatelessWidget {
       onTap: () {
         _selectedDrawerIndex = position;
         onTap();
-        Navigator.pop(context);
+        Navigator.canPop(context);
       },
       selected: _selectedDrawerIndex == position,
       dense: true,

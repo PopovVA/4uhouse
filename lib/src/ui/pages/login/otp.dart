@@ -13,7 +13,6 @@ import '../../../resources/auth_repository.dart';
 import '../../components/common/page_template.dart' show PageTemplate;
 import '../../components/common/snackbar.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
-import '../home/home.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({@required this.selectedItem, @required this.phone});
