@@ -1,5 +1,6 @@
 import 'package:rxdart/rxdart.dart' show Observable, PublishSubject;
 import 'package:meta/meta.dart' show required;
+import 'package:user_mobile/src/models/screen/components/button_model.dart';
 
 import '../models/screen/screen_model.dart' show ScreenModel;
 import '../resources/auth_repository.dart' show AuthRepository;
@@ -15,6 +16,21 @@ class ScreenBloc {
 
   Observable<ScreenModel> get screen => _screen.stream;
 
+  final ScreenModel testModel = ScreenModel.fromJson({
+    'value': 'My button',
+    'path': '=> path test my button',
+    'components': [
+      {
+        'key': 'MyKey',
+        'typeQuery': 'PUT',
+        'id': 'myId',
+        'isAble': true,
+        'value': 'tesst value in button',
+        'component': 'button'
+      }
+    ]
+  });
+
   Future<String> get token async {
     return authRepository.accessToken;
   }
@@ -26,6 +42,8 @@ class ScreenBloc {
           await screenRepository.fetchScreen(query: route, token: token);
       _screen.sink.add(screenModel);
     } else {
+      _screen.sink.add(testModel);
+
       // TODO(Andrei): show snackbar error
     }
   }

@@ -18,6 +18,7 @@ class ScreenRepository {
   Future<ScreenModel> sendItemValue(String query, dynamic value,
       {dynamic body, String token}) async {
     Map<String, dynamic> response;
+    print('sfddfsdfsdfsdf');
     if (body is File) {
       response = await screenApi.uploadImage(
           query: query,
