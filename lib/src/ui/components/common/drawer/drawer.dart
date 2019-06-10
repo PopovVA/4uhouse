@@ -6,6 +6,9 @@ import '../../../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../../../blocs/auth/auth_event.dart'
     show AuthEvent, LoginButtonPressed, LogoutButtonPressed;
 import '../../../../blocs/auth/auth_state.dart' show AuthState, AuthAuthorized;
+import '../../../../utils/route_transition.dart' show SlideRoute;
+import '../../../pages/login/login.dart' show Login;
+
 
 import 'drawer_header.dart' show Header;
 
@@ -69,6 +72,10 @@ class DrawerOnly extends StatelessWidget {
                                 icon: const Icon(OMIcons.exitToApp),
                                 position: 8, onTap: () {
                                 authBloc.dispatch(LoginButtonPressed());
+                                Navigator.push(
+                                  context,
+                                  SlideRoute(widget: Login(), side: 'left'),
+                                );
                               }),
                       ],
                     ),

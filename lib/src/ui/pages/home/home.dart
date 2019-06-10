@@ -4,7 +4,6 @@ import '../../../utils/route_transition.dart' show SlideRoute;
 import '../../components/common/circular_progress.dart' show CircularProgress;
 import '../../components/common/page_template.dart' show PageTemplate;
 import '../../components/common/styled_button.dart' show StyledButton;
-import '../login/login.dart';
 import '../property/property.dart' show AddProperty;
 import 'components/description.dart' show Description;
 import 'components/main_points.dart' show MainPoint;
@@ -92,7 +91,7 @@ class HomePage extends StatelessWidget {
                       text: 'Add property',
                       onPressed: () => Navigator.push(
                             context,
-                            SlideRoute(widget: Login(), side: 'left'),
+                            SlideRoute(widget: AddProperty(), side: 'left'),
                           )),
                 )
               ],
