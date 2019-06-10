@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import '../../models/screen/components/note_model.dart' show NoteModel;
 
 class Note extends StatelessWidget {
-  Note(NoteModel note)
-      // ignore: prefer_initializing_formals
-      : note = note,
-        id = note.id,
+  Note(this.note)
+      : id = note.id,
         color = note.color;
 
   final NoteModel note;
