@@ -45,6 +45,7 @@ class Property extends StatelessWidget {
               statusColor: property.statusColor,
               statusValue: property.statusValue),
           PropertyFooter(
+            isInput: property.isInput,
             currency: property.currency,
             costSale: property.costSale,
             costRent: property.costRent,

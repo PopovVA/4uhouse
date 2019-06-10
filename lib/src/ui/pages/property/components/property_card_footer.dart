@@ -23,14 +23,14 @@ class PropertyFooter extends StatelessWidget {
     switch (text) {
       case 'addInfoStyle':
         return TextStyle(
-            fontSize: 14.0, color: isInput ? ACTIVE_COLOR : DISABLED_COLOR);
+            fontSize: 14.0, color: isInput&&isInput!=null ? ACTIVE_COLOR : DISABLED_COLOR);
 
         break;
       default:
         return TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.w500,
-            color: isInput ? ACTIVE_COLOR : DISABLED_COLOR);
+            color: isInput&&isInput!=null? ACTIVE_COLOR : DISABLED_COLOR);
     }
   }
 
@@ -46,7 +46,7 @@ class PropertyFooter extends StatelessWidget {
               child: Text(paymentPeriod,
                   style: TextStyle(
                       fontSize: 12.0,
-                      color: isInput ? ACTIVE_COLOR : DISABLED_COLOR))),
+                      color:isInput&&isInput!=null? ACTIVE_COLOR : DISABLED_COLOR))),
         ],
       );
     }

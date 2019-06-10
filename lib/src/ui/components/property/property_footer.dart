@@ -1,20 +1,35 @@
 import 'package:flutter/material.dart';
 import '../../../utils/type_check.dart' show isNotNull;
+import '../../../typography.dart';
 
 class PropertyFooter extends StatelessWidget {
   const PropertyFooter(
-      {this.currency,
+      {this.isInput,
+      this.currency,
       this.costSale,
       this.costRent,
       this.paymentPeriod,
       this.mainInfo,
       this.address});
-  static const Color fontColor = Color(0xFF212121);
-  static const TextStyle addInfoStyle =
-      TextStyle(fontSize: 14.0, color: fontColor);
-  static const TextStyle mainValueStyle =
-      TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500, color: fontColor);
 
+  static const Color fontColor = Color(0xFF212121);
+
+  TextStyle getTextStyle(String text) {
+    switch (text) {
+      case 'addInfoStyle':
+        return TextStyle(
+            fontSize: 14.0, color: isInput ? ACTIVE_COLOR : DISABLED_COLOR);
+
+        break;
+      default:
+        return TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.w500,
+            color: isInput ? ACTIVE_COLOR : DISABLED_COLOR);
+    }
+  }
+
+  final bool isInput;
   final String currency;
   final int costSale;
   final int costRent;
@@ -28,11 +43,13 @@ class PropertyFooter extends StatelessWidget {
       return Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
-          const Text('/', style: mainValueStyle),
+          Text('/', style: getTextStyle('mainValueStyle')),
           Padding(
               padding: const EdgeInsets.only(bottom: 2.0),
-              child:
-                  Text(paymentPeriod, style: const TextStyle(fontSize: 12.0))),
+              child: Text(paymentPeriod,
+                  style: TextStyle(
+                      fontSize: 12.0,
+                      color: isInput ? ACTIVE_COLOR : DISABLED_COLOR))),
         ],
       );
     }
@@ -42,7 +59,8 @@ class PropertyFooter extends StatelessWidget {
         padding: EdgeInsets.only(bottom: padding),
         child: Row(
           children: <Widget>[
-            Text('$currency ${value.toString()}', style: mainValueStyle),
+            Text('$currency ${value.toString()}',
+                style: getTextStyle('mainValueStyle')),
             includePaymentPeriod ? renderPaymentPeriod() : null,
           ].where(isNotNull).toList(),
         ),
@@ -56,11 +74,11 @@ class PropertyFooter extends StatelessWidget {
     if (value is String) {
       return Row(
         children: <Widget>[
-          Text(value, style: addInfoStyle),
+          Text(value, style: getTextStyle('addInfoStyle')),
           addSeparator
-              ? const Padding(
-                  padding: EdgeInsets.only(left: 23.0, right: 17.0),
-                  child: Text('|', style: addInfoStyle),
+              ? Padding(
+                  padding: const EdgeInsets.only(left: 23.0, right: 17.0),
+                  child: Text('|', style: getTextStyle('addInfoStyle')),
                 )
               : null,
         ].where(isNotNull).toList(),

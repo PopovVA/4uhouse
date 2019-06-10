@@ -20,7 +20,8 @@
         "paymentPeriod": "month",
         "costSale": 48000000,
         "address": "📍 , ",
-        "isTransition": true
+        "isTransition": true,
+        "isInput": true
       },
       {
         "id": "5",
@@ -29,7 +30,8 @@
         "costRent": 48000,
         "paymentPeriod": "month",
         "address": "📍 , ",
-        "isTransition": true
+        "isTransition": true,
+        "isInput": false
       },
       {
         "id": "3",
