@@ -15,7 +15,10 @@ import '../../components/common/styled_button.dart' show StyledButton;
 import '../../components/common/resend.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({@required this.loginBloc,@required this.selectedItem, @required this.phone});
+  const OtpScreen(
+      {@required this.loginBloc,
+      @required this.selectedItem,
+      @required this.phone});
 
   final CountryPhoneData selectedItem;
   final String phone;
@@ -37,7 +40,7 @@ class _OtpScreenState extends State<OtpScreen> {
   }
 
   void _codeListener() {
-    print(code.text);
+    setState(() {});
   }
 
   @override
@@ -89,7 +92,8 @@ class _OtpScreenState extends State<OtpScreen> {
                       Resend(
                           type: 'Timer',
                           onPressed: () {
-                            widget.loginBloc.dispatch(OtpRequested(widget.phone));
+                            widget.loginBloc
+                                .dispatch(OtpRequested(widget.phone));
                           }),
                       _buildSendButton()
                     ]);
@@ -105,14 +109,15 @@ class _OtpScreenState extends State<OtpScreen> {
                   }
                   if (state is IsFetchingCode) {
                     //Кнопка "Send" задизаблена и показывает индикатор загрузки. Реализовать через styled_button.
-                    isFetchingCode = true;
+                      isFetchingCode = true;
                     return Column(children: <Widget>[
                       _buildHeadLine(),
                       _buildCodeInput(),
                       Resend(
                           type: 'Timer',
                           onPressed: () {
-                            widget.loginBloc.dispatch(OtpRequested(widget.phone));
+                            widget.loginBloc
+                                .dispatch(OtpRequested(widget.phone));
                           }),
                       _buildSendButton()
                     ]);
@@ -152,7 +157,7 @@ class _OtpScreenState extends State<OtpScreen> {
           onPressed: isFetchingCode == false && code.text.length != maxLength
               ? null
               : () {
-            widget.loginBloc.dispatch(
+                  widget.loginBloc.dispatch(
                       SubmitCodeTapped(widget.phone, int.parse(code.text)));
                 },
           text: 'Send',
