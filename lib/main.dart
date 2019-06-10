@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 
-//import 'src/app.dart' show App;
-//import 'src/resources/auth_repository.dart' show AuthRepository;
+import 'src/app.dart' show App;
+import 'src/resources/auth_repository.dart' show AuthRepository;
 import 'temp/app_old.dart';
 
 //import 'temp/app_old.dart' show AppScreens;
@@ -14,8 +14,8 @@ class AppBlocDelegate extends BlocDelegate {
 //  }
 
   @override
-  void onError(Bloc<dynamic, dynamic> bloc, Object error,
-      StackTrace stacktrace) {
+  void onError(
+      Bloc<dynamic, dynamic> bloc, Object error, StackTrace stacktrace) {
     // handle errors here
     print('bloc error: $error');
     super.onError(bloc, error, stacktrace);
@@ -26,6 +26,6 @@ class AppBlocDelegate extends BlocDelegate {
 void main() async {
 //  debugPaintSizeEnabled = true;
   BlocSupervisor().delegate = AppBlocDelegate();
-  runApp(AppScreens());
+  runApp(App(authRepository: AuthRepository()));
 //  runApp(AppScreens());
 }

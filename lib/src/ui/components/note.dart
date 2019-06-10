@@ -5,6 +5,27 @@ class Note extends StatelessWidget {
   Note(this.note)
       : id = note.id,
         color = note.color;
+/*try {
+        var futureData =
+             repository.getCountriesPhoneData();
+       var futureCountryCode =  repository.getCountryByIp();
+        Future.wait([
+          futureData,
+          futureCountryCode
+        ]).whenComplete(() {
+          futureData.then((List<CountryPhoneData>data){
+             data.sort((CountryPhoneData a, CountryPhoneData b) {
+              if (a.countryId == countryCode) {
+                return -1;
+              }
+              if (b.countryId == countryCode) {
+                return 1;
+              }
+              return a.countryId.compareTo(b.countryId);
+            });
+          });
+        });
+*/
 
   final NoteModel note;
   final String id;
