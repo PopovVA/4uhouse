@@ -73,7 +73,7 @@ class DrawerOnly extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   SlideRoute(
-                                      widget: Phone(authBloc: authBloc),
+                                      widget: PhoneScreen(authBloc: authBloc),
                                       side: 'left'),
                                 );
                                 //authBloc.dispatch(LoginButtonPressed());
