@@ -23,7 +23,7 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
         yield PhoneCountriesDataLoaded(data);
       } catch (error) {
         print('=> PhoneState => $error');
-        yield PhoneLoadingError();
+        yield PhoneLoadingError(error:error.toString());
       }
     }
   }

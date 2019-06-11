@@ -53,8 +53,8 @@ class _PhoneScreenState extends State<PhoneScreen> {
                 bloc: _bloc,
                 listener: (BuildContext context, PhoneState state) {
                   if (state is PhoneLoadingError) {
-                    Scaffold.of(context).showSnackBar(const CustomSnackBar(
-                      content: Text('Something went wrong'),
+                    Scaffold.of(context).showSnackBar(CustomSnackBar(
+                      content: Text(state.toString()),
                       backgroundColor: Colors.redAccent,
                     ));
                   }
