@@ -2,35 +2,43 @@ import 'package:flutter/material.dart';
 import '../../../../typography.dart';
 import '../../../../utils/type_check.dart' show isNotNull;
 
-class PropertyFooter extends StatelessWidget {
-  const PropertyFooter({this.isInput,
-    this.currency,
+class PropertyFooter extends StatefulWidget {
+  const PropertyFooter(
+      {this.isInput,
+      this.currency,
       this.costSale,
       this.costRent,
       this.paymentPeriod,
       this.mainInfo,
       this.address});
 
-  final bool isInput;
   final String currency;
   final int costSale;
   final int costRent;
   final String paymentPeriod;
   final String mainInfo;
   final String address;
+  final bool isInput;
 
-  TextStyle getTextStyle(String text) {
-    switch (text) {
-      case 'addInfoStyle':
-        return TextStyle(
-            fontSize: 14.0, color: isInput&&isInput!=null ? ACTIVE_COLOR : DISABLED_COLOR);
+  @override
+  State createState() => PropertyState();
+}
 
-      default:
-        return TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.w500,
-            color: isInput&&isInput!=null? ACTIVE_COLOR : DISABLED_COLOR);
-    }
+class PropertyState extends State<PropertyFooter> {
+  static const Color fontColor = Color(0xFF212121);
+  TextStyle addInfoStyle;
+  TextStyle mainValueStyle;
+
+  @override
+  void initState() {
+    super.initState();
+    addInfoStyle = TextStyle(fontSize: 14.0, color: getColor());
+    mainValueStyle = TextStyle(
+        fontSize: 20.0, fontWeight: FontWeight.w500, color: getColor());
+  }
+
+  Color getColor() {
+    return widget.isInput ? ACTIVE_COLOR : DISABLED_COLOR;
   }
 
   Widget buildMainValue(int value, double padding,
@@ -39,13 +47,11 @@ class PropertyFooter extends StatelessWidget {
       return Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
-          Text('/', style: getTextStyle('mainValueStyle')),
+          Text('/', style: mainValueStyle),
           Padding(
               padding: const EdgeInsets.only(bottom: 2.0),
-              child: Text(paymentPeriod,
-                  style: TextStyle(
-                      fontSize: 12.0,
-                      color:isInput&&isInput!=null? ACTIVE_COLOR : DISABLED_COLOR))),
+              child: Text(widget.paymentPeriod,
+                  style: const TextStyle(fontSize: 12.0))),
         ],
       );
     }
@@ -55,8 +61,8 @@ class PropertyFooter extends StatelessWidget {
         padding: EdgeInsets.only(bottom: padding),
         child: Row(
           children: <Widget>[
-            Text('$currency ${value.toString()}',
-                style: getTextStyle('mainValueStyle')),
+            Text('${widget.currency} ${value.toString()}',
+                style: mainValueStyle),
             includePaymentPeriod ? renderPaymentPeriod() : null,
           ].where(isNotNull).toList(),
         ),
@@ -70,11 +76,11 @@ class PropertyFooter extends StatelessWidget {
     if (value is String) {
       return Row(
         children: <Widget>[
-          Text(value, style: getTextStyle('addInfoStyle')),
+          Text(value, style: addInfoStyle),
           addSeparator
               ? Padding(
-            padding: const EdgeInsets.only(left: 23.0, right: 17.0),
-            child: Text('|', style: getTextStyle('addInfoStyle')),
+                  padding: const EdgeInsets.only(left: 23.0, right: 17.0),
+                  child: Text('|', style: addInfoStyle),
                 )
               : null,
         ].where(isNotNull).toList(),
@@ -91,12 +97,12 @@ class PropertyFooter extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          buildMainValue(costSale, 5.0),
-          buildMainValue(costRent, 13.0, includePaymentPeriod: true),
+          buildMainValue(widget.costSale, 5.0),
+          buildMainValue(widget.costRent, 13.0, includePaymentPeriod: true),
           Row(
             children: <Widget>[
-              buildAddInfo(mainInfo, addSeparator: true),
-              buildAddInfo(address),
+              buildAddInfo(widget.mainInfo, addSeparator: true),
+              buildAddInfo(widget.address),
             ].where(isNotNull).toList(),
           ),
         ].where(isNotNull).toList(),

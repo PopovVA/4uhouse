@@ -28,11 +28,13 @@ class PropertyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () {
-          if (makeTransition is Function) {
-            makeTransition(context, property.id);
-          }
-        },
+        onTap: property.isTransition
+            ? () {
+                if (makeTransition is Function) {
+                  makeTransition(context, property.id);
+                }
+              }
+            : null,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(30.0),
           child: Column(
