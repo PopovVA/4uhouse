@@ -163,7 +163,7 @@ class _ScreenState extends State<Screen> {
     );
   }
 
-  void handleSendItemValue(String id, dynamic value, {dynamic body}) {
-//    return screenBloc.sendItemValue('${widget.route}/$id', value, body: body);
+  Future<Screen> handleSendItemValue(String id, dynamic value, {dynamic body}) {
+    return screenBloc.sendItemValue('${widget.route}/$id', value, body: body);
   }
 }
