@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../src/utils/route_transition.dart' show SlideRoute;
 import '../../../blocs/auth/auth_state.dart';
 import '../../../blocs/login/login_bloc.dart';
 import '../../../blocs/login/login_event.dart';
@@ -14,11 +15,13 @@ class OtpScreen extends StatefulWidget {
   const OtpScreen(
       {@required this.loginBloc,
       @required this.selectedItem,
-      @required this.phone});
+      @required this.phone,
+      this.previousRoute});
 
   final CountryPhoneData selectedItem;
   final String phone;
   final LoginBloc loginBloc;
+  final SlideRoute previousRoute;
 
   @override
   _OtpScreenState createState() => _OtpScreenState();
@@ -77,9 +80,8 @@ class _OtpScreenState extends State<OtpScreen> {
               if (state is AuthAuthorized) {
                 //Убиваем оба рута (страница ввода номера телефона, страница ввода sms-кода).
                 print('AuthAuthorized');
-                //Пока закоментил
-                //Navigator.of(context)
-                //.popUntil((Route<dynamic> route) => route.isFirst);
+                widget.previousRoute.didPop(null);
+                ModalRoute.of(context).didPop(null);
               }
             },
             child: BlocBuilder<LoginEvent, LoginState>(

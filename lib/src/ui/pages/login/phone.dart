@@ -168,7 +168,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                   Navigator.push(
                       context,
                       SlideRoute(
-                          widget: OtpScreen(loginBloc:_loginBloc,
+                          widget: OtpScreen(loginBloc:_loginBloc,previousRoute: ModalRoute.of(context),
                               selectedItem: selectedItem, phone: phone),
                           side: "left"));
                 }
