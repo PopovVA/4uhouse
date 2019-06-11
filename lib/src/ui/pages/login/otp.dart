@@ -55,8 +55,8 @@ class _OtpScreenState extends State<OtpScreen> {
             listener: (BuildContext context, LoginState state) {
               print('===> state listener name : ' + state.toString());
               if (state is PhoneError || state is CodeError) {
-                Scaffold.of(context).showSnackBar(const CustomSnackBar(
-                  content: Text('Something went wrong'),
+                Scaffold.of(context).showSnackBar(CustomSnackBar(
+                  content: Text(state.toString()),
                   backgroundColor: Colors.redAccent,
                 ));
               }
@@ -64,8 +64,8 @@ class _OtpScreenState extends State<OtpScreen> {
                 //Очищаешь TextField.
                 print('CodeError');
                 code.clear();
-                Scaffold.of(context).showSnackBar(const CustomSnackBar(
-                  content: Text('Something went wrong'),
+                Scaffold.of(context).showSnackBar(CustomSnackBar(
+                  content: Text(state.toString()),
                   backgroundColor: Colors.redAccent,
                 ));
               }
