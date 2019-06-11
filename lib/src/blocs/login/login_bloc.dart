@@ -24,13 +24,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           authRepository.getOtp(event.phone, codeChallenge);
           yield OtpSent();
         } catch (error) {
-          yield PhoneError();
+          yield PhoneError(error:error);
         }
       } else if (event is SubmitCodeTapped) {
         try {
           yield IsFetchingCode();
         } catch (error) {
-          yield CodeError();
+          yield CodeError(error:error);
         }
       }
     } else {

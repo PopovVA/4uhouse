@@ -30,16 +30,29 @@ class OtpSent extends LoginState {
 }
 
 class LoginError extends LoginState {
+
+  LoginError({this.error});
+
+  final String error;
+
   @override
-  String toString() => 'LoginError';
+  String toString() => error;
 }
 
 class PhoneError extends LoginError {
-  @override
-  String toString() => 'PhoneError';
+
+  PhoneError({this.error}):super(error:error);
+
+  final String error;
+
+  String toString() => super.toString();
 }
 
 class CodeError extends LoginError {
-  @override
-  String toString() => 'CodeError';
+
+  CodeError({this.error}):super(error:error);
+
+  final String error;
+
+  String toString() => super.toString();
 }

@@ -85,6 +85,9 @@ class _OtpScreenState extends State<OtpScreen> {
                 bloc: widget.loginBloc,
                 builder: (BuildContext context, LoginState state) {
                   print('===> state builder name : ' + state.toString());
+                  if (state is PhoneError || state is CodeError){
+                    return Text(state.toString());
+                  }
                   if (state is OtpSent) {
                     return Column(children: <Widget>[
                       _buildHeadLine(),
