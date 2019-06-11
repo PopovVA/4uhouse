@@ -31,8 +31,7 @@ class PropertyCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 6.0),
       decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius:
-          const BorderRadius.all(Radius.circular(30.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(30.0)),
           border: Border.all(
               width: 0.1,
               style: BorderStyle.solid,
@@ -45,8 +44,7 @@ class PropertyCard extends StatelessWidget {
           ]),
       child: Container(
         decoration: const BoxDecoration(
-            borderRadius:
-            BorderRadius.all(Radius.circular(30.0))),
+            borderRadius: BorderRadius.all(Radius.circular(30.0))),
         child: InkWell(
             onTap: property.isTransition
                 ? () {
