@@ -1,7 +1,5 @@
 import 'package:rxdart/rxdart.dart' show Observable, PublishSubject;
 import 'package:meta/meta.dart' show required;
-import 'package:user_mobile/src/models/screen/components/button_model.dart';
-
 import '../models/screen/screen_model.dart' show ScreenModel;
 import '../resources/auth_repository.dart' show AuthRepository;
 import '../resources/screen_repository.dart' show ScreenRepository;
@@ -32,12 +30,12 @@ class ScreenBloc {
     }
   }
 
-  Future<void> sendItemValue(String route, dynamic value,String typeQuery,
+  Future<void> sendItemValue(String route, dynamic value,
       {dynamic body}) async {
     final String token = await this.token;
     if ((token is String) && token.isNotEmpty) {
       final ScreenModel screenModel =
-          await screenRepository.sendItemValue(route, value,typeQuery, body: body,);
+          await screenRepository.sendItemValue(route, value, body: body,);
       _screen.sink.add(screenModel);
     } else {
 

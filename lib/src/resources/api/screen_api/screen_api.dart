@@ -15,8 +15,8 @@ class ScreenApi extends Api {
   static Uri _componentUri(
           {@required String route,
           dynamic value,
-          @required String typeQuery}) =>
-      typeQuery == 'PUT'
+          }) =>
+      value != null
           ? Uri.parse('$BASE_URL$route?value=${value.toString()}')
           : Uri.parse('$BASE_URL$route');
 
@@ -43,7 +43,7 @@ class ScreenApi extends Api {
       {@required String query,
       dynamic value,
       String token,
-      String typeQuery}) async {
+      }) async {
     // Form and send request
     final Map<String, String> headers =
         ((token is String) && token.isNotEmpty) ??
@@ -52,7 +52,7 @@ class ScreenApi extends Api {
             };
     try {
       final http.Response response = await client.put(
-          _componentUri(route: query, value: value, typeQuery: typeQuery),
+          _componentUri(route: query, value: value),
           headers: headers);
 
       // Process response
@@ -73,7 +73,7 @@ class ScreenApi extends Api {
       String token}) async {
     // Form request
     final http.MultipartRequest request = http.MultipartRequest(
-        'PUT', _componentUri(route: query, value: value, typeQuery: 'PUT'));
+        'PUT', _componentUri(route: query, value: value));
     final http.MultipartFile multipartFile = http.MultipartFile.fromBytes(
       'img',
       jpg,

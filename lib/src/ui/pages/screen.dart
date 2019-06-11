@@ -110,7 +110,7 @@ class _ScreenState extends State<Screen> {
           buttons.add(Button(
             component,
             data.path,
-            handleSendItemValue,
+            component.typeQuery == 'PUT' ? handleSendItemValue : null,
           ));
         }
       });
@@ -158,7 +158,7 @@ class _ScreenState extends State<Screen> {
     );
   }
 
-  void handleSendItemValue(String id, dynamic value, {dynamic body}) {
-//    return screenBloc.sendItemValue('${widget.route}/$id', value, body: body);
+  Future<Screen> handleSendItemValue(String id, dynamic value, {dynamic body}) {
+    return screenBloc.sendItemValue('${widget.route}/$id', value, body: body);
   }
 }

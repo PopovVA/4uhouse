@@ -15,7 +15,7 @@ class ScreenRepository {
     return ScreenModel.fromJson(response);
   }
 
-  Future<ScreenModel> sendItemValue(String query, dynamic value,String typeQuery,
+  Future<ScreenModel> sendItemValue(String query, dynamic value,
       {dynamic body, String token}) async {
     Map<String, dynamic> response;
     if (body is File) {
@@ -25,7 +25,7 @@ class ScreenRepository {
           token: token,
           jpg: img.encodeJpg(img.decodeImage(body.readAsBytesSync())));
     } else {
-      response = await screenApi.sendComponentValue(query: query, value: value,typeQuery: typeQuery);
+      response = await screenApi.sendComponentValue(query: query, value: value);
     }
 
     return ScreenModel.fromJson(response);
