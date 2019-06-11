@@ -77,8 +77,9 @@ class _OtpScreenState extends State<OtpScreen> {
               if (state is AuthAuthorized) {
                 //Убиваем оба рута (страница ввода номера телефона, страница ввода sms-кода).
                 print('AuthAuthorized');
-                Navigator.popUntil(
-                    context, ModalRoute.withName(Navigator.defaultRouteName));
+                //Пока закоментил
+                //Navigator.of(context)
+                //.popUntil((Route<dynamic> route) => route.isFirst);
               }
             },
             child: BlocBuilder<LoginEvent, LoginState>(
@@ -178,11 +179,13 @@ class _OtpScreenState extends State<OtpScreen> {
         style: const TextStyle(fontSize: 16.0, color: Color(0xde000000)),
         keyboardType: const TextInputType.numberWithOptions(decimal: true),
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.all(0.0),
-          border: UnderlineInputBorder(
-              borderSide: BorderSide(
-                  width: 2.0, color: const Color.fromRGBO(175, 173, 173, 0.4))),
-        ),
+            contentPadding: const EdgeInsets.all(0.0),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                    width: 2.0,
+                    color: code.text.length != maxLength
+                        ? Colors.redAccent
+                        : Theme.of(context).primaryColor))),
       ),
     );
   }
