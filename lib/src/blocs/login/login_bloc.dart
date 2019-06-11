@@ -1,12 +1,11 @@
 import 'package:bloc/bloc.dart';
-import 'package:user_mobile/src/blocs/auth/auth_bloc.dart';
 import 'package:user_mobile/src/resources/auth_repository.dart';
-
 import 'login_event.dart';
 import 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  AuthBloc authBloc;
+  LoginBloc(this.authRepository);
+
   AuthRepository authRepository;
 
   @override
@@ -37,24 +36,4 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
     }
   }
-
-/* Stream<LoginState> _mapErrorLoginTap() async* {
-    final bool internet = await checkInternet();
-    if (internet) {
-      yield CodeError();
-    } else {
-      yield PhoneError();
-    }
-  }
-
-  Future<bool> checkInternet() async {
-    final ConnectivityResult connectivityResult =
-        await Connectivity().checkConnectivity();
-    if (connectivityResult == ConnectivityResult.mobile) {
-      return true;
-    } else if (connectivityResult == ConnectivityResult.wifi) {
-      return true;
-    }
-    return false;
-  }*/
 }

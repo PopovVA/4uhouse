@@ -15,7 +15,6 @@ class OtpRequested extends LoginEvent {
   String toString() => 'OtpRequested';
 }
 
-
 class SubmitCodeTapped extends LoginEvent {
   SubmitCodeTapped(this.phone, this.code);
 
