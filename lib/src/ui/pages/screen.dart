@@ -110,7 +110,7 @@ class _ScreenState extends State<Screen> {
           buttons.add(Button(
             component,
             data.path,
-            component.typeQuery == 'PUT' ? handleSendItemValue : null,
+            handleSendItemValue,
           ));
         }
       });
