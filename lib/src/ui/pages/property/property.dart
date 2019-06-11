@@ -21,72 +21,28 @@ class AddProperty extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.only(right: 10.0, left: 10.0),
                   child: Column(children: <Widget>[
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 6.0),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(30.0)),
-                          border: Border.all(
-                              width: 0.1,
-                              style: BorderStyle.solid,
-                              color: Colors.black.withOpacity(0.3)),
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                blurRadius: 0.5,
-                                offset: const Offset(0.0, 2.0))
-                          ]),
-                      child: Container(
-                        decoration: const BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30.0))),
-                        child: PropertyCard(PropertyModel.fromJson(_getMapData(
-                            '1',
-                            _roomBs64,
-                            'To Do',
-                            '0xDEFFA726',
-                            r'$',
-                            250000,
-                            8000,
-                            'month',
-                            '3 Bed, Apt',
-                            'Paphos, Emba'))),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 6.0),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(30.0)),
-                          border: Border.all(
-                              width: 0.1,
-                              style: BorderStyle.solid,
-                              color: Colors.black.withOpacity(0.3)),
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                blurRadius: 0.5,
-                                offset: const Offset(0.0, 2.0))
-                          ]),
-                      child: Container(
-                        decoration: const BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30.0))),
-                        child: PropertyCard(PropertyModel.fromJson(_getMapData(
-                            '2',
-                            _roomBs64,
-                            'To Do',
-                            '0xDEFFA726',
-                            r'$',
-                            250000,
-                            8000,
-                            'month',
-                            '3 Bed, Apt',
-                            'Paphos, Emba'))),
-                      ),
-                    )
+                    PropertyCard(PropertyModel.fromJson(_getMapData(
+                        '1',
+                        _roomBs64,
+                        'To Do',
+                        '0xDEFFA726',
+                        r'$',
+                        250000,
+                        8000,
+                        'month',
+                        '3 Bed, Apt',
+                        'Paphos, Emba'))),
+                    PropertyCard(PropertyModel.fromJson(_getMapData(
+                        '2',
+                        _roomBs64,
+                        'To Do',
+                        '0xDEFFA726',
+                        r'$',
+                        250000,
+                        8000,
+                        'month',
+                        '3 Bed, Apt',
+                        'Paphos, Emba'))),
                   ]),
                 )
               ],
