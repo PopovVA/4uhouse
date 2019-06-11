@@ -85,7 +85,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 bloc: widget.loginBloc,
                 builder: (BuildContext context, LoginState state) {
                   print('===> state builder name : ' + state.toString());
-                  if (state is PhoneError || state is CodeError){
+                  if (state is PhoneError || state is CodeError) {
                     return Text(state.toString());
                   }
                   if (state is OtpSent) {
@@ -112,7 +112,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   }
                   if (state is IsFetchingCode) {
                     //Кнопка "Send" задизаблена и показывает индикатор загрузки. Реализовать через styled_button.
-                      isFetchingCode = true;
+                    isFetchingCode = true;
                     return Column(children: <Widget>[
                       _buildHeadLine(),
                       _buildCodeInput(),

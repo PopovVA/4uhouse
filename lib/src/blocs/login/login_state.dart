@@ -30,7 +30,6 @@ class OtpSent extends LoginState {
 }
 
 class LoginError extends LoginState {
-
   LoginError({this.error});
 
   final String error;
@@ -40,19 +39,13 @@ class LoginError extends LoginState {
 }
 
 class PhoneError extends LoginError {
+  PhoneError({this.message}) : super(error: message);
 
-  PhoneError({this.error}):super(error:error);
-
-  final String error;
-
-  String toString() => super.toString();
+  final String message;
 }
 
 class CodeError extends LoginError {
+  CodeError({this.message}) : super(error: message);
 
-  CodeError({this.error}):super(error:error);
-
-  final String error;
-
-  String toString() => super.toString();
+  final String message;
 }
