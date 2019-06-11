@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
+import '../../../temp/screen_repository_test.dart';
 import '../../blocs/screen_bloc.dart' show ScreenBloc;
 import '../../constants/layout.dart' show standardPadding;
 import '../../models/screen/components/button_model.dart' show ButtonModel;
@@ -10,13 +11,12 @@ import '../../models/screen/screen_model.dart' show ScreenModel;
 import '../../resources/auth_repository.dart' show AuthRepository;
 
 //import '../../resources/screen_repository.dart' show ScreenRepository;
-import 'package:user_mobile/temp/screen_repository_test.dart';
 import '../components/common/button.dart' show Button;
 import '../components/common/circular_progress.dart' show CircularProgress;
 import '../components/common/page_template.dart' show PageTemplate;
 import '../components/item/item.dart' show Item;
 import '../components/note.dart' show Note;
-import '../components/property/property.dart' show Property;
+import 'property/components/property_card_body.dart';
 
 // ignore: must_be_immutable
 class Screen extends StatefulWidget {
@@ -114,7 +114,7 @@ class _ScreenState extends State<Screen> {
         } else if (component is NoteModel) {
           items.add(Note(component));
         } else if (component is PropertyModel) {
-          items.add(Property(component,
+          items.add(PropertyCard(component,
               makeTransition: component.isTransition ? makeTransition : null));
         } else if (component is ButtonModel) {
           buttons.add(Button(

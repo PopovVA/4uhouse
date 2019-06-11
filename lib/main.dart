@@ -26,6 +26,6 @@ class AppBlocDelegate extends BlocDelegate {
 void main() async {
 //  debugPaintSizeEnabled = true;
   BlocSupervisor().delegate = AppBlocDelegate();
-  runApp(App(authRepository: AuthRepository()));
+  runApp(AppScreens());
 //  runApp(AppScreens());
 }
