@@ -6,9 +6,9 @@ import '../../../blocs/login/login_event.dart';
 import '../../../blocs/login/login_state.dart';
 import '../../../models/country_phone_data.dart';
 import '../../components/common/page_template.dart' show PageTemplate;
-import 'package:user_mobile/src/ui/components/resend.dart';
 import '../../components/common/snackbar.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
+import '../../components/resend.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen(
@@ -64,6 +64,10 @@ class _OtpScreenState extends State<OtpScreen> {
                 //Очищаешь TextField.
                 print('CodeError');
                 code.clear();
+                Scaffold.of(context).showSnackBar(const CustomSnackBar(
+                  content: Text('Something went wrong'),
+                  backgroundColor: Colors.redAccent,
+                ));
               }
               if (state is PhoneEntering) {
                 //Убиваем рут (возвращаемся на экран ввода номера телефона).

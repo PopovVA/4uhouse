@@ -16,16 +16,16 @@ import '../../components/common/snackbar.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
 import 'otp.dart';
 
-class Login extends StatefulWidget {
-  const Login({@required this.authBloc});
+class Phone extends StatefulWidget {
+  const Phone({@required this.authBloc});
 
   final AuthBloc authBloc;
 
   @override
-  _LoginState createState() => _LoginState();
+  _PhoneState createState() => _PhoneState();
 }
 
-class _LoginState extends State<Login> {
+class _PhoneState extends State<Phone> {
   bool isAgree = false;
   bool validPhone = false;
   PhoneBloc _bloc;

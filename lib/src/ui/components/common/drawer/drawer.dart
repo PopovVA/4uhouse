@@ -7,7 +7,7 @@ import '../../../../blocs/auth/auth_event.dart'
     show AuthEvent, LoginButtonPressed, LogoutButtonPressed;
 import '../../../../blocs/auth/auth_state.dart' show AuthState, AuthAuthorized;
 import '../../../../utils/route_transition.dart' show SlideRoute;
-import '../../../pages/login/login.dart';
+import '../../../pages/login/phone.dart';
 
 import 'drawer_header.dart' show Header;
 
@@ -73,7 +73,7 @@ class DrawerOnly extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   SlideRoute(
-                                      widget: Login(authBloc: authBloc),
+                                      widget: Phone(authBloc: authBloc),
                                       side: 'left'),
                                 );
                                 //authBloc.dispatch(LoginButtonPressed());
