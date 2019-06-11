@@ -27,9 +27,11 @@ class PropertyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return
+      Container(
       margin: const EdgeInsets.symmetric(vertical: 6.0),
-      decoration: BoxDecoration(
+      child: Ink(
+        decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: const BorderRadius.all(Radius.circular(30.0)),
           border: Border.all(
@@ -42,19 +44,19 @@ class PropertyCard extends StatelessWidget {
                 blurRadius: 0.5,
                 offset: const Offset(0.0, 2.0))
           ]),
-      child: Container(
-        decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(30.0))),
-        child: InkWell(
-            onTap: property.isTransition
-                ? () {
-                    if (makeTransition is Function) {
-                      makeTransition(context, property.id);
+        child: Container(
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(30.0))),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(30.0),
+            child: InkWell(
+              onTap: property.isTransition
+                  ? () {
+                      if (makeTransition is Function) {
+                        makeTransition(context, property.id);
+                      }
                     }
-                  }
-                : null,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(30.0),
+                  : null,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -75,7 +77,9 @@ class PropertyCard extends StatelessWidget {
                   Container(height: 4.0),
                 ],
               ),
-            )),
+            ),
+          ),
+        ),
       ),
     );
   }

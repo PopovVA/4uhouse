@@ -135,7 +135,7 @@ class _ScreenState extends State<Screen> {
             .addPostFrameCallback((_) => scrollToItem(scrollItemKey));
       }
 
-      return Container(
+      return Ink(
         color: const Color(0xFFEBECED),
         height: double.infinity,
         padding: const EdgeInsets.only(right: 8.0, left: 8.0),
