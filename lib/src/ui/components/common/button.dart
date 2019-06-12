@@ -27,7 +27,8 @@ class _ButtonState extends State<Button> {
       onPressed: button.isAble
           ? () async {
               setState(() => loading = true);
-              await widget.handleSave(button.id, button.value);
+              await widget.handleSave(
+                  button.id, button.typeQuery == 'PUT' ? button.value : null);
               setState(() => loading = false);
             }
           : null,

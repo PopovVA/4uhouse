@@ -6,6 +6,8 @@ import '../../../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../../../blocs/auth/auth_event.dart'
     show AuthEvent, LoginButtonPressed, LogoutButtonPressed;
 import '../../../../blocs/auth/auth_state.dart' show AuthState, AuthAuthorized;
+import '../../../../utils/route_transition.dart' show SlideRoute;
+import '../../../pages/login/phone.dart';
 
 import 'drawer_header.dart' show Header;
 
@@ -83,7 +85,13 @@ class DrawerState extends State<DrawerOnly> {
                             : buildListTile(context, 'Sign in',
                                 icon: const Icon(OMIcons.exitToApp),
                                 position: 8, onTap: () {
-                                authBloc.dispatch(LoginButtonPressed());
+                                Navigator.push(
+                                  context,
+                                  SlideRoute(
+                                      widget: PhoneScreen(authBloc: authBloc),
+                                      side: 'left'),
+                                );
+                                //authBloc.dispatch(LoginButtonPressed());
                               }),
                       ],
                     ),
@@ -101,7 +109,7 @@ class DrawerState extends State<DrawerOnly> {
       onTap: () {
         _selectedDrawerIndex = position;
         onTap();
-        Navigator.pop(context);
+        Navigator.canPop(context);
       },
       selected: _selectedDrawerIndex == position,
       dense: true,

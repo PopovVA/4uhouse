@@ -1,11 +1,12 @@
 import 'package:bloc/bloc.dart';
+import 'package:user_mobile/src/blocs/auth/auth_bloc.dart';
 import 'package:user_mobile/src/resources/auth_repository.dart';
+
 import 'login_event.dart';
 import 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc(this.authRepository);
-
+  AuthBloc authBloc;
   AuthRepository authRepository;
 
   @override
@@ -21,13 +22,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           authRepository.getOtp(event.phone, codeChallenge);
           yield OtpSent();
         } catch (error) {
-          yield PhoneError();
+          yield PhoneError(message:error.toString());
         }
       } else if (event is SubmitCodeTapped) {
         try {
           yield IsFetchingCode();
         } catch (error) {
-          yield CodeError();
+          yield CodeError(message:error.toString());
         }
       }
     } else {

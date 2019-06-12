@@ -1,6 +1,6 @@
 import 'package:rxdart/rxdart.dart' show Observable, PublishSubject;
 import 'package:meta/meta.dart' show required;
-import 'package:user_mobile/temp/screen_repository_test.dart';
+
 import '../models/screen/screen_model.dart' show ScreenModel;
 import '../resources/auth_repository.dart' show AuthRepository;
 import '../resources/screen_repository.dart' show ScreenRepository;

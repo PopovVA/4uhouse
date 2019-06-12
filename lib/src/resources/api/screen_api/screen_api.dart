@@ -12,8 +12,13 @@ class ScreenApi extends Api {
 
   static String _formToken(String token) => 'Bearer $token';
 
-  static Uri _componentUri({@required String route, @required dynamic value}) =>
-      Uri.parse('$BASE_URL$route?value=${value.toString()}');
+  static Uri _componentUri(
+          {@required String route,
+          dynamic value,
+          }) =>
+      value != null
+          ? Uri.parse('$BASE_URL$route?value=${value.toString()}')
+          : Uri.parse('$BASE_URL$route');
 
   Future<Map<String, dynamic>> fetchScreen(
       {@required String query, String token}) async {
@@ -34,11 +39,11 @@ class ScreenApi extends Api {
     }
   }
 
-  Future<Map<String, dynamic>> sendComponentValue({
-    @required String query,
-    @required dynamic value,
-    String token,
-  }) async {
+  Future<Map<String, dynamic>> sendComponentValue(
+      {@required String query,
+      dynamic value,
+      String token,
+      }) async {
     // Form and send request
     final Map<String, String> headers =
         ((token is String) && token.isNotEmpty) ??
@@ -46,8 +51,9 @@ class ScreenApi extends Api {
               'Authorization': _formToken(token),
             };
     try {
-      final http.Response response = await client
-          .put(_componentUri(route: query, value: value), headers: headers);
+      final http.Response response = await client.put(
+          _componentUri(route: query, value: value),
+          headers: headers);
 
       // Process response
       if (response.statusCode == 200) {
@@ -66,8 +72,8 @@ class ScreenApi extends Api {
       @required List<int> jpg,
       String token}) async {
     // Form request
-    final http.MultipartRequest request =
-        http.MultipartRequest('PUT', _componentUri(route: query, value: value));
+    final http.MultipartRequest request = http.MultipartRequest(
+        'PUT', _componentUri(route: query, value: value));
     final http.MultipartFile multipartFile = http.MultipartFile.fromBytes(
       'img',
       jpg,

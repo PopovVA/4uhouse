@@ -30,6 +30,11 @@ class PhoneCountriesDataLoaded extends PhoneState {
 }
 
 class PhoneLoadingError extends PhoneState {
+
+  PhoneLoadingError({this.error});
+
+  final String error;
+
   @override
-  String toString() => 'PhoneLoadingError';
+  String toString() => error;
 }

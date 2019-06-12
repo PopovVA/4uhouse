@@ -2,28 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:user_mobile/temp/phone_repository_test.dart';
 import 'package:user_mobile/src/ui/components/pickers/phone/phone_picker.dart';
+import '../../../../src/utils/route_transition.dart' show SlideRoute;
+import '../../../blocs/auth/auth_bloc.dart';
+import '../../../blocs/login/login_bloc.dart';
+import '../../../blocs/login/login_event.dart';
 import '../../../blocs/phone/phone_bloc.dart';
 import '../../../blocs/phone/phone_event.dart';
 import '../../../blocs/phone/phone_state.dart';
+import '../../../models/country_phone_data.dart';
+import '../../../resources/auth_repository.dart';
 import '../../components/common/page_template.dart' show PageTemplate;
 import '../../components/common/snackbar.dart';
 import '../../components/common/styled_button.dart' show StyledButton;
+import 'otp.dart';
 
-class Login extends StatefulWidget {
+class PhoneScreen extends StatefulWidget {
+  const PhoneScreen({@required this.authBloc});
+
+  final AuthBloc authBloc;
+
   @override
-  _LoginState createState() => _LoginState();
+  _PhoneScreenState createState() => _PhoneScreenState();
 }
 
-class _LoginState extends State<Login> {
+class _PhoneScreenState extends State<PhoneScreen> {
   bool isAgree = false;
   bool validPhone = false;
   PhoneBloc _bloc;
+  LoginBloc _loginBloc;
+  CountryPhoneData selectedItem;
+  String phone;
 
   @override
   void initState() {
     super.initState();
     _bloc = PhoneBloc(TestPhoneRepository());
     _bloc.dispatch(PhoneInitialized());
+    _loginBloc = LoginBloc(widget.authBloc, AuthRepository());
   }
 
   @override
@@ -43,9 +58,10 @@ class _LoginState extends State<Login> {
             child: BlocListener<PhoneEvent, PhoneState>(
                 bloc: _bloc,
                 listener: (BuildContext context, PhoneState state) {
+                  print('===> state listener name : ' + state.toString());
                   if (state is PhoneLoadingError) {
-                    Scaffold.of(context).showSnackBar(const CustomSnackBar(
-                      content: Text('Something went wrong'),
+                    Scaffold.of(context).showSnackBar(CustomSnackBar(
+                      content: Text(state.toString()),
                       backgroundColor: Colors.redAccent,
                     ));
                   }
@@ -53,6 +69,7 @@ class _LoginState extends State<Login> {
                 child: BlocBuilder<PhoneEvent, PhoneState>(
                     bloc: _bloc,
                     builder: (BuildContext context, PhoneState state) {
+                      print('===> state builder name : ' + state.toString());
                       if (state is PhoneLoading) {
                         return Column(children: <Widget>[
                           _buildTittle(),
@@ -66,9 +83,13 @@ class _LoginState extends State<Login> {
                         return Column(children: <Widget>[
                           _buildTittle(),
                           PhonePicker(
-                              onSelected: (bool value) {
+                              onSelected: (bool value,
+                                  CountryPhoneData countryPhone,
+                                  String inputtedPhone) {
                                 setState(() {
                                   validPhone = value;
+                                  selectedItem = countryPhone;
+                                  phone = inputtedPhone;
                                 });
                               },
                               countryPhoneDataList: state.data,
@@ -151,7 +172,13 @@ class _LoginState extends State<Login> {
           loading: false,
           onPressed: isAgree && validPhone
               ? () {
-                  print('some action');
+                _loginBloc.dispatch(OtpRequested(phone));
+                  Navigator.push(
+                      context,
+                      SlideRoute(
+                          widget: OtpScreen(loginBloc:_loginBloc,previousRoute: ModalRoute.of(context),
+                              selectedItem: selectedItem, phone: phone),
+                          side: "left"));
                 }
               : null,
           text: 'Submit',
