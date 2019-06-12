@@ -11,14 +11,29 @@ import '../../../pages/login/phone.dart';
 
 import 'drawer_header.dart' show Header;
 
-// ignore: must_be_immutable
-class DrawerOnly extends StatelessWidget {
-  int _selectedDrawerIndex = 0;
+class DrawerOnly extends StatefulWidget {
+  @override
+  State createState() => DrawerState();
+}
 
+class DrawerState extends State<DrawerOnly> {
+  int _selectedDrawerIndex = 0;
+  AuthBloc authBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    authBloc = BlocProvider.of<AuthBloc>(context);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    authBloc.dispose();
+  }
   @override
   Widget build(BuildContext context) {
 //    final InheritedAuth inheritedAuth = InheritedAuth.of(context);
-    final AuthBloc authBloc = BlocProvider.of<AuthBloc>(context);
     return BlocBuilder<AuthEvent, AuthState>(
         bloc: authBloc,
         builder: (BuildContext context, AuthState state) {

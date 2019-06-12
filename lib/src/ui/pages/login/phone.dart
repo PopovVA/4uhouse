@@ -42,6 +42,12 @@ class _PhoneScreenState extends State<PhoneScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _bloc.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return PageTemplate(
         goBack: null,
@@ -52,6 +58,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
             child: BlocListener<PhoneEvent, PhoneState>(
                 bloc: _bloc,
                 listener: (BuildContext context, PhoneState state) {
+                  print('===> state listener name : ' + state.toString());
                   if (state is PhoneLoadingError) {
                     Scaffold.of(context).showSnackBar(CustomSnackBar(
                       content: Text(state.toString()),
@@ -62,6 +69,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                 child: BlocBuilder<PhoneEvent, PhoneState>(
                     bloc: _bloc,
                     builder: (BuildContext context, PhoneState state) {
+                      print('===> state builder name : ' + state.toString());
                       if (state is PhoneLoading) {
                         return Column(children: <Widget>[
                           _buildTittle(),

@@ -14,4 +14,8 @@ class PhoneRepository {
     }
     return list;
   }
+
+  Future<String> getCountryByIp() async {
+    return await phoneApi.countryLookUp();
+  }
 }

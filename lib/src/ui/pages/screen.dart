@@ -46,6 +46,11 @@ class _ScreenState extends State<Screen> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    screenBloc.dispose();
+  }
   void scrollToItem(GlobalKey key) {
     if (key != null) {
       Scrollable.ensureVisible(key.currentContext);
@@ -158,7 +163,7 @@ class _ScreenState extends State<Screen> {
     );
   }
 
-  void handleSendItemValue(String id, dynamic value, {dynamic body}) {
-//    return screenBloc.sendItemValue('${widget.route}/$id', value, body: body);
+  Future<Screen> handleSendItemValue(String id, dynamic value, {dynamic body}) {
+    return screenBloc.sendItemValue('${widget.route}/$id', value, body: body);
   }
 }
