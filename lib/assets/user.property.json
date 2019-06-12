@@ -1,0 +1,74 @@
+[
+  {
+    "value": "My property",
+    "path": "user/property",
+    "components": [
+      {
+        "id": "9",
+        "component": "property",
+        "address": "📍 , ",
+        "isTransition": true,
+        "statusValue": "To Do",
+        "statusColor": "0xFFFFA726",
+        "isInput": true
+      },
+      {
+        "id": "7",
+        "component": "property",
+        "currency": "€",
+        "costRent": 48000,
+        "paymentPeriod": "month",
+        "costSale": 48000000,
+        "address": "📍 , ",
+        "isTransition": false,
+        "isInput": true
+      },
+      {
+        "id": "5",
+        "component": "property",
+        "currency": "€",
+        "costRent": 48000,
+        "paymentPeriod": "month",
+        "address": "📍 , ",
+        "isTransition": true,
+        "isInput": false
+      },
+      {
+        "id": "3",
+        "component": "property",
+        "currency": "€",
+        "costRent": 100000,
+        "paymentPeriod": "month",
+        "mainInfo": "4 Bed, house",
+        "address": "📍 Tsada, PAPHOS",
+        "isTransition": true
+      },
+      {
+        "id": "2",
+        "component": "property",
+        "currency": "€",
+        "costRent": 48000,
+        "paymentPeriod": "month",
+        "address": "📍 , ",
+        "isTransition": true
+      },
+      {
+        "id": "1",
+        "component": "property",
+        "currency": "€",
+        "costRent": 100000,
+        "paymentPeriod": "month",
+        "mainInfo": "5 Bed, house",
+        "address": "📍 Tsada, PAPHOS",
+        "isTransition": true
+      },
+      {
+        "id": "Case",
+        "component": "button",
+        "typeQuery": "POST",
+        "isAble": true,
+        "key": "Add property"
+      }
+    ]
+  }
+]

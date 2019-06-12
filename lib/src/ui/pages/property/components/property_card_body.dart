@@ -27,33 +27,60 @@ class PropertyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-        onTap: () {
-          if (makeTransition is Function) {
-            makeTransition(context, property.id);
-          }
-        },
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(30.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              PropertyImage(
-                  id: property.id,
-                  picture: property.picture,
-                  statusColor: property.statusColor,
-                  statusValue: property.statusValue),
-              PropertyFooter(
-                currency: property.currency,
-                costSale: property.costSale,
-                costRent: property.costRent,
-                paymentPeriod: property.paymentPeriod,
-                mainInfo: property.mainInfo,
-                address: property.address,
+    return
+      Container(
+      margin: const EdgeInsets.symmetric(vertical: 6.0),
+      child: Ink(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+          border: Border.all(
+              width: 0.1,
+              style: BorderStyle.solid,
+              color: Colors.black.withOpacity(0.3)),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 0.5,
+                offset: const Offset(0.0, 2.0))
+          ]),
+        child: Container(
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(30.0))),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(30.0),
+            child: InkWell(
+              onTap: property.isTransition
+                  ? () {
+                      if (makeTransition is Function) {
+                        makeTransition(context, property.id);
+                      }
+                    }
+                  : null,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  PropertyImage(
+                      id: property.id,
+                      picture: property.picture,
+                      statusColor: property.statusColor,
+                      statusValue: property.statusValue),
+                  PropertyFooter(
+                    isInput: property.isInput,
+                    currency: property.currency,
+                    costSale: property.costSale,
+                    costRent: property.costRent,
+                    paymentPeriod: property.paymentPeriod,
+                    mainInfo: property.mainInfo,
+                    address: property.address,
+                  ),
+                  Container(height: 4.0),
+                ],
               ),
-              Container(height: 4.0),
-            ],
+            ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

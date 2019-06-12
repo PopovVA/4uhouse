@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
+import 'package:user_mobile/src/ui/components/property/property.dart';
+import '../../../temp/screen_repository_test.dart';
 import '../../blocs/screen_bloc.dart' show ScreenBloc;
 import '../../constants/layout.dart' show standardPadding;
 import '../../models/screen/components/button_model.dart' show ButtonModel;
@@ -8,13 +10,14 @@ import '../../models/screen/components/note_model.dart' show NoteModel;
 import '../../models/screen/components/property_model.dart' show PropertyModel;
 import '../../models/screen/screen_model.dart' show ScreenModel;
 import '../../resources/auth_repository.dart' show AuthRepository;
-import '../../resources/screen_repository.dart' show ScreenRepository;
+
+//import '../../resources/screen_repository.dart' show ScreenRepository;
 import '../components/common/button.dart' show Button;
 import '../components/common/circular_progress.dart' show CircularProgress;
 import '../components/common/page_template.dart' show PageTemplate;
 import '../components/item/item.dart' show Item;
 import '../components/note.dart' show Note;
-import '../components/property/property.dart' show Property;
+import 'property/components/property_card_body.dart';
 
 // ignore: must_be_immutable
 class Screen extends StatefulWidget {
@@ -41,7 +44,8 @@ class _ScreenState extends State<Screen> {
   @override
   void initState() {
     screenBloc = ScreenBloc(
-        authRepository: AuthRepository(), screenRepository: ScreenRepository());
+        authRepository: AuthRepository(),
+        screenRepository: TestScreenRepository());
     screenBloc.fetchScreen(widget.route);
     super.initState();
   }
@@ -51,6 +55,7 @@ class _ScreenState extends State<Screen> {
     super.dispose();
     screenBloc.dispose();
   }
+
   void scrollToItem(GlobalKey key) {
     if (key != null) {
       Scrollable.ensureVisible(key.currentContext);
@@ -110,7 +115,8 @@ class _ScreenState extends State<Screen> {
         } else if (component is NoteModel) {
           items.add(Note(component));
         } else if (component is PropertyModel) {
-          items.add(Property(component, makeTransition: makeTransition));
+          items.add(PropertyCard(component,
+              makeTransition: component.isTransition ? makeTransition : null));
         } else if (component is ButtonModel) {
           buttons.add(Button(
             component,
@@ -129,27 +135,32 @@ class _ScreenState extends State<Screen> {
             .addPostFrameCallback((_) => scrollToItem(scrollItemKey));
       }
 
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              child: SingleChildScrollView(
-                controller: widget.scrollController,
-                child: Column(
-                  children: items,
+      return Ink(
+        color: const Color(0xFFEBECED),
+        height: double.infinity,
+        padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                child: SingleChildScrollView(
+                  controller: widget.scrollController,
+                  child: Column(
+                    children: items,
+                  ),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: standardPadding),
-            child: Column(
-              children: buttons,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: standardPadding),
+              child: Column(
+                children: buttons,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       );
     }
 

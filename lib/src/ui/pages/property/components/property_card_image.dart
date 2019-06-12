@@ -25,6 +25,7 @@ class PropertyImage extends StatelessWidget {
       pictureDecodingError: pictureDecodingError,
     );
   }
+
   const PropertyImage._(
       {this.id,
       this.statusColor,

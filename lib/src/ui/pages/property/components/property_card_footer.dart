@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
+import '../../../../typography.dart';
 import '../../../../utils/type_check.dart' show isNotNull;
 
-class PropertyFooter extends StatelessWidget {
+class PropertyFooter extends StatefulWidget {
   const PropertyFooter(
-      {this.currency,
+      {this.isInput,
+      this.currency,
       this.costSale,
       this.costRent,
       this.paymentPeriod,
       this.mainInfo,
       this.address});
-  static const Color fontColor = Color(0xFF212121);
-  static const TextStyle addInfoStyle =
-      TextStyle(fontSize: 14.0, color: fontColor);
-  static const TextStyle mainValueStyle =
-      TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500, color: fontColor);
 
   final String currency;
   final int costSale;
@@ -21,6 +18,28 @@ class PropertyFooter extends StatelessWidget {
   final String paymentPeriod;
   final String mainInfo;
   final String address;
+  final bool isInput;
+
+  @override
+  State createState() => PropertyState();
+}
+
+class PropertyState extends State<PropertyFooter> {
+  static const Color fontColor = Color(0xFF212121);
+  TextStyle addInfoStyle;
+  TextStyle mainValueStyle;
+
+  @override
+  void initState() {
+    super.initState();
+    addInfoStyle = TextStyle(fontSize: 14.0, color: getColor());
+    mainValueStyle = TextStyle(
+        fontSize: 20.0, fontWeight: FontWeight.w500, color: getColor());
+  }
+
+  Color getColor() {
+    return widget.isInput ? ACTIVE_COLOR : DISABLED_COLOR;
+  }
 
   Widget buildMainValue(int value, double padding,
       {bool includePaymentPeriod = false}) {
@@ -28,11 +47,11 @@ class PropertyFooter extends StatelessWidget {
       return Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
-          const Text('/', style: mainValueStyle),
+          Text('/', style: mainValueStyle),
           Padding(
               padding: const EdgeInsets.only(bottom: 2.0),
-              child:
-                  Text(paymentPeriod, style: const TextStyle(fontSize: 12.0))),
+              child: Text(widget.paymentPeriod,
+                  style: const TextStyle(fontSize: 12.0))),
         ],
       );
     }
@@ -42,7 +61,8 @@ class PropertyFooter extends StatelessWidget {
         padding: EdgeInsets.only(bottom: padding),
         child: Row(
           children: <Widget>[
-            Text('$currency ${value.toString()}', style: mainValueStyle),
+            Text('${widget.currency} ${value.toString()}',
+                style: mainValueStyle),
             includePaymentPeriod ? renderPaymentPeriod() : null,
           ].where(isNotNull).toList(),
         ),
@@ -58,8 +78,8 @@ class PropertyFooter extends StatelessWidget {
         children: <Widget>[
           Text(value, style: addInfoStyle),
           addSeparator
-              ? const Padding(
-                  padding: EdgeInsets.only(left: 23.0, right: 17.0),
+              ? Padding(
+                  padding: const EdgeInsets.only(left: 23.0, right: 17.0),
                   child: Text('|', style: addInfoStyle),
                 )
               : null,
@@ -77,12 +97,12 @@ class PropertyFooter extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          buildMainValue(costSale, 5.0),
-          buildMainValue(costRent, 13.0, includePaymentPeriod: true),
+          buildMainValue(widget.costSale, 5.0),
+          buildMainValue(widget.costRent, 13.0, includePaymentPeriod: true),
           Row(
             children: <Widget>[
-              buildAddInfo(mainInfo, addSeparator: true),
-              buildAddInfo(address),
+              buildAddInfo(widget.mainInfo, addSeparator: true),
+              buildAddInfo(widget.address),
             ].where(isNotNull).toList(),
           ),
         ].where(isNotNull).toList(),
