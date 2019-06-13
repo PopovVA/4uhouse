@@ -155,8 +155,11 @@ class _ScreenState extends State<Screen> {
                 ),
               ],
             ),
-            Column(
-                mainAxisAlignment: MainAxisAlignment.end, children: buttons),
+            Padding(
+              padding: const EdgeInsets.only(bottom:4.0),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end, children: buttons),
+            ),
           ],
         ),
       );
