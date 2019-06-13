@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:user_mobile/src/ui/components/common/circular_progress.dart';
+import '../../../constants/layout.dart'
+    show standardHorizontalPadding, standardVerticalPadding;
+import '../../components/common/circular_progress.dart';
 
 class StyledButton extends StatelessWidget {
   const StyledButton({this.text = '', this.onPressed, this.loading = false});
@@ -10,15 +12,18 @@ class StyledButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 48.0,
-      width: double.infinity,
-      child: RaisedButton(
-        color: Theme.of(context).primaryColor,
-        disabledColor: const Color(0xE6CACACA),
-        elevation: 8,
-        onPressed: loading ? null : onPressed,
-        child: buildChild(context),
+    return Padding(
+      padding: EdgeInsets.only(bottom: standardVerticalPadding,left: standardHorizontalPadding,right: standardHorizontalPadding),
+      child: Container(
+        height: 48.0,
+        width: double.infinity,
+        child: RaisedButton(
+          color: Theme.of(context).primaryColor,
+          disabledColor: const Color(0xE6CACACA),
+          elevation: 8,
+          onPressed: loading ? null : onPressed,
+          child: buildChild(context),
+        ),
       ),
     );
   }

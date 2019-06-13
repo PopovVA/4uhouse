@@ -4,8 +4,6 @@ import 'package:flutter/scheduler.dart' show SchedulerBinding;
 //import 'package:user_mobile/src/ui/components/property/property.dart';
 import '../../../temp/screen_repository_test.dart';
 import '../../blocs/screen_bloc.dart' show ScreenBloc;
-import '../../constants/layout.dart'
-    show standardHorizontalPadding, standardVerticalPadding;
 import '../../models/screen/components/button_model.dart' show ButtonModel;
 import '../../models/screen/components/item_model.dart' show ItemModel;
 import '../../models/screen/components/note_model.dart' show NoteModel;
@@ -157,14 +155,8 @@ class _ScreenState extends State<Screen> {
                 ),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                  left: standardHorizontalPadding,
-                  right: standardHorizontalPadding,
-                  bottom: standardVerticalPadding),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end, children: buttons),
-            ),
+            Column(
+                mainAxisAlignment: MainAxisAlignment.end, children: buttons),
           ],
         ),
       );
