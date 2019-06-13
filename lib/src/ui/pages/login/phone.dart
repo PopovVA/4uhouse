@@ -181,7 +181,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                               previousRoute: ModalRoute.of(context),
                               selectedItem: selectedItem,
                               phone: phone),
-                          side: "left"));
+                          side: 'left'));
                 }
               : null,
           text: 'Submit',
