@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:meta/meta.dart';
 import 'package:user_mobile/src/blocs/auth/auth_bloc.dart';
 import 'package:user_mobile/src/resources/auth_repository.dart';
 
@@ -6,8 +7,10 @@ import 'login_event.dart';
 import 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  AuthBloc authBloc;
-  AuthRepository authRepository;
+  LoginBloc({@required  this.bloc,@required this.repository});
+  AuthBloc bloc;
+  AuthRepository repository;
+
 
   @override
   LoginState get initialState => PhoneEntering();
@@ -18,8 +21,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       if (event is OtpRequested) {
         try {
           yield IsFetchingOtp();
-          final String codeChallenge = await authRepository.generatePkce();
-          authRepository.getOtp(event.phone, codeChallenge);
+          final String codeChallenge = await repository.generatePkce();
+          repository.getOtp(event.phone, codeChallenge);
           yield OtpSent();
         } catch (error) {
           yield PhoneError(message:error.toString());

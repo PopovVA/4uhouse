@@ -38,7 +38,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
     super.initState();
     _bloc = PhoneBloc(TestPhoneRepository());
     _bloc.dispatch(PhoneInitialized());
-    _loginBloc = LoginBloc(widget.authBloc, AuthRepository());
+    _loginBloc = LoginBloc(bloc: widget.authBloc, repository: AuthRepository());
   }
 
   @override
@@ -172,12 +172,15 @@ class _PhoneScreenState extends State<PhoneScreen> {
           loading: false,
           onPressed: isAgree && validPhone
               ? () {
-                _loginBloc.dispatch(OtpRequested(phone));
+                  _loginBloc.dispatch(OtpRequested(phone));
                   Navigator.push(
                       context,
                       SlideRoute(
-                          widget: OtpScreen(loginBloc:_loginBloc,previousRoute: ModalRoute.of(context),
-                              selectedItem: selectedItem, phone: phone),
+                          widget: OtpScreen(
+                              loginBloc: _loginBloc,
+                              previousRoute: ModalRoute.of(context),
+                              selectedItem: selectedItem,
+                              phone: phone),
                           side: "left"));
                 }
               : null,
