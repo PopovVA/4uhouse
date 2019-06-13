@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
-import 'package:user_mobile/src/ui/components/property/property.dart';
+//import 'package:user_mobile/src/ui/components/property/property.dart';
 import '../../../temp/screen_repository_test.dart';
 import '../../blocs/screen_bloc.dart' show ScreenBloc;
 import '../../constants/layout.dart'
