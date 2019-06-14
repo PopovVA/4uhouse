@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
 import '../src/pallete.dart';
 import '../src/typography.dart';
 import '../src/ui/pages/screen.dart';
+import '../src/utils/route_transition.dart';
 
 class AppScreens extends StatelessWidget {
   @override
@@ -15,10 +15,9 @@ class AppScreens extends StatelessWidget {
         textTheme: customTextTheme,
       ),
       home: Screen('user/property'),
-      onGenerateRoute: (RouteSettings settings) =>
-          MaterialPageRoute<dynamic>(
-              builder: (BuildContext context) =>
-              Screen(settings.name, arguments: settings.arguments)),
+      onGenerateRoute: (RouteSettings settings) => SlideRoute(
+          widget: Screen(settings.name, arguments: settings.arguments),
+          side: 'left'),
     );
   }
 }
