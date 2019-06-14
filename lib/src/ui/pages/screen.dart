@@ -135,36 +135,43 @@ class _ScreenState extends State<Screen> {
             .addPostFrameCallback((_) => scrollToItem(scrollItemKey));
       }
 
-      return Ink(
-        color: const Color(0xFFEBECED),
-        height: double.infinity,
-        padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                child: SingleChildScrollView(
-                  controller: widget.scrollController,
-                  child: Column(
-                    children: items,
+      return RefreshIndicator(
+        onRefresh: _refresh,
+        child: Ink(
+          color: const Color(0xFFEBECED),
+          height: double.infinity,
+          padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  child: SingleChildScrollView(
+                    controller: widget.scrollController,
+                    child: Column(
+                      children: items,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: standardPadding),
-              child: Column(
-                children: buttons,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: standardPadding),
+                child: Column(
+                  children: buttons,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     }
 
     return null;
+  }
+
+  Future<void> _refresh() async {
+    await screenBloc.refreshScreen(widget.route);
   }
 
   void makeTransition(BuildContext context, String id) {

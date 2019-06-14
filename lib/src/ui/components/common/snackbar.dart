@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomSnackBar extends StatelessWidget implements SnackBar {
+class CustomSnackBar extends SnackBar implements StatelessWidget {
   const CustomSnackBar(
       {@required this.content,
       this.backgroundColor,

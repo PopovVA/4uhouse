@@ -1,5 +1,6 @@
 import 'package:rxdart/rxdart.dart' show Observable, PublishSubject;
 import 'package:meta/meta.dart' show required;
+import '../../temp/screen_repository_test.dart';
 
 import '../models/screen/screen_model.dart' show ScreenModel;
 import '../resources/auth_repository.dart' show AuthRepository;
@@ -25,6 +26,18 @@ class ScreenBloc {
         screenRepository is TestScreenRepository) {
       final ScreenModel screenModel =
           await screenRepository.fetchScreen(query: route, token: token);
+      _screen.sink.add(screenModel);
+    } else {
+      // TODO(Andrei): show snackbar error
+    }
+  }
+
+  Future<void> refreshScreen(String route) async {
+    final String token = await this.token;
+    if ((token is String) && token.isNotEmpty ||
+        screenRepository is TestScreenRepository) {
+      final ScreenModel screenModel =
+      await screenRepository.fetchScreen(query: route, token: token);
       _screen.sink.add(screenModel);
     } else {
       // TODO(Andrei): show snackbar error
