@@ -37,7 +37,7 @@ class ScreenBloc {
     if ((token is String) && token.isNotEmpty ||
         screenRepository is TestScreenRepository) {
       final ScreenModel screenModel =
-      await screenRepository.fetchScreen(query: route, token: token);
+          await screenRepository.fetchScreen(query: route, token: token);
       _screen.sink.add(screenModel);
     } else {
       // TODO(Andrei): show snackbar error
