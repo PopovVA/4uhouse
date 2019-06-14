@@ -1,40 +1,68 @@
-import 'package:bloc/bloc.dart';
-import 'package:user_mobile/src/blocs/auth/auth_bloc.dart';
-import 'package:user_mobile/src/resources/auth_repository.dart';
+import 'package:bloc/bloc.dart' show Bloc;
+import 'package:user_mobile/src/blocs/auth/auth_bloc.dart' show AuthBloc;
+import 'package:user_mobile/src/resources/auth_repository.dart'
+    show AuthRepository;
 
-import 'login_event.dart';
-import 'login_state.dart';
+import '../auth/auth_event.dart' show UserLoggedIn;
+import 'login_event.dart'
+    show CodeEnteringCanceled, LoginEvent, OtpRequested, SubmitCodeTapped;
+import 'login_state.dart'
+    show
+        CodeError,
+        IsFetchingCode,
+        IsFetchingOtp,
+        LoginState,
+        OtpSent,
+        PhoneEntering,
+        PhoneError;
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  AuthBloc authBloc;
-  AuthRepository authRepository;
+  LoginBloc(AuthBloc authBloc, AuthRepository authRepository)
+      : assert(authBloc != null),
+        assert(authRepository != null),
+        _authBloc = authBloc,
+        _authRepository = authRepository;
+
+  final AuthBloc _authBloc;
+  final AuthRepository _authRepository;
 
   @override
   LoginState get initialState => PhoneEntering();
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    if (initialState == PhoneEntering()) {
-      if (event is OtpRequested) {
-        try {
-          yield IsFetchingOtp();
-          final String codeChallenge = await authRepository.generatePkce();
-          authRepository.getOtp(event.phone, codeChallenge);
-          yield OtpSent();
-        } catch (error) {
-          yield PhoneError(message:error.toString());
-        }
-      } else if (event is SubmitCodeTapped) {
-        try {
-          yield IsFetchingCode();
-        } catch (error) {
-          yield CodeError(message:error.toString());
-        }
-      }
-    } else {
-      if (event is CodeEnteringCanceled) {
-        yield PhoneEntering();
-      }
+    if (event is OtpRequested) {
+      yield* _mapOtpRequestedToState(event);
+    } else if (event is CodeEnteringCanceled) {
+      yield PhoneEntering();
+    } else if (event is SubmitCodeTapped) {
+      yield* _mapSubmitCodeTappedToState(event);
+    }
+  }
+
+  Stream<LoginState> _mapOtpRequestedToState(OtpRequested event) async* {
+    try {
+      yield IsFetchingOtp();
+      await _authRepository.getOtp(
+          countryId: event.countryId,
+          code: event.code,
+          number: event.number);
+      yield OtpSent();
+    } catch (error) {
+      yield PhoneError(error.toString());
+    }
+  }
+
+  Stream<LoginState> _mapSubmitCodeTappedToState(
+      SubmitCodeTapped event) async* {
+    try {
+      throw Exception('TEST ERROR boi');
+      yield IsFetchingCode();
+      await _authRepository.login(
+          number: event.number, code: event.code, otp: event.otp);
+      _authBloc.dispatch(UserLoggedIn());
+    } catch (error) {
+      yield CodeError(error.toString());
     }
   }
 }

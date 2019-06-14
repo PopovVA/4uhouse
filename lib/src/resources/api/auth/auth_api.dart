@@ -1,15 +1,19 @@
 import 'dart:async' show Future;
-
+import 'dart:convert' show json;
 import 'package:meta/meta.dart' show required;
+
 import 'package:http/http.dart' as http;
 
+import '../../../models/auth/token_response_model.dart' show TokenResponseModel;
+import '../../../models/auth/user_model.dart' show UserModel;
 import '../api.dart' show Api;
 import 'constants/url.dart' show OAUTH_URL, USER_URL;
 
 class AuthApi extends Api {
   final http.Client client = http.Client();
 
-  static const String _contentType = 'x-www-form-urlencoded';
+  static const String _contentType = 'application/x-www-form-urlencoded';
+  static const String clientId = 'user-mobile';
 
   // endpoints
   static const String _otpEndpoint = '${OAUTH_URL}otp';
@@ -17,16 +21,12 @@ class AuthApi extends Api {
   static const String _logoutEndpoint = '${USER_URL}logout';
   static const String _userInfoEndpoint = '${USER_URL}userinfo';
 
-  static String _formBodyParametersToString(Map<String, dynamic> parameters) {
-    final List<String> formBody = <String>[];
+  static String _encodeMapToUrl(Map<String, dynamic> parameters) {
+    final List<String> urlEncodedForm = <String>[];
+    parameters.forEach((String key, dynamic value) =>
+        urlEncodedForm.add('${Uri.encodeFull(key)}=${Uri.encodeFull(value.toString())}'));
 
-    parameters.forEach((String key, dynamic value) {
-      final String encodedKey = Uri.encodeFull(key);
-      final String encodedValue = Uri.encodeFull(value);
-      formBody.add('$encodedKey=$encodedValue');
-    });
-
-    return formBody.join('&');
+    return urlEncodedForm.join('&');
   }
 
   static Map<String, String> _makeHeaders({String accessToken}) {
@@ -41,72 +41,138 @@ class AuthApi extends Api {
     return headers;
   }
 
-  Future<void> requestOtp(String codeChallenge, String deviceId,
-      String countryId, int countryCode, String number) async {
+  Future<void> requestOtp(
+      {@required String codeChallenge,
+      @required String deviceId,
+      @required String countryId,
+      @required int code,
+      @required String number}) async {
     try {
-      final http.Response response = await http.post(
+      print('===> body: ${_encodeMapToUrl({
+        'code_challenge': codeChallenge,
+        'device_id': deviceId,
+        'country_id': countryId,
+        'country_code': code,
+        'number': number
+      })}');
+      final http.Response response = await client.post(
         _otpEndpoint,
         headers: _makeHeaders(),
-        body: _formBodyParametersToString(<String, dynamic>{
+        body: _encodeMapToUrl(<String, dynamic>{
           'code_challenge': codeChallenge,
           'device_id': deviceId,
           'country_id': countryId,
-          'country_code': countryCode,
+          'country_code': code,
           'number': number
         }),
+      );
+
+      print('===> response.statusCode: ${response.statusCode}');
+      print('===> response.body: ${response.body}');
+      if (response.statusCode != 204) {
+        throw response;
+      }
+    } catch (error) {
+      throw await inferError(error);
+    }
+  }
+
+  Future<TokenResponseModel> requestToken(
+      {@required String number,
+      @required int code,
+      @required String otp,
+      @required String codeVerifier,
+      @required String deviceId}) async {
+    final String phone = '$code$number';
+    try {
+      print('===> body: ${_encodeMapToUrl({
+        'grant_type': 'otp',
+        'client_id': clientId,
+        'phone': phone,
+        'otp': otp,
+        'code_verifier': codeVerifier,
+        'device_id': deviceId,
+      })}');
+      final http.Response response = await client.post(
+        _tokenEndpoint,
+        headers: _makeHeaders(),
+        body: _encodeMapToUrl(<String, dynamic>{
+          'grant_type': 'otp',
+          'client_id': clientId,
+          'phone': phone,
+          'otp': otp,
+          'code_verifier': codeVerifier,
+          'device_id': deviceId,
+        }),
+      );
+
+      print('===> response.statusCode: ${response.statusCode}');
+      print('===> response.body: ${response.body}');
+
+      if (response.statusCode != 200) {
+        throw response;
+      }
+
+      return TokenResponseModel.fromJson(json.decode(response.body));
+    } catch (error) {
+      throw await inferError(error);
+    }
+  }
+
+  Future<TokenResponseModel> refreshToken(
+      {@required String refreshToken}) async {
+    try {
+      final http.Response response = await client.post(
+        _tokenEndpoint,
+        headers: _makeHeaders(),
+        body: _encodeMapToUrl(<String, dynamic>{
+          'grant_type': 'refresh_token',
+          'client_id': clientId,
+          'refreshToken': refreshToken,
+        }),
+      );
+
+      if (response.statusCode != 200) {
+        throw response;
+      }
+
+      return TokenResponseModel.fromJson(json.decode(response.body));
+    } catch (error) {
+      throw await inferError(error);
+    }
+  }
+
+  Future<void> logout({@required String accessToken}) async {
+    try {
+      final http.Response response = await client.post(
+        _logoutEndpoint,
+        headers: _makeHeaders(accessToken: accessToken),
       );
 
       if (response.statusCode != 204) {
         throw response;
       }
-
     } catch (error) {
-      throw inferError(error);
+      print('===> logout error: ${error.statusCode}');
+      print('===> logout error body: ${error.body}');
+      throw await inferError(error);
     }
   }
 
-  Future<TokenResponse> refresh({@required String refreshToken}) async =>
-      _appAuth.token(TokenRequest(_clientId, _redirectUrl,
-          refreshToken: refreshToken,
-          discoveryUrl: _discoveryUrl,
-          scopes: _scopes));
-
-  Future<void> logout(
-      {@required String accessToken, @required String refreshToken}) async {
+  Future<UserModel> loadUserProfile({@required String accessToken}) async {
     try {
-      final http.Response response = await http.post(
-          'https://dev.auth.4u.house/auth/realms/4uhouse/protocol/openid-connect/logout',
-          body: <String, String>{
-            'client_id': _clientId,
-            'refresh_token': refreshToken
-          },
-          headers: <String, String>{
-            'Authorization': 'Bearer $accessToken',
-            'Content-type': 'application/x-www-form-urlencoded'
-          });
+      final http.Response response = await client.get(
+        _userInfoEndpoint,
+        headers: _makeHeaders(accessToken: accessToken),
+      );
 
-      // no response body, do not decode!
-      if (response.statusCode != 204) {
+      if (response.statusCode != 200) {
         throw response;
       }
-    } catch (error) {
-      throw inferError(error);
-    }
-  }
 
-  Future<Map<String, dynamic>> loadUserProfile(
-      {@required String accessToken}) async {
-    try {
-      final http.Response response = await http.get(_userInfoEndpoint,
-          headers: <String, String>{'Authorization': 'Bearer $accessToken'});
-
-      if (response.statusCode == 200) {
-        return processResponse(response);
-      } else {
-        throw response;
-      }
+      return UserModel.fromJson(json.decode(response.body));
     } catch (error) {
-      throw inferError(error);
+      throw await inferError(error);
     }
   }
 }

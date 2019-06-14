@@ -4,7 +4,7 @@ class UserModel {
   }
 
   UserModel.fromJson(Map<String, dynamic> json) {
-    _phone = json['phone'];
+    _phone = json['phone_number'];
   }
 
   String _phone;
@@ -12,8 +12,8 @@ class UserModel {
   String get phone => _phone;
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['phone'] = _phone;
-    return data;
+    final Map<String, dynamic> json = <String, dynamic>{};
+    json['phone_number'] = _phone;
+    return json;
   }
 }

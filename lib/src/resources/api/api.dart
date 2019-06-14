@@ -1,12 +1,13 @@
-import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
+import 'dart:async' show Completer, Future;
+import 'dart:convert' show json, utf8;
+import 'dart:io' show SocketException;
 import 'package:http/http.dart' as http;
-import 'package:connectivity/connectivity.dart';
-import 'package:user_mobile/src/models/error.dart';
-import '../../models/errors/auth_error.dart';
-import '../../models/errors/connection_error.dart';
-import '../../models/errors/no_internet_error.dart';
+import 'package:connectivity/connectivity.dart'
+    show Connectivity, ConnectivityResult;
+
+import '../../models/errors/auth_error.dart' show AuthError;
+import '../../models/errors/connection_error.dart' show ConnectionError;
+import '../../models/errors/no_internet_error.dart' show NoInternetError;
 
 class Api {
   Future<dynamic> inferError(dynamic object) async {
@@ -21,12 +22,8 @@ class Api {
       switch (object.statusCode) {
         case 401:
           return AuthError();
-          break;
         default:
-          return Exception(
-              ErrorMessage
-                  .fromJson(await processResponse(object))
-                  .message);
+          return Exception();
       }
     }
   }

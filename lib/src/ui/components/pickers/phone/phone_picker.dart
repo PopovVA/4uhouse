@@ -20,7 +20,17 @@ class _PhonePickerState extends State<PhonePicker> {
   TextEditingController phone = TextEditingController();
   CountryPhoneData selectedItem;
 
-  void _phoneListner() {
+  @override
+  void didChangeDependencies() {
+    if (selectedItem == null && widget.countryPhoneDataList != null) {
+      setState(() {
+        selectedItem = widget.countryPhoneDataList[0];
+      });
+    }
+    super.didChangeDependencies();
+  }
+
+  void _phoneListener() {
     if (widget.onSelected is Function) {
       widget.onSelected(_isValid(), selectedItem, phone.text);
     }
@@ -49,7 +59,7 @@ class _PhonePickerState extends State<PhonePicker> {
   @override
   void initState() {
     super.initState();
-    phone.addListener(_phoneListner);
+    phone.addListener(_phoneListener);
   }
 
   @override

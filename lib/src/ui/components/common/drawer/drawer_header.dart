@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
-import '../../../../models/user_profile.dart';
-import '../../../../utils/route_transition.dart';
-import '../../../pages/example_page.dart';
+
+import '../../../../models/auth/user_model.dart' show UserModel;
 
 class Header extends StatelessWidget {
-  const Header({@required this.userProfile});
+  const Header({this.userProfile});
 
-  final UserProfile userProfile;
+  final UserModel userProfile;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +19,14 @@ class Header extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(
-                    userProfile.preferredUsername,
-                    style: const TextStyle(
-                        fontSize: 20.0, color: Color.fromRGBO(0, 0, 0, 0.87)),
-                  ),
+                  userProfile != null
+                      ? Text(
+                          userProfile.phone,
+                          style: const TextStyle(
+                              fontSize: 20.0,
+                              color: Color.fromRGBO(0, 0, 0, 0.87)),
+                        )
+                      : Container(width: 0.0, height: 0.0),
                   IconButton(
                       icon: const Icon(
                         OMIcons.close,
@@ -32,34 +34,6 @@ class Header extends StatelessWidget {
                       ),
                       onPressed: () {
                         Navigator.pop(context);
-                      })
-                ],
-              ),
-              Text(
-                userProfile.email,
-                style: const TextStyle(color: Color.fromRGBO(0, 0, 0, 0.87)),
-              ),
-              Row(
-                children: <Widget>[
-                  Container(
-                    child: const Text(
-                      '8 800 555 3535',
-                      style: TextStyle(
-                          fontSize: 16.0, color: Color.fromRGBO(0, 0, 0, 0.87)),
-                    ),
-                    width: 132,
-                  ),
-                  IconButton(
-                      iconSize: 16,
-                      icon: const Icon(
-                        OMIcons.borderColor,
-                        color: Color.fromRGBO(218, 218, 218, 1),
-                      ),
-                      onPressed: () {
-                        /* Navigator.pushNamedAndRemoveUntil(context, '/home',
-                                (Route<dynamic> route) => false);*/
-                        Navigator.push(context,
-                            SlideRoute(widget: ExamplePage(), side: 'left'));
                       })
                 ],
               ),
