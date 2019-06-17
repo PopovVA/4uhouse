@@ -3,9 +3,8 @@ import 'package:bloc/bloc.dart';
 
 import 'src/app.dart' show App;
 import 'src/resources/auth_repository.dart' show AuthRepository;
-import 'temp/app_old.dart';
-
-//import 'temp/app_old.dart' show AppScreens;
+//import 'temp/app_old.dart';
+import 'temp/app_test_alert_dialog.dart';
 
 class AppBlocDelegate extends BlocDelegate {
 //  @override
@@ -26,6 +25,6 @@ class AppBlocDelegate extends BlocDelegate {
 void main() async {
 //  debugPaintSizeEnabled = true;
   BlocSupervisor().delegate = AppBlocDelegate();
-  runApp(AppScreens());
+  runApp(AppAlert());
 //  runApp(AppScreens());
 }
