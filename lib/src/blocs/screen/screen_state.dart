@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart' show immutable;
+import '../../../src/models/screen/screen_model.dart';
 
 @immutable
 abstract class ScreenState extends Equatable {
@@ -22,10 +23,10 @@ class ScreenLoading extends ScreenState {
 class ScreenDataLoaded extends ScreenState {
   ScreenDataLoaded(this.data);
 
-  final String data;
+  final List<ScreenModel> data;
 
   @override
-  String toString() => 'PhoneCountriesDataLoaded';
+  String toString() => 'ScreenDataLoaded';
 }
 
 class ScreenDataLoadingError extends ScreenState {
