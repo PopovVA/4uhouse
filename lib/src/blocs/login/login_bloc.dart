@@ -6,6 +6,7 @@ import 'login_event.dart';
 import 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
+  LoginBloc(this.authBloc, this.authRepository);
   AuthBloc authBloc;
   AuthRepository authRepository;
 

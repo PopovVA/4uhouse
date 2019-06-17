@@ -22,7 +22,7 @@ class ScreenBloc {
   Future<void> fetchScreen(String route) async {
     final String token = await this.token;
     if ((token is String) && token.isNotEmpty ||
-        screenRepository is TestScreenRepository) {
+        screenRepository is ScreenRepository) {
       final ScreenModel screenModel =
           await screenRepository.fetchScreen(query: route, token: token);
       _screen.sink.add(screenModel);
