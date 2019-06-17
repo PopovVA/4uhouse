@@ -22,11 +22,11 @@ import '../../../models/country_phone_data.dart' show CountryPhoneData;
 import '../../../resources/auth_repository.dart' show AuthRepository;
 import '../../../resources/phone_repository.dart' show PhoneRepository;
 
-import '../../components/common/alert_dialog.dart' show CustomAlertDialog;
-import '../../components/common/circular_progress.dart' show CircularProgress;
-import '../../components/common/page_template.dart' show PageTemplate;
-import '../../components/common/styled_button.dart' show StyledButton;
+import '../../components/page_template.dart' show PageTemplate;
 import '../../components/pickers/phone/phone_picker.dart' show PhonePicker;
+import '../../components/styled/styled_alert_dialog.dart' show StyledAlertDialog;
+import '../../components/styled/styled_button.dart' show StyledButton;
+import '../../components/styled/styled_circular_progress.dart' show StyledCircularProgress;
 import 'otp.dart' show OtpScreen;
 
 class PhoneScreen extends StatefulWidget {
@@ -62,7 +62,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
 
   void _showError(BuildContext context, dynamic state) {
     showDialog(context: context, builder: (BuildContext context) {
-      return CustomAlertDialog(
+      return StyledAlertDialog(
         content: state.toString(),
         onOk: () {
           Navigator.of(context).pop();
@@ -118,14 +118,20 @@ class _PhoneScreenState extends State<PhoneScreen> {
                           _buildTittle(),
                           if (state is PhoneUninitialized ||
                               state is PhoneLoading)
-                            CircularProgress(
+                            StyledCircularProgress(
                                 size: 'small',
                                 color: Theme.of(context).primaryColor),
                           if (state is PhoneCountriesDataLoaded)
-                            _buildPhonePicker(state),
+                            Container(
+                              margin: const EdgeInsets.only(left: 24.0),
+                              child: _buildPhonePicker(state),
+                            ),
                           if (state is PhoneLoadingError)
                             Text(state.toString()),
-                          _buildTerms(),
+                          Container(
+                            margin: const EdgeInsets.only(left: 8.0),
+                            child: _buildTerms(),
+                          ),
                           _buildSubmit(loginBloc: _loginBloc),
                         ],
                       );
@@ -135,14 +141,14 @@ class _PhoneScreenState extends State<PhoneScreen> {
   Widget _buildTittle() {
     return Container(
         alignment: const Alignment(-1, 0),
-        margin: const EdgeInsets.only(top: 56.0, bottom: 16.0, left: 14.0),
+        margin: const EdgeInsets.only(top: 56.0, bottom: 16.0, left: 24.0),
         child: const Text('Enter your phone number',
             style: TextStyle(fontSize: 16)));
   }
 
   Widget _buildTerms() {
-    return Padding(
-        padding: const EdgeInsets.only(top: 16.0),
+    return Container(
+        margin: const EdgeInsets.only(top: 16.0),
         child: Row(children: <Widget>[
           Checkbox(
             activeColor: Theme.of(context).primaryColor,

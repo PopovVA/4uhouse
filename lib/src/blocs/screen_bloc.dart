@@ -35,8 +35,6 @@ class ScreenBloc {
       final ScreenModel screenModel =
           await screenRepository.sendItemValue(route, value, body: body);
       _screen.sink.add(screenModel);
-    } else {
-      // TODO(Andrei): show snackbar error
     }
   }
 

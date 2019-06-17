@@ -1,5 +1,5 @@
-class AuthError implements Exception {
-  AuthError([this.message]);
+class HttpError implements Exception {
+  HttpError([this.message]);
 
   final String message;
 

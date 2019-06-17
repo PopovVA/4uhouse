@@ -19,9 +19,11 @@ import '../../../blocs/login/login_state.dart'
         PhoneError;
 import '../../../models/country_phone_data.dart' show CountryPhoneData;
 
-import '../../components/common/alert_dialog.dart' show CustomAlertDialog;
-import '../../components/common/page_template.dart' show PageTemplate;
-import '../../components/common/styled_button.dart' show StyledButton;
+import '../../components/page_template.dart' show PageTemplate;
+import '../../components/styled/styled_alert_dialog.dart'
+    show StyledAlertDialog;
+import '../../components/styled/styled_button.dart' show StyledButton;
+import '../../components/styled/styled_text_field.dart' show StyledTextField;
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen(
@@ -57,16 +59,17 @@ class _OtpScreenState extends State<OtpScreen> {
   }
 
   void _showError(BuildContext context, LoginState state) {
-    showDialog(context: context, builder: (BuildContext context) {
-      return CustomAlertDialog(
-        content: state.toString(),
-        onOk: () {
-          Navigator.of(context)
-              .removeRouteBelow(ModalRoute.of(context));
-          Navigator.of(context).removeRoute(ModalRoute.of(context));
-        },
-      );
-    });
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return StyledAlertDialog(
+            content: state.toString(),
+            onOk: () {
+              Navigator.of(context).removeRouteBelow(ModalRoute.of(context));
+              Navigator.of(context).removeRoute(ModalRoute.of(context));
+            },
+          );
+        });
   }
 
   @override
@@ -184,23 +187,17 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget _buildCodeInput() {
     return Container(
       margin: const EdgeInsets.only(top: 26.0),
-      width: 312,
-      child: TextField(
+      child: StyledTextField(
         autofocus: true,
-        textAlign: TextAlign.center,
+        borderColor: code.text.length != maxLength
+            ? Colors.redAccent
+            : Theme.of(context).primaryColor,
         controller: code,
+        textAlign: TextAlign.center,
         maxLength: maxLength,
-        style: const TextStyle(fontSize: 16.0, color: Color(0xde000000)),
         keyboardType: const TextInputType.numberWithOptions(decimal: true),
-        decoration: InputDecoration(
-            contentPadding: const EdgeInsets.all(0.0),
-            focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                    width: 2.0,
-                    color: code.text.length != maxLength
-                        ? Colors.redAccent
-                        : Theme.of(context).primaryColor))),
       ),
+      width: 312,
     );
   }
 }

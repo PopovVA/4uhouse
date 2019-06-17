@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 
-import '../../../../models/auth/user_model.dart' show UserModel;
+import '../../../models/auth/user_model.dart' show UserModel;
 
 class Header extends StatelessWidget {
   const Header({this.userProfile});

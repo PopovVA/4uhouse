@@ -50,7 +50,7 @@ class AuthApi extends Api {
     try {
       print('===> body: ${_encodeMapToUrl({
         'code_challenge': codeChallenge,
-        'device_id': deviceId,
+        'app_id': deviceId,
         'country_id': countryId,
         'country_code': code,
         'number': number
@@ -60,7 +60,7 @@ class AuthApi extends Api {
         headers: _makeHeaders(),
         body: _encodeMapToUrl(<String, dynamic>{
           'code_challenge': codeChallenge,
-          'device_id': deviceId,
+          'app_id': deviceId,
           'country_id': countryId,
           'country_code': code,
           'number': number
@@ -91,7 +91,7 @@ class AuthApi extends Api {
         'phone': phone,
         'otp': otp,
         'code_verifier': codeVerifier,
-        'device_id': deviceId,
+        'app_id': deviceId,
       })}');
       final http.Response response = await client.post(
         _tokenEndpoint,
@@ -102,7 +102,7 @@ class AuthApi extends Api {
           'phone': phone,
           'otp': otp,
           'code_verifier': codeVerifier,
-          'device_id': deviceId,
+          'app_id': deviceId,
         }),
       );
 

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart'
+    show MoneyMaskedTextController;
 
-import '../../models/screen/components/item_model.dart';
-import '../components/common/page_template.dart';
-import '../components/common/styled_button.dart';
-import '../components/pickers/money_picker.dart';
+import '../../models/screen/components/item_model.dart' show ItemModel;
+import '../components/page_template.dart' show PageTemplate;
+import '../components/pickers/money_picker.dart' show MoneyPicker;
+import '../components/styled/styled_button.dart' show StyledButton;
 
 import '../helpers/money_controller.dart' show createMoneyController;
 

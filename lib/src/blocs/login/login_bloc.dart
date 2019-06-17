@@ -56,7 +56,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> _mapSubmitCodeTappedToState(
       SubmitCodeTapped event) async* {
     try {
-      throw Exception('TEST ERROR boi');
       yield IsFetchingCode();
       await _authRepository.login(
           number: event.number, code: event.code, otp: event.otp);

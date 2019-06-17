@@ -5,8 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:connectivity/connectivity.dart'
     show Connectivity, ConnectivityResult;
 
-import '../../models/errors/auth_error.dart' show AuthError;
 import '../../models/errors/connection_error.dart' show ConnectionError;
+import '../../models/errors/http_error.dart' show HttpError;
 import '../../models/errors/no_internet_error.dart' show NoInternetError;
 
 class Api {
@@ -18,14 +18,14 @@ class Api {
       } else {
         return NoInternetError();
       }
-    } else if (object is http.BaseResponse) {
-      switch (object.statusCode) {
-        case 401:
-          return AuthError();
-        default:
-          return Exception();
-      }
     }
+
+    if (object is http.BaseResponse) {
+      final Map<String, dynamic> parsedResponse = await processResponse(object);
+      return HttpError(parsedResponse['error_description']);
+    }
+
+    return object;
   }
 
   Future<dynamic> processResponse(http.BaseResponse response) async {

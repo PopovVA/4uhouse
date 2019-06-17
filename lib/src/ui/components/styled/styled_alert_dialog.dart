@@ -4,8 +4,8 @@ import 'package:meta/meta.dart' show immutable;
 import '../../../typography.dart' show DISABLED_COLOR;
 
 @immutable
-class CustomAlertDialog extends StatelessWidget {
-  const CustomAlertDialog(
+class StyledAlertDialog extends StatelessWidget {
+  const StyledAlertDialog(
       {this.title, this.content, this.onOk, this.onCancel});
 
   final String title;
@@ -17,7 +17,7 @@ class CustomAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
         backgroundColor: const Color(0xffeeeeee),
-        title: title is String ? Text(title) : null,
+        title: Text(title is String ? title : 'Oops'),
         titleTextStyle: const TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.w600,

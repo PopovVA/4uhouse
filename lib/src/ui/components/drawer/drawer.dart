@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocProvider, BlocBuilder;
 
-import '../../../../blocs/auth/auth_bloc.dart' show AuthBloc;
-import '../../../../blocs/auth/auth_event.dart'
+import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
+import '../../../blocs/auth/auth_event.dart'
     show AuthEvent, LogoutButtonPressed;
-import '../../../../blocs/auth/auth_state.dart'
+import '../../../blocs/auth/auth_state.dart'
     show AuthState, AuthUnauthorized, AuthAuthorized, IsFetchingLogout;
 
-import '../../../../utils/route_transition.dart' show SlideRoute;
-import '../../../pages/login/phone.dart';
-import '../../common/alert_dialog.dart' show CustomAlertDialog;
-import '../../common/circular_progress.dart' show CircularProgress;
+import '../../../utils/route_transition.dart' show SlideRoute;
+import '../../pages/login/phone.dart';
+import '../styled/styled_alert_dialog.dart' show StyledAlertDialog;
+import '../styled/styled_circular_progress.dart' show StyledCircularProgress;
 import 'drawer_header.dart' show Header;
 
 class DrawerOnly extends StatefulWidget {
@@ -92,7 +92,7 @@ class DrawerState extends State<DrawerOnly> {
             final bool logoutApproved = await showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return CustomAlertDialog(
+                  return StyledAlertDialog(
                     title: 'Logout',
                     content: 'Are you sure you want to log out?',
                     onOk: () {
@@ -110,7 +110,7 @@ class DrawerState extends State<DrawerOnly> {
         }
 
         if (state is IsFetchingLogout) {
-          return CircularProgress(
+          return StyledCircularProgress(
               size: 'small', color: Theme.of(context).primaryColor);
         }
       },
