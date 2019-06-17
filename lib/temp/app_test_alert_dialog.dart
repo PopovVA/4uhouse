@@ -49,18 +49,6 @@ class AppAlert extends StatelessWidget {
                                   ))
                             ],
                           );
-                          /* return AlertDialog(
-                            title: Text("Create Transaction"),
-                            content: Text('KKjkljkjlkk'),
-                            actions: <Widget>[
-                              FlatButton(
-                                child: Text('Ok'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          );*/
                         });
                   }),
             );

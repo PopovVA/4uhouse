@@ -57,22 +57,4 @@ class StyledAlertDialog extends StatelessWidget {
       ),
     );
   }
-/*Padding(
-                padding: const EdgeInsets.only(left: 24, right: 24, top: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                        padding: const EdgeInsets.only(bottom: 12.0),
-                        child: title),
-                    content,
-                    Padding(
-                      padding: const EdgeInsets.only(top: 2.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: actions),
-                    )
-                  ],
-                ),
-              )*/
 }
