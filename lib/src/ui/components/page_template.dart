@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:user_mobile/src/ui/components/common/drawer/drawer.dart'
+import 'drawer/drawer.dart'
     show DrawerOnly;
 
 class PageTemplate extends StatelessWidget {

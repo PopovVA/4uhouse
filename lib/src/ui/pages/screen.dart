@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
-import 'package:user_mobile/src/ui/components/property/property.dart';
 import '../../../temp/screen_repository_test.dart';
 import '../../blocs/screen_bloc.dart' show ScreenBloc;
 import '../../constants/layout.dart' show standardPadding;
@@ -11,12 +10,12 @@ import '../../models/screen/components/property_model.dart' show PropertyModel;
 import '../../models/screen/screen_model.dart' show ScreenModel;
 import '../../resources/auth_repository.dart' show AuthRepository;
 
-//import '../../resources/screen_repository.dart' show ScreenRepository;
-import '../components/common/button.dart' show Button;
-import '../components/common/circular_progress.dart' show CircularProgress;
-import '../components/common/page_template.dart' show PageTemplate;
+import '../components/button.dart' show Button;
 import '../components/item/item.dart' show Item;
 import '../components/note.dart' show Note;
+import '../components/page_template.dart' show PageTemplate;
+import '../components/styled/styled_circular_progress.dart'
+    show StyledCircularProgress;
 import 'property/components/property_card_body.dart';
 
 // ignore: must_be_immutable
@@ -92,7 +91,7 @@ class _ScreenState extends State<Screen> {
 
         return Container(
           color: Colors.white,
-          child: const CircularProgress(),
+          child: const StyledCircularProgress(),
         );
       },
     );

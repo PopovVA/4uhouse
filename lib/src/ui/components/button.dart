@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/screen/components/button_model.dart';
-import 'styled_button.dart';
+import '../../models/screen/components/button_model.dart';
+import '../components/styled/styled_button.dart' show StyledButton;
 
 class Button extends StatefulWidget {
   const Button(this.button, this.path, this.handleSave);

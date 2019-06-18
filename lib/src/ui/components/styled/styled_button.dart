@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:user_mobile/src/ui/components/common/circular_progress.dart';
+
+import 'styled_circular_progress.dart';
 
 class StyledButton extends StatelessWidget {
   const StyledButton({this.text = '', this.onPressed, this.loading = false});
@@ -25,7 +26,7 @@ class StyledButton extends StatelessWidget {
 
   Widget buildChild(BuildContext context) {
     if (loading) {
-      return const CircularProgress(size: 'small', color: Colors.white);
+      return const StyledCircularProgress(size: 'small', color: Colors.white);
     }
 
     return Text(

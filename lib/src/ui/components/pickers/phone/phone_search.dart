@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+
 import '../../../../models/country_phone_data.dart';
+import '../../../components/styled/styled_text_field.dart' show StyledTextField;
 
 class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
   CustomSearchDelegate(
       {this.favorites,
       @required this.countryPhoneDataList,
       @required this.onSelected});
+
   List<String> favorites;
   List<CountryPhoneData> countryPhoneDataList;
   Function onSelected;
@@ -52,14 +55,16 @@ class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
   }
 
   Widget _buildRows() {
-    final List<CountryPhoneData> totalList = <CountryPhoneData>[];
+    final List<CountryPhoneData> list = <CountryPhoneData>[];
     if (favorites.isNotEmpty) {
       for (String fav in favorites) {
-        totalList.addAll(countryPhoneDataList.where((CountryPhoneData item) =>
+        list.addAll(countryPhoneDataList.where((CountryPhoneData item) =>
             item.countryId.toLowerCase().contains(fav.toLowerCase())));
       }
     }
-    totalList..addAll(countryPhoneDataList);
+    list.addAll(countryPhoneDataList);
+
+    final List<CountryPhoneData> totalList = list.toSet().toList();
 
     return ListView.builder(
         itemCount: totalList.length,
