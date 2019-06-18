@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'src/app.dart' show App;
 import 'src/resources/auth_repository.dart' show AuthRepository;
 import 'temp/app_old.dart';
+import 'temp/app_styled_text_edit.dart';
 
 class AppBlocDelegate extends BlocDelegate {
   @override
@@ -17,6 +18,6 @@ class AppBlocDelegate extends BlocDelegate {
 void main() {
 //  debugPaintSizeEnabled = true;
   BlocSupervisor().delegate = AppBlocDelegate();
-  runApp(App(authRepository: AuthRepository()));
+  runApp(AppStyledText());
 //  runApp(AppScreens());
 }
