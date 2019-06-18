@@ -12,7 +12,6 @@ class TestScreenRepository extends ScreenRepository {
   @override
   Future<ScreenModel> fetchScreen({String query = '', String token}) async {
     route = query;
-    print(route);
     final Map<String, dynamic> dmap =
         await parseJsonFromAssets('lib/assets/${replaceSlash(route)}.json');
     return ScreenModel.fromJson(dmap);
