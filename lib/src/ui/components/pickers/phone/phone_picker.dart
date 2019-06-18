@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:user_mobile/temp/styled_text_controler.dart';
+import '../../../../../temp/styled_text_controler.dart';
 
 import '../../../../models/country_phone_data.dart';
 
