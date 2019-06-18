@@ -22,24 +22,13 @@ class ScreenBloc {
 
   Future<void> fetchScreen(String route) async {
     final String token = await this.token;
-    if ((token is String) && token.isNotEmpty) {
+    if ((token is String) && token.isNotEmpty||screenRepository is TestScreenRepository) {
       final ScreenModel screenModel =
           await screenRepository.fetchScreen(query: route, token: token);
       _screen.sink.add(screenModel);
     }
   }
 
-  Future<void> refreshScreen(String route) async {
-    final String token = await this.token;
-    if ((token is String) && token.isNotEmpty ||
-        screenRepository is TestScreenRepository) {
-      final ScreenModel screenModel =
-          await screenRepository.fetchScreen(query: route, token: token);
-      _screen.sink.add(screenModel);
-    } else {
-      // TODO(Andrei): show snackbar error
-    }
-  }
 
   Future<void> sendItemValue(String route, dynamic value,
       {dynamic body}) async {

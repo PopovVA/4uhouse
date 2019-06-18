@@ -170,7 +170,7 @@ class _ScreenState extends State<Screen> {
   }
 
   Future<void> _refresh() async {
-    await screenBloc.refreshScreen(widget.route);
+    await screenBloc.fetchScreen(widget.route);
   }
 
   void makeTransition(BuildContext context, String id) {
