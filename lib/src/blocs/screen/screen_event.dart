@@ -17,7 +17,7 @@ class ScreenInitialized extends ScreenEvent {
 
 class TappedOnComponent extends ScreenEvent {
   @override
-  String toString() => 'SubmitCodeTapped';
+  String toString() => 'TappedOnComponent';
 }
 
 class SendItem extends ScreenEvent {

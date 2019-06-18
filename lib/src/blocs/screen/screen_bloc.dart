@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:rxdart/rxdart.dart' show Observable, PublishSubject;
 //import '../../resources/screen_repository.dart' show ScreenRepository;
 import '../../../src/models/screen/screen_model.dart';
 import '../../../temp/screen_repository_test.dart';
@@ -9,12 +8,9 @@ import 'screen_state.dart';
 class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
   ScreenBloc(this.screenRepository);
   TestScreenRepository screenRepository;
-  final PublishSubject<ScreenModel> _screen = PublishSubject<ScreenModel>();
 
   @override
   ScreenState get initialState => ScreenUninitialized();
-
-  Observable<ScreenModel> get screen => _screen.stream;
 
   @override
   Stream<ScreenState> mapEventToState(ScreenEvent event) async* {
