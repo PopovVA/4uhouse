@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../src/pallete.dart';
 import '../src/typography.dart';
-import '../src/ui/pages/screen_test.dart';
-//import '../src/ui/pages/screen.dart';
+import '../src/ui/pages/screen.dart';
 
 class AppScreens extends StatelessWidget {
   @override
