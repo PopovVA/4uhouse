@@ -1,13 +1,17 @@
 import 'package:bloc/bloc.dart';
 //import '../../resources/screen_repository.dart' show ScreenRepository;
+import 'package:meta/meta.dart' show required;
 import '../../../src/models/screen/screen_model.dart';
 import '../../../temp/screen_repository_test.dart';
+import '../../resources/auth_repository.dart' show AuthRepository;
 import 'screen_event.dart';
 import 'screen_state.dart';
 
 class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
-  ScreenBloc(this.screenRepository);
-  TestScreenRepository screenRepository;
+  ScreenBloc({@required this.authRepository, @required this.screenRepository});
+
+  final TestScreenRepository screenRepository;
+  final AuthRepository authRepository;
 
   @override
   ScreenState get initialState => ScreenUninitialized();
