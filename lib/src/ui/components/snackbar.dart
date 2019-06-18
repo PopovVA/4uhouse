@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CustomSnackBar extends SnackBar implements StatelessWidget {
+class CustomSnackBar extends SnackBar{
   const CustomSnackBar(
       {@required this.content,
       this.backgroundColor,
       this.action,
       this.animation});
+
 
   @override
   final Widget content;
