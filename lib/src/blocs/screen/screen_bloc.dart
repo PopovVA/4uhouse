@@ -18,9 +18,9 @@ class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
       try {
         yield ScreenLoading();
         //загружаю данные
-        final List<ScreenModel> data = await Future.wait(<Future<ScreenModel>>[
-          screenRepository.fetchScreen(query: event.query)
-        ]);
+        final List<ScreenModel> data = <ScreenModel>[
+          await screenRepository.fetchScreen(query: event.query)
+        ];
         yield ScreenDataLoaded(data);
       } catch (error) {
         yield ScreenDataLoadingError(error: error.toString());
