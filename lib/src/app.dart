@@ -31,9 +31,7 @@ class _AppState extends State<App> {
   @override
   void initState() {
     authBloc = AuthBloc(authRepository: authRepository);
-    Future<dynamic>.delayed(Duration(seconds: 2), () {
-      authBloc.dispatch(AppStarted());
-    });
+    authBloc.dispatch(AppStarted());
     super.initState();
   }
 
@@ -53,26 +51,7 @@ class _AppState extends State<App> {
             accentColor: accentColor,
             primaryColor: primaryColor,
             textTheme: customTextTheme),
-        home: BlocBuilder<AuthEvent, AuthState>(
-          bloc: authBloc,
-          builder: (BuildContext context, AuthState state) {
-            print('===> state: $state');
-            if ((state is AuthUninitialized) ||
-                (state is AuthCheckIfAuthorized)) {
-              // TODO(Andrei): add splash screen here
-              return Container(
-                alignment: Alignment.bottomCenter,
-                width: double.infinity,
-                height: double.infinity,
-                color: Colors.white,
-                child: Container(
-                    height: 5.0, child: const LinearProgressIndicator()),
-              );
-            }
-
-            return HomePage();
-          },
-        ),
+        home: HomePage(),
       ),
     );
   }

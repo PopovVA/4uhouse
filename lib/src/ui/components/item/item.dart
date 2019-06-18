@@ -8,7 +8,7 @@ import '../../../models/screen/components/item_model.dart';
 import '../../../utils/type_check.dart' show isNotNull;
 import '../../helpers/money_controller.dart' show formatCost;
 import '../../pages/data_entry.dart';
-import '../common/circular_progress.dart';
+import '../../components/styled/styled_circular_progress.dart' show StyledCircularProgress;
 import '../pickers/date_picker/date_picker_modal.dart' show openDatePicker;
 import './item_layout.dart';
 
@@ -96,7 +96,7 @@ class _ItemState extends State<Item> {
 
   Object buildSuffix(BuildContext context) {
     if (loading) {
-      return const CircularProgress(size: 'small');
+      return const StyledCircularProgress(size: 'small');
     }
 
     final ItemModel item = widget.item;

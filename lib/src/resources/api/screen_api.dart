@@ -4,11 +4,11 @@ import 'package:meta/meta.dart' show required;
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart' show MediaType;
 
-import '../api.dart';
+import './api.dart';
 import 'constants/url.dart' show BASE_URL;
 
 class ScreenApi extends Api {
-  final http.Client client = http.Client();
+  final http.Client _client = http.Client();
 
   static String _formToken(String token) => 'Bearer $token';
 
@@ -24,7 +24,7 @@ class ScreenApi extends Api {
       {@required String query, String token}) async {
     try {
       final http.Response response =
-          await client.get('$BASE_URL$query', headers: <String, String>{
+          await _client.get('$BASE_URL$query', headers: <String, String>{
         'Authorization': token,
       });
 
@@ -35,7 +35,7 @@ class ScreenApi extends Api {
         throw response;
       }
     } catch (error) {
-      throw inferError(error);
+      throw await inferError(error);
     }
   }
 
@@ -51,7 +51,7 @@ class ScreenApi extends Api {
               'Authorization': _formToken(token),
             };
     try {
-      final http.Response response = await client.put(
+      final http.Response response = await _client.put(
           _componentUri(route: query, value: value),
           headers: headers);
 
@@ -62,7 +62,7 @@ class ScreenApi extends Api {
         throw response;
       }
     } catch (error) {
-      throw inferError(error);
+      throw await inferError(error);
     }
   }
 
@@ -95,7 +95,7 @@ class ScreenApi extends Api {
         throw response;
       }
     } catch (error) {
-      throw inferError(error);
+      throw await inferError(error);
     }
   }
 }

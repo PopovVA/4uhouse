@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CircularProgress extends StatelessWidget {
-  const CircularProgress({
+class StyledCircularProgress extends StatelessWidget {
+  const StyledCircularProgress({
     this.size = 'default',
     this.color,
   });

@@ -1,26 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart'
+    show BlocBuilder, BlocListener, BlocListenerTree;
+
 import '../../../../src/utils/route_transition.dart' show SlideRoute;
-import '../../../blocs/auth/auth_state.dart';
-import '../../../blocs/login/login_bloc.dart';
-import '../../../blocs/login/login_event.dart';
-import '../../../blocs/login/login_state.dart';
-import '../../../models/country_phone_data.dart';
-import '../../components/common/page_template.dart' show PageTemplate;
-import '../../components/common/snackbar.dart';
-import '../../components/common/styled_button.dart' show StyledButton;
-import '../../components/resend.dart';
+import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
+import '../../../blocs/auth/auth_event.dart' show AuthEvent;
+import '../../../blocs/auth/auth_state.dart' show AuthState, AuthAuthorized;
+import '../../../blocs/login/login_bloc.dart' show LoginBloc;
+import '../../../blocs/login/login_event.dart'
+    show CodeEnteringCanceled, LoginEvent, SubmitCodeTapped;
+import '../../../blocs/login/login_state.dart'
+    show
+        CodeError,
+        IsFetchingCode,
+        LoginState,
+        OtpSent,
+        PhoneEntering,
+        PhoneError;
+import '../../../models/country_phone_data.dart' show CountryPhoneData;
+
+import '../../components/page_template.dart' show PageTemplate;
+import '../../components/styled/styled_alert_dialog.dart'
+    show StyledAlertDialog;
+import '../../components/styled/styled_button.dart' show StyledButton;
+import '../../components/styled/styled_text_field.dart' show StyledTextField;
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen(
-      {@required this.loginBloc,
+      {@required this.authBloc,
+      @required this.loginBloc,
       @required this.selectedItem,
-      @required this.phone,
+      @required this.number,
       this.previousRoute});
 
-  final CountryPhoneData selectedItem;
-  final String phone;
+  final AuthBloc authBloc;
   final LoginBloc loginBloc;
+  final CountryPhoneData selectedItem;
+  final String number;
   final SlideRoute previousRoute;
 
   @override
@@ -29,7 +45,7 @@ class OtpScreen extends StatefulWidget {
 
 class _OtpScreenState extends State<OtpScreen> {
   bool isFetchingCode = false;
-  final int maxLength = 6;
+  final int maxLength = 4;
   TextEditingController code = TextEditingController();
 
   @override
@@ -42,48 +58,64 @@ class _OtpScreenState extends State<OtpScreen> {
     setState(() {});
   }
 
+  void _showError(BuildContext context, LoginState state) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return StyledAlertDialog(
+            content: state.toString(),
+            onOk: () {
+              Navigator.of(context).removeRouteBelow(ModalRoute.of(context));
+              Navigator.of(context).removeRoute(ModalRoute.of(context));
+            },
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
+    print('===> auth bloc: ${widget.authBloc}');
     return PageTemplate(
         goBack: () {
-          widget.loginBloc.dispatch(CodeEnteringCanceled(widget.phone));
-          Navigator.pop(context);
+          widget.loginBloc.dispatch(CodeEnteringCanceled());
         },
         title: 'Confirm',
         body: Container(
           padding: const EdgeInsets.only(left: 14.0, right: 14.0),
           margin: const EdgeInsets.only(bottom: 12.0),
-          child: BlocListener<LoginEvent, LoginState>(
-            bloc: widget.loginBloc,
-            listener: (BuildContext context, LoginState state) {
-              print('===> state listener name : ' + state.toString());
-              if (state is PhoneError || state is CodeError) {
-                Scaffold.of(context).showSnackBar(CustomSnackBar(
-                  content: Text(state.toString()),
-                  backgroundColor: Colors.redAccent,
-                ));
-              }
-              if (state is CodeError) {
-                //Очищаешь TextField.
-                print('CodeError');
-                code.clear();
-                Scaffold.of(context).showSnackBar(CustomSnackBar(
-                  content: Text(state.toString()),
-                  backgroundColor: Colors.redAccent,
-                ));
-              }
-              if (state is PhoneEntering) {
-                //Убиваем рут (возвращаемся на экран ввода номера телефона).
-                print('PhoneEntering');
-                Navigator.pop(context);
-              }
-              if (state is AuthAuthorized) {
-                //Убиваем оба рута (страница ввода номера телефона, страница ввода sms-кода).
-                print('AuthAuthorized');
-                widget.previousRoute.didPop(null);
-                ModalRoute.of(context).didPop(null);
-              }
-            },
+          child: BlocListenerTree(
+            blocListeners: <BlocListener<dynamic, dynamic>>[
+              BlocListener<AuthEvent, AuthState>(
+                bloc: widget.authBloc,
+                listener: (BuildContext context, AuthState state) {
+                  if (state is AuthAuthorized) {
+                    // Убиваем оба рута (страница ввода номера телефона, страница ввода sms-кода).
+                    Navigator.of(context)
+                        .removeRouteBelow(ModalRoute.of(context));
+                    Navigator.of(context).removeRoute(ModalRoute.of(context));
+                  }
+                },
+              ),
+              BlocListener<LoginEvent, LoginState>(
+                bloc: widget.loginBloc,
+                listener: (BuildContext context, LoginState state) {
+                  print('===> state listener name  ${state.runtimeType}');
+                  if (state is PhoneError || state is CodeError) {
+                    _showError(context, state);
+                  }
+
+                  if (state is CodeError) {
+                    code.clear();
+                    _showError(context, state);
+                  }
+
+                  if (state is PhoneEntering) {
+                    // Убиваем рут (возвращаемся на экран ввода номера телефона).
+                    Navigator.pop(context);
+                  }
+                },
+              )
+            ],
             child: BlocBuilder<LoginEvent, LoginState>(
                 bloc: widget.loginBloc,
                 builder: (BuildContext context, LoginState state) {
@@ -92,39 +124,20 @@ class _OtpScreenState extends State<OtpScreen> {
                     return Column(children: <Widget>[
                       _buildHeadLine(),
                       _buildCodeInput(),
-                      Resend(
-                          type: 'Timer',
-                          onPressed: () {
-                            widget.loginBloc
-                                .dispatch(OtpRequested(widget.phone));
-                          }),
                       _buildSendButton()
                     ]);
                   }
-                  if (state is IsFetchingOtp) {
-                    //Вместо виджета Resend отображаем индикатор загрузки.
-                    return Column(children: <Widget>[
-                      _buildHeadLine(),
-                      _buildCodeInput(),
-                      const Resend(type: 'Circular'),
-                      _buildSendButton()
-                    ]);
-                  }
+
                   if (state is IsFetchingCode) {
-                    //Кнопка "Send" задизаблена и показывает индикатор загрузки. Реализовать через styled_button.
                     isFetchingCode = true;
                     return Column(children: <Widget>[
                       _buildHeadLine(),
                       _buildCodeInput(),
-                      Resend(
-                          type: 'Timer',
-                          onPressed: () {
-                            widget.loginBloc
-                                .dispatch(OtpRequested(widget.phone));
-                          }),
                       _buildSendButton()
                     ]);
                   }
+
+                  return Container(width: 0.0, height: 0.0);
                 }),
           ),
         ));
@@ -144,7 +157,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 '+ (' +
                     widget.selectedItem.code.toString() +
                     ') ' +
-                    widget.phone,
+                    widget.number,
                 style: const TextStyle(fontSize: 16.0))
           ],
         ));
@@ -160,8 +173,10 @@ class _OtpScreenState extends State<OtpScreen> {
           onPressed: isFetchingCode == false && code.text.length != maxLength
               ? null
               : () {
-                  widget.loginBloc.dispatch(
-                      SubmitCodeTapped(widget.phone, int.parse(code.text)));
+                  widget.loginBloc.dispatch(SubmitCodeTapped(
+                      code: widget.selectedItem.code,
+                      number: widget.number,
+                      otp: code.text));
                 },
           text: 'Send',
         ),
@@ -172,23 +187,17 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget _buildCodeInput() {
     return Container(
       margin: const EdgeInsets.only(top: 26.0),
-      width: 312,
-      child: TextField(
+      child: StyledTextField(
         autofocus: true,
-        textAlign: TextAlign.center,
+        borderColor: code.text.length != maxLength
+            ? Colors.redAccent
+            : Theme.of(context).primaryColor,
         controller: code,
+        textAlign: TextAlign.center,
         maxLength: maxLength,
-        style: const TextStyle(fontSize: 16.0, color: Color(0xde000000)),
         keyboardType: const TextInputType.numberWithOptions(decimal: true),
-        decoration: InputDecoration(
-            contentPadding: const EdgeInsets.all(0.0),
-            focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                    width: 2.0,
-                    color: code.text.length != maxLength
-                        ? Colors.redAccent
-                        : Theme.of(context).primaryColor))),
       ),
+      width: 312,
     );
   }
 }

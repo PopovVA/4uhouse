@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../temp/room_bs64.dart' show RoomBs64;
 import '../../../models/screen/components/property_model.dart'
     show PropertyModel;
-import '../../components/common/page_template.dart';
+import 'package:user_mobile/src/ui/components/page_template.dart';
 import 'components/property_card_body.dart' show PropertyCard;
 
 class AddProperty extends StatelessWidget {
