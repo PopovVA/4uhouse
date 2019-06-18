@@ -7,6 +7,10 @@ abstract class ScreenEvent extends Equatable {
 }
 
 class ScreenInitialized extends ScreenEvent {
+  ScreenInitialized({this.query});
+
+  final String query;
+
   @override
   String toString() => 'ScreenInitialized';
 }
@@ -14,4 +18,15 @@ class ScreenInitialized extends ScreenEvent {
 class TappedOnComponent extends ScreenEvent {
   @override
   String toString() => 'SubmitCodeTapped';
+}
+
+class SendItem extends ScreenEvent {
+  SendItem({this.route, this.value, this.body});
+
+  final String route;
+  final dynamic value;
+  final dynamic body;
+
+  @override
+  String toString() => 'SendItem';
 }

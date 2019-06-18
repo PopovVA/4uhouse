@@ -37,3 +37,13 @@ class ScreenDataLoadingError extends ScreenState {
   @override
   String toString() => error;
 }
+
+class SendingItem extends ScreenState {
+  @override
+  String toString() => 'SendingItem';
+}
+
+class SendedItem extends ScreenState {
+  @override
+  String toString() => 'SendedItem';
+}

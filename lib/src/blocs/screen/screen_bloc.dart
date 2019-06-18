@@ -22,12 +22,17 @@ class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
       try {
         yield ScreenLoading();
         //загружаю данные
-        final List<ScreenModel> data = await Future.wait(
-            <Future<ScreenModel>>[screenRepository.fetchScreen()]);
+        final List<ScreenModel> data = await Future.wait(<Future<ScreenModel>>[
+          screenRepository.fetchScreen(query: event.query)
+        ]);
         yield ScreenDataLoaded(data);
       } catch (error) {
-        yield ScreenDataLoadingError(error: error);
+        yield ScreenDataLoadingError(error: error.toString());
       }
+    } else if (event is SendItem) {
+      //Отправляю данные
+      await screenRepository.sendItemValue(
+          event.route, event.value, body: event.body);
     } else if (event is TappedOnComponent) {}
   }
 }
