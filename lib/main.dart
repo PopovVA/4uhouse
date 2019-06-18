@@ -5,7 +5,6 @@ import 'package:bloc/bloc.dart';
 //import 'src/resources/auth_repository.dart' show AuthRepository;
 import 'temp/app_old.dart';
 
-//import 'temp/app_old.dart' show AppScreens;
 
 class AppBlocDelegate extends BlocDelegate {
 //  @override
