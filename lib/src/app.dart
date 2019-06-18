@@ -1,18 +1,15 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder, BlocProvider;
+import 'package:flutter_bloc/flutter_bloc.dart' show BlocProvider;
 import 'package:meta/meta.dart' show required;
 
 import 'blocs/auth/auth_bloc.dart' show AuthBloc;
-import 'blocs/auth/auth_event.dart';
-import 'blocs/auth/auth_state.dart'
-    show AuthCheckIfAuthorized, AuthState, AuthUninitialized;
+import 'blocs/auth/auth_event.dart' show AppStarted;
 
-import 'pallete.dart';
+import 'pallete.dart' show accentColor, primaryColor;
 import 'resources/auth_repository.dart' show AuthRepository;
-import 'typography.dart';
-import 'ui/pages/home/home.dart';
+import 'typography.dart' show customTextTheme;
+import 'ui/pages/home/home.dart' show HomePage;
+import 'ui/pages/screen.dart' show Screen;
 
 class App extends StatefulWidget {
   const App({@required this.authRepository});
@@ -52,6 +49,19 @@ class _AppState extends State<App> {
             primaryColor: primaryColor,
             textTheme: customTextTheme),
         home: HomePage(),
+        onGenerateRoute: (RouteSettings settings) {
+          final String name = settings.name;
+          switch (name) {
+            case '/':
+              return MaterialPageRoute<dynamic>(
+                builder: (BuildContext context) => HomePage(),
+              );
+            default:
+              return MaterialPageRoute<dynamic>(
+                  builder: (BuildContext context) =>
+                      Screen(name, arguments: settings.arguments));
+          }
+        },
       ),
     );
   }

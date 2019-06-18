@@ -123,7 +123,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                                 color: Theme.of(context).primaryColor),
                           if (state is PhoneCountriesDataLoaded)
                             Container(
-                              margin: const EdgeInsets.only(left: 24.0),
+                              margin: const EdgeInsets.symmetric(horizontal: 24.0),
                               child: _buildPhonePicker(state),
                             ),
                           if (state is PhoneLoadingError)

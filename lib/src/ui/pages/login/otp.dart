@@ -65,8 +65,8 @@ class _OtpScreenState extends State<OtpScreen> {
           return StyledAlertDialog(
             content: state.toString(),
             onOk: () {
-              Navigator.of(context).removeRouteBelow(ModalRoute.of(context));
-              Navigator.of(context).removeRoute(ModalRoute.of(context));
+              Navigator.of(context)
+                  .popUntil(ModalRoute.withName(Navigator.defaultRouteName));
             },
           );
         });
