@@ -79,7 +79,7 @@ class ScreenApi extends Api {
     );
     request.files.add(multipartFile);
     if ((token is String) && token.isNotEmpty) {
-      request.headers['${Api.authHeader}'] = Api.formToken(token);
+      request.headers['${Api.authHeaderKey}'] = Api.formToken(token);
     }
 
     // Send and process
