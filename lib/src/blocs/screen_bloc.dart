@@ -22,13 +22,10 @@ class ScreenBloc {
 
   Future<void> fetchScreen(String route) async {
     final String token = await this.token;
-    if ((token is String) && token.isNotEmpty ||
-        screenRepository is TestScreenRepository) {
+    if ((token is String) && token.isNotEmpty) {
       final ScreenModel screenModel =
           await screenRepository.fetchScreen(query: route, token: token);
       _screen.sink.add(screenModel);
-    } else {
-      // TODO(Andrei): show snackbar error
     }
   }
 
@@ -39,8 +36,6 @@ class ScreenBloc {
       final ScreenModel screenModel =
           await screenRepository.sendItemValue(route, value, body: body);
       _screen.sink.add(screenModel);
-    } else {
-      // TODO(Andrei): show snackbar error
     }
   }
 

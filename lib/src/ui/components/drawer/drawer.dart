@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocProvider, BlocBuilder;
 
-import '../../../../blocs/auth/auth_bloc.dart' show AuthBloc;
-import '../../../../blocs/auth/auth_event.dart'
-    show AuthEvent, LoginButtonPressed, LogoutButtonPressed;
-import '../../../../blocs/auth/auth_state.dart' show AuthState, AuthAuthorized;
-import '../../../../utils/route_transition.dart' show SlideRoute;
-import '../../../pages/login/phone.dart';
+import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
+import '../../../blocs/auth/auth_event.dart'
+    show AuthEvent, LogoutButtonPressed;
+import '../../../blocs/auth/auth_state.dart'
+    show AuthState, AuthUnauthorized, AuthAuthorized, IsFetchingLogout;
 
+import '../../../utils/route_transition.dart' show SlideRoute;
+import '../../pages/login/phone.dart';
+import '../styled/styled_alert_dialog.dart' show StyledAlertDialog;
+import '../styled/styled_circular_progress.dart' show StyledCircularProgress;
 import 'drawer_header.dart' show Header;
 
 class DrawerOnly extends StatefulWidget {
@@ -18,22 +21,10 @@ class DrawerOnly extends StatefulWidget {
 
 class DrawerState extends State<DrawerOnly> {
   int _selectedDrawerIndex = 0;
-  AuthBloc authBloc;
 
-  @override
-  void initState() {
-    super.initState();
-    authBloc = BlocProvider.of<AuthBloc>(context);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    authBloc.dispose();
-  }
   @override
   Widget build(BuildContext context) {
-//    final InheritedAuth inheritedAuth = InheritedAuth.of(context);
+    final AuthBloc authBloc = BlocProvider.of<AuthBloc>(context);
     return BlocBuilder<AuthEvent, AuthState>(
         bloc: authBloc,
         builder: (BuildContext context, AuthState state) {
@@ -76,23 +67,9 @@ class DrawerState extends State<DrawerOnly> {
                     child: Column(
                       children: <Widget>[
                         buildDivider(),
-                        state is AuthAuthorized
-                            ? buildListTile(context, 'Sign out',
-                                icon: const Icon(OMIcons.exitToApp),
-                                position: 8, onTap: () {
-                                authBloc.dispatch(LogoutButtonPressed());
-                              })
-                            : buildListTile(context, 'Sign in',
-                                icon: const Icon(OMIcons.exitToApp),
-                                position: 8, onTap: () {
-                                Navigator.push(
-                                  context,
-                                  SlideRoute(
-                                      widget: PhoneScreen(authBloc: authBloc),
-                                      side: 'left'),
-                                );
-                                //authBloc.dispatch(LoginButtonPressed());
-                              }),
+                        state is AuthUnauthorized
+                            ? buildSignIn(authBloc: authBloc)
+                            : buildSignOut(authBloc: authBloc, context: context)
                       ],
                     ),
                   ),
@@ -101,6 +78,53 @@ class DrawerState extends State<DrawerOnly> {
             ),
           );
         });
+  }
+
+  Widget buildSignOut(
+      {@required BuildContext context, @required AuthBloc authBloc}) {
+    return BlocBuilder<AuthEvent, AuthState>(
+      bloc: authBloc,
+      builder: (BuildContext context, AuthState state) {
+        if (state is AuthAuthorized) {
+          return buildListTile(context, 'Sign out',
+              icon: const Icon(OMIcons.exitToApp),
+              position: 8, onTap: () async {
+            final bool logoutApproved = await showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return StyledAlertDialog(
+                    title: 'Logout',
+                    content: 'Are you sure you want to log out?',
+                    onOk: () {
+                      Navigator.of(context).pop(true);
+                    },
+                    onCancel: () {
+                      Navigator.of(context).pop(false);
+                    },
+                  );
+                });
+            if (logoutApproved) {
+              authBloc.dispatch(LogoutButtonPressed());
+            }
+          });
+        }
+
+        if (state is IsFetchingLogout) {
+          return StyledCircularProgress(
+              size: 'small', color: Theme.of(context).primaryColor);
+        }
+      },
+    );
+  }
+
+  Widget buildSignIn({@required AuthBloc authBloc}) {
+    return buildListTile(context, 'Sign in',
+        icon: const Icon(OMIcons.exitToApp), position: 8, onTap: () {
+      Navigator.push(
+        context,
+        SlideRoute(widget: PhoneScreen(authBloc: authBloc), side: 'left'),
+      );
+    });
   }
 
   Widget buildListTile(BuildContext context, String title,

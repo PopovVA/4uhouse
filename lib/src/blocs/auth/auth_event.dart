@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart' show immutable;
+import 'package:meta/meta.dart' show immutable, required;
+
+import '../../models/auth/user_model.dart' show UserModel;
 
 @immutable
 abstract class AuthEvent extends Equatable {
@@ -11,9 +13,9 @@ class AppStarted extends AuthEvent {
   String toString() => 'AppStarted';
 }
 
-class LoginButtonPressed extends AuthEvent {
+class UserLoggedIn extends AuthEvent {
   @override
-  String toString() => 'LoginButtonPressed';
+  String toString() => 'LogoutButtonPressed';
 }
 
 class LogoutButtonPressed extends AuthEvent {
