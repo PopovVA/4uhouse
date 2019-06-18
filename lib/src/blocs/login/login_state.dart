@@ -29,23 +29,20 @@ class OtpSent extends LoginState {
   String toString() => 'OtpSent';
 }
 
-class LoginError extends LoginState {
-  LoginError({this.error});
+class PhoneError extends LoginState {
+  PhoneError([this.message]) : super(<String>[message]);
 
-  final String error;
+  final String message;
 
   @override
-  String toString() => error;
+  String toString() => message;
 }
 
-class PhoneError extends LoginError {
-  PhoneError({this.message}) : super(error: message);
+class CodeError extends LoginState {
+  CodeError([this.message]) : super(<String>[message]);
 
   final String message;
-}
 
-class CodeError extends LoginError {
-  CodeError({this.message}) : super(error: message);
-
-  final String message;
+  @override
+  String toString() => message;
 }

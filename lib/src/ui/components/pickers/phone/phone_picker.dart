@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../../../../models/country_phone_data.dart';
+
+import '../../../components/styled/styled_text_field.dart' show StyledTextField;
 import 'phone_search.dart';
 
 class PhonePicker extends StatefulWidget {
@@ -17,20 +20,43 @@ class PhonePicker extends StatefulWidget {
 }
 
 class _PhonePickerState extends State<PhonePicker> {
-  TextEditingController phone = TextEditingController();
+  TextEditingController phoneController =
+  TextEditingController();
+  TextEditingController codeController = TextEditingController();
   CountryPhoneData selectedItem;
 
-  void _phoneListner() {
+  @override
+  void initState() {
+    super.initState();
+    codeController.text =
+    '+ (${widget.countryPhoneDataList[0].code.toString()})';
+    phoneController.addListener(_phoneListener);
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (selectedItem == null && widget.countryPhoneDataList != null) {
+      setState(() {
+        print(
+            '===> widget.countryPhoneDataList[0]: ${widget
+                .countryPhoneDataList[0].countryId}');
+        selectedItem = widget.countryPhoneDataList[0];
+      });
+    }
+    super.didChangeDependencies();
+  }
+
+  void _phoneListener() {
     if (widget.onSelected is Function) {
-      widget.onSelected(_isValid(), selectedItem, phone.text);
+      widget.onSelected(_isValid(), selectedItem, phoneController.text);
     }
   }
 
   bool _isValid() {
-    return phone.text.isNotEmpty &&
+    return phoneController.text.isNotEmpty &&
         selectedItem != null &&
-        _validLength(selectedItem.length, phone.text.length) &&
-        hasMatch(phone.text, selectedItem.numberPattern);
+        _validLength(selectedItem.length, phoneController.text.length) &&
+        hasMatch(phoneController.text, selectedItem.numberPattern);
   }
 
   bool _validLength(List<int> lengthList, int length) {
@@ -47,73 +73,49 @@ class _PhonePickerState extends State<PhonePicker> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    phone.addListener(_phoneListner);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Row(children: <Widget>[
-      Container(
-          margin: const EdgeInsets.only(left: 14.0),
-          width: 70.0,
-          child: InkWell(
-              child: Container(
-                  decoration: BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(
-                              width: 2.0,
-                              color:
-                                  const Color.fromRGBO(175, 173, 173, 0.4)))),
-                  child: Text(
-                      selectedItem == null
-                          ? '+(${widget.countryPhoneDataList[0].code.toString()})'
-                          : '+(${selectedItem.code.toString()})',
-                      style: const TextStyle(
-                          color: Color(0xde000000), fontSize: 16.0))),
-              onTap: () async {
-                final CountryPhoneData result = await showSearch(
-                  context: context,
-                  delegate: CustomSearchDelegate(
-                      onSelected: (close(
-                          BuildContext context, CountryPhoneData item)) {},
-                      favorites: widget.favorites,
-                      countryPhoneDataList: widget.countryPhoneDataList),
-                );
-                setState(() {
-                  if (result != null) {
-                    selectedItem = result;
-                  }
-                });
-              })),
-      Container(
-        padding: const EdgeInsets.only(left: 12.0),
-        width: 260,
-        child: TextField(
-          autofocus: true,
-          controller: phone,
-          style: const TextStyle(fontSize: 16.0, color: Color(0xde000000)),
-          keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          decoration: InputDecoration(
-              contentPadding: const EdgeInsets.all(0.0),
-              hintText: selectedItem == null
-                  ? widget.countryPhoneDataList[0].example.toString()
-                  : selectedItem.example.toString(),
-              hintStyle:
-                  const TextStyle(color: Color(0x8a000000), fontSize: 16.0),
-              border: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                      width: 2.0,
-                      color: const Color.fromRGBO(175, 173, 173, 0.4))),
-              focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                      width: 2.0,
-                      color: _isValid()
-                          ? Theme.of(context).primaryColor
-                          : Colors.redAccent))),
+      InkWell(
+        child: Container(
+            width: 70.0,
+            child: IgnorePointer(
+                child: StyledTextField(
+                  controller: codeController,
+                ))),
+        onTap: () async {
+          final CountryPhoneData result = await showSearch(
+            context: context,
+            delegate: CustomSearchDelegate(
+                onSelected:
+                    (close(BuildContext context, CountryPhoneData item)) {},
+                favorites: widget.favorites,
+                countryPhoneDataList: widget.countryPhoneDataList),
+          );
+          setState(() {
+            if (result != null) {
+              selectedItem = result;
+              codeController.text = '+ (${selectedItem.code.toString()})';
+            }
+          });
+        },
+      ),
+      Expanded(
+        child: Container(
+          padding: const EdgeInsets.only(left: 12.0),
+          child: StyledTextField(
+            autofocus: true,
+            controller: phoneController,
+            hintText: selectedItem == null
+                ? widget.countryPhoneDataList[0].example.toString()
+                : selectedItem.example.toString(),
+            borderColor:
+            _isValid() ? Theme
+                .of(context)
+                .primaryColor : Colors.redAccent,
+            keyboardType: TextInputType.number,
+          ),
         ),
-      )
+      ),
     ]);
   }
 }

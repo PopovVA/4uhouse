@@ -1,1 +1,0 @@
-class AuthError implements Exception {}

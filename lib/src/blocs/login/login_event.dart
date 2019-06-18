@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart' show immutable;
+import 'package:meta/meta.dart' show immutable, required;
 
 @immutable
 abstract class LoginEvent extends Equatable {
@@ -7,29 +7,33 @@ abstract class LoginEvent extends Equatable {
 }
 
 class OtpRequested extends LoginEvent {
-  OtpRequested(this.phone);
+  OtpRequested({@required this.countryId,
+    @required this.code,
+    @required this.number})
+      : super(<dynamic>[code, code, number]);
 
-  final String phone;
+  final String countryId;
+  final int code;
+  final String number;
 
   @override
   String toString() => 'OtpRequested';
 }
 
 class SubmitCodeTapped extends LoginEvent {
-  SubmitCodeTapped(this.phone, this.code);
+  SubmitCodeTapped(
+      {@required this.number, @required this.code, @required this.otp})
+      : super(<dynamic>[number, code, otp]);
 
-  final String phone;
+  final String number;
   final int code;
+  final String otp;
 
   @override
   String toString() => 'SubmitCodeTapped';
 }
 
 class CodeEnteringCanceled extends LoginEvent {
-  CodeEnteringCanceled(this.phone);
-
-  final String phone;
-
   @override
   String toString() => 'CodeEnteringCanceled';
 }

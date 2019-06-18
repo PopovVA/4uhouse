@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart' show SvgPicture;
+
 import '../../../utils/route_transition.dart' show SlideRoute;
-import '../../components/common/circular_progress.dart' show CircularProgress;
-import '../../components/common/page_template.dart' show PageTemplate;
-import '../../components/common/styled_button.dart' show StyledButton;
+import '../../components/page_template.dart' show PageTemplate;
+import '../../components/styled/styled_button.dart' show StyledButton;
+import '../../components/styled/styled_circular_progress.dart'
+    show StyledCircularProgress;
 import '../property/property.dart' show AddProperty;
 import 'components/description.dart' show Description;
 import 'components/main_points.dart' show MainPoint;
 import 'components/sub_points.dart' show SubPoint;
-
 
 class HomePage extends StatelessWidget {
   final bool isLoading = true;
@@ -96,6 +97,6 @@ class HomePage extends StatelessWidget {
                 )
               ],
             ))
-        : const CircularProgress();
+        : const StyledCircularProgress();
   }
 }

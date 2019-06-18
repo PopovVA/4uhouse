@@ -1,115 +1,107 @@
 import 'dart:async' show Future;
-import 'dart:convert' show base64, json;
-import 'dart:math';
-import 'package:crypto/crypto.dart';
-import 'package:device_info/device_info.dart';
+import 'dart:convert' show base64, json, ascii;
+import 'dart:math' show Random;
 
+import 'package:crypto/crypto.dart' show sha256, Hash;
+import 'package:device_info/device_info.dart'
+    show AndroidDeviceInfo, DeviceInfoPlugin, IosDeviceInfo;
 import 'package:meta/meta.dart' show required;
-import 'package:flutter_appauth/flutter_appauth.dart'
-    show AuthorizationTokenResponse, TokenResponse;
 
-import '../models/user_profile.dart' show UserProfile;
-import 'api/auth_api.dart' show AuthApi;
+import '../models/auth/token_response_model.dart' show TokenResponseModel;
+import '../models/auth/user_model.dart' show UserModel;
+import 'api/auth/auth_api.dart' show AuthApi;
 import 'services/secure_storage.dart' show SecureStorageService;
 
 class AuthRepository {
   final AuthApi _authApi = AuthApi();
   final SecureStorageService _storage = SecureStorageService();
 
-  Future<String> get accessToken async => await _storage.read(key: _access);
+  Future<String> get accessToken async => await readData(_access);
 
-  Future<String> get refreshToken async => await _storage.read(key: _refresh);
+  Future<String> get refreshToken async => await readData(_refresh);
 
-  Future<String> get idToken async => await _storage.read(key: _id);
+  Future<UserModel> get userProfile async => await readCredentials();
 
   static const String _access = 'accessToken';
   static const String _refresh = 'refreshToken';
-  static const String _id = 'idToken';
   static const String _userProfile = 'userProfile';
   static const String _verifier = 'verifier';
 
-  /* Auth operations */
-  Future<AuthorizationTokenResponse> login() {
-    return _authApi.login();
+  /* Login flow */
+  Future<void> getOtp({@required String countryId,
+    @required int code,
+    @required String number}) async {
+    final String deviceId = await _getDeviceId();
+    final String codeChallenge = await _generatePKCE();
+    return _authApi.requestOtp(
+        codeChallenge: codeChallenge,
+        deviceId: deviceId,
+        countryId: countryId,
+        code: code,
+        number: number);
   }
 
-  Future<UserProfile> loadUserProfile({@required String accessToken}) async {
-    if (accessToken is String && accessToken.isNotEmpty) {
-      final Map<String, dynamic> decodedUserProfile =
-      await _authApi.loadUserProfile(accessToken: accessToken);
-      return UserProfile.fromJson(decodedUserProfile);
+  Future<void> login({@required String number,
+    @required int code,
+    @required String otp}) async {
+    final String codeVerifier = await readData(_verifier);
+    final String deviceId = await _getDeviceId();
+
+    if (!(codeVerifier is String && codeVerifier.isNotEmpty)) {
+      throw Exception('auth_repository.login: no codeVerifier specified.');
     }
 
-    throw Exception(
-        'auth_repository loadUserProfile: accessToken is not specified.');
-  }
-
-  Future<void> logout(
-      {@required String accessToken, @required String refreshToken}) async {
-    if ((accessToken is String && accessToken.isNotEmpty) &&
-        (refreshToken is String && refreshToken.isNotEmpty)) {
-      return _authApi.logout(
-          accessToken: accessToken, refreshToken: refreshToken);
+    if (!(deviceId is String && deviceId.isNotEmpty)) {
+      throw Exception('auth_repository.login: no deviceId specified.');
     }
 
-    throw Exception(
-        'auth_repository logout: No access or/and refresh token is not specified.');
+    final TokenResponseModel tokenResponse = await _authApi.requestToken(
+      number: number,
+      code: code,
+      otp: otp,
+      codeVerifier: codeVerifier,
+      deviceId: deviceId,
+    );
+    await _storeTokens(tokenResponse: tokenResponse);
   }
 
-  Future<TokenResponse> refresh({@required String refreshToken}) async {
+  Future<void> refresh() async {
+    final String refreshToken = await readData(_refresh);
     if (refreshToken is String && refreshToken.isNotEmpty) {
-      return _authApi.refresh(refreshToken: refreshToken);
+      final TokenResponseModel tokenResponse =
+      await _authApi.refreshToken(refreshToken: refreshToken);
+      await _storeTokens(tokenResponse: tokenResponse);
     }
 
-    throw Exception('auth_repository refresh: no refreshToken specified.');
+    throw Exception('auth_repository.refresh: no refreshToken specified.');
   }
 
-  /* Storage */
-  Future<void> storeTokens({@required TokenResponse tokenResponse}) async {
-    await _storage.write(key: _access, value: tokenResponse.accessToken);
-    await _storage.write(key: _refresh, value: tokenResponse.refreshToken);
-    await _storage.write(key: _id, value: tokenResponse.idToken);
+  /* Login flow helpers */
+  String _base64URLEncode(List<int> bytes) {
+    return base64
+        .encode(bytes)
+        .replaceAll('+', '-')
+        .replaceAll('/', '_')
+        .replaceAll('=', '')
+        .trim();
   }
 
-  Future<void> clearAll() async {
-    await _storage.deleteAll();
-  }
-
-  Future<void> storeCredentials({@required UserProfile userProfile}) async {
-    await _storage.write(key: _userProfile, value: json.encode(userProfile));
-  }
-
-  Future<void> clearCredentials() async {
-    await _storage.delete(key: _userProfile);
-  }
-
-  Future<String> generatePkce() async {
-    //Code Verifier
+  Future<String> _generatePKCE() async {
+    // Code Verifier
     final Random random = Random.secure();
-    final List<int> bytes = List<int>.generate(32, (_) => random.nextInt(100));
-    final String verifier = base64.encode(bytes);
-    putData(_verifier, verifier);
-    //Code challenge
-    final List<int> bytesVerifier = verifier.codeUnits;
-    final List<int> digest = sha256.convert(bytesVerifier).bytes;
-    final String challenge = base64.encode(digest);
-    return challenge;
+    final List<int> bytes = List<int>.generate(32, (_) => random.nextInt(127));
+
+    final String verifier = _base64URLEncode(bytes);
+    await storeData(_verifier, verifier);
+
+    // Code challenge
+    final List<int> digest = sha256
+        .convert(ascii.encode(verifier))
+        .bytes;
+    return _base64URLEncode(digest);
   }
 
-  Future<String> readCodeVerifier() async {
-    final String verifier = await getData(_verifier);
-    return verifier;
-  }
-
-  Future<void> putData(String key, String text) async {
-    await _storage.write(key: key, value: text);
-  }
-
-  Future<String> getData(String key) async {
-    return await _storage.read(key: key);
-  }
-
-  Future<String> getDeviceId() async {
+  Future<String> _getDeviceId() async {
     final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     try {
       final IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
@@ -122,8 +114,64 @@ class AuthRepository {
     }
   }
 
-  Future<void> getOtp(String phone, String codeChallenge) async {
-    final String deviceId = await getDeviceId();
-    _authApi.requestOtp(phone, codeChallenge, deviceId);
+  Future<void> _storeTokens(
+      {@required TokenResponseModel tokenResponse}) async {
+    await storeData(_access, tokenResponse.accessToken);
+    await storeData(_refresh, tokenResponse.refreshToken);
+  }
+
+  /* Auth operations */
+  Future<void> logout() async {
+    final String accessToken = await this.accessToken;
+    if (!(accessToken is String && accessToken.isNotEmpty)) {
+      throw Exception('auth_repository.logout: No access token specified.');
+    }
+
+    await _authApi.logout(accessToken: accessToken);
+  }
+
+  Future<UserModel> loadUserProfile() async {
+    final String accessToken = await this.accessToken;
+    if (!(accessToken is String && accessToken.isNotEmpty)) {
+      throw Exception(
+          'auth_repository.loadUserProfile: accessToken is not specified.');
+    }
+
+    final UserModel userProfile =
+    await _authApi.loadUserProfile(accessToken: accessToken);
+    await storeCredentials(userProfile: userProfile);
+    return userProfile;
+  }
+
+  /* Storage */
+  Future<void> storeData(String key, String text) async {
+    await _storage.write(key: key, value: text);
+  }
+
+  Future<String> readData(String key) async {
+    return await _storage.read(key: key);
+  }
+
+  Future<void> clearAll() async {
+    await _storage.deleteAll();
+  }
+
+  Future<void> storeCredentials({@required UserModel userProfile}) {
+    return storeData(_userProfile, json.encode(userProfile.toJson()));
+  }
+
+  Future<UserModel> readCredentials() async {
+    final String jsonString = await readData(_userProfile);
+
+    if (!(jsonString is String && jsonString.isNotEmpty)) {
+      throw Exception(
+          'auth_repository.getCredentials: no user profile stored.');
+    }
+
+    return UserModel.fromJson(json.decode(jsonString));
+  }
+
+  Future<void> clearCredentials() async {
+    await _storage.delete(key: _userProfile);
   }
 }
