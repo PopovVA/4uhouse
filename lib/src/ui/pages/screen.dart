@@ -79,8 +79,7 @@ class _ScreenState extends State<Screen> {
                 Navigator.of(context).pushNamedAndRemoveUntil(
                   path.substring(0, path.lastIndexOf('/')),
                       (Route<dynamic> route) => false,
-                  // ignore: always_specify_types
-                  arguments: {
+                  arguments: <String, String>{
                     'scrollToId': widget.route
                         .substring(widget.route.lastIndexOf('/') + 1),
                   },
@@ -101,12 +100,10 @@ class _ScreenState extends State<Screen> {
   }
 
   Widget buildComponents(List<ScreenModel> data) {
-//    final dynamic data = snapshot.data;
     if (data.isNotEmpty) {
       final List<Widget> items = <Widget>[];
       final List<Button> buttons = <Button>[];
-      // ignore: avoid_function_literals_in_foreach_calls
-      data.first.components.forEach((dynamic component) {
+      for (dynamic component in data.first.components) {
         if (component is ItemModel) {
           items.add(Item(
             component,
@@ -126,8 +123,7 @@ class _ScreenState extends State<Screen> {
             handleSendItemValue,
           ));
         }
-      });
-
+      }
       if (widget.scrollToId is String) {
         final dynamic scrollItemList = items
             .where((dynamic item) => item.id == widget.scrollToId)
