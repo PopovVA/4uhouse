@@ -10,6 +10,16 @@ import '../../models/errors/http_error.dart' show HttpError;
 import '../../models/errors/no_internet_error.dart' show NoInternetError;
 
 class Api {
+  static const String authHeader = 'Authorization';
+
+  static String formToken(String token) => 'Bearer $token';
+
+  static bool isValidToken(String token) => token is String && token.isNotEmpty;
+
+  static Map<String, String> makeHeaders(String token) => isValidToken(token)
+      ? <String, String>{'$authHeader': formToken(token)}
+      : null;
+
   Future<dynamic> inferError(dynamic object) async {
     if (object is SocketException) {
       final bool internet = await _checkInternet();

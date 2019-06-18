@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
-import '../../../temp/screen_repository_test.dart';
 import '../../blocs/screen_bloc.dart' show ScreenBloc;
 import '../../constants/layout.dart' show standardPadding;
 import '../../models/screen/components/button_model.dart' show ButtonModel;
@@ -9,6 +8,7 @@ import '../../models/screen/components/note_model.dart' show NoteModel;
 import '../../models/screen/components/property_model.dart' show PropertyModel;
 import '../../models/screen/screen_model.dart' show ScreenModel;
 import '../../resources/auth_repository.dart' show AuthRepository;
+import '../../resources/screen_repository.dart' show ScreenRepository;
 
 import '../components/button.dart' show Button;
 import '../components/item/item.dart' show Item;
@@ -18,16 +18,19 @@ import '../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
 import 'property/components/property_card_body.dart';
 
-// ignore: must_be_immutable
+import '../../../temp/screen_repository_test.dart';
+
 class Screen extends StatefulWidget {
-  Screen(this.route, {Map<String, dynamic> arguments}) {
-    if (arguments != null) {
-      scrollToId = arguments['scrollToId'];
-    }
+  factory Screen(String route, {Map<String, dynamic> arguments}) {
+    final String scrollToId =
+        arguments != null ? arguments['scrollToId'] : null;
+    return Screen._(route, scrollToId: scrollToId);
   }
 
+  Screen._(this.route, {this.scrollToId});
+
   final String route;
-  String scrollToId;
+  final String scrollToId;
   final ScrollController scrollController = ScrollController();
 
   @override
@@ -44,7 +47,7 @@ class _ScreenState extends State<Screen> {
   void initState() {
     screenBloc = ScreenBloc(
         authRepository: AuthRepository(),
-        screenRepository: TestScreenRepository());
+        screenRepository: ScreenRepository());
     screenBloc.fetchScreen(widget.route);
     super.initState();
   }

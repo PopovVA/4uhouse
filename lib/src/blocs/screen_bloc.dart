@@ -21,11 +21,9 @@ class ScreenBloc {
 
   Future<void> fetchScreen(String route) async {
     final String token = await this.token;
-    if ((token is String) && token.isNotEmpty) {
-      final ScreenModel screenModel =
-          await screenRepository.fetchScreen(query: route, token: token);
-      _screen.sink.add(screenModel);
-    }
+    final ScreenModel screenModel =
+        await screenRepository.fetchScreen(query: route, token: token);
+    _screen.sink.add(screenModel);
   }
 
   Future<void> sendItemValue(String route, dynamic value,
