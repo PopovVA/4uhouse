@@ -26,5 +26,6 @@ void main() async {
 //  debugPaintSizeEnabled = true;
   BlocSupervisor().delegate = AppBlocDelegate();
   runApp(AppAlert());
+  //runApp(AppAlert());
 //  runApp(AppScreens());
 }
