@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:user_mobile/temp/styled_text_controler.dart';
 
 import '../../../../models/country_phone_data.dart';
 
@@ -21,7 +22,7 @@ class PhonePicker extends StatefulWidget {
 
 class _PhonePickerState extends State<PhonePicker> {
   TextEditingController phoneController =
-      TextEditingController();
+      StyledTextController();
   TextEditingController codeController = TextEditingController();
   CountryPhoneData selectedItem;
 
