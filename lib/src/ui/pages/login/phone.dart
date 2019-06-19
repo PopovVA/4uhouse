@@ -11,10 +11,10 @@ import '../../../blocs/login/login_state.dart'
     show LoginState, IsFetchingOtp, OtpSent, PhoneError;
 import '../../../blocs/phone/phone_bloc.dart' show PhoneBloc;
 import '../../../blocs/phone/phone_event.dart'
-    show PhoneEvent, CountryPhoneDataRequested;
+    show PhoneEvent, PhoneCountriesDataRequested;
 import '../../../blocs/phone/phone_state.dart'
     show
-        PhoneCountriesDataRequested,
+        PhoneCountriesDataLoaded,
         PhoneLoading,
         PhoneLoadingError,
         PhoneState,
@@ -54,7 +54,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
     super.initState();
     //_phoneBloc = PhoneBloc(TestPhoneRepository());
     _phoneBloc = PhoneBloc(PhoneRepository());
-    _phoneBloc.dispatch(CountryPhoneDataRequested());
+    _phoneBloc.dispatch(PhoneCountriesDataRequested());
     _loginBloc = LoginBloc(widget.authBloc, AuthRepository());
   }
 
@@ -127,7 +127,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                             StyledCircularProgress(
                                 size: 'small',
                                 color: Theme.of(context).primaryColor),
-                          if (state is PhoneCountriesDataRequested)
+                          if (state is PhoneCountriesDataLoaded)
                             Container(
                               margin:
                                   const EdgeInsets.symmetric(horizontal: 24.0),
@@ -190,7 +190,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
         ]));
   }
 
-  Widget _buildPhonePicker(PhoneCountriesDataRequested state) {
+  Widget _buildPhonePicker(PhoneCountriesDataLoaded state) {
     print('=>state => CreateDate => ${state.creationDate}');
     return PhonePicker(
         onSelected:
@@ -201,7 +201,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
             number = inputtedPhone;
           });
         },
-        countryPhoneDataList: state.data,
+        countryPhoneDataList: state.countryData,
         favorites: const <String>['RU', 'CY']);
   }
 

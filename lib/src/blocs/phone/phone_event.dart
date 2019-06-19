@@ -6,7 +6,7 @@ abstract class PhoneEvent extends Equatable {
   PhoneEvent([List<dynamic> props = const <dynamic>[]]) : super(props);
 }
 
-class CountryPhoneDataRequested extends PhoneEvent {
+class PhoneCountriesDataRequested extends PhoneEvent {
   @override
   String toString() => 'PhoneInitialized';
 }
