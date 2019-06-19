@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
-import 'package:user_mobile/src/models/screen/screen_model.dart';
-import '../../../temp/screen_repository_test.dart';
 import '../../blocs/screen/screen_bloc.dart' show ScreenBloc;
 import '../../blocs/screen/screen_event.dart';
 import '../../blocs/screen/screen_state.dart';
@@ -11,10 +9,10 @@ import '../../models/screen/components/button_model.dart' show ButtonModel;
 import '../../models/screen/components/item_model.dart' show ItemModel;
 import '../../models/screen/components/note_model.dart' show NoteModel;
 import '../../models/screen/components/property_model.dart' show PropertyModel;
-//import '../../models/screen/screen_model.dart' show ScreenModel;
+import '../../models/screen/screen_model.dart' show ScreenModel;
 
-//import '../../resources/screen_repository.dart' show ScreenRepository;
 import '../../resources/auth_repository.dart' show AuthRepository;
+import '../../resources/screen_repository.dart' show ScreenRepository;
 import '../components/button.dart' show Button;
 import '../components/item/item.dart' show Item;
 import '../components/note.dart' show Note;
@@ -23,16 +21,19 @@ import '../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
 import 'property/components/property_card_body.dart';
 
-// ignore: must_be_immutable
+//import '../../../temp/screen_repository_test.dart';
+
 class Screen extends StatefulWidget {
-  Screen(this.route, {Map<String, dynamic> arguments}) {
-    if (arguments != null) {
-      scrollToId = arguments['scrollToId'];
-    }
+  factory Screen(String route, {Map<String, dynamic> arguments}) {
+    final String scrollToId =
+    arguments != null ? arguments['scrollToId'] : null;
+    return Screen._(route, scrollToId: scrollToId);
   }
 
+  Screen._(this.route, {this.scrollToId});
+
   final String route;
-  String scrollToId;
+  final String scrollToId;
   final ScrollController scrollController = ScrollController();
 
   @override
@@ -48,7 +49,7 @@ class _ScreenState extends State<Screen> {
   @override
   void initState() {
     super.initState();
-    screenBloc = ScreenBloc(screenRepository: TestScreenRepository(),
+    screenBloc = ScreenBloc(screenRepository: ScreenRepository(),
         authRepository: AuthRepository());
     screenBloc.dispatch(ScreenInitialized(query: widget.route));
   }
@@ -73,9 +74,9 @@ class _ScreenState extends State<Screen> {
           if (state is ScreenDataLoaded) {
             return PageTemplate(
               body: buildComponents(state.data),
-              goBack: state.data.first.path != null
+              goBack: state.data.path != null
                   ? () {
-                final String path = state.data.first.path;
+                final String path = state.data.path;
                 Navigator.of(context).pushNamedAndRemoveUntil(
                   path.substring(0, path.lastIndexOf('/')),
                       (Route<dynamic> route) => false,
@@ -86,7 +87,7 @@ class _ScreenState extends State<Screen> {
                 );
               }
                   : null,
-              title: state.data.first.value,
+              title: state.data.value,
             );
           } else if (state is ScreenDataLoadingError) {
             return Text(state.error.toString());
@@ -99,15 +100,15 @@ class _ScreenState extends State<Screen> {
         });
   }
 
-  Widget buildComponents(List<ScreenModel> data) {
-    if (data.isNotEmpty) {
+  Widget buildComponents(ScreenModel data) {
+    if (data != null) {
       final List<Widget> items = <Widget>[];
       final List<Button> buttons = <Button>[];
-      for (dynamic component in data.first.components) {
+      for (dynamic component in data.components) {
         if (component is ItemModel) {
           items.add(Item(
             component,
-            data.first.path,
+            data.path,
             handleSendItemValue,
             makeTransition,
           ));
@@ -119,11 +120,12 @@ class _ScreenState extends State<Screen> {
         } else if (component is ButtonModel) {
           buttons.add(Button(
             component,
-            data.first.path,
+            data.path,
             handleSendItemValue,
           ));
         }
       }
+
       if (widget.scrollToId is String) {
         final dynamic scrollItemList = items
             .where((dynamic item) => item.id == widget.scrollToId)

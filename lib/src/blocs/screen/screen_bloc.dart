@@ -1,16 +1,24 @@
 import 'package:bloc/bloc.dart';
-//import '../../resources/screen_repository.dart' show ScreenRepository;
 import 'package:meta/meta.dart' show required;
-import '../../../src/models/screen/screen_model.dart';
-import '../../../temp/screen_repository_test.dart';
+//import '../../../temp/screen_repository_test.dart';
+
+import '../../../src/models/screen/screen_model.dart' show ScreenModel;
 import '../../resources/auth_repository.dart' show AuthRepository;
-import 'screen_event.dart';
-import 'screen_state.dart';
+import '../../resources/screen_repository.dart' show ScreenRepository;
+import 'screen_event.dart'
+    show ScreenEvent, ScreenInitialized, SendItem, TappedOnComponent;
+import 'screen_state.dart'
+    show
+        ScreenDataLoaded,
+        ScreenDataLoadingError,
+        ScreenLoading,
+        ScreenState,
+        ScreenUninitialized;
 
 class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
   ScreenBloc({@required this.authRepository, @required this.screenRepository});
 
-  final TestScreenRepository screenRepository;
+  final ScreenRepository screenRepository;
   final AuthRepository authRepository;
 
   @override
@@ -22,17 +30,16 @@ class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
       try {
         yield ScreenLoading();
         //загружаю данные
-        final List<ScreenModel> data = <ScreenModel>[
-          await screenRepository.fetchScreen(query: event.query)
-        ];
+        final ScreenModel data =
+            await screenRepository.fetchScreen(query: event.query);
         yield ScreenDataLoaded(data);
       } catch (error) {
         yield ScreenDataLoadingError(error: error.toString());
       }
     } else if (event is SendItem) {
       //Отправляю данные
-      await screenRepository.sendItemValue(
-          event.route, event.value, body: event.body);
+      await screenRepository.sendItemValue(event.route, event.value,
+          body: event.body);
     } else if (event is TappedOnComponent) {}
   }
 }
