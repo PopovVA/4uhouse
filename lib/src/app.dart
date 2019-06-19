@@ -48,13 +48,15 @@ class _AppState extends State<App> {
             accentColor: accentColor,
             primaryColor: primaryColor,
             textTheme: customTextTheme),
-        home: HomePage(),
+        home: Screen('/property'),
         onGenerateRoute: (RouteSettings settings) {
           final String name = settings.name;
           switch (name) {
             case '/':
+            case '/property':
               return MaterialPageRoute<dynamic>(
-                builder: (BuildContext context) => HomePage(),
+                builder: (BuildContext context) =>
+                    Screen(name, arguments: settings.arguments),
               );
             default:
               return MaterialPageRoute<dynamic>(

@@ -18,5 +18,4 @@ void main() {
 //  debugPaintSizeEnabled = true;
   BlocSupervisor().delegate = AppBlocDelegate();
   runApp(App(authRepository: AuthRepository()));
-//  runApp(AppScreens());
 }

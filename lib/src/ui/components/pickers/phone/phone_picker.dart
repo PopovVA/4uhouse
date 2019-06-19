@@ -22,7 +22,7 @@ class PhonePicker extends StatefulWidget {
 
 class _PhonePickerState extends State<PhonePicker> {
   TextEditingController phoneController =
-      StyledTextController();
+      NumberOnlyTextEditingController();
   TextEditingController codeController = TextEditingController();
   CountryPhoneData selectedItem;
 

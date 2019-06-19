@@ -23,8 +23,8 @@ class AuthApi extends Api {
 
   static String _encodeMapToUrl(Map<String, dynamic> parameters) {
     final List<String> urlEncodedForm = <String>[];
-    parameters.forEach((String key, dynamic value) =>
-        urlEncodedForm.add('${Uri.encodeFull(key)}=${Uri.encodeFull(value.toString())}'));
+    parameters.forEach((String key, dynamic value) => urlEncodedForm
+        .add('${Uri.encodeFull(key)}=${Uri.encodeFull(value.toString())}'));
 
     return urlEncodedForm.join('&');
   }
@@ -48,13 +48,6 @@ class AuthApi extends Api {
       @required int code,
       @required String number}) async {
     try {
-      print('===> body: ${_encodeMapToUrl({
-        'code_challenge': codeChallenge,
-        'app_id': deviceId,
-        'country_id': countryId,
-        'country_code': code,
-        'number': number
-      })}');
       final http.Response response = await client.post(
         _otpEndpoint,
         headers: _makeHeaders(),
@@ -85,14 +78,6 @@ class AuthApi extends Api {
       @required String deviceId}) async {
     final String phone = '$code$number';
     try {
-      print('===> body: ${_encodeMapToUrl({
-        'grant_type': 'otp',
-        'client_id': clientId,
-        'phone': phone,
-        'otp': otp,
-        'code_verifier': codeVerifier,
-        'app_id': deviceId,
-      })}');
       final http.Response response = await client.post(
         _tokenEndpoint,
         headers: _makeHeaders(),

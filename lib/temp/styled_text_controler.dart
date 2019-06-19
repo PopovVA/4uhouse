@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class StyledTextController extends TextEditingController {
-  StyledTextController() {
+class NumberOnlyTextEditingController extends TextEditingController {
+  NumberOnlyTextEditingController() {
     //
     addListener(() {
       String numberText = '';

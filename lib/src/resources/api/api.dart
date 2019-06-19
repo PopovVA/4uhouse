@@ -5,11 +5,23 @@ import 'package:http/http.dart' as http;
 import 'package:connectivity/connectivity.dart'
     show Connectivity, ConnectivityResult;
 
+import '../../models/errors/auth_error.dart' show AuthError;
 import '../../models/errors/connection_error.dart' show ConnectionError;
 import '../../models/errors/http_error.dart' show HttpError;
 import '../../models/errors/no_internet_error.dart' show NoInternetError;
 
 class Api {
+  static const String authHeaderKey = 'Authorization';
+
+  static bool isValidToken(String token) => token is String && token.isNotEmpty;
+
+  static String formToken(String token) => 'Bearer $token';
+
+  static Map<String, String> makeHeaders(String token) =>
+      isValidToken(token)
+          ? <String, String>{'$authHeaderKey': formToken(token)}
+          : null;
+
   Future<dynamic> inferError(dynamic object) async {
     if (object is SocketException) {
       final bool internet = await _checkInternet();
@@ -21,8 +33,15 @@ class Api {
     }
 
     if (object is http.BaseResponse) {
+      final int statusCode = object.statusCode;
       final Map<String, dynamic> parsedResponse = await processResponse(object);
-      return HttpError(parsedResponse['error_description']);
+      final String description = parsedResponse['error_description'];
+
+      if (statusCode == 401) {
+        return AuthError(description);
+      }
+
+      return HttpError(description);
     }
 
     return object;
@@ -43,7 +62,7 @@ class Api {
 
   Future<bool> _checkInternet() async {
     final ConnectivityResult connectivityResult =
-        await Connectivity().checkConnectivity();
+    await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile) {
       return true;
     } else if (connectivityResult == ConnectivityResult.wifi) {

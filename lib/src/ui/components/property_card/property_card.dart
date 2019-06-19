@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../models/screen/components/property_model.dart'
+import '../../../models/screen/components/property_model.dart'
     show PropertyModel;
 
 import 'property_card_footer.dart' show PropertyFooter;
@@ -50,12 +50,13 @@ class PropertyCard extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(30.0),
             child: InkWell(
+              borderRadius: BorderRadius.circular(30.0),
               onTap: property.isTransition
                   ? () {
-                      if (makeTransition is Function) {
-                        makeTransition(context, property.id);
-                      }
-                    }
+                if (makeTransition is Function) {
+                  makeTransition(context, property.id);
+                }
+              }
                   : null,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

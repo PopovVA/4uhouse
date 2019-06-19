@@ -68,6 +68,13 @@
         "typeQuery": "POST",
         "isAble": true,
         "key": "Add property"
+      },
+      {
+        "id": "Case",
+        "component": "button",
+        "typeQuery": "POST",
+        "isAble": true,
+        "key": "Add property"
       }
     ]
   }
