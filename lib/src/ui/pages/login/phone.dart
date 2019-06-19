@@ -10,7 +10,7 @@ import '../../../blocs/login/login_state.dart'
     show LoginState, IsFetchingOtp, OtpSent, PhoneError;
 import '../../../blocs/phone/phone_bloc.dart' show PhoneBloc;
 import '../../../blocs/phone/phone_event.dart'
-    show PhoneEvent, PhoneInitialized;
+    show PhoneEvent, CountryPhoneDataRequested;
 import '../../../blocs/phone/phone_state.dart'
     show
     PhoneCountriesDataLoaded,
@@ -52,7 +52,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
   void initState() {
     super.initState();
     _phoneBloc = PhoneBloc(PhoneRepository());
-    _phoneBloc.dispatch(PhoneInitialized());
+    _phoneBloc.dispatch(CountryPhoneDataRequested());
     _loginBloc = LoginBloc(widget.authBloc, AuthRepository());
   }
 

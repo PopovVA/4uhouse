@@ -15,7 +15,7 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
 
   @override
   Stream<PhoneState> mapEventToState(PhoneEvent event) async* {
-    if (event is PhoneInitialized) {
+    if (event is CountryPhoneDataRequested) {
       yield PhoneLoading();
       try {
         final List<dynamic> waitList = await Future.wait(<Future<dynamic>>[

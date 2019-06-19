@@ -28,14 +28,14 @@ class PageTemplate extends StatelessWidget {
         backgroundColor: const Color(0xFFe9e7e7),
         iconTheme: const IconThemeData(color: color),
         leading: Navigator.canPop(context)
-            ? IconButton(
-                color: color,
-                tooltip: 'go back',
-                icon: const Icon(Icons.arrow_back_ios),
-                onPressed: () {
-                  return goBack is Function ? goBack() : Navigator.pop(context);
-                })
-            : null,
+          ? IconButton(
+          color: color,
+          tooltip: 'go back',
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            return goBack is Function ? goBack() : Navigator.pop(context);
+          })
+          : null,
         centerTitle: true,
         title:
             Text(title, style: const TextStyle(color: color, fontSize: 20.0)),
