@@ -30,10 +30,10 @@ class Screen extends StatefulWidget {
       {Map<String, dynamic> arguments}) {
     final String scrollToId =
     arguments != null ? arguments['scrollToId'] : null;
-    return Screen._(route, drawer, scrollToId: scrollToId);
+    return Screen._(route, drawer: drawer, scrollToId: scrollToId);
   }
 
-  Screen._(this.route, this.drawer, {this.scrollToId});
+  Screen._(this.route, {this.drawer, this.scrollToId});
 
   final String route;
   final String scrollToId;
