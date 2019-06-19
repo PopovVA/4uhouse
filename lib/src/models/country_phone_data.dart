@@ -1,11 +1,10 @@
 class CountryPhoneData {
-  CountryPhoneData(
-      {this.countryId,
-      this.code,
-      this.name,
-      this.length,
-      this.example,
-      this.numberPattern});
+  CountryPhoneData({this.countryId,
+    this.code,
+    this.name,
+    this.length,
+    this.example,
+    this.numberPattern});
 
   CountryPhoneData.fromJson(Map<String, dynamic> json) {
     countryId = json['countryId'];

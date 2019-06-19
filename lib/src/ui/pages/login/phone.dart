@@ -13,20 +13,22 @@ import '../../../blocs/phone/phone_event.dart'
     show PhoneEvent, PhoneInitialized;
 import '../../../blocs/phone/phone_state.dart'
     show
-        PhoneCountriesDataLoaded,
-        PhoneLoading,
-        PhoneLoadingError,
-        PhoneState,
-        PhoneUninitialized;
+    PhoneCountriesDataLoaded,
+    PhoneLoading,
+    PhoneLoadingError,
+    PhoneState,
+    PhoneUninitialized;
 import '../../../models/country_phone_data.dart' show CountryPhoneData;
 import '../../../resources/auth_repository.dart' show AuthRepository;
 import '../../../resources/phone_repository.dart' show PhoneRepository;
 
 import '../../components/page_template.dart' show PageTemplate;
 import '../../components/pickers/phone/phone_picker.dart' show PhonePicker;
-import '../../components/styled/styled_alert_dialog.dart' show StyledAlertDialog;
+import '../../components/styled/styled_alert_dialog.dart'
+    show StyledAlertDialog;
 import '../../components/styled/styled_button.dart' show StyledButton;
-import '../../components/styled/styled_circular_progress.dart' show StyledCircularProgress;
+import '../../components/styled/styled_circular_progress.dart'
+    show StyledCircularProgress;
 import 'otp.dart' show OtpScreen;
 
 class PhoneScreen extends StatefulWidget {
@@ -120,10 +122,13 @@ class _PhoneScreenState extends State<PhoneScreen> {
                               state is PhoneLoading)
                             StyledCircularProgress(
                                 size: 'small',
-                                color: Theme.of(context).primaryColor),
+                                color: Theme
+                                    .of(context)
+                                    .primaryColor),
                           if (state is PhoneCountriesDataLoaded)
                             Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 24.0),
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 24.0),
                               child: _buildPhonePicker(state),
                             ),
                           if (state is PhoneLoadingError)
@@ -203,22 +208,22 @@ class _PhoneScreenState extends State<PhoneScreen> {
         builder: (BuildContext context, LoginState state) {
           return Container(
               child: Expanded(
-            child: Align(
-              alignment: FractionalOffset.bottomCenter,
-              child: StyledButton(
-                loading: state is IsFetchingOtp,
-                onPressed: isAgree && validPhone
-                    ? () {
-                        _loginBloc.dispatch(OtpRequested(
-                            countryId: selectedItem.countryId,
-                            code: selectedItem.code,
-                            number: number));
-                      }
-                    : null,
-                text: 'Submit',
-              ),
-            ),
-          ));
+                child: Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: StyledButton(
+                    loading: state is IsFetchingOtp,
+                    onPressed: isAgree && validPhone
+                        ? () {
+                      _loginBloc.dispatch(OtpRequested(
+                          countryId: selectedItem.countryId,
+                          code: selectedItem.code,
+                          number: number));
+                    }
+                        : null,
+                    text: 'Submit',
+                  ),
+                ),
+              ));
         });
   }
 }

@@ -23,8 +23,8 @@ class AuthApi extends Api {
 
   static String _encodeMapToUrl(Map<String, dynamic> parameters) {
     final List<String> urlEncodedForm = <String>[];
-    parameters.forEach((String key, dynamic value) =>
-        urlEncodedForm.add('${Uri.encodeFull(key)}=${Uri.encodeFull(value.toString())}'));
+    parameters.forEach((String key, dynamic value) => urlEncodedForm
+        .add('${Uri.encodeFull(key)}=${Uri.encodeFull(value.toString())}'));
 
     return urlEncodedForm.join('&');
   }
