@@ -1,24 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart' show BlocProvider;
+import 'package:meta/meta.dart' show required;
 
-import '../src/pallete.dart';
-import '../src/typography.dart';
-import '../src/ui/pages/screen.dart';
+import '../src/blocs/auth/auth_bloc.dart' show AuthBloc;
+import '../src/blocs/auth/auth_event.dart' show AppStarted;
 
-class AppScreens extends StatelessWidget {
+import '../src/pallete.dart' show accentColor, primaryColor;
+import '../src/resources/auth_repository.dart' show AuthRepository;
+import '../src/typography.dart' show customTextTheme;
+import 'package:user_mobile/src/ui/pages/home/screen.dart' show Screen;
+
+class App extends StatefulWidget {
+  const App({@required this.authRepository});
+
+  final AuthRepository authRepository;
+
+  @override
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  AuthBloc authBloc;
+
+  AuthRepository get authRepository => widget.authRepository;
+
+  @override
+  void initState() {
+    authBloc = AuthBloc(authRepository: authRepository);
+    authBloc.dispatch(AppStarted());
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    authBloc.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '4u.house',
-      theme: ThemeData(
-        accentColor: accentColor,
-        primaryColor: primaryColor,
-        textTheme: customTextTheme,
+    return BlocProvider<AuthBloc>(
+      bloc: authBloc,
+      child: MaterialApp(
+        title: '4u.house',
+        theme: ThemeData(
+            accentColor: accentColor,
+            primaryColor: primaryColor,
+            textTheme: customTextTheme),
+        home: Screen('user/property'),
+        onGenerateRoute: (RouteSettings settings) {
+          final String name = settings.name;
+          switch (name) {
+            case '/':
+              return MaterialPageRoute<dynamic>(
+                builder: (BuildContext context) =>
+                    Screen(name, arguments: settings.arguments),
+              );
+            default:
+              return MaterialPageRoute<dynamic>(
+                  builder: (BuildContext context) =>
+                      Screen(name, arguments: settings.arguments));
+          }
+        },
       ),
-      home: Screen('user/property'),
-      onGenerateRoute: (RouteSettings settings) =>
-          MaterialPageRoute<dynamic>(
-              builder: (BuildContext context) =>
-              Screen(settings.name, arguments: settings.arguments)),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocProvider;
 import 'package:meta/meta.dart' show required;
+import 'package:user_mobile/src/ui/pages/home/screen.dart' show Screen;
 
 import 'blocs/auth/auth_bloc.dart' show AuthBloc;
 import 'blocs/auth/auth_event.dart' show AppStarted;
@@ -8,8 +9,7 @@ import 'blocs/auth/auth_event.dart' show AppStarted;
 import 'pallete.dart' show accentColor, primaryColor;
 import 'resources/auth_repository.dart' show AuthRepository;
 import 'typography.dart' show customTextTheme;
-import 'ui/pages/home/home.dart' show HomePage;
-import 'ui/pages/screen.dart' show Screen;
+
 
 class App extends StatefulWidget {
   const App({@required this.authRepository});
@@ -54,7 +54,13 @@ class _AppState extends State<App> {
           switch (name) {
             case '/':
               return MaterialPageRoute<dynamic>(
-                builder: (BuildContext context) => HomePage(),
+                  builder: (BuildContext context) =>
+                      Screen(name, arguments: settings.arguments)
+              );
+            case '/property':
+              return MaterialPageRoute<dynamic>(
+                  builder: (BuildContext context) =>
+                      Screen(name, arguments: settings.arguments)
               );
             default:
               return MaterialPageRoute<dynamic>(
