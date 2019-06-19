@@ -26,6 +26,7 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
 
         final List<CountryPhoneData> countryPhoneDataList =
             <CountryPhoneData>[];
+        print(waitList[2]);
         countryPhoneDataList.addAll(waitList[2]);
         countryPhoneDataList.addAll(waitList[0]);
         final String countryIdByIp = waitList[1];
