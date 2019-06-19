@@ -5,7 +5,7 @@ import '../../../../temp/screen_repository_test.dart';
 import '../../../blocs/screen/screen_bloc.dart' show ScreenBloc;
 import '../../../blocs/screen/screen_event.dart';
 import '../../../blocs/screen/screen_state.dart';
-import '../../../constants/layout.dart' show standardPadding;
+import '../../../constants/layout.dart';
 import '../../../models/screen/components/button_model.dart' show ButtonModel;
 import '../../../models/screen/components/item_model.dart' show ItemModel;
 import '../../../models/screen/components/note_model.dart' show NoteModel;
@@ -187,7 +187,8 @@ class _ScreenState extends State<Screen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: standardPadding),
+              padding: EdgeInsets.symmetric(
+                  horizontal: standardHorizontalPadding),
               child: Column(
                 children: buttons,
               ),
@@ -203,7 +204,7 @@ class _ScreenState extends State<Screen> {
   void makeTransition(BuildContext context, String id) {
     Navigator.of(context).pushNamedAndRemoveUntil(
       '${widget.route}${id is String ? '/$id' : ''}',
-      (Route<dynamic> route) => false,
+          (Route<dynamic> route) => false,
     );
   }
 
