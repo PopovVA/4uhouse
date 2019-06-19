@@ -55,7 +55,8 @@ class _AppState extends State<App> {
             case '/':
             case '/property':
               return MaterialPageRoute<dynamic>(
-                builder: (BuildContext context) => HomePage(),
+                builder: (BuildContext context) =>
+                    Screen(name, arguments: settings.arguments),
               );
             default:
               return MaterialPageRoute<dynamic>(

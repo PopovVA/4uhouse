@@ -23,7 +23,7 @@ class ScreenLoading extends ScreenState {
 class ScreenDataLoaded extends ScreenState {
   ScreenDataLoaded(this.data);
 
-  final List<ScreenModel> data;
+  final ScreenModel data;
 
   @override
   String toString() => 'ScreenDataLoaded';
