@@ -4,7 +4,6 @@ import 'package:flutter/scheduler.dart' show SchedulerBinding;
 import '../../blocs/screen/screen_bloc.dart' show ScreenBloc;
 import '../../blocs/screen/screen_event.dart';
 import '../../blocs/screen/screen_state.dart';
-import '../../constants/layout.dart' show standardPadding;
 import '../../models/screen/components/button_model.dart' show ButtonModel;
 import '../../models/screen/components/item_model.dart' show ItemModel;
 import '../../models/screen/components/note_model.dart' show NoteModel;
@@ -155,7 +154,7 @@ class _ScreenState extends State<Screen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: standardPadding),
+              padding:const EdgeInsets.only(bottom: 4),
               child: Column(
                 children: buttons,
               ),
