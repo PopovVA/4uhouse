@@ -1,37 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
-import 'package:user_mobile/src/ui/components/button.dart';
-import 'package:user_mobile/src/ui/components/page_template.dart';
-import 'package:user_mobile/src/ui/components/styled/styled_circular_progress.dart';
-
-//import 'package:user_mobile/src/ui/components/property/property.dart';
-import '../../../temp/screen_repository_test.dart';
-import '../../blocs/screen_bloc.dart' show ScreenBloc;
+import '../../blocs/screen/screen_bloc.dart' show ScreenBloc;
+import '../../blocs/screen/screen_event.dart';
+import '../../blocs/screen/screen_state.dart';
 import '../../models/screen/components/button_model.dart' show ButtonModel;
 import '../../models/screen/components/item_model.dart' show ItemModel;
 import '../../models/screen/components/note_model.dart' show NoteModel;
 import '../../models/screen/components/property_model.dart' show PropertyModel;
 import '../../models/screen/screen_model.dart' show ScreenModel;
-import '../../resources/auth_repository.dart' show AuthRepository;
 
-//import '../../resources/screen_repository.dart' show ScreenRepository;
-/*import '../components/common/button.dart' show Button;
-import '../components/common/circular_progress.dart' show CircularProgress;
-import '../components/common/page_template.dart' show PageTemplate;*/
+import '../../resources/auth_repository.dart' show AuthRepository;
+import '../../resources/screen_repository.dart' show ScreenRepository;
+import '../components/button.dart' show Button;
 import '../components/item/item.dart' show Item;
 import '../components/note.dart' show Note;
-import 'property/components/property_card_body.dart';
+import '../components/page_template.dart' show PageTemplate;
+import '../components/property_card/property_card.dart' show PropertyCard;
+import '../components/styled/styled_circular_progress.dart'
+    show StyledCircularProgress;
 
-// ignore: must_be_immutable
+import '../../../temp/screen_repository_test.dart';
+
 class Screen extends StatefulWidget {
-  Screen(this.route, {Map<String, dynamic> arguments}) {
-    if (arguments != null) {
-      scrollToId = arguments['scrollToId'];
-    }
+  factory Screen(String route, {Map<String, dynamic> arguments}) {
+    final String scrollToId =
+        arguments != null ? arguments['scrollToId'] : null;
+    return Screen._(route, scrollToId: scrollToId);
   }
 
+  Screen._(this.route, {this.scrollToId});
+
   final String route;
-  String scrollToId;
+  final String scrollToId;
   final ScrollController scrollController = ScrollController();
 
   @override
@@ -46,11 +47,11 @@ class _ScreenState extends State<Screen> {
 
   @override
   void initState() {
-    screenBloc = ScreenBloc(
-        authRepository: AuthRepository(),
-        screenRepository: TestScreenRepository());
-    screenBloc.fetchScreen(widget.route);
     super.initState();
+    screenBloc = ScreenBloc(
+        screenRepository: ScreenRepository(), authRepository: AuthRepository());
+//    screenRepository: TestScreenRepository(), authRepository: AuthRepository());
+    screenBloc.dispatch(ScreenInitialized(query: widget.route));
   }
 
   @override
@@ -67,47 +68,43 @@ class _ScreenState extends State<Screen> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<ScreenModel>(
-      stream: screenBloc.screen,
-      builder: (BuildContext context, AsyncSnapshot<ScreenModel> snapshot) {
-        if (snapshot.hasData) {
-          return PageTemplate(
-            body: buildComponents(snapshot),
-            goBack: snapshot.data.path != null
-                ? () {
-                    final String path = snapshot.data.path;
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                      path.substring(0, path.lastIndexOf('/')),
-                      (Route<dynamic> route) => false,
-                      // ignore: always_specify_types
-                      arguments: {
-                        'scrollToId': widget.route
-                            .substring(widget.route.lastIndexOf('/') + 1),
-                      },
-                    );
-                  }
-                : null,
-            title: snapshot.data.value,
-          );
-        } else if (snapshot.hasError) {
-          return Text(snapshot.error.toString());
-        }
+    return BlocBuilder<ScreenEvent, ScreenState>(
+        bloc: screenBloc,
+        builder: (BuildContext context, ScreenState state) {
+          if (state is ScreenDataLoaded) {
+            return PageTemplate(
+              body: buildComponents(state.data),
+              goBack: state.data.path != null
+                  ? () {
+                      final String path = state.data.path;
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        path.substring(0, path.lastIndexOf('/')),
+                        (Route<dynamic> route) => false,
+                        arguments: <String, String>{
+                          'scrollToId': widget.route
+                              .substring(widget.route.lastIndexOf('/') + 1),
+                        },
+                      );
+                    }
+                  : null,
+              title: state.data.value,
+            );
+          } else if (state is ScreenDataLoadingError) {
+            return Text(state.error.toString());
+          }
 
-        return Container(
-          color: Colors.white,
-          child: const StyledCircularProgress(),
-        );
-      },
-    );
+          return Container(
+            color: Colors.white,
+            child: const StyledCircularProgress(),
+          );
+        });
   }
 
-  Widget buildComponents(AsyncSnapshot<ScreenModel> snapshot) {
-    final dynamic data = snapshot.data;
-    if (data is ScreenModel) {
+  Widget buildComponents(ScreenModel data) {
+    if (data != null) {
       final List<Widget> items = <Widget>[];
       final List<Button> buttons = <Button>[];
-      // ignore: avoid_function_literals_in_foreach_calls
-      data.components.forEach((dynamic component) {
+      for (dynamic component in data.components) {
         if (component is ItemModel) {
           items.add(Item(
             component,
@@ -127,7 +124,7 @@ class _ScreenState extends State<Screen> {
             handleSendItemValue,
           ));
         }
-      });
+      }
 
       if (widget.scrollToId is String) {
         final dynamic scrollItemList = items
@@ -142,26 +139,25 @@ class _ScreenState extends State<Screen> {
         color: const Color(0xFFEBECED),
         height: double.infinity,
         padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-        child: Stack(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Column(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    child: SingleChildScrollView(
-                      controller: widget.scrollController,
-                      child: Column(
-                        children: items,
-                      ),
-                    ),
+            Expanded(
+              child: Container(
+                child: SingleChildScrollView(
+                  controller: widget.scrollController,
+                  child: Column(
+                    children: items,
                   ),
                 ),
-              ],
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom:4.0),
+              padding:const EdgeInsets.only(bottom: 4),
               child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end, children: buttons),
+                children: buttons,
+              ),
             ),
           ],
         ),
@@ -178,7 +174,8 @@ class _ScreenState extends State<Screen> {
     );
   }
 
-  Future<Screen> handleSendItemValue(String id, dynamic value, {dynamic body}) {
-    return screenBloc.sendItemValue('${widget.route}/$id', value, body: body);
+  void handleSendItemValue(String id, dynamic value, {dynamic body}) {
+    screenBloc.dispatch(
+        SendItem(route: '${widget.route}/$id', value: value, body: body));
   }
 }

@@ -13,16 +13,21 @@ class StyledButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: standardVerticalPadding,left: standardHorizontalPadding,right: standardHorizontalPadding),
-      child: Container(
-        height: 48.0,
-        width: double.infinity,
-        child: RaisedButton(
-          color: Theme.of(context).primaryColor,
-          disabledColor: const Color(0xE6CACACA),
-          elevation: 8,
-          onPressed: loading ? null : onPressed,
-          child: buildChild(context),
+      padding: EdgeInsets.only(
+          bottom: standardVerticalPadding,
+          left: standardHorizontalPadding,
+          right: standardHorizontalPadding),
+      child: SafeArea(
+        child: Container(
+          height: 48.0,
+          width: double.infinity,
+          child: RaisedButton(
+            color: Theme.of(context).primaryColor,
+            disabledColor: const Color(0xE6CACACA),
+            elevation: 8,
+            onPressed: loading ? null : onPressed,
+            child: buildChild(context),
+          ),
         ),
       ),
     );

@@ -5,8 +5,7 @@ import '../../../typography.dart' show DISABLED_COLOR;
 
 @immutable
 class StyledAlertDialog extends StatelessWidget {
-  const StyledAlertDialog(
-      {this.title, this.content, this.onOk, this.onCancel});
+  const StyledAlertDialog({this.title, this.content, this.onOk, this.onCancel});
 
   final String title;
   final String content;

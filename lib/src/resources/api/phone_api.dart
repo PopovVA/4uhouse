@@ -10,7 +10,7 @@ class PhoneApi extends Api {
   Future<dynamic> requestCountriesPhoneData() async {
     try {
       final http.Response response =
-          await _client.get('${BASE_URL}auth/country-phones-data');
+      await _client.get('${BASE_URL}auth/country-phones-data');
       if (response.statusCode == 200) {
         return processResponse(response);
       } else {
@@ -25,7 +25,9 @@ class PhoneApi extends Api {
     try {
       final http.Response response = await http.get('http://ip-api.com/json');
       if (response.statusCode == 200) {
-        return Location.fromJson(await processResponse(response)).countryCode;
+        return Location
+            .fromJson(await processResponse(response))
+            .countryCode;
       } else {
         throw response;
       }

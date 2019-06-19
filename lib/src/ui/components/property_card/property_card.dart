@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../models/screen/components/property_model.dart'
+import '../../../models/screen/components/property_model.dart'
     show PropertyModel;
 
 import 'property_card_footer.dart' show PropertyFooter;
