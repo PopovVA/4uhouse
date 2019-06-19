@@ -53,6 +53,7 @@ class _AppState extends State<App> {
           final String name = settings.name;
           switch (name) {
             case '/':
+            case '/property':
               return MaterialPageRoute<dynamic>(
                 builder: (BuildContext context) => HomePage(),
               );
