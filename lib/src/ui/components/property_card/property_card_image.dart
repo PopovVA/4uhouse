@@ -2,7 +2,7 @@ import 'dart:convert' show base64Decode;
 import 'dart:typed_data' show Uint8List;
 import 'package:flutter/material.dart';
 
-import '../../../../utils/type_check.dart' show isNotNull;
+import '../../../utils/type_check.dart' show isNotNull;
 
 class PropertyImage extends StatelessWidget {
   factory PropertyImage(

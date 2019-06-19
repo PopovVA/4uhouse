@@ -17,16 +17,16 @@ import '../components/button.dart' show Button;
 import '../components/item/item.dart' show Item;
 import '../components/note.dart' show Note;
 import '../components/page_template.dart' show PageTemplate;
+import '../components/property_card/property_card.dart' show PropertyCard;
 import '../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
-import 'property/components/property_card_body.dart';
 
-//import '../../../temp/screen_repository_test.dart';
+import '../../../temp/screen_repository_test.dart';
 
 class Screen extends StatefulWidget {
   factory Screen(String route, {Map<String, dynamic> arguments}) {
     final String scrollToId =
-    arguments != null ? arguments['scrollToId'] : null;
+        arguments != null ? arguments['scrollToId'] : null;
     return Screen._(route, scrollToId: scrollToId);
   }
 
@@ -49,8 +49,9 @@ class _ScreenState extends State<Screen> {
   @override
   void initState() {
     super.initState();
-    screenBloc = ScreenBloc(screenRepository: ScreenRepository(),
-        authRepository: AuthRepository());
+    screenBloc = ScreenBloc(
+        screenRepository: ScreenRepository(), authRepository: AuthRepository());
+//    screenRepository: TestScreenRepository(), authRepository: AuthRepository());
     screenBloc.dispatch(ScreenInitialized(query: widget.route));
   }
 
@@ -76,16 +77,16 @@ class _ScreenState extends State<Screen> {
               body: buildComponents(state.data),
               goBack: state.data.path != null
                   ? () {
-                final String path = state.data.path;
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                  path.substring(0, path.lastIndexOf('/')),
-                      (Route<dynamic> route) => false,
-                  arguments: <String, String>{
-                    'scrollToId': widget.route
-                        .substring(widget.route.lastIndexOf('/') + 1),
-                  },
-                );
-              }
+                      final String path = state.data.path;
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        path.substring(0, path.lastIndexOf('/')),
+                        (Route<dynamic> route) => false,
+                        arguments: <String, String>{
+                          'scrollToId': widget.route
+                              .substring(widget.route.lastIndexOf('/') + 1),
+                        },
+                      );
+                    }
                   : null,
               title: state.data.value,
             );
