@@ -115,6 +115,8 @@ class DrawerState extends State<DrawerOnly> {
               .of(context)
               .primaryColor);
         }
+
+        return Container(width: 0.0, height: 0.0);
       },
     );
   }
