@@ -21,7 +21,7 @@ class PhonePicker extends StatefulWidget {
 
 class _PhonePickerState extends State<PhonePicker> {
   TextEditingController phoneController =
-      TextEditingController();
+  TextEditingController();
   TextEditingController codeController = TextEditingController();
   CountryPhoneData selectedItem;
 
@@ -29,7 +29,7 @@ class _PhonePickerState extends State<PhonePicker> {
   void initState() {
     super.initState();
     codeController.text =
-        '+ (${widget.countryPhoneDataList[0].code.toString()})';
+    '+ (${widget.countryPhoneDataList[0].code.toString()})';
     phoneController.addListener(_phoneListener);
   }
 
@@ -38,7 +38,8 @@ class _PhonePickerState extends State<PhonePicker> {
     if (selectedItem == null && widget.countryPhoneDataList != null) {
       setState(() {
         print(
-            '===> widget.countryPhoneDataList[0]: ${widget.countryPhoneDataList[0].countryId}');
+            '===> widget.countryPhoneDataList[0]: ${widget
+                .countryPhoneDataList[0].countryId}');
         selectedItem = widget.countryPhoneDataList[0];
       });
     }
@@ -79,8 +80,8 @@ class _PhonePickerState extends State<PhonePicker> {
             width: 70.0,
             child: IgnorePointer(
                 child: StyledTextField(
-              controller: codeController,
-            ))),
+                  controller: codeController,
+                ))),
         onTap: () async {
           final CountryPhoneData result = await showSearch(
             context: context,
@@ -108,7 +109,9 @@ class _PhonePickerState extends State<PhonePicker> {
                 ? widget.countryPhoneDataList[0].example.toString()
                 : selectedItem.example.toString(),
             borderColor:
-                _isValid() ? Theme.of(context).primaryColor : Colors.redAccent,
+            _isValid() ? Theme
+                .of(context)
+                .primaryColor : Colors.redAccent,
             keyboardType: TextInputType.number,
           ),
         ),
