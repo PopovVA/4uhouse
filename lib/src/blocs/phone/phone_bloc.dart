@@ -33,7 +33,7 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
           countryPhoneDataList.insert(0, temp);
         }
 
-        yield PhoneCountriesDataLoaded(countryPhoneDataList);
+        yield PhoneCountriesDataRequested(countryPhoneDataList);
       } catch (error) {
         print('=> PhoneState => $error');
         yield PhoneLoadingError(error: error.toString());

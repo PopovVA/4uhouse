@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocBuilder, BlocListener, BlocListenerTree;
+import 'package:user_mobile/temp/phone_repository_test.dart';
 
 import '../../../../src/utils/route_transition.dart' show SlideRoute;
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
@@ -13,11 +14,11 @@ import '../../../blocs/phone/phone_event.dart'
     show PhoneEvent, CountryPhoneDataRequested;
 import '../../../blocs/phone/phone_state.dart'
     show
-    PhoneCountriesDataLoaded,
-    PhoneLoading,
-    PhoneLoadingError,
-    PhoneState,
-    PhoneUninitialized;
+        PhoneCountriesDataRequested,
+        PhoneLoading,
+        PhoneLoadingError,
+        PhoneState,
+        PhoneUninitialized;
 import '../../../models/country_phone_data.dart' show CountryPhoneData;
 import '../../../resources/auth_repository.dart' show AuthRepository;
 import '../../../resources/phone_repository.dart' show PhoneRepository;
@@ -51,7 +52,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
   @override
   void initState() {
     super.initState();
-    _phoneBloc = PhoneBloc(PhoneRepository());
+    _phoneBloc = PhoneBloc(TestPhoneRepository());
     _phoneBloc.dispatch(CountryPhoneDataRequested());
     _loginBloc = LoginBloc(widget.authBloc, AuthRepository());
   }
@@ -63,14 +64,16 @@ class _PhoneScreenState extends State<PhoneScreen> {
   }
 
   void _showError(BuildContext context, dynamic state) {
-    showDialog(context: context, builder: (BuildContext context) {
-      return StyledAlertDialog(
-        content: state.toString(),
-        onOk: () {
-          Navigator.of(context).pop();
-        },
-      );
-    });
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return StyledAlertDialog(
+            content: state.toString(),
+            onOk: () {
+              Navigator.of(context).pop();
+            },
+          );
+        });
   }
 
   @override
@@ -122,13 +125,11 @@ class _PhoneScreenState extends State<PhoneScreen> {
                               state is PhoneLoading)
                             StyledCircularProgress(
                                 size: 'small',
-                                color: Theme
-                                    .of(context)
-                                    .primaryColor),
-                          if (state is PhoneCountriesDataLoaded)
+                                color: Theme.of(context).primaryColor),
+                          if (state is PhoneCountriesDataRequested)
                             Container(
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 24.0),
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 24.0),
                               child: _buildPhonePicker(state),
                             ),
                           if (state is PhoneLoadingError)
@@ -188,7 +189,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
         ]));
   }
 
-  Widget _buildPhonePicker(PhoneCountriesDataLoaded state) {
+  Widget _buildPhonePicker(PhoneCountriesDataRequested state) {
     return PhonePicker(
         onSelected:
             (bool value, CountryPhoneData countryPhone, String inputtedPhone) {
@@ -208,22 +209,22 @@ class _PhoneScreenState extends State<PhoneScreen> {
         builder: (BuildContext context, LoginState state) {
           return Container(
               child: Expanded(
-                child: Align(
-                  alignment: FractionalOffset.bottomCenter,
-                  child: StyledButton(
-                    loading: state is IsFetchingOtp,
-                    onPressed: isAgree && validPhone
-                        ? () {
-                      _loginBloc.dispatch(OtpRequested(
-                          countryId: selectedItem.countryId,
-                          code: selectedItem.code,
-                          number: number));
-                    }
-                        : null,
-                    text: 'Submit',
-                  ),
-                ),
-              ));
+            child: Align(
+              alignment: FractionalOffset.bottomCenter,
+              child: StyledButton(
+                loading: state is IsFetchingOtp,
+                onPressed: isAgree && validPhone
+                    ? () {
+                        _loginBloc.dispatch(OtpRequested(
+                            countryId: selectedItem.countryId,
+                            code: selectedItem.code,
+                            number: number));
+                      }
+                    : null,
+                text: 'Submit',
+              ),
+            ),
+          ));
         });
   }
 }

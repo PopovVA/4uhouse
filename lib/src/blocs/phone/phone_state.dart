@@ -20,8 +20,8 @@ class PhoneLoading extends PhoneState {
   String toString() => 'PhoneLoading';
 }
 
-class PhoneCountriesDataLoaded extends PhoneState {
-  PhoneCountriesDataLoaded(this.data);
+class PhoneCountriesDataRequested extends PhoneState {
+  PhoneCountriesDataRequested(this.data);
 
   final List<CountryPhoneData> data;
 
