@@ -21,7 +21,7 @@ import '../components/property_card/property_card.dart' show PropertyCard;
 import '../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
 
-import '../../../temp/resources/screen_repository_test.dart';
+//import '../../../temp/resources/screen_repository_test.dart';
 
 class Screen extends StatefulWidget {
   factory Screen(String route, {Map<String, dynamic> arguments}) {
