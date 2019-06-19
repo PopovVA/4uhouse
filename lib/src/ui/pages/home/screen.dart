@@ -17,12 +17,15 @@ import '../../../models/screen/components/property_model.dart'
 //import '../../resources/screen_repository.dart' show ScreenRepository;
 import '../../../resources/auth_repository.dart' show AuthRepository;
 import '../../components/button.dart' show Button;
+import '../../components/drawer/drawer.dart'
+    show DrawerOnly;
 import '../../components/item/item.dart' show Item;
 import '../../components/note.dart' show Note;
-import '../../components/page_template_drawer.dart' show PageTemplateDrawer;
+import '../../components/page_template.dart' show PageTemplate;
 import '../../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
 import '../property/components/property_card_body.dart';
+
 
 // ignore: must_be_immutable
 class Screen extends StatefulWidget {
@@ -73,8 +76,9 @@ class _ScreenState extends State<Screen> {
         bloc: screenBloc,
         builder: (BuildContext context, ScreenState state) {
           if (state is ScreenDataLoaded) {
-            return PageTemplateDrawer(
+            return PageTemplate(
               body: buildComponents(state.data),
+              drawer: DrawerOnly(),
               title: state.data.first.value,
             );
           } else if (state is ScreenDataLoadingError) {
