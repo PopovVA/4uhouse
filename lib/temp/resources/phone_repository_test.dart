@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 import '../../src/models/country_phone_data.dart';
 import '../../src/resources/phone_repository.dart';
-import '../model/country_phone_data_test_2.dart';
+import '../models/country_phone_data_test_2.dart';
 
 class TestPhoneRepository extends PhoneRepository {
   /* @override
