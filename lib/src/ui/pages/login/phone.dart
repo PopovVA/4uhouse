@@ -190,6 +190,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
   }
 
   Widget _buildPhonePicker(PhoneCountriesDataRequested state) {
+    print('=>state => CreateDate => ${state.creationDate}');
     return PhonePicker(
         onSelected:
             (bool value, CountryPhoneData countryPhone, String inputtedPhone) {

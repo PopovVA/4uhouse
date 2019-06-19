@@ -21,12 +21,12 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
         final List<dynamic> waitList = await Future.wait(<Future<dynamic>>[
           repository.getCountriesPhoneData(),
           repository.getCountryByIp(),
-          repository.getTopCountriesPhoneData()
+          repository.getTopCountriesPhoneData(),
+          repository.getCreationDate()
         ]);
 
         final List<CountryPhoneData> countryPhoneDataList =
             <CountryPhoneData>[];
-        print(waitList[2]);
         countryPhoneDataList.addAll(waitList[2]);
         countryPhoneDataList.addAll(waitList[0]);
         final String countryIdByIp = waitList[1];
@@ -38,7 +38,7 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
           countryPhoneDataList.insert(0, temp);
         }
 
-        yield PhoneCountriesDataRequested(countryPhoneDataList);
+        yield PhoneCountriesDataRequested(countryPhoneDataList, waitList[3]);
       } catch (error) {
         print('=> PhoneState => $error');
         yield PhoneLoadingError(error: error.toString());

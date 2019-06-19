@@ -21,16 +21,16 @@ class PhoneLoading extends PhoneState {
 }
 
 class PhoneCountriesDataRequested extends PhoneState {
-  PhoneCountriesDataRequested(this.data);
+  PhoneCountriesDataRequested(this.data, this.creationDate);
 
   final List<CountryPhoneData> data;
+  final int creationDate;
 
   @override
   String toString() => 'PhoneCountriesDataLoaded';
 }
 
 class PhoneLoadingError extends PhoneState {
-
   PhoneLoadingError({this.error});
 
   final String error;
