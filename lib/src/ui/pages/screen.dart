@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
 import 'package:user_mobile/src/models/screen/screen_model.dart';
-import '../../../temp/screen_repository_test.dart';
+import 'package:user_mobile/temp/resourse/screen_repository_test.dart';
 import '../../blocs/screen/screen_bloc.dart' show ScreenBloc;
 import '../../blocs/screen/screen_event.dart';
 import '../../blocs/screen/screen_state.dart';
