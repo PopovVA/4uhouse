@@ -31,7 +31,7 @@ class ScreenApi extends Api {
       print(response.body.toString());
       if (response.statusCode == 200) {
         final dynamic json = await processResponse(response);
-        return json.cast<List<Map<String, dynamic>>>();
+        return json.cast<Map<String, dynamic>>();
       } else {
         throw response;
       }
