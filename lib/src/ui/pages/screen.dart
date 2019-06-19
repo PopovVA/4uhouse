@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
+
+import '../../../temp/resources/screen_repository_test.dart';
 import '../../blocs/screen/screen_bloc.dart' show ScreenBloc;
 import '../../blocs/screen/screen_event.dart';
 import '../../blocs/screen/screen_state.dart';
-import '../../constants/layout.dart' show standardPadding;
 import '../../models/screen/components/button_model.dart' show ButtonModel;
 import '../../models/screen/components/item_model.dart' show ItemModel;
 import '../../models/screen/components/note_model.dart' show NoteModel;
@@ -20,8 +21,6 @@ import '../components/page_template.dart' show PageTemplate;
 import '../components/property_card/property_card.dart' show PropertyCard;
 import '../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
-
-//import '../../../temp/resources/screen_repository_test.dart';
 
 class Screen extends StatefulWidget {
   factory Screen(String route, {Map<String, dynamic> arguments}) {
@@ -50,8 +49,8 @@ class _ScreenState extends State<Screen> {
   void initState() {
     super.initState();
     screenBloc = ScreenBloc(
-        screenRepository: ScreenRepository(), authRepository: AuthRepository());
-//    screenRepository: TestScreenRepository(), authRepository: AuthRepository());
+  //      screenRepository: ScreenRepository(), authRepository: AuthRepository());
+    screenRepository: TestScreenRepository(), authRepository: AuthRepository());
     screenBloc.dispatch(ScreenInitialized(query: widget.route));
   }
 
@@ -155,7 +154,7 @@ class _ScreenState extends State<Screen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: standardPadding),
+              padding: const EdgeInsets.only(bottom: 4),
               child: Column(
                 children: buttons,
               ),

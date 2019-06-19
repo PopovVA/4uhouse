@@ -31,20 +31,36 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
             countryPhoneDataResponse.topCountryPhonesData;
         final int creationDate = countryPhoneDataResponse.creationDate;
         final String countryIdByIp = waitList[1];
-        final int index = countryPhoneDataList
-            .indexWhere((CountryPhoneData it) => it.countryId == countryIdByIp);
-        if (index != -1) {
-          final CountryPhoneData temp = countryPhoneDataList[index];
-          countryPhoneDataList.removeAt(index);
-          countryPhoneDataList.insert(0, temp);
-        }
-
-        yield PhoneCountriesDataLoaded(
-            countryPhoneDataList, topCountryPhoneDataList, creationDate);
+        //sortData(countryPhoneDataList, countryIdByIp);
+        //sortData(topCountryPhoneDataList, countryIdByIp);
+        final CountryPhoneData countryPhoneDataByIp =
+            getCountryPhoneDataByIp(countryPhoneDataList, countryIdByIp) != null
+                ? getCountryPhoneDataByIp(countryPhoneDataList, countryIdByIp)
+                : getCountryPhoneDataByIp(topCountryPhoneDataList, countryIdByIp);
+        yield PhoneCountriesDataLoaded(countryPhoneDataList,
+            topCountryPhoneDataList, creationDate, countryPhoneDataByIp);
       } catch (error) {
         print('=> PhoneState => $error');
         yield PhoneLoadingError(error: error.toString());
       }
     }
+  }
+
+  /* List<CountryPhoneData> sortData(
+      List<CountryPhoneData> list, String countryIdByIp) {
+    final int index =
+        list.indexWhere((CountryPhoneData it) => it.countryId == countryIdByIp);
+    if (index != -1) {
+      final CountryPhoneData temp = list[index];
+      list.removeAt(index);
+      list.insert(0, temp);
+    }
+    return list;
+  }*/
+  CountryPhoneData getCountryPhoneDataByIp(
+      List<CountryPhoneData> list, String countryIdByIp) {
+    final int index =
+        list.indexWhere((CountryPhoneData it) => it.countryId == countryIdByIp);
+    return index != -1 ? list[index] : null;
   }
 }

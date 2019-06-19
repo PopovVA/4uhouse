@@ -22,11 +22,12 @@ class PhoneLoading extends PhoneState {
 
 class PhoneCountriesDataLoaded extends PhoneState {
   PhoneCountriesDataLoaded(
-      this.countryData, this.topCountryData, this.creationDate);
+      this.countryData, this.topCountryData, this.creationDate,this.countryPhone);
 
   final List<CountryPhoneData> countryData;
   final List<CountryPhoneData> topCountryData;
   final int creationDate;
+  final CountryPhoneData countryPhone;
 
   @override
   String toString() => 'PhoneCountriesDataLoaded';
