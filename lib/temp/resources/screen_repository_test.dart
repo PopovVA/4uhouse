@@ -13,7 +13,7 @@ class TestScreenRepository extends ScreenRepository {
   Future<ScreenModel> fetchScreen({String query = '', String token}) async {
     route = query;
     final Map<String, dynamic> dmap =
-        await parseJsonFromAssets('lib/assets/${replaceSlash(route)}.json');
+        await parseJsonFromAssets('lib/assets/user${replaceSlash(route)}.json');
     return ScreenModel.fromJson(dmap);
   }
 
@@ -21,7 +21,7 @@ class TestScreenRepository extends ScreenRepository {
   Future<ScreenModel> sendItemValue(String query, dynamic value,
       {dynamic body, String token}) async {
     final Map<String, dynamic> dmap =
-        await parseJsonFromAssets('lib/assets/${replaceSlash(route)}.json');
+        await parseJsonFromAssets('lib/assets/user${replaceSlash(route)}.json');
     return ScreenModel.fromJson(
         updateMap(dmap, route.replaceAll('$route/', ''), value));
   }
