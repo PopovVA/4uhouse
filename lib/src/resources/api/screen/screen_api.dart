@@ -25,6 +25,7 @@ class ScreenApi extends Api {
   Future<List<Map<String, dynamic>>> fetchScreen(
       {@required String query, String token}) async {
     try {
+      print('===> request: ${_getUrl(token)}$query');
       final http.Response response = await _client
           .get('${_getUrl(token)}$query', headers: Api.makeHeaders(token));
 
