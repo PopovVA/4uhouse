@@ -1,6 +1,5 @@
 import 'dart:async';
-import 'package:user_mobile/temp/model/country_phone_data_test_2.dart';
-
+import '../../temp/models/country_phone_data_test_2.dart';
 import '../models/country_phone_data.dart';
 import 'api/phone_api.dart';
 
