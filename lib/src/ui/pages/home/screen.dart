@@ -16,7 +16,6 @@ import '../../../models/screen/screen_model.dart' show ScreenModel;
 import '../../../resources/auth_repository.dart' show AuthRepository;
 import '../../../resources/screen_repository.dart' show ScreenRepository;
 import '../../components/button.dart' show Button;
-import '../../components/drawer/drawer.dart' show DrawerOnly;
 import '../../components/item/item.dart' show Item;
 import '../../components/note.dart' show Note;
 import '../../components/page_template.dart' show PageTemplate;
@@ -27,16 +26,18 @@ import '../../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
 
 class Screen extends StatefulWidget {
-  factory Screen(String route, {Map<String, dynamic> arguments}) {
+  factory Screen(String route, Widget drawer,
+      {Map<String, dynamic> arguments}) {
     final String scrollToId =
     arguments != null ? arguments['scrollToId'] : null;
-    return Screen._(route, scrollToId: scrollToId);
+    return Screen._(route, drawer, scrollToId: scrollToId);
   }
 
-  Screen._(this.route, {this.scrollToId});
+  Screen._(this.route, this.drawer, {this.scrollToId});
 
   final String route;
   final String scrollToId;
+  final Widget drawer;
   final ScrollController scrollController = ScrollController();
 
   @override
@@ -72,14 +73,16 @@ class _ScreenState extends State<Screen> {
   }
 
   void _showError(BuildContext context, dynamic state) {
-    showDialog(context: context, builder: (BuildContext context) {
-      return StyledAlertDialog(
-        content: state.toString(),
-        onOk: () {
-          Navigator.of(context).pop();
-        },
-      );
-    });
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return StyledAlertDialog(
+            content: state.toString(),
+            onOk: () {
+              Navigator.of(context).pop();
+            },
+          );
+        });
   }
 
   @override
@@ -99,7 +102,7 @@ class _ScreenState extends State<Screen> {
             builder: (BuildContext context, ScreenState state) {
               if (state is ScreenDataLoaded) {
                 return PageTemplate(
-                  drawer: DrawerOnly(),
+                  drawer: widget.drawer,
                   body: buildComponents(state.data),
                   goBack: state.data.path != null
                       ? () {
