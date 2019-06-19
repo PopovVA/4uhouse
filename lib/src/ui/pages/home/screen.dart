@@ -13,7 +13,6 @@ import '../../../models/screen/components/property_model.dart'
     show PropertyModel;
 import '../../../models/screen/screen_model.dart' show ScreenModel;
 
-
 import '../../../resources/auth_repository.dart' show AuthRepository;
 import '../../../resources/screen_repository.dart' show ScreenRepository;
 import '../../components/button.dart' show Button;
@@ -22,6 +21,8 @@ import '../../components/item/item.dart' show Item;
 import '../../components/note.dart' show Note;
 import '../../components/page_template.dart' show PageTemplate;
 import '../../components/property_card/property_card.dart' show PropertyCard;
+import '../../components/styled/styled_alert_dialog.dart'
+    show StyledAlertDialog;
 import '../../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
 
@@ -70,39 +71,63 @@ class _ScreenState extends State<Screen> {
     }
   }
 
+  void _showError(BuildContext context, dynamic state) {
+    showDialog(context: context, builder: (BuildContext context) {
+      return StyledAlertDialog(
+        content: state.toString(),
+        onOk: () {
+          Navigator.of(context).pop();
+        },
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ScreenEvent, ScreenState>(
-        bloc: screenBloc,
-        builder: (BuildContext context, ScreenState state) {
-          if (state is ScreenDataLoaded) {
-            return PageTemplate(
-              drawer: DrawerOnly(),
-              body: buildComponents(state.data),
-              goBack: state.data.path != null
-                  ? () {
-                final String path = state.data.path;
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                  path.substring(0, path.lastIndexOf('/')),
-                      (Route<dynamic> route) => false,
-                  arguments: <String, String>{
-                    'scrollToId': widget.route
-                        .substring(widget.route.lastIndexOf('/') + 1),
-                  },
+    return BlocListenerTree(
+        blocListeners: <BlocListener<dynamic, dynamic>>[
+          BlocListener<ScreenEvent, ScreenState>(
+              bloc: screenBloc,
+              listener: (BuildContext context, ScreenState state) {
+                if (state is ScreenDataLoadingError) {
+                  _showError(context, state);
+                }
+              })
+        ],
+        child: BlocBuilder<ScreenEvent, ScreenState>(
+            bloc: screenBloc,
+            builder: (BuildContext context, ScreenState state) {
+              if (state is ScreenDataLoaded) {
+                return PageTemplate(
+                  drawer: DrawerOnly(),
+                  body: buildComponents(state.data),
+                  goBack: state.data.path != null
+                      ? () {
+                    final String path = state.data.path;
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      path.substring(0, path.lastIndexOf('/')),
+                          (Route<dynamic> route) => false,
+                      arguments: <String, String>{
+                        'scrollToId': widget.route
+                            .substring(widget.route.lastIndexOf('/') + 1),
+                      },
+                    );
+                  }
+                      : null,
+                  title: state.data.value,
+                );
+              } else if (state is ScreenDataLoadingError) {
+                return Container(
+                  color: Colors.white,
+                  child: const StyledCircularProgress(),
                 );
               }
-                  : null,
-              title: state.data.value,
-            );
-          } else if (state is ScreenDataLoadingError) {
-            return Text(state.error.toString());
-          }
 
-          return Container(
-            color: Colors.white,
-            child: const StyledCircularProgress(),
-          );
-        });
+              return Container(
+                color: Colors.white,
+                child: const StyledCircularProgress(),
+              );
+            }));
   }
 
   Widget buildComponents(ScreenModel data) {
