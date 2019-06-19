@@ -20,10 +20,14 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
       try {
         final List<dynamic> waitList = await Future.wait(<Future<dynamic>>[
           repository.getCountriesPhoneData(),
-          repository.getCountryByIp()
+          repository.getCountryByIp(),
+          repository.getTopCountriesPhoneData()
         ]);
 
-        final List<CountryPhoneData> countryPhoneDataList = waitList[0];
+        final List<CountryPhoneData> countryPhoneDataList =
+            <CountryPhoneData>[];
+        countryPhoneDataList.addAll(waitList[2]);
+        countryPhoneDataList.addAll(waitList[0]);
         final String countryIdByIp = waitList[1];
         final int index = countryPhoneDataList
             .indexWhere((CountryPhoneData it) => it.countryId == countryIdByIp);
