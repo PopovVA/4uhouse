@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../models/country_phone_data.dart';
+import '../../../../models/phone/country_phone_data.dart';
 import '../../../components/styled/styled_text_field.dart' show StyledTextField;
 
 class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
