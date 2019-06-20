@@ -27,27 +27,13 @@ class AppAlert extends StatelessWidget {
                         context: context,
                         builder: (BuildContext context) {
                           return StyledAlertDialog(
-                            content: const Text(
-                              'There was an error loading data. Please repeat the action',
-                              style: TextStyle(
-                                color: Color.fromRGBO(0, 0, 0, 0.541327),
-                                fontSize: 16,
-                              ),
-                            ),
-                            actions: <Widget>[
-                              InkWell(
-                                  onTap: () {
-                                    print('Ok button tapped');
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text(
-                                    'OK',
-                                    style: TextStyle(
-                                      color: Color.fromRGBO(55, 180, 188, 1),
-                                      fontSize: 16,
-                                    ),
-                                  ))
-                            ],
+                            content: 'Helootertrehkjhkjhjkhkjhjhjhjkhjkhkjhjkhkjhkjhjkkjjkhjhjkhjkhjkhjhkjhkjhkjhkjhkjhjhhk',
+                            onOk: () {
+                              Navigator.of(context).pop();
+                            },
+                            onCancel: () {
+                              Navigator.of(context).pop();
+                            },
                           );
                         });
                   }),

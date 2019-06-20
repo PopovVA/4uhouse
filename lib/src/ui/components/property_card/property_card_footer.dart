@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../typography.dart';
-import '../../../../utils/type_check.dart' show isNotNull;
+import '../../../typography.dart';
+import '../../../utils/type_check.dart' show isNotNull;
 
 class PropertyFooter extends StatefulWidget {
   const PropertyFooter(

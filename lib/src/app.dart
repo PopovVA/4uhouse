@@ -1,18 +1,14 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder, BlocProvider;
+import 'package:flutter_bloc/flutter_bloc.dart' show BlocProvider;
 import 'package:meta/meta.dart' show required;
 
 import 'blocs/auth/auth_bloc.dart' show AuthBloc;
-import 'blocs/auth/auth_event.dart';
-import 'blocs/auth/auth_state.dart'
-    show AuthCheckIfAuthorized, AuthState, AuthUninitialized;
+import 'blocs/auth/auth_event.dart' show AppStarted;
 
-import 'pallete.dart';
+import 'pallete.dart' show accentColor, primaryColor;
 import 'resources/auth_repository.dart' show AuthRepository;
-import 'typography.dart';
-import 'ui/pages/home/home.dart';
+import 'typography.dart' show customTextTheme;
+import 'ui/pages/home/home.dart' show HomeScreen;
 
 class App extends StatefulWidget {
   const App({@required this.authRepository});
@@ -51,7 +47,22 @@ class _AppState extends State<App> {
             accentColor: accentColor,
             primaryColor: primaryColor,
             textTheme: customTextTheme),
-        home: HomePage(),
+        home: const HomeScreen(route: '/property'),
+        onGenerateRoute: (RouteSettings settings) {
+          final String name = settings.name;
+          switch (name) {
+            case '/':
+            case '/property':
+              return MaterialPageRoute<dynamic>(
+                builder: (BuildContext context) =>
+                    HomeScreen(route: name, arguments: settings.arguments),
+              );
+            default:
+              return MaterialPageRoute<dynamic>(
+                  builder: (BuildContext context) =>
+                      HomeScreen(route: name, arguments: settings.arguments));
+          }
+        },
       ),
     );
   }

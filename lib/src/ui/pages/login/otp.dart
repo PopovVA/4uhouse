@@ -11,12 +11,12 @@ import '../../../blocs/login/login_event.dart'
     show CodeEnteringCanceled, LoginEvent, SubmitCodeTapped;
 import '../../../blocs/login/login_state.dart'
     show
-        CodeError,
-        IsFetchingCode,
-        LoginState,
-        OtpSent,
-        PhoneEntering,
-        PhoneError;
+    CodeError,
+    IsFetchingCode,
+    LoginState,
+    OtpSent,
+    PhoneEntering,
+    PhoneError;
 import '../../../models/country_phone_data.dart' show CountryPhoneData;
 
 import '../../components/page_template.dart' show PageTemplate;
@@ -26,11 +26,10 @@ import '../../components/styled/styled_button.dart' show StyledButton;
 import '../../components/styled/styled_text_field.dart' show StyledTextField;
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen(
-      {@required this.authBloc,
-      @required this.loginBloc,
+  const OtpScreen({@required this.authBloc,
+    @required this.loginBloc,
       @required this.selectedItem,
-      @required this.number,
+    @required this.number,
       this.previousRoute});
 
   final AuthBloc authBloc;
@@ -65,8 +64,8 @@ class _OtpScreenState extends State<OtpScreen> {
           return StyledAlertDialog(
             content: state.toString(),
             onOk: () {
-              Navigator.of(context).removeRouteBelow(ModalRoute.of(context));
-              Navigator.of(context).removeRoute(ModalRoute.of(context));
+              Navigator.of(context)
+                  .popUntil(ModalRoute.withName(Navigator.defaultRouteName));
             },
           );
         });
@@ -173,10 +172,10 @@ class _OtpScreenState extends State<OtpScreen> {
           onPressed: isFetchingCode == false && code.text.length != maxLength
               ? null
               : () {
-                  widget.loginBloc.dispatch(SubmitCodeTapped(
-                      code: widget.selectedItem.code,
-                      number: widget.number,
-                      otp: code.text));
+            widget.loginBloc.dispatch(SubmitCodeTapped(
+                code: widget.selectedItem.code,
+                number: widget.number,
+                otp: code.text));
                 },
           text: 'Send',
         ),
@@ -191,7 +190,9 @@ class _OtpScreenState extends State<OtpScreen> {
         autofocus: true,
         borderColor: code.text.length != maxLength
             ? Colors.redAccent
-            : Theme.of(context).primaryColor,
+            : Theme
+            .of(context)
+            .primaryColor,
         controller: code,
         textAlign: TextAlign.center,
         maxLength: maxLength,

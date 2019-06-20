@@ -8,13 +8,13 @@ import 'login_event.dart'
     show CodeEnteringCanceled, LoginEvent, OtpRequested, SubmitCodeTapped;
 import 'login_state.dart'
     show
-        CodeError,
-        IsFetchingCode,
-        IsFetchingOtp,
-        LoginState,
-        OtpSent,
-        PhoneEntering,
-        PhoneError;
+    CodeError,
+    IsFetchingCode,
+    IsFetchingOtp,
+    LoginState,
+    OtpSent,
+    PhoneEntering,
+    PhoneError;
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc(AuthBloc authBloc, AuthRepository authRepository)
