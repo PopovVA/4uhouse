@@ -9,11 +9,11 @@ import 'screen_event.dart'
     show ScreenEvent, ScreenInitialized, SendItem, TappedOnComponent;
 import 'screen_state.dart'
     show
-        ScreenDataLoaded,
-        ScreenDataLoadingError,
-        ScreenLoading,
-        ScreenState,
-        ScreenUninitialized;
+    ScreenDataLoaded,
+    ScreenDataLoadingError,
+    ScreenLoading,
+    ScreenState,
+    ScreenUninitialized;
 
 class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
   ScreenBloc({@required this.authRepository, @required this.screenRepository});
@@ -31,7 +31,7 @@ class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
         yield ScreenLoading();
         //загружаю данные
         final ScreenModel data =
-            await screenRepository.fetchScreen(query: event.query);
+        await screenRepository.fetchScreen(query: event.query);
         yield ScreenDataLoaded(data);
       } catch (error) {
         yield ScreenDataLoadingError(error: error.toString());

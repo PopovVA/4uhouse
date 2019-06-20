@@ -10,9 +10,9 @@ class ScreenRepository {
   final ScreenApi screenApi = ScreenApi();
 
   Future<ScreenModel> fetchScreen({String query = '', String token}) async {
-    final List<Map<String, dynamic>> response =
+    final Map<String, dynamic> response =
         await screenApi.fetchScreen(query: query, token: token);
-    return ScreenModel.fromJson(response[0]);
+    return ScreenModel.fromJson(response);
   }
 
   Future<ScreenModel> sendItemValue(String query, dynamic value,
