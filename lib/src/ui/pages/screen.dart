@@ -199,7 +199,7 @@ class _ScreenState extends State<Screen> {
     return null;
   }
 
-  void _refresh() {
+  Future<void> _refresh() {
     screenBloc.dispatch(ScreenInitialized(query: widget.route));
   }
 
