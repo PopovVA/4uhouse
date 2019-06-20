@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'drawer/drawer.dart'
-    show DrawerOnly;
+
 
 class PageTemplate extends StatelessWidget {
   const PageTemplate({
@@ -8,6 +7,7 @@ class PageTemplate extends StatelessWidget {
     this.note,
     this.body,
     this.goBack,
+    this.drawer,
     this.padding = false,
   });
 
@@ -18,6 +18,7 @@ class PageTemplate extends StatelessWidget {
   final String note;
   final Widget body;
   final Function goBack;
+  final Widget drawer;
   final bool padding;
 
   @override
@@ -27,20 +28,20 @@ class PageTemplate extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFFe9e7e7),
         iconTheme: const IconThemeData(color: color),
-        leading: Navigator.canPop(context)
-          ? IconButton(
-          color: color,
-          tooltip: 'go back',
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            return goBack is Function ? goBack() : Navigator.pop(context);
-          })
-          : null,
+        leading: drawer == null && Navigator.canPop(context)
+            ? IconButton(
+                color: color,
+                tooltip: 'go back',
+                icon: const Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  return goBack is Function ? goBack() : Navigator.pop(context);
+                })
+            : null,
         centerTitle: true,
         title:
             Text(title, style: const TextStyle(color: color, fontSize: 20.0)),
       ),
-      drawer: DrawerOnly(),
+      drawer: drawer,
       body: Container(
         child: body,
       ),

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import '../../models/phone/phone_all_response.dart';
 import '../../models/phone/country_phone_data.dart';
+import '../../models/phone/phone_all_response.dart';
 import '../../resources/phone_repository.dart';
 
 import 'phone_event.dart';

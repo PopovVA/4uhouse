@@ -22,7 +22,7 @@ class ScreenApi extends Api {
           ? Uri.parse('${_getUrl(token)}$route?value=${value.toString()}')
           : Uri.parse('${_getUrl(token)}$route');
 
-  Future<List<Map<String, dynamic>>> fetchScreen(
+  Future<Map<String, dynamic>> fetchScreen(
       {@required String query, String token}) async {
     try {
       print('===> request: ${_getUrl(token)}$query');
@@ -32,7 +32,7 @@ class ScreenApi extends Api {
       print(response.body.toString());
       if (response.statusCode == 200) {
         final dynamic json = await processResponse(response);
-        return json.cast<Map<String, dynamic>>();
+        return json;
       } else {
         throw response;
       }
