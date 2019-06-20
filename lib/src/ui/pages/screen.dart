@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
-import '../../../temp/screen_repository_test.dart';
 import '../../blocs/screen/screen_bloc.dart' show ScreenBloc;
 import '../../blocs/screen/screen_event.dart';
 import '../../blocs/screen/screen_state.dart';
@@ -85,7 +84,6 @@ class _ScreenState extends State<Screen> {
 
   @override
   Widget build(BuildContext context) {
-    print('===> buildblock drawer: ${widget.drawer}');
     return BlocListenerTree(
         blocListeners: <BlocListener<dynamic, dynamic>>[
           BlocListener<ScreenEvent, ScreenState>(
