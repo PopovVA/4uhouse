@@ -20,7 +20,8 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
       yield PhoneLoading();
       try {
         final List<dynamic> waitList = await Future.wait(<Future<dynamic>>[
-          getCountryPhoneData(currentState),
+          repository.getCountriesPhoneData(
+              creationDate: getCountryPhoneData(currentState)),
           repository.getCountryByIp(),
         ]);
 
@@ -52,11 +53,10 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
     return index != -1 ? list[index] : null;
   }
 
-  Future<AllPhoneResponse> getCountryPhoneData(PhoneState currentState) async {
+  int getCountryPhoneData(PhoneState currentState) {
     if (currentState is PhoneCountriesDataLoaded)
-      return repository.getCountriesPhoneData(
-          creationDate: currentState.creationDate);
-    else if (currentState is PhoneUninitialized)
-      return repository.getCountriesPhoneData();
+      return currentState.creationDate;
+    else
+      return null;
   }
 }
