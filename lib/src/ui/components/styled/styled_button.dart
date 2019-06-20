@@ -22,7 +22,9 @@ class StyledButton extends StatelessWidget {
           height: 48.0,
           width: double.infinity,
           child: RaisedButton(
-            color: Theme.of(context).primaryColor,
+            color: Theme
+                .of(context)
+                .primaryColor,
             disabledColor: const Color(0xE6CACACA),
             elevation: 8,
             onPressed: loading ? null : onPressed,
