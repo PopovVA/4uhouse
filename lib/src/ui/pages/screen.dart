@@ -53,8 +53,8 @@ class _ScreenState extends State<Screen> {
     super.initState();
     screenBloc = ScreenBloc(
         screenRepository: ScreenRepository(), authRepository: AuthRepository());
-//        screenRepository: TestScreenRepository(),
-//        authRepository: AuthRepository());
+       // screenRepository: TestScreenRepository(),
+     //   authRepository: AuthRepository());
     screenBloc.dispatch(ScreenInitialized(query: widget.route));
   }
 
@@ -197,8 +197,8 @@ class _ScreenState extends State<Screen> {
     return null;
   }
 
-  void _refresh() {
-    screenBloc.dispatch(ScreenInitialized(query: widget.route));
+  Future<void> _refresh() async{
+   screenBloc.dispatch(ScreenInitialized(query: widget.route));
   }
 
   void makeTransition(BuildContext context, String id) {
