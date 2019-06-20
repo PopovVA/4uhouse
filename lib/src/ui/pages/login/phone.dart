@@ -7,7 +7,7 @@ import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../../blocs/login/login_bloc.dart' show LoginBloc;
 import '../../../blocs/login/login_event.dart' show LoginEvent, OtpRequested;
 import '../../../blocs/login/login_state.dart'
-    show LoginState, IsFetchingOtp, OtpSent, PhoneError;
+    show LoginState, PhoneEntering, IsFetchingOtp, OtpSent, PhoneError;
 import '../../../blocs/phone/phone_bloc.dart' show PhoneBloc;
 import '../../../blocs/phone/phone_event.dart'
     show PhoneEvent, PhoneCountriesDataRequested;
@@ -18,8 +18,7 @@ import '../../../blocs/phone/phone_state.dart'
         PhoneLoadingError,
         PhoneState,
         PhoneUninitialized;
-import '../../../models/phone/country_phone_data.dart'
-    show CountryPhoneData;
+import '../../../models/phone/country_phone_data.dart' show CountryPhoneData;
 import '../../../resources/auth_repository.dart' show AuthRepository;
 import '../../../resources/phone_repository.dart' show PhoneRepository;
 
@@ -92,6 +91,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                   BlocListener<LoginEvent, LoginState>(
                       bloc: _loginBloc,
                       listener: (BuildContext context, LoginState state) {
+                        print('===> state listener name  ${state.runtimeType}');
                         if (state is OtpSent) {
                           Navigator.push(
                               context,
@@ -99,7 +99,6 @@ class _PhoneScreenState extends State<PhoneScreen> {
                                   widget: OtpScreen(
                                       authBloc: widget.authBloc,
                                       loginBloc: _loginBloc,
-                                      previousRoute: ModalRoute.of(context),
                                       selectedItem: selectedItem,
                                       number: number),
                                   side: 'left'));
@@ -111,6 +110,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                   BlocListener<PhoneEvent, PhoneState>(
                     bloc: widget.phoneBloc,
                     listener: (BuildContext context, PhoneState state) {
+                      print('===> state listener name  ${state.runtimeType}');
                       if (state is PhoneLoadingError) {
                         _showError(context, state);
                       }

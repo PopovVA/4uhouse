@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocBuilder, BlocListener, BlocListenerTree;
-
-import '../../../../src/utils/route_transition.dart' show SlideRoute;
+import '../../../../src/models/phone/country_phone_data.dart'
+    show CountryPhoneData;
 import '../../../../temp/styled_text_controler.dart';
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../../blocs/auth/auth_event.dart' show AuthEvent;
@@ -18,8 +18,6 @@ import '../../../blocs/login/login_state.dart'
     OtpSent,
     PhoneEntering,
     PhoneError;
-import 'package:user_mobile/src/models/phone/country_phone_data.dart' show CountryPhoneData;
-
 import '../../components/page_template.dart' show PageTemplate;
 import '../../components/styled/styled_alert_dialog.dart'
     show StyledAlertDialog;
@@ -30,14 +28,12 @@ class OtpScreen extends StatefulWidget {
   const OtpScreen({@required this.authBloc,
     @required this.loginBloc,
       @required this.selectedItem,
-    @required this.number,
-      this.previousRoute});
+    @required this.number});
 
   final AuthBloc authBloc;
   final LoginBloc loginBloc;
   final CountryPhoneData selectedItem;
   final String number;
-  final SlideRoute previousRoute;
 
   @override
   _OtpScreenState createState() => _OtpScreenState();

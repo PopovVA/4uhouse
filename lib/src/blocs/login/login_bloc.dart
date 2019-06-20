@@ -43,10 +43,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> _mapOtpRequestedToState(OtpRequested event) async* {
     try {
       yield IsFetchingOtp();
-      await _authRepository.getOtp(
-          countryId: event.countryId,
-          code: event.code,
-          number: event.number);
+//      await _authRepository.getOtp(
+//          countryId: event.countryId,
+//          code: event.code,
+//          number: event.number);
       yield OtpSent();
     } catch (error) {
       yield PhoneError(error.toString());
