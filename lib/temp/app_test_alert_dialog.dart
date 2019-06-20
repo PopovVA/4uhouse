@@ -27,7 +27,7 @@ class AppAlert extends StatelessWidget {
                         context: context,
                         builder: (BuildContext context) {
                           return StyledAlertDialog(
-                            content: 'Helootertrehkjhkjhjkhkjhjhjhjkhjkhkjhjkhkjhkjhjkkjjkhjhjkhjkhjkhjhkjhkjhkjhkjhkjhjhhk',
+                            content: 'Helootertrehkjhkjkjhkjhk',
                             onOk: () {
                               Navigator.of(context).pop();
                             },

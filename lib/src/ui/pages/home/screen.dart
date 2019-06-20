@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
-import '../../../../temp/screen_repository_test.dart';
 import '../../../blocs/screen/screen_bloc.dart' show ScreenBloc;
 import '../../../blocs/screen/screen_event.dart';
 import '../../../blocs/screen/screen_state.dart';
@@ -24,6 +23,8 @@ import '../../components/styled/styled_alert_dialog.dart'
     show StyledAlertDialog;
 import '../../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
+import '../../../../temp/resources/screen_repository_test.dart';
+
 
 class Screen extends StatefulWidget {
   factory Screen(String route, Widget drawer,

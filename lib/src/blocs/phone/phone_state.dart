@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart' show immutable;
-import 'package:user_mobile/src/models/country_phone_data.dart';
-
+import '../../models/phone/country_phone_data.dart';
 @immutable
 abstract class PhoneState extends Equatable {
   PhoneState([List<dynamic> props = const <dynamic>[]]) : super(props);
@@ -21,16 +20,19 @@ class PhoneLoading extends PhoneState {
 }
 
 class PhoneCountriesDataLoaded extends PhoneState {
-  PhoneCountriesDataLoaded(this.data);
+  PhoneCountriesDataLoaded(
+      this.countryData, this.topCountryData, this.creationDate,this.countryPhoneByIp);
 
-  final List<CountryPhoneData> data;
+  final List<CountryPhoneData> countryData;
+  final List<CountryPhoneData> topCountryData;
+  final int creationDate;
+  final CountryPhoneData countryPhoneByIp;
 
   @override
   String toString() => 'PhoneCountriesDataLoaded';
 }
 
 class PhoneLoadingError extends PhoneState {
-
   PhoneLoadingError({this.error});
 
   final String error;
