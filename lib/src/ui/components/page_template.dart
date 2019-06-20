@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class PageTemplate extends StatelessWidget {
   const PageTemplate({
     this.title,
@@ -23,18 +22,28 @@ class PageTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(
+        '===> drawer == null && Navigator.canPop(context): ${drawer == null && Navigator.canPop(context)}');
+    print('===> drawer == null: ${drawer == null}');
+    print('===> Navigator.canPop(context): ${Navigator.canPop(context)}');
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: const Color(0xFFe9e7e7),
         iconTheme: const IconThemeData(color: color),
-        leading: drawer == null && Navigator.canPop(context)
+        leading: drawer == null
             ? IconButton(
                 color: color,
                 tooltip: 'go back',
                 icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () {
-                  return goBack is Function ? goBack() : Navigator.pop(context);
+                  print('---> on go back');
+                  print('===> goBack: ${goBack.runtimeType}');
+                  if (goBack is Function) {
+                    goBack();
+                  } else if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  }
                 })
             : null,
         centerTitle: true,

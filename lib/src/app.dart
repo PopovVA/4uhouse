@@ -8,7 +8,8 @@ import 'blocs/auth/auth_event.dart' show AppStarted;
 import 'pallete.dart' show accentColor, primaryColor;
 import 'resources/auth_repository.dart' show AuthRepository;
 import 'typography.dart' show customTextTheme;
-import 'ui/pages/home/home.dart' show HomeScreen;
+import 'ui/pages/home.dart' show HomeScreen;
+import 'ui/pages/screen.dart' show Screen;
 
 class App extends StatefulWidget {
   const App({@required this.authRepository});
@@ -23,6 +24,8 @@ class _AppState extends State<App> {
   AuthBloc authBloc;
 
   AuthRepository get authRepository => widget.authRepository;
+
+  static const String rootPage = 'user/property';
 
   @override
   void initState() {
@@ -47,20 +50,19 @@ class _AppState extends State<App> {
             accentColor: accentColor,
             primaryColor: primaryColor,
             textTheme: customTextTheme),
-        home: const HomeScreen(route: '/property'),
+        home: const HomeScreen(route: rootPage),
         onGenerateRoute: (RouteSettings settings) {
           final String name = settings.name;
           switch (name) {
-            case '/':
-            case '/property':
-              return MaterialPageRoute<dynamic>(
+            case rootPage:
+              return MaterialPageRoute<HomeScreen>(
                 builder: (BuildContext context) =>
                     HomeScreen(route: name, arguments: settings.arguments),
               );
             default:
-              return MaterialPageRoute<dynamic>(
+              return MaterialPageRoute<Screen>(
                   builder: (BuildContext context) =>
-                      HomeScreen(route: name, arguments: settings.arguments));
+                      Screen(name, arguments: settings.arguments));
           }
         },
       ),

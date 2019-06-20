@@ -34,3 +34,4 @@ class CountryPhoneData {
   int example;
   String numberPattern;
 }
+

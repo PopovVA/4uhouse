@@ -5,13 +5,16 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart' show MediaType;
 
 import '../api.dart';
-import 'constants/url.dart' show USER_URL, GUEST_URL;
+import 'constants/url.dart' show GUEST_URL, USER_URL;
 
 class ScreenApi extends Api {
   final http.Client _client = http.Client();
 
-  static String _getUrl(String token) =>
-      Api.isValidToken(token) ? USER_URL : GUEST_URL;
+  static String _getUrl(String token, String route) {
+    final String context = route.replaceFirst('user', '');
+    print('===> context: ${context}');
+    return Api.isValidToken(token) ? '$USER_URL$context' : '$GUEST_URL$context';
+  }
 
   static Uri _componentUri({
     @required String token,
@@ -19,15 +22,15 @@ class ScreenApi extends Api {
     dynamic value,
   }) =>
       value != null
-          ? Uri.parse('${_getUrl(token)}$route?value=${value.toString()}')
-          : Uri.parse('${_getUrl(token)}$route');
+          ? Uri.parse('${_getUrl(token, route)}?value=${value.toString()}')
+          : Uri.parse(_getUrl(token, route));
 
   Future<Map<String, dynamic>> fetchScreen(
       {@required String query, String token}) async {
     try {
-      print('===> request: ${_getUrl(token)}$query');
+      print('===> request: ${_getUrl(token, query)}');
       final http.Response response = await _client
-          .get('${_getUrl(token)}$query', headers: Api.makeHeaders(token));
+          .get('${_getUrl(token, query)}', headers: Api.makeHeaders(token));
 
       print(response.body.toString());
       if (response.statusCode == 200) {

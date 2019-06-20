@@ -4,7 +4,7 @@ import 'dart:io' show File;
 import 'package:image/image.dart' as img;
 
 import '../models/screen/screen_model.dart' show ScreenModel;
-import 'api/screen/screen_api.dart' show ScreenApi;
+import 'package:user_mobile/src/resources/api/screen/screen_api.dart' show ScreenApi;
 
 class ScreenRepository {
   final ScreenApi screenApi = ScreenApi();

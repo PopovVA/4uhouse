@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../components/drawer/drawer.dart' show DrawerOnly;
+import '../components/drawer/drawer.dart' show DrawerOnly;
 import 'screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -10,6 +10,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Screen(route, DrawerOnly(), arguments: arguments);
+    return Screen(route, drawer: DrawerOnly(), arguments: arguments);
   }
 }
