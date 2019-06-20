@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocBuilder, BlocListener, BlocListenerTree;
-import 'package:user_mobile/temp/resources/phone_repository_test.dart';
 
 import '../../../../src/utils/route_transition.dart' show SlideRoute;
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
@@ -19,7 +18,8 @@ import '../../../blocs/phone/phone_state.dart'
         PhoneLoadingError,
         PhoneState,
         PhoneUninitialized;
-import '../../../models/country_phone_data.dart' show CountryPhoneData;
+import '../../../models/phone/country_phone_data.dart'
+    show CountryPhoneData;
 import '../../../resources/auth_repository.dart' show AuthRepository;
 import '../../../resources/phone_repository.dart' show PhoneRepository;
 
@@ -31,6 +31,8 @@ import '../../components/styled/styled_button.dart' show StyledButton;
 import '../../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
 import 'otp.dart' show OtpScreen;
+
+import '../../../../temp/resources/phone_repository_test.dart';
 
 class PhoneScreen extends StatefulWidget {
   const PhoneScreen({@required this.authBloc});

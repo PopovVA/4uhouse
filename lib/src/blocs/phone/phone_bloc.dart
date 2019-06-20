@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
-import '../../models/country_phone_data.dart';
+import '../../models/phone/phone_all_response.dart';
+import '../../models/phone/country_phone_data.dart';
 import '../../resources/phone_repository.dart';
 
 import 'phone_event.dart';
@@ -23,7 +24,7 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
           repository.getCountryByIp(),
         ]);
 
-        final CountryPhoneDataResponse countryPhoneDataResponse = waitList[0];
+        final AllPhoneResponse countryPhoneDataResponse = waitList[0];
         final List<CountryPhoneData> countryPhoneDataList =
             countryPhoneDataResponse.countryPhonesData;
         final List<CountryPhoneData> topCountryPhoneDataList =

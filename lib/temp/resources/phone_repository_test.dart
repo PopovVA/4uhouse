@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
-import '../../src/models/country_phone_data.dart';
+import 'package:user_mobile/src/models/phone/phone_all_response.dart';
 import '../../src/resources/phone_repository.dart';
 
 class TestPhoneRepository extends PhoneRepository {
@@ -9,9 +9,9 @@ class TestPhoneRepository extends PhoneRepository {
   final String uRl = 'lib/assets/country_phone_data.json';
 
   @override
-  Future<CountryPhoneDataResponse> getCountriesPhoneData() async {
+  Future<AllPhoneResponse> getCountriesPhoneData() async {
     final String response = await rootBundle.loadString(uRl);
-    return CountryPhoneDataResponse.fromJson(json.decode(response));
+    return AllPhoneResponse.fromJson(json.decode(response));
   }
 
 }

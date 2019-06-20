@@ -17,7 +17,7 @@ import '../../../blocs/login/login_state.dart'
     OtpSent,
     PhoneEntering,
     PhoneError;
-import '../../../models/country_phone_data.dart' show CountryPhoneData;
+import 'package:user_mobile/src/models/phone/country_phone_data.dart' show CountryPhoneData;
 
 import '../../components/page_template.dart' show PageTemplate;
 import '../../components/styled/styled_alert_dialog.dart'

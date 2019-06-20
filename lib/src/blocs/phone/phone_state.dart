@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart' show immutable;
-import 'package:user_mobile/src/models/country_phone_data.dart';
-
+import '../../models/phone/country_phone_data.dart';
 @immutable
 abstract class PhoneState extends Equatable {
   PhoneState([List<dynamic> props = const <dynamic>[]]) : super(props);

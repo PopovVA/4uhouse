@@ -1,11 +1,11 @@
 import 'dart:async';
-import '../models/country_phone_data.dart';
+import 'package:user_mobile/src/models/phone/phone_all_response.dart';
 import 'api/phone_api.dart';
 
 class PhoneRepository {
   final PhoneApi phoneApi = PhoneApi();
 
-  Future<CountryPhoneDataResponse> getCountriesPhoneData() async {
+  Future<AllPhoneResponse> getCountriesPhoneData() async {
     final dynamic data = await phoneApi.requestCountriesPhoneData();
     /* final CountryPhoneDataResponse countryPhoneDataResponse =
         CountryPhoneDataResponse.fromJson(data);*/

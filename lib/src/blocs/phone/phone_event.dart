@@ -8,5 +8,5 @@ abstract class PhoneEvent extends Equatable {
 
 class PhoneCountriesDataRequested extends PhoneEvent {
   @override
-  String toString() => 'PhoneInitialized';
+  String toString() => 'PhoneCountriesDataRequested';
 }
