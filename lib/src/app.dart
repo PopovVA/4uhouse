@@ -47,7 +47,7 @@ class _AppState extends State<App> {
             accentColor: accentColor,
             primaryColor: primaryColor,
             textTheme: customTextTheme),
-        home: const HomeScreen(route: 'property'),
+        home: const HomeScreen(route: '/property'),
         onGenerateRoute: (RouteSettings settings) {
           final String name = settings.name;
           switch (name) {
