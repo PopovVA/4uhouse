@@ -1,35 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
-import '../../../../temp/screen_repository_test.dart';
-import '../../../blocs/screen/screen_bloc.dart' show ScreenBloc;
-import '../../../blocs/screen/screen_event.dart';
-import '../../../blocs/screen/screen_state.dart';
-import '../../../constants/layout.dart';
-import '../../../models/screen/components/button_model.dart' show ButtonModel;
-import '../../../models/screen/components/item_model.dart' show ItemModel;
-import '../../../models/screen/components/note_model.dart' show NoteModel;
-import '../../../models/screen/components/property_model.dart'
-    show PropertyModel;
-import '../../../models/screen/screen_model.dart' show ScreenModel;
+import '../../../temp/screen_repository_test.dart';
+import '../../blocs/screen/screen_bloc.dart' show ScreenBloc;
+import '../../blocs/screen/screen_event.dart';
+import '../../blocs/screen/screen_state.dart';
+import '../../constants/layout.dart';
+import '../../models/screen/components/button_model.dart' show ButtonModel;
+import '../../models/screen/components/item_model.dart' show ItemModel;
+import '../../models/screen/components/note_model.dart' show NoteModel;
+import '../../models/screen/components/property_model.dart' show PropertyModel;
+import '../../models/screen/screen_model.dart' show ScreenModel;
 
-import '../../../resources/auth_repository.dart' show AuthRepository;
-import '../../../resources/screen_repository.dart' show ScreenRepository;
-import '../../components/button.dart' show Button;
-import '../../components/item/item.dart' show Item;
-import '../../components/note.dart' show Note;
-import '../../components/page_template.dart' show PageTemplate;
-import '../../components/property_card/property_card.dart' show PropertyCard;
-import '../../components/styled/styled_alert_dialog.dart'
-    show StyledAlertDialog;
-import '../../components/styled/styled_circular_progress.dart'
+import '../../resources/auth_repository.dart' show AuthRepository;
+import '../../resources/screen_repository.dart' show ScreenRepository;
+import '../components/button.dart' show Button;
+import '../components/item/item.dart' show Item;
+import '../components/note.dart' show Note;
+import '../components/page_template.dart' show PageTemplate;
+import '../components/property_card/property_card.dart' show PropertyCard;
+import '../components/styled/styled_alert_dialog.dart' show StyledAlertDialog;
+import '../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
 
 class Screen extends StatefulWidget {
-  factory Screen(String route, Widget drawer,
-      {Map<String, dynamic> arguments}) {
+  factory Screen(String route,
+      {Widget drawer, Map<String, dynamic> arguments}) {
     final String scrollToId =
-    arguments != null ? arguments['scrollToId'] : null;
+        arguments != null ? arguments['scrollToId'] : null;
     return Screen._(route, drawer: drawer, scrollToId: scrollToId);
   }
 
@@ -87,6 +85,7 @@ class _ScreenState extends State<Screen> {
 
   @override
   Widget build(BuildContext context) {
+    print('===> buildblock drawer: ${widget.drawer}');
     return BlocListenerTree(
         blocListeners: <BlocListener<dynamic, dynamic>>[
           BlocListener<ScreenEvent, ScreenState>(
@@ -104,18 +103,12 @@ class _ScreenState extends State<Screen> {
                 return PageTemplate(
                   drawer: widget.drawer,
                   body: buildComponents(state.data),
-                  goBack: state.data.path != null
+                  goBack: widget.drawer == null
                       ? () {
-                    final String path = state.data.path;
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                      path.substring(0, path.lastIndexOf('/')),
-                          (Route<dynamic> route) => false,
-                      arguments: <String, String>{
-                        'scrollToId': widget.route
-                            .substring(widget.route.lastIndexOf('/') + 1),
-                      },
-                    );
-                  }
+                          final String path = state.data.path;
+                          Navigator.of(context).pushReplacementNamed(
+                              path.substring(0, path.lastIndexOf('/')));
+                        }
                       : null,
                   title: state.data.value,
                 );
@@ -187,8 +180,8 @@ class _ScreenState extends State<Screen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: standardHorizontalPadding),
+              padding:
+                  EdgeInsets.symmetric(horizontal: standardHorizontalPadding),
               child: Column(
                 children: buttons,
               ),
@@ -204,7 +197,7 @@ class _ScreenState extends State<Screen> {
   void makeTransition(BuildContext context, String id) {
     Navigator.of(context).pushNamedAndRemoveUntil(
       '${widget.route}${id is String ? '/$id' : ''}',
-          (Route<dynamic> route) => false,
+      (Route<dynamic> route) => false,
     );
   }
 
