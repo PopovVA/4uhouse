@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart'
-    show BlocBuilder, BlocListener, BlocListenerTree;
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
 
 import '../../blocs/screen/screen_bloc.dart' show ScreenBloc;
@@ -88,6 +87,7 @@ class _ScreenState extends State<Screen> {
 
   @override
   Widget build(BuildContext context) {
+    print('===> buildblock drawer: ${widget.drawer}');
     return BlocListenerTree(
         blocListeners: <BlocListener<dynamic, dynamic>>[
           BlocListener<ScreenEvent, ScreenState>(
@@ -154,7 +154,6 @@ class _ScreenState extends State<Screen> {
         }
       }
 
-      print('===> widget.scrollToId: ${widget.scrollToId}');
       if (widget.scrollToId is String) {
         final dynamic scrollItemList = items
             .where((dynamic item) => item.id == widget.scrollToId)
@@ -164,32 +163,35 @@ class _ScreenState extends State<Screen> {
             .addPostFrameCallback((_) => scrollToItem(scrollItemKey));
       }
 
-      return Ink(
-        color: const Color(0xFFEBECED),
-        height: double.infinity,
-        padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                child: SingleChildScrollView(
-                  controller: widget.scrollController,
-                  child: Column(
-                    children: items,
+      return RefreshIndicator(
+        onRefresh: _refresh,
+        child: Ink(
+          color: const Color(0xFFEBECED),
+          height: double.infinity,
+          padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  child: SingleChildScrollView(
+                    controller: widget.scrollController,
+                    child: Column(
+                      children: items,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: standardHorizontalPadding),
-              child: Column(
-                children: buttons,
+              Padding(
+                padding:
+                    EdgeInsets.symmetric(horizontal: standardHorizontalPadding),
+                child: Column(
+                  children: buttons,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     }
@@ -197,9 +199,15 @@ class _ScreenState extends State<Screen> {
     return null;
   }
 
+  void _refresh() {
+    screenBloc.dispatch(ScreenInitialized(query: widget.route));
+  }
+
   void makeTransition(BuildContext context, String id) {
-    Navigator.of(context)
-        .pushReplacementNamed('${widget.route}${id is String ? '/$id' : ''}');
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      '${widget.route}${id is String ? '/$id' : ''}',
+      (Route<dynamic> route) => false,
+    );
   }
 
   void handleSendItemValue(String id, dynamic value, {dynamic body}) {
