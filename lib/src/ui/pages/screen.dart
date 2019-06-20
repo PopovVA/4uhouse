@@ -169,24 +169,28 @@ class _ScreenState extends State<Screen> {
           color: const Color(0xFFEBECED),
           height: double.infinity,
           padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
             children: <Widget>[
-              Expanded(
-                child: Container(
-                  child: SingleChildScrollView(
-                    controller: widget.scrollController,
-                    child: Column(
-                      children: items,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      child: SingleChildScrollView(
+                        controller: widget.scrollController,
+                        child: Column(
+                          children: items,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
               Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: standardHorizontalPadding),
+                padding: const EdgeInsets.symmetric(vertical: 4),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: buttons,
                 ),
               ),
@@ -199,7 +203,7 @@ class _ScreenState extends State<Screen> {
     return null;
   }
 
-  Future<void> _refresh() {
+  Future<void> _refresh() async {
     screenBloc.dispatch(ScreenInitialized(query: widget.route));
   }
 
