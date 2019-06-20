@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart'
+    show BlocBuilder, BlocListener, BlocListenerTree;
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
+
 import '../../blocs/screen/screen_bloc.dart' show ScreenBloc;
-import '../../blocs/screen/screen_event.dart';
-import '../../blocs/screen/screen_state.dart';
-import '../../constants/layout.dart';
+import '../../blocs/screen/screen_event.dart'
+    show ScreenEvent, ScreenInitialized, SendItem;
+import '../../blocs/screen/screen_state.dart'
+    show ScreenDataLoaded, ScreenDataLoadingError, ScreenState;
+import '../../constants/layout.dart' show standardHorizontalPadding;
 import '../../models/screen/components/button_model.dart' show ButtonModel;
 import '../../models/screen/components/item_model.dart' show ItemModel;
 import '../../models/screen/components/note_model.dart' show NoteModel;
@@ -150,6 +154,7 @@ class _ScreenState extends State<Screen> {
         }
       }
 
+      print('===> widget.scrollToId: ${widget.scrollToId}');
       if (widget.scrollToId is String) {
         final dynamic scrollItemList = items
             .where((dynamic item) => item.id == widget.scrollToId)
@@ -193,10 +198,8 @@ class _ScreenState extends State<Screen> {
   }
 
   void makeTransition(BuildContext context, String id) {
-    Navigator.of(context).pushNamedAndRemoveUntil(
-      '${widget.route}${id is String ? '/$id' : ''}',
-      (Route<dynamic> route) => false,
-    );
+    Navigator.of(context)
+        .pushReplacementNamed('${widget.route}${id is String ? '/$id' : ''}');
   }
 
   void handleSendItemValue(String id, dynamic value, {dynamic body}) {
