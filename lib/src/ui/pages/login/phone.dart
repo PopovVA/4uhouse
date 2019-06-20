@@ -35,9 +35,10 @@ import 'otp.dart' show OtpScreen;
 import '../../../../temp/resources/phone_repository_test.dart';
 
 class PhoneScreen extends StatefulWidget {
-  const PhoneScreen({@required this.authBloc});
+  PhoneScreen({@required this.authBloc, @required this.phoneBloc});
 
   final AuthBloc authBloc;
+  PhoneBloc phoneBloc;
 
   @override
   _PhoneScreenState createState() => _PhoneScreenState();
@@ -46,7 +47,6 @@ class PhoneScreen extends StatefulWidget {
 class _PhoneScreenState extends State<PhoneScreen> {
   bool isAgree = true;
   bool validPhone = false;
-  PhoneBloc _phoneBloc;
   LoginBloc _loginBloc;
   CountryPhoneData selectedItem;
   String number;
@@ -54,16 +54,16 @@ class _PhoneScreenState extends State<PhoneScreen> {
   @override
   void initState() {
     super.initState();
-    //_phoneBloc = PhoneBloc(TestPhoneRepository());
-    _phoneBloc = PhoneBloc(PhoneRepository());
-    _phoneBloc.dispatch(PhoneCountriesDataRequested());
+    widget.phoneBloc = PhoneBloc(TestPhoneRepository());
+//    _phoneBloc = PhoneBloc(PhoneRepository());
+    widget.phoneBloc.dispatch(PhoneCountriesDataRequested());
     _loginBloc = LoginBloc(widget.authBloc, AuthRepository());
   }
 
   @override
   void dispose() {
     super.dispose();
-    _phoneBloc.dispose();
+    widget.phoneBloc.dispose();
   }
 
   void _showError(BuildContext context, dynamic state) {
@@ -109,7 +109,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                         }
                       }),
                   BlocListener<PhoneEvent, PhoneState>(
-                    bloc: _phoneBloc,
+                    bloc: widget.phoneBloc,
                     listener: (BuildContext context, PhoneState state) {
                       if (state is PhoneLoadingError) {
                         _showError(context, state);
@@ -118,7 +118,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                   )
                 ],
                 child: BlocBuilder<PhoneEvent, PhoneState>(
-                    bloc: _phoneBloc,
+                    bloc: widget.phoneBloc,
                     builder: (BuildContext context, PhoneState state) {
                       print('===> state builder name : ${state.runtimeType}');
                       return Column(
@@ -204,7 +204,8 @@ class _PhoneScreenState extends State<PhoneScreen> {
           });
         },
         countryPhoneDataList: state.countryData,
-        favorites: const <String>['RU', 'CY']);
+        favorites: state.topCountryData,
+        itemByIp: state.countryPhoneByIp);
   }
 
   Widget _buildSubmit({@required LoginBloc loginBloc}) {

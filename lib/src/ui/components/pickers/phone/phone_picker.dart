@@ -10,27 +10,27 @@ class PhonePicker extends StatefulWidget {
   const PhonePicker(
       {this.favorites,
       @required this.countryPhoneDataList,
-      @required this.onSelected});
+        @required this.onSelected,
+        this.itemByIp});
 
-  final List<String> favorites;
+  final List<CountryPhoneData> favorites;
   final List<CountryPhoneData> countryPhoneDataList;
   final Function onSelected;
+  final CountryPhoneData itemByIp;
 
   @override
   _PhonePickerState createState() => _PhonePickerState();
 }
 
 class _PhonePickerState extends State<PhonePicker> {
-  TextEditingController phoneController =
-      NumberOnlyTextEditingController();
+  TextEditingController phoneController = NumberOnlyTextEditingController();
   TextEditingController codeController = TextEditingController();
   CountryPhoneData selectedItem;
 
   @override
   void initState() {
     super.initState();
-    codeController.text =
-        '+ (${widget.countryPhoneDataList[0].code.toString()})';
+    codeController.text = '+ (${_buildDefaultCode()})';
     phoneController.addListener(_phoneListener);
   }
 
@@ -40,7 +40,9 @@ class _PhonePickerState extends State<PhonePicker> {
       setState(() {
         print(
             '===> widget.countryPhoneDataList[0]: ${widget.countryPhoneDataList[0].countryId}');
-        selectedItem = widget.countryPhoneDataList[0];
+        selectedItem =
+        widget.itemByIp == null ? widget.countryPhoneDataList[0] : widget
+            .itemByIp;
       });
     }
     super.didChangeDependencies();
@@ -70,6 +72,22 @@ class _PhonePickerState extends State<PhonePicker> {
   bool hasMatch(String value, String reg) {
     final RegExp regExp = RegExp(reg);
     return regExp.hasMatch(value);
+  }
+
+  String _buildDefaultPhone() {
+    return selectedItem == null
+        ? widget.itemByIp == null
+        ? widget.countryPhoneDataList[0].example.toString()
+        : widget.itemByIp.example.toString()
+        : selectedItem.example.toString();
+  }
+
+  String _buildDefaultCode() {
+    return selectedItem == null
+        ? widget.itemByIp == null
+        ? widget.countryPhoneDataList[0].code.toString()
+        : widget.itemByIp.code.toString()
+        : selectedItem.code.toString();
   }
 
   @override
@@ -105,9 +123,7 @@ class _PhonePickerState extends State<PhonePicker> {
           child: StyledTextField(
             autofocus: true,
             controller: phoneController,
-            hintText: selectedItem == null
-                ? widget.countryPhoneDataList[0].example.toString()
-                : selectedItem.example.toString(),
+            hintText: _buildDefaultPhone(),
             borderColor:
                 _isValid() ? Theme.of(context).primaryColor : Colors.redAccent,
             keyboardType: TextInputType.number,
