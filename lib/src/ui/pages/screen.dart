@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
-import '../../../temp/resources/screen_repository_test.dart';
+
 import '../../blocs/screen/screen_bloc.dart' show ScreenBloc;
-import '../../blocs/screen/screen_event.dart';
-import '../../blocs/screen/screen_state.dart';
-import '../../constants/layout.dart';
+import '../../blocs/screen/screen_event.dart'
+    show ScreenEvent, ScreenInitialized, SendItem;
+import '../../blocs/screen/screen_state.dart'
+    show ScreenDataLoaded, ScreenDataLoadingError, ScreenState;
+import '../../constants/layout.dart' show standardHorizontalPadding;
 import '../../models/screen/components/button_model.dart' show ButtonModel;
 import '../../models/screen/components/item_model.dart' show ItemModel;
 import '../../models/screen/components/note_model.dart' show NoteModel;
@@ -53,8 +55,8 @@ class _ScreenState extends State<Screen> {
     super.initState();
     screenBloc = ScreenBloc(
         screenRepository: ScreenRepository(), authRepository: AuthRepository());
-       // screenRepository: TestScreenRepository(),
-     //   authRepository: AuthRepository());
+//        screenRepository: TestScreenRepository(),
+//        authRepository: AuthRepository());
     screenBloc.dispatch(ScreenInitialized(query: widget.route));
   }
 
@@ -197,8 +199,8 @@ class _ScreenState extends State<Screen> {
     return null;
   }
 
-  Future<void> _refresh() async{
-   screenBloc.dispatch(ScreenInitialized(query: widget.route));
+  Future<void> _refresh() {
+    screenBloc.dispatch(ScreenInitialized(query: widget.route));
   }
 
   void makeTransition(BuildContext context, String id) {

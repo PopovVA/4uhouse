@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocBuilder, BlocListener, BlocListenerTree;
 
 import '../../../../src/utils/route_transition.dart' show SlideRoute;
+import '../../../../temp/styled_text_controler.dart';
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../../blocs/auth/auth_event.dart' show AuthEvent;
 import '../../../blocs/auth/auth_state.dart' show AuthState, AuthAuthorized;
@@ -45,7 +46,7 @@ class OtpScreen extends StatefulWidget {
 class _OtpScreenState extends State<OtpScreen> {
   bool isFetchingCode = false;
   final int maxLength = 4;
-  TextEditingController code = TextEditingController();
+  TextEditingController code = NumberOnlyTextEditingController();
 
   @override
   void initState() {
@@ -118,7 +119,6 @@ class _OtpScreenState extends State<OtpScreen> {
             child: BlocBuilder<LoginEvent, LoginState>(
                 bloc: widget.loginBloc,
                 builder: (BuildContext context, LoginState state) {
-                  print('===> state builder name : ' + state.toString());
                   if (state is OtpSent) {
                     return Column(children: <Widget>[
                       _buildHeadLine(),

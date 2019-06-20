@@ -12,7 +12,6 @@ class ScreenApi extends Api {
 
   static String _getUrl(String token, String route) {
     final String context = route.replaceFirst('user', '');
-    print('===> context: ${context}');
     return Api.isValidToken(token) ? '$USER_URL$context' : '$GUEST_URL$context';
   }
 
