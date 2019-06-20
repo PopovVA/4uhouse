@@ -1,1 +1,2 @@
-double standardPadding = 16.0;
+double standardHorizontalPadding = 8.0;
+double standardVerticalPadding = 8.0;

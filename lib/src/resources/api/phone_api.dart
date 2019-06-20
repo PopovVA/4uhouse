@@ -1,6 +1,7 @@
 import 'dart:async' show Future;
 import 'package:http/http.dart' as http;
-import 'package:user_mobile/src/models/location.dart';
+import '../../models/location.dart';
+import '../../models/phone/phone_all_response.dart';
 import './constants/url.dart' show BASE_URL;
 import 'api.dart';
 
@@ -12,7 +13,8 @@ class PhoneApi extends Api {
       final http.Response response =
           await _client.get('${BASE_URL}auth/country-phones-data');
       if (response.statusCode == 200) {
-        return processResponse(response);
+        return AllPhoneResponse.fromJson(await processResponse(response));
+      } else if (response.statusCode == 204) {
       } else {
         throw response;
       }

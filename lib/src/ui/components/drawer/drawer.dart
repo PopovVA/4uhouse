@@ -89,30 +89,34 @@ class DrawerState extends State<DrawerOnly> {
           return buildListTile(context, 'Sign out',
               icon: const Icon(OMIcons.exitToApp),
               position: 8, onTap: () async {
-            final bool logoutApproved = await showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return StyledAlertDialog(
-                    title: 'Logout',
-                    content: 'Are you sure you want to log out?',
-                    onOk: () {
-                      Navigator.of(context).pop(true);
-                    },
-                    onCancel: () {
-                      Navigator.of(context).pop(false);
-                    },
-                  );
-                });
-            if (logoutApproved) {
-              authBloc.dispatch(LogoutButtonPressed());
-            }
-          });
+                final bool logoutApproved = await showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return StyledAlertDialog(
+                        title: 'Logout',
+                        content: 'Are you sure you want to log out?',
+                        onOk: () {
+                          Navigator.of(context).pop(true);
+                        },
+                        onCancel: () {
+                          Navigator.of(context).pop(false);
+                        },
+                      );
+                    });
+                if (logoutApproved) {
+                  authBloc.dispatch(LogoutButtonPressed());
+                }
+              });
         }
 
         if (state is IsFetchingLogout) {
           return StyledCircularProgress(
-              size: 'small', color: Theme.of(context).primaryColor);
+              size: 'small', color: Theme
+              .of(context)
+              .primaryColor);
         }
+
+        return Container(width: 0.0, height: 0.0);
       },
     );
   }
@@ -120,11 +124,11 @@ class DrawerState extends State<DrawerOnly> {
   Widget buildSignIn({@required AuthBloc authBloc}) {
     return buildListTile(context, 'Sign in',
         icon: const Icon(OMIcons.exitToApp), position: 8, onTap: () {
-      Navigator.push(
-        context,
-        SlideRoute(widget: PhoneScreen(authBloc: authBloc), side: 'left'),
-      );
-    });
+          Navigator.push(
+            context,
+            SlideRoute(widget: PhoneScreen(authBloc: authBloc), side: 'left'),
+          );
+        });
   }
 
   Widget buildListTile(BuildContext context, String title,

@@ -28,10 +28,9 @@ class AuthRepository {
   static const String _verifier = 'verifier';
 
   /* Login flow */
-  Future<void> getOtp(
-      {@required String countryId,
-      @required int code,
-      @required String number}) async {
+  Future<void> getOtp({@required String countryId,
+    @required int code,
+    @required String number}) async {
     final String deviceId = await _getDeviceId();
     final String codeChallenge = await _generatePKCE();
     return _authApi.requestOtp(
@@ -42,10 +41,9 @@ class AuthRepository {
         number: number);
   }
 
-  Future<void> login(
-      {@required String number,
-      @required int code,
-      @required String otp}) async {
+  Future<void> login({@required String number,
+    @required int code,
+    @required String otp}) async {
     final String codeVerifier = await readData(_verifier);
     final String deviceId = await _getDeviceId();
 
@@ -71,7 +69,7 @@ class AuthRepository {
     final String refreshToken = await readData(_refresh);
     if (refreshToken is String && refreshToken.isNotEmpty) {
       final TokenResponseModel tokenResponse =
-          await _authApi.refreshToken(refreshToken: refreshToken);
+      await _authApi.refreshToken(refreshToken: refreshToken);
       await _storeTokens(tokenResponse: tokenResponse);
     }
 
@@ -97,7 +95,9 @@ class AuthRepository {
     await storeData(_verifier, verifier);
 
     // Code challenge
-    final List<int> digest = sha256.convert(ascii.encode(verifier)).bytes;
+    final List<int> digest = sha256
+        .convert(ascii.encode(verifier))
+        .bytes;
     return _base64URLEncode(digest);
   }
 
@@ -138,7 +138,7 @@ class AuthRepository {
     }
 
     final UserModel userProfile =
-        await _authApi.loadUserProfile(accessToken: accessToken);
+    await _authApi.loadUserProfile(accessToken: accessToken);
     await storeCredentials(userProfile: userProfile);
     return userProfile;
   }

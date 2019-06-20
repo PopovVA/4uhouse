@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart' show SvgPicture;
 
-import '../../../utils/route_transition.dart' show SlideRoute;
-import '../../components/page_template.dart' show PageTemplate;
-import '../../components/styled/styled_button.dart' show StyledButton;
-import '../../components/styled/styled_circular_progress.dart'
+import '../../src/ui/components/page_template.dart' show PageTemplate;
+import '../../src/ui/components/styled/styled_button.dart' show StyledButton;
+import '../../src/ui/components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
-import '../property/property.dart' show AddProperty;
+import '../../src/utils/route_transition.dart' show SlideRoute;
 import 'components/description.dart' show Description;
 import 'components/main_points.dart' show MainPoint;
 import 'components/sub_points.dart' show SubPoint;
@@ -88,12 +87,7 @@ class HomePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(
                       top: 9, left: 15.0, right: 15.0, bottom: 16),
-                  child: StyledButton(
-                      text: 'Add property',
-                      onPressed: () => Navigator.push(
-                            context,
-                            SlideRoute(widget: AddProperty(), side: 'left'),
-                          )),
+                  child: StyledButton(text: 'Add property', onPressed: () {}),
                 )
               ],
             ))
