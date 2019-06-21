@@ -11,7 +11,7 @@ class PhoneRepository {
   }
 
 
-  Future<String> getCountryByIp() async {
-    return await phoneApi.countryLookUp();
+  Future<String> getCountryByIp() {
+    return phoneApi.countryLookUp();
   }
 }
