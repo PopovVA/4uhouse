@@ -58,8 +58,6 @@ class _ScreenState extends State<Screen> {
 //        screenRepository: TestScreenRepository(),
 //        authRepository: AuthRepository());
     screenBloc.dispatch(ScreenInitialized(query: widget.route));
-
-
   }
 
   @override
