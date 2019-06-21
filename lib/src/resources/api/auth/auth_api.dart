@@ -6,12 +6,10 @@ import 'package:http/http.dart' as http;
 
 import '../../../models/auth/token_response_model.dart' show TokenResponseModel;
 import '../../../models/auth/user_model.dart' show UserModel;
-import '../api.dart' show Api;
+import '../generic/api.dart' show Api;
 import 'constants/url.dart' show OAUTH_URL, USER_URL;
 
 class AuthApi extends Api {
-  final http.Client client = http.Client();
-
   static const String _contentType = 'application/x-www-form-urlencoded';
   static const String clientId = 'user-mobile';
 
@@ -29,13 +27,13 @@ class AuthApi extends Api {
     return urlEncodedForm.join('&');
   }
 
-  static Map<String, String> _makeHeaders({String accessToken}) {
+  Map<String, String> _makeHeaders({String accessToken}) {
     final Map<String, String> headers = <String, String>{
       'Content-type': _contentType,
     };
 
     if (accessToken is String && accessToken.isNotEmpty) {
-      headers['Authorization'] = 'Bearer $accessToken';
+      headers['$authHeaderKey'] = formToken(accessToken);
     }
 
     return headers;
@@ -60,8 +58,6 @@ class AuthApi extends Api {
         }),
       );
 
-      print('===> response.statusCode: ${response.statusCode}');
-      print('===> response.body: ${response.body}');
       if (response.statusCode != 204) {
         throw response;
       }
@@ -90,9 +86,6 @@ class AuthApi extends Api {
           'app_id': deviceId,
         }),
       );
-
-      print('===> response.statusCode: ${response.statusCode}');
-      print('===> response.body: ${response.body}');
 
       if (response.statusCode != 200) {
         throw response;

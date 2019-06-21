@@ -1,28 +1,37 @@
-import 'dart:io';
+import 'dart:io' show File;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show DateFormat;
-import 'package:user_mobile/src/ui/components/pickers/photo_uploader.dart'
-    show openPhotoUploader;
+import 'package:flutter_bloc/flutter_bloc.dart'
+    show BlocListener, BlocProvider, BlocBuilder;
 
+import '../../../blocs/component/component_bloc.dart' show ComponentBloc;
+import '../../../blocs/component/component_event.dart'
+    show ComponentEvent, SendingComponentValueRequested;
+import '../../../blocs/component/component_state.dart'
+    show ComponentState, ComponentIsFetching, ComponentFetchingError;
+import '../../../blocs/screen/screen_bloc.dart' show ScreenBloc;
 import '../../../models/screen/components/item_model.dart';
+import '../../../resources/auth_repository.dart' show AuthRepository;
+import '../../../resources/component_repository.dart' show ComponentRepository;
+
+import '../../../utils/show_alert.dart' show showError;
 import '../../../utils/type_check.dart' show isNotNull;
-import '../../helpers/money_controller.dart' show formatCost;
-import '../../pages/data_entry.dart';
+
 import '../../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
+import '../../helpers/money_controller.dart' show formatCost;
+import '../../pages/data_entry.dart' show DataEntry;
 import '../pickers/date_picker/date_picker_modal.dart' show openDatePicker;
-import './item_layout.dart';
+import '../pickers/photo_uploader.dart' show openPhotoUploader;
+import './item_layout.dart' show ItemLayout;
 
 class Item extends StatefulWidget {
-  Item(ItemModel item, this.path, this.handleSave, this.makeTransition)
-      // ignore: prefer_initializing_formals
-      : item = item,
-        id = item.id;
+  const Item(this.item, this.path, this.makeTransition, this.screenBloc);
+
   final ItemModel item;
-  final String id;
-  final Function handleSave;
   final String path;
   final Function makeTransition;
+  final ScreenBloc screenBloc;
 
   @override
   State<StatefulWidget> createState() {
@@ -32,25 +41,38 @@ class Item extends StatefulWidget {
 
 class _ItemState extends State<Item> {
   final DateFormat formatter = DateFormat('dd.MM.yyyy');
+  ComponentBloc componentBloc;
 
-  bool loading = false;
-
-  // ignore: unnecessary_parenthesis
-  bool get isTapable => (widget.item.isTransition || widget.item.isInput);
-
-  // ignore: avoid_void_async
-  void onChanged(dynamic value, {dynamic body}) async {
-    setState(() => loading = true);
-    await widget.handleSave(widget.item.id, value, body: body);
-    setState(() => loading = false);
+  @override
+  void initState() {
+    componentBloc = ComponentBloc(
+        screenBloc: widget.screenBloc,
+        authRepository: AuthRepository(),
+        componentRepository: ComponentRepository());
+    super.initState();
   }
 
-  // ignore: always_declare_return_types
-  onTap(BuildContext context) => () {
+  @override
+  void dispose() {
+    componentBloc.dispose();
+    super.dispose();
+  }
+
+  bool get isTapable => widget.item.isTransition || widget.item.isInput;
+
+  Future<void> onChanged(dynamic value, {dynamic body}) async {
+    componentBloc.dispatch(SendingComponentValueRequested(
+      route: '${widget.path}/${widget.item.id}',
+      value: value,
+      body: body,
+    ));
+  }
+
+  Function onTap(BuildContext context) => () {
         final ItemModel item = widget.item;
         if (item.isTransition) {
           widget.makeTransition(context, item.id);
-        } else {
+        } else if (item.isInput) {
           switch (item.typeValue) {
             case 'date':
               openDatePicker(
@@ -85,18 +107,15 @@ class _ItemState extends State<Item> {
     Navigator.of(context).push(
       MaterialPageRoute<Widget>(
         builder: (BuildContext context) => DataEntry(
-              widget.item,
-              widget.handleSave,
-              onSuccess: () {
-                widget.makeTransition(context);
-              },
-            ),
+          widget.item,
+          onChanged,
+        ),
       ),
     );
   }
 
-  Object buildSuffix(BuildContext context) {
-    if (loading) {
+  Object buildSuffix(BuildContext context, ComponentState state) {
+    if (state is ComponentIsFetching) {
       return const StyledCircularProgress(size: 'small');
     }
 
@@ -127,13 +146,29 @@ class _ItemState extends State<Item> {
   @override
   Widget build(BuildContext context) {
     final ItemModel item = widget.item;
-    return ItemLayout(
-      picture: item.picture,
-      body: item.key,
-      suffix: buildSuffix(context),
-      link: item.isTransition,
-      disabled: !item.isInput,
-      onTap: isTapable ? onTap(context) : null,
+    return BlocListener<ComponentEvent, ComponentState>(
+      bloc: componentBloc,
+      listener: (BuildContext context, ComponentState state) {
+        if (state is ComponentFetchingError) {
+          showError(context, state);
+        }
+      },
+      child: BlocProvider<ComponentBloc>(
+        bloc: componentBloc,
+        child: BlocBuilder<ComponentEvent, ComponentState>(
+          bloc: componentBloc,
+          builder: (BuildContext context, ComponentState state) {
+            return ItemLayout(
+              picture: item.picture,
+              body: item.key,
+              suffix: buildSuffix(context, state),
+              link: item.isTransition,
+              disabled: !item.isInput,
+              onTap: isTapable ? onTap(context) : null,
+            );
+          },
+        ),
+      ),
     );
   }
 }

@@ -1,7 +1,7 @@
-import 'dart:async';
-import 'dart:io';
+import 'dart:async' show Future;
+import 'dart:io' show File;
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:image_picker/image_picker.dart' show ImagePicker, ImageSource;
 
 import '../../../pallete.dart' show primaryColor;
 import 'generic/open_modal_bottom.dart' show openModalBottom;
@@ -48,10 +48,8 @@ class _Uploader extends StatelessWidget {
 
   final Function onLoad;
 
-  // ignore: always_specify_types
-  Future chooseImage(BuildContext context, String type) async {
-    // ignore: prefer_typing_uninitialized_variables, always_specify_types
-    var source;
+  Future<void> chooseImage(BuildContext context, String type) async {
+    ImageSource source;
 
     switch (type) {
       case 'take':

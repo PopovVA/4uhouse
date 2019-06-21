@@ -10,6 +10,7 @@ class AppBlocDelegate extends BlocDelegate {
   void onError(
       Bloc<dynamic, dynamic> bloc, Object error, StackTrace stacktrace) {
     print('bloc error: $error');
+    print('===> error.runtimeType: ${error.runtimeType}');
     super.onError(bloc, error, stacktrace);
   }
 }

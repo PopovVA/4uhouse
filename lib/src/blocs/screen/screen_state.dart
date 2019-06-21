@@ -21,7 +21,7 @@ class ScreenLoading extends ScreenState {
 }
 
 class ScreenDataLoaded extends ScreenState {
-  ScreenDataLoaded(this.data);
+  ScreenDataLoaded(this.data) : super(<ScreenModel>[data]);
 
   final ScreenModel data;
 
@@ -30,7 +30,7 @@ class ScreenDataLoaded extends ScreenState {
 }
 
 class ScreenDataLoadingError extends ScreenState {
-  ScreenDataLoadingError({this.error});
+  ScreenDataLoadingError([this.error]);
 
   final String error;
 

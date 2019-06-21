@@ -15,7 +15,6 @@ class Note extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(color),
       alignment: Alignment.centerLeft,
       width: double.infinity,
       height: 54.0,
@@ -28,14 +27,14 @@ class Note extends StatelessWidget {
         ),
       ),
       decoration: BoxDecoration(
-        color: const Color(0xFFb5ffc5c5),
-        border: Border(
+        color: Color(color),
+        border: const Border(
           left: BorderSide(
-            color: const Color(0xFFd24444),
+            color:  Color(0xFFd24444),
             width: 4.0,
           ),
           bottom: BorderSide(
-            color: const Color(0xFFecc3c3),
+            color: Color(0xFFecc3c3),
             width: 1.0,
           ),
         ),

@@ -2,26 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
 
+import '../../blocs/component/component_bloc.dart' show ComponentBloc;
 import '../../blocs/screen/screen_bloc.dart' show ScreenBloc;
-import '../../blocs/screen/screen_event.dart'
-    show ScreenEvent, ScreenInitialized, SendItem;
+import '../../blocs/screen/screen_event.dart' show ScreenEvent, ScreenRequested;
 import '../../blocs/screen/screen_state.dart'
     show ScreenDataLoaded, ScreenDataLoadingError, ScreenState;
+
 import '../../constants/layout.dart' show standardHorizontalPadding;
 import '../../models/screen/components/button_model.dart' show ButtonModel;
 import '../../models/screen/components/item_model.dart' show ItemModel;
 import '../../models/screen/components/note_model.dart' show NoteModel;
 import '../../models/screen/components/property_model.dart' show PropertyModel;
 import '../../models/screen/screen_model.dart' show ScreenModel;
-
 import '../../resources/auth_repository.dart' show AuthRepository;
 import '../../resources/screen_repository.dart' show ScreenRepository;
+import '../../utils/show_alert.dart' show showError;
+
 import '../components/button.dart' show Button;
 import '../components/item/item.dart' show Item;
 import '../components/note.dart' show Note;
 import '../components/page_template.dart' show PageTemplate;
 import '../components/property_card/property_card.dart' show PropertyCard;
-import '../components/styled/styled_alert_dialog.dart' show StyledAlertDialog;
 import '../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
 
@@ -49,6 +50,8 @@ class Screen extends StatefulWidget {
 class _ScreenState extends State<Screen> {
   GlobalKey scrollItemKey;
   ScreenBloc screenBloc;
+  ComponentBloc componentBloc;
+  String scrollToId;
 
   @override
   void initState() {
@@ -57,75 +60,30 @@ class _ScreenState extends State<Screen> {
         screenRepository: ScreenRepository(), authRepository: AuthRepository());
 //        screenRepository: TestScreenRepository(),
 //        authRepository: AuthRepository());
-    screenBloc.dispatch(ScreenInitialized(query: widget.route));
+    scrollToId = widget.scrollToId;
+    screenBloc.dispatch(ScreenRequested(query: widget.route));
   }
 
   @override
   void dispose() {
-    super.dispose();
     screenBloc.dispose();
+    super.dispose();
   }
 
-  void scrollToItem(GlobalKey key) {
+  void _scrollToItem(GlobalKey key) {
     if (key != null) {
       Scrollable.ensureVisible(key.currentContext);
     }
   }
 
-  void _showError(BuildContext context, dynamic state) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return StyledAlertDialog(
-            content: state.toString(),
-            onOk: () {
-              Navigator.of(context).pop();
-            },
-          );
-        });
+  Future<void> _refresh() async {
+    scrollToId = null;
+    screenBloc.dispatch(ScreenRequested(query: widget.route));
   }
 
-  @override
-  Widget build(BuildContext context) {
-    print('===> buildblock drawer: ${widget.drawer}');
-    return BlocListenerTree(
-        blocListeners: <BlocListener<dynamic, dynamic>>[
-          BlocListener<ScreenEvent, ScreenState>(
-              bloc: screenBloc,
-              listener: (BuildContext context, ScreenState state) {
-                if (state is ScreenDataLoadingError) {
-                  _showError(context, state);
-                }
-              })
-        ],
-        child: BlocBuilder<ScreenEvent, ScreenState>(
-            bloc: screenBloc,
-            builder: (BuildContext context, ScreenState state) {
-              if (state is ScreenDataLoaded) {
-                return PageTemplate(
-                  drawer: widget.drawer,
-                  body: buildComponents(state.data),
-                  goBack: widget.drawer == null
-                      ? () {
-                          final String path = state.data.path;
-                          Navigator.of(context).pushReplacementNamed(
-                              path.substring(0, path.lastIndexOf('/')));
-                        }
-                      : null,
-                  title: state.data.value,
-                );
-              } else if (state is ScreenDataLoadingError) {
-                return Container(
-                  color: Colors.white,
-                  child: const StyledCircularProgress(),
-                );
-              }
-
-              return Container(
-                color: Colors.white,
-                child: const StyledCircularProgress(),
-              );
-            }));
+  void makeTransition(BuildContext context, String id) {
+    Navigator.of(context)
+        .pushReplacementNamed('${widget.route}${id is String ? '/$id' : ''}');
   }
 
   Widget buildComponents(ScreenModel data) {
@@ -133,38 +91,50 @@ class _ScreenState extends State<Screen> {
       final List<Widget> items = <Widget>[];
       final List<Button> buttons = <Button>[];
       for (dynamic component in data.components) {
-        if (component is ItemModel) {
-          items.add(Item(
-            component,
-            data.path,
-            handleSendItemValue,
-            makeTransition,
-          ));
-        } else if (component is NoteModel) {
-          items.add(Note(component));
-        } else if (component is PropertyModel) {
-          items.add(PropertyCard(component,
-              makeTransition: component.isTransition ? makeTransition : null));
-        } else if (component is ButtonModel) {
-          buttons.add(Button(
-            component,
-            data.path,
-            handleSendItemValue,
-          ));
+        switch (component.runtimeType) {
+          case NoteModel: {
+            items.add(Note(component));
+            break;
+          }
+
+          case ItemModel: {
+            items.add(Item(
+              component,
+              data.path,
+              makeTransition,
+              screenBloc,
+            ));
+            break;
+          }
+
+          case PropertyModel: {
+            items.add(PropertyCard(component,
+                makeTransition: component.isTransition ? makeTransition : null));
+            break;
+          }
+
+          case ButtonModel: {
+            buttons.add(Button(
+              component,
+              data.path,
+              screenBloc,
+            ));
+            break;
+          }
         }
       }
 
-      if (widget.scrollToId is String) {
-        final dynamic scrollItemList = items
-            .where((dynamic item) => item.id == widget.scrollToId)
-            .toList();
+      if (scrollToId is String) {
+        final dynamic scrollItemList =
+            items.where((dynamic item) => item.id == scrollToId).toList();
         scrollItemKey = scrollItemList.isEmpty ? null : scrollItemList[0].key;
         SchedulerBinding.instance
-            .addPostFrameCallback((_) => scrollToItem(scrollItemKey));
+            .addPostFrameCallback((_) => _scrollToItem(scrollItemKey));
       }
 
       return RefreshIndicator(
         onRefresh: _refresh,
+        color: Theme.of(context).primaryColor,
         child: Ink(
           color: const Color(0xFFEBECED),
           height: double.infinity,
@@ -199,19 +169,57 @@ class _ScreenState extends State<Screen> {
     return null;
   }
 
-  Future<void> _refresh() {
-    screenBloc.dispatch(ScreenInitialized(query: widget.route));
+  Function getHandleGoBack(ScreenState state) {
+    if (widget.drawer == null && state is ScreenDataLoaded) {
+      return () {
+        final String path = state.data.path;
+        Navigator.of(context).pushReplacementNamed(
+          path.substring(0, path.lastIndexOf('/')),
+          arguments: <String, String>{
+            'scrollToId':
+                widget.route.substring(widget.route.lastIndexOf('/') + 1),
+          },
+        );
+      };
+    }
+
+    return null;
   }
 
-  void makeTransition(BuildContext context, String id) {
-    Navigator.of(context).pushNamedAndRemoveUntil(
-      '${widget.route}${id is String ? '/$id' : ''}',
-      (Route<dynamic> route) => false,
-    );
+  Widget buildBody(ScreenState state) {
+    if (state is ScreenDataLoaded) {
+      return buildComponents(state.data);
+    }
+
+    return const StyledCircularProgress();
   }
 
-  void handleSendItemValue(String id, dynamic value, {dynamic body}) {
-    screenBloc.dispatch(
-        SendItem(route: '${widget.route}/$id', value: value, body: body));
+  String buildTitle(ScreenState state) {
+    if (state is ScreenDataLoaded) {
+      return state.data.value;
+    }
+
+    return 'Loading';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<ScreenEvent, ScreenState>(
+        bloc: screenBloc,
+        listener: (BuildContext context, ScreenState state) {
+          if (state is ScreenDataLoadingError) {
+            showError(context, state);
+          }
+        },
+        child: BlocBuilder<ScreenEvent, ScreenState>(
+            bloc: screenBloc,
+            builder: (BuildContext context, ScreenState state) {
+              return PageTemplate(
+                drawer: widget.drawer,
+                body: buildBody(state),
+                goBack: getHandleGoBack(state),
+                title: buildTitle(state),
+              );
+            }));
   }
 }

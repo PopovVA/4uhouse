@@ -74,7 +74,6 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('===> auth bloc: ${widget.authBloc}');
     return PageTemplate(
         goBack: () {
           widget.loginBloc.dispatch(CodeEnteringCanceled());
@@ -99,7 +98,6 @@ class _OtpScreenState extends State<OtpScreen> {
               BlocListener<LoginEvent, LoginState>(
                 bloc: widget.loginBloc,
                 listener: (BuildContext context, LoginState state) {
-                  print('===> state listener name  ${state.runtimeType}');
                   if (state is PhoneError || state is CodeError) {
                     _showError(context, state);
                   }

@@ -31,15 +31,17 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
             countryPhoneDataResponse.topCountryPhonesData;
         final int creationDate = countryPhoneDataResponse.creationDate;
         final String countryIdByIp = waitList[1];
+
         final CountryPhoneData countryPhoneByIp =
             getCountryPhoneDataByIp(countryPhoneDataList, countryIdByIp);
         final CountryPhoneData countryPhoneDataByIp = countryPhoneByIp != null
             ? countryPhoneByIp
             : getCountryPhoneDataByIp(topCountryPhoneDataList, countryIdByIp);
+
         yield PhoneCountriesDataLoaded(countryPhoneDataList,
             topCountryPhoneDataList, creationDate, countryPhoneDataByIp);
       } catch (error) {
-        print('=> PhoneState => $error');
+        print('=> phone bloc error => $error');
         yield PhoneLoadingError(error: error.toString());
       }
     }

@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart'
+    show BlocProvider, BlocListener, BlocBuilder;
 import 'package:flutter_masked_text/flutter_masked_text.dart'
     show MoneyMaskedTextController;
 
+import '../../blocs/component/component_bloc.dart' show ComponentBloc;
+import '../../blocs/component/component_event.dart' show ComponentEvent;
+import '../../blocs/component/component_state.dart'
+    show
+        ComponentState,
+        ComponentIsFetching,
+        ComponentFetchingSuccess,
+        ComponentFetchingError;
+import '../../models/screen/components/item_model.dart';
 import '../../models/screen/components/item_model.dart' show ItemModel;
+import '../../utils/show_alert.dart' show showError;
+
 import '../components/page_template.dart' show PageTemplate;
 import '../components/pickers/money_picker.dart' show MoneyPicker;
 import '../components/styled/styled_button.dart' show StyledButton;
@@ -10,11 +23,10 @@ import '../components/styled/styled_button.dart' show StyledButton;
 import '../helpers/money_controller.dart' show createMoneyController;
 
 class DataEntry extends StatefulWidget {
-  const DataEntry(this.item, this.handleSave, {this.onSuccess});
+  const DataEntry(this.item, this.onChanged);
 
   final ItemModel item;
-  final Function handleSave;
-  final Function onSuccess;
+  final Function onChanged;
 
   @override
   State<StatefulWidget> createState() {
@@ -23,7 +35,6 @@ class DataEntry extends StatefulWidget {
 }
 
 class _DataEntryState extends State<DataEntry> {
-  bool loading = false;
   MoneyMaskedTextController _moneyController;
 
   @override
@@ -38,23 +49,41 @@ class _DataEntryState extends State<DataEntry> {
 
   @override
   Widget build(BuildContext context) {
-    return PageTemplate(
-      title: widget.item.key,
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: Center(
-              child: buildDataEntryWidget(),
+    final ComponentBloc componentBloc = BlocProvider.of<ComponentBloc>(context);
+    return BlocListener<ComponentEvent, ComponentState>(
+      bloc: componentBloc,
+      listener: (BuildContext context, ComponentState state) {
+        if (state is ComponentFetchingSuccess) {
+          Navigator.of(context).pop();
+        }
+
+        if (state is ComponentFetchingError) {
+          showError(context, state);
+        }
+      },
+      child: BlocBuilder<ComponentEvent, ComponentState>(
+        bloc: componentBloc,
+        builder: (BuildContext context, ComponentState state) {
+          return PageTemplate(
+            title: widget.item.key,
+            body: Column(
+              children: <Widget>[
+                Expanded(
+                  child: Center(
+                    child: buildDataEntryWidget(),
+                  ),
+                ),
+                StyledButton(
+                  text: 'save',
+                  onPressed: _handleSubmit(context),
+                  loading: state is ComponentIsFetching,
+                ),
+              ],
             ),
-          ),
-          StyledButton(
-            text: 'save',
-            onPressed: _handleSubmit(context),
-            loading: loading,
-          ),
-        ],
+            padding: true,
+          );
+        },
       ),
-      padding: true,
     );
   }
 
@@ -68,9 +97,7 @@ class _DataEntryState extends State<DataEntry> {
     }
   }
 
-  // ignore: always_declare_return_types
-  _handleSubmit(BuildContext context) => () async {
-        setState(() => loading = true);
+  Function _handleSubmit(BuildContext context) => () async {
         dynamic value;
         switch (widget.item.typeValue) {
           case 'money':
@@ -78,11 +105,6 @@ class _DataEntryState extends State<DataEntry> {
             break;
         }
 
-        try {
-          await widget.handleSave(widget.item.id, value);
-          Navigator.of(context).pop();
-        } catch (error) {
-          setState(() => loading = false);
-        }
+        widget.onChanged(value);
       };
 }
