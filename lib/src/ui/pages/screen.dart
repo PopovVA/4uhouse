@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
-import '../../../temp/resources/screen_repository_test.dart';
+
 import '../../blocs/screen/screen_bloc.dart' show ScreenBloc;
-import '../../blocs/screen/screen_event.dart';
-import '../../blocs/screen/screen_state.dart';
-import '../../constants/layout.dart';
+import '../../blocs/screen/screen_event.dart'
+    show ScreenEvent, ScreenInitialized, SendItem;
+import '../../blocs/screen/screen_state.dart'
+    show ScreenDataLoaded, ScreenDataLoadingError, ScreenState;
+import '../../constants/layout.dart' show standardHorizontalPadding;
 import '../../models/screen/components/button_model.dart' show ButtonModel;
 import '../../models/screen/components/item_model.dart' show ItemModel;
 import '../../models/screen/components/note_model.dart' show NoteModel;
@@ -164,27 +166,30 @@ class _ScreenState extends State<Screen> {
       return RefreshIndicator(
         onRefresh: _refresh,
         child: Ink(
-          color: const Color(0xFFEBECED),
           height: double.infinity,
           padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
             children: <Widget>[
-              Expanded(
-                child: Container(
-                  child: SingleChildScrollView(
-                    controller: widget.scrollController,
-                    child: Column(
-                      children: items,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      child: SingleChildScrollView(
+                        controller: widget.scrollController,
+                        child: Column(
+                          children: items,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
               Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: standardHorizontalPadding),
+                padding: const EdgeInsets.symmetric(vertical: 4),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: buttons,
                 ),
               ),
@@ -197,7 +202,7 @@ class _ScreenState extends State<Screen> {
     return null;
   }
 
-  void _refresh() {
+  Future<void> _refresh() async {
     screenBloc.dispatch(ScreenInitialized(query: widget.route));
   }
 

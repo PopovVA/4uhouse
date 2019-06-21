@@ -146,7 +146,6 @@ class _PhoneScreenState extends State<PhoneScreen> {
                 child: BlocBuilder<PhoneEvent, PhoneState>(
                     bloc: widget.phoneBloc,
                     builder: (BuildContext context, PhoneState state) {
-                      print('===> state builder name : ${state.runtimeType}');
                       return Column(
                         children: <Widget>[
                           _buildTittle(),
@@ -219,7 +218,6 @@ class _PhoneScreenState extends State<PhoneScreen> {
   }
 
   Widget _buildPhonePicker(PhoneCountriesDataLoaded state) {
-    print('=>state => CreateDate => ${state.creationDate}');
     return PhonePicker(
         onSelected:
             (bool value, CountryPhoneData countryPhone, String inputtedPhone) {

@@ -22,10 +22,6 @@ class PageTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(
-        '===> drawer == null && Navigator.canPop(context): ${drawer == null && Navigator.canPop(context)}');
-    print('===> drawer == null: ${drawer == null}');
-    print('===> Navigator.canPop(context): ${Navigator.canPop(context)}');
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -37,8 +33,6 @@ class PageTemplate extends StatelessWidget {
                 tooltip: 'go back',
                 icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () {
-                  print('---> on go back');
-                  print('===> goBack: ${goBack.runtimeType}');
                   if (goBack is Function) {
                     goBack();
                   } else if (Navigator.canPop(context)) {
