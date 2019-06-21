@@ -58,6 +58,8 @@ class _ScreenState extends State<Screen> {
 //        screenRepository: TestScreenRepository(),
 //        authRepository: AuthRepository());
     screenBloc.dispatch(ScreenInitialized(query: widget.route));
+
+
   }
 
   @override
@@ -166,7 +168,6 @@ class _ScreenState extends State<Screen> {
       return RefreshIndicator(
         onRefresh: _refresh,
         child: Ink(
-          color: const Color(0xFFEBECED),
           height: double.infinity,
           padding: const EdgeInsets.only(right: 8.0, left: 8.0),
           child: Stack(
