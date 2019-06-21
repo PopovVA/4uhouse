@@ -18,6 +18,9 @@ import '../../../blocs/login/login_state.dart'
     OtpSent,
     PhoneEntering,
     PhoneError;
+import '../../../blocs/phone/phone_bloc.dart' show PhoneBloc;
+import '../../../blocs/phone/phone_event.dart'
+    show PhoneEvent, PhoneCountriesDataRequested;
 import '../../components/page_template.dart' show PageTemplate;
 import '../../components/styled/styled_alert_dialog.dart'
     show StyledAlertDialog;
@@ -27,6 +30,7 @@ import '../../components/styled/styled_text_field.dart' show StyledTextField;
 class OtpScreen extends StatefulWidget {
   const OtpScreen({@required this.authBloc,
     @required this.loginBloc,
+    @required this.phoneBloc,
       @required this.selectedItem,
     @required this.number});
 
@@ -34,6 +38,7 @@ class OtpScreen extends StatefulWidget {
   final LoginBloc loginBloc;
   final CountryPhoneData selectedItem;
   final String number;
+  final PhoneBloc phoneBloc;
 
   @override
   _OtpScreenState createState() => _OtpScreenState();
@@ -74,6 +79,7 @@ class _OtpScreenState extends State<OtpScreen> {
     return PageTemplate(
         goBack: () {
           widget.loginBloc.dispatch(CodeEnteringCanceled());
+          widget.phoneBloc.dispatch(PhoneCountriesDataRequested());
         },
         title: 'Confirm',
         body: Container(
