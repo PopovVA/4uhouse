@@ -42,9 +42,7 @@ class _PhonePickerState extends State<PhonePicker> {
       setState(() {
         print(
             '===> widget.countryPhoneDataList[0]: ${widget.countryPhoneDataList[0].countryId}');
-        widget.selectedItem = widget.itemByIp == null
-            ? widget.countryPhoneDataList[0]
-            : widget.itemByIp;
+        widget.selectedItem = _buildDataItem();
       });
     }
     super.didChangeDependencies();
@@ -108,7 +106,7 @@ class _PhonePickerState extends State<PhonePicker> {
               codeController.text =
               '+ (${widget.selectedItem.code.toString()})';
               if (widget.onSelected is Function) {
-                widget.onSelected(widget.isValid(), widget.selectedItem,
+                widget.onSelected(widget.isValid(), result,
                     widget.phoneController.text);
               }
             }
