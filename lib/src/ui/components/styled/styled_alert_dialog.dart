@@ -22,75 +22,83 @@ class StyledAlertDialog extends StatelessWidget {
           ),
           Align(
             alignment: FractionalOffset.center,
-            child: ConstrainedBox(
-              constraints:const BoxConstraints(
-                  minHeight: 120,
-                  minWidth: 280.0,
-                  maxHeight: 0,
-                  maxWidth: 280.0),
-              child: Container(
-                  decoration:
-                      BoxDecoration(color: Colors.white, boxShadow: <BoxShadow>[
-                    BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        blurRadius: 12,
-                        offset: const Offset(0.0, 12.0))
-                  ]),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: 12.0, left: 24, right: 24, top: 10),
-                          child: Text(
-                            title is String ? title : 'Opps...',
-                            style: const TextStyle(
-                              fontSize: 20,
-                              color: Color.fromRGBO(0, 0, 0, 0.87),
-                            ),
-                          )),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 24, right: 24, bottom: 8),
-                        child: Text(
-                          content is String ? content : null,
-                          style: const TextStyle(
-                            color: Color.fromRGBO(0, 0, 0, 0.541327),
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              blurRadius: 12,
+                              offset: const Offset(0.0, 12.0))
+                        ]),
+                    constraints: const BoxConstraints(
+                      minHeight: 120,
+                    ),
+                    width: 280,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            if (onCancel is Function)
-                              FlatButton(
-                                  onPressed: onCancel,
-                                  child: const Text(
-                                    'Cancel',
-                                    style: TextStyle(
-                                      color: DISABLED_COLOR,
-                                      fontSize: 16,
-                                    ),
-                                  )),
-                            if (onOk is Function)
-                              FlatButton(
-                                  onPressed: onOk,
-                                  child: const Text(
-                                    'OK',
-                                    style: TextStyle(
-                                      color: Color.fromRGBO(55, 180, 188, 1),
-                                      fontSize: 16,
-                                    ),
-                                  )),
+                            Padding(
+                                padding: const EdgeInsets.only(
+                                    bottom: 12.0, left: 24, right: 24, top: 10),
+                                child: Text(
+                                  title is String ? title : 'Opps...',
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Color.fromRGBO(0, 0, 0, 0.87),
+                                  ),
+                                )),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 24, right: 24, bottom: 8),
+                              child: Text(
+                                content is String ? content : null,
+                                style: const TextStyle(
+                                  color: Color.fromRGBO(0, 0, 0, 0.541327),
+                                  fontSize: 16,
+                                ),
+                              ),
+                            )
                           ],
                         ),
-                      ),
-                    ],
-                  )),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              if (onCancel is Function)
+                                FlatButton(
+                                    onPressed: onCancel,
+                                    child: const Text(
+                                      'Cancel',
+                                      style: TextStyle(
+                                        color: DISABLED_COLOR,
+                                        fontSize: 16,
+                                      ),
+                                    )),
+                              if (onOk is Function)
+                                FlatButton(
+                                    onPressed: onOk,
+                                    child: const Text(
+                                      'OK',
+                                      style: TextStyle(
+                                        color: Color.fromRGBO(55, 180, 188, 1),
+                                        fontSize: 16,
+                                      ),
+                                    )),
+                            ],
+                          ),
+                        ),
+                      ],
+                    )),
+              ],
             ),
           ),
         ],
