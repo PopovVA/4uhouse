@@ -54,5 +54,5 @@ Future<Map<String, dynamic>> parseJsonFromAssets(String assetsPath) async {
 }
 
 String replaceSlash(String text) {
-  return text.replaceAll('/', '.');
+  return text.replaceAll('user/', '').replaceAll('/', '.');
 }
