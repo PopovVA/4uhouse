@@ -9,7 +9,7 @@ import 'phone_search.dart';
 class PhonePicker extends StatefulWidget {
   PhonePicker(
       {this.favorites,
-      @required this.countryPhoneDataList,
+        @required this.countryPhoneDataList,
         @required this.onSelected,
         @required this.selectedItem,
         @required this.itemByIp,
@@ -68,8 +68,8 @@ class _PhonePickerState extends State<PhonePicker> {
 
   bool _validLength(List<int> lengthList, int length) {
     return lengthList.firstWhere((int item) => item == length,
-                orElse: () => 0) >
-            0
+        orElse: () => 0) >
+        0
         ? true
         : false;
   }
@@ -128,8 +128,8 @@ class _PhonePickerState extends State<PhonePicker> {
             width: 70.0,
             child: IgnorePointer(
                 child: StyledTextField(
-              controller: codeController,
-            ))),
+                  controller: codeController,
+                ))),
         onTap: () async {
           final CountryPhoneData result = await showSearch(
             context: context,
@@ -160,7 +160,9 @@ class _PhonePickerState extends State<PhonePicker> {
             controller: widget.phoneController,
             hintText: _buildDefaultPhone(),
             borderColor:
-                _isValid() ? Theme.of(context).primaryColor : Colors.redAccent,
+            _isValid() ? Theme
+                .of(context)
+                .primaryColor : Colors.redAccent,
             keyboardType: TextInputType.number,
           ),
         ),

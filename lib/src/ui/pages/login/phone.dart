@@ -15,11 +15,11 @@ import '../../../blocs/phone/phone_event.dart'
     show PhoneEvent, PhoneCountriesDataRequested;
 import '../../../blocs/phone/phone_state.dart'
     show
-        PhoneCountriesDataLoaded,
-        PhoneLoading,
-        PhoneLoadingError,
-        PhoneState,
-        PhoneUninitialized;
+    PhoneCountriesDataLoaded,
+    PhoneLoading,
+    PhoneLoadingError,
+    PhoneState,
+    PhoneUninitialized;
 import '../../../models/phone/country_phone_data.dart' show CountryPhoneData;
 import '../../../resources/auth_repository.dart' show AuthRepository;
 import '../../../resources/phone_repository.dart' show PhoneRepository;
