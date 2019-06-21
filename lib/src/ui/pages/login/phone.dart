@@ -77,9 +77,8 @@ class _PhoneScreenState extends State<PhoneScreen> {
   @override
   void initState() {
     super.initState();
-    print('here');
-    widget.phoneBloc = PhoneBloc(TestPhoneRepository());
-//    _phoneBloc = PhoneBloc(PhoneRepository());
+//    widget.phoneBloc = PhoneBloc(TestPhoneRepository());
+    widget.phoneBloc = PhoneBloc(PhoneRepository());
     widget.phoneBloc.dispatch(PhoneCountriesDataRequested());
     _loginBloc = LoginBloc(widget.authBloc, AuthRepository());
     phoneController.addListener(_phoneListener);
@@ -234,7 +233,8 @@ class _PhoneScreenState extends State<PhoneScreen> {
         phoneController: phoneController,
         countryPhoneDataList: state.countryData,
         favorites: state.topCountryData,
-        itemByIp: state.countryPhoneByIp);
+        itemByIp: state.countryPhoneByIp,
+        isValid: _isValid);
   }
 
   Widget _buildSubmit({@required LoginBloc loginBloc}) {

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../temp/styled_text_controler.dart';
-
 import '../../../../models/phone/country_phone_data.dart';
-
 import '../../../components/styled/styled_text_field.dart' show StyledTextField;
 import 'phone_search.dart';
 
@@ -13,6 +11,7 @@ class PhonePicker extends StatefulWidget {
         @required this.onSelected,
         @required this.selectedItem,
         @required this.itemByIp,
+        @required this.isValid,
         @required this.phoneController});
 
   final List<CountryPhoneData> favorites;
@@ -20,6 +19,7 @@ class PhonePicker extends StatefulWidget {
   final Function onSelected;
   final CountryPhoneData itemByIp;
   final TextEditingController phoneController;
+  final Function isValid;
   CountryPhoneData selectedItem;
 
   @override
@@ -32,7 +32,7 @@ class _PhonePickerState extends State<PhonePicker> {
   @override
   void initState() {
     super.initState();
-    codeController.text = '+ (${_buildDefaultCode()})';
+    codeController.text = '+ (${_buildDataItem().code.toString()})';
     widget.phoneController.addListener(_phoneListener);
   }
 
@@ -53,70 +53,33 @@ class _PhonePickerState extends State<PhonePicker> {
   void _phoneListener() {
     if (widget.onSelected is Function) {
       widget.onSelected(
-          _isValid(), widget.selectedItem, widget.phoneController.text);
+          widget.isValid(), widget.selectedItem, widget.phoneController.text);
     }
   }
 
-  bool _isValid() {
-    return widget.phoneController.text.isNotEmpty &&
-        widget.selectedItem != null &&
-        _validLength(
-            widget.selectedItem.length, widget.phoneController.text.length) &&
-        hasMatch(
-            widget.phoneController.text, widget.selectedItem.numberPattern);
-  }
-
-  bool _validLength(List<int> lengthList, int length) {
-    return lengthList.firstWhere((int item) => item == length,
-        orElse: () => 0) >
-        0
-        ? true
-        : false;
-  }
-
-  bool hasMatch(String value, String reg) {
-    final RegExp regExp = RegExp(reg);
-    return regExp.hasMatch(value);
-  }
-
-  CountryPhoneData _findItem() {
-    final CountryPhoneData foundItem = widget.countryPhoneDataList.firstWhere(
+  CountryPhoneData _findItemById(List<CountryPhoneData> list) {
+    return list.firstWhere(
             (CountryPhoneData item) =>
         item.countryId == widget.selectedItem.countryId,
         orElse: () => null);
-    if (foundItem != null) {
-      return foundItem;
-    } else {
-      return widget.favorites.firstWhere((CountryPhoneData item) =>
-      item.countryId == widget.selectedItem.countryId);
-    }
   }
 
-  String _buildDefaultPhone() {
+  CountryPhoneData _buildDataItem() {
     if (widget.selectedItem == null) {
       if (widget.itemByIp == null) {
         return widget.favorites.isNotEmpty
-            ? widget.favorites.first.example.toString()
-            : widget.countryPhoneDataList.first.example.toString();
+            ? widget.favorites.first
+            : widget.countryPhoneDataList.first;
       } else {
-        return widget.itemByIp.example.toString();
+        return widget.itemByIp;
       }
     } else {
-      return _findItem().example.toString();
-    }
-  }
-
-  String _buildDefaultCode() {
-    if (widget.selectedItem == null) {
-      if (widget.itemByIp == null) {
-        return widget.favorites.isNotEmpty
-            ? widget.favorites.first.code.toString()
-            : widget.countryPhoneDataList.first.code.toString();
-      } else {
-        return widget.itemByIp.code.toString();
-      }
-    } else {
-      return _findItem().code.toString();
+      final CountryPhoneData favItem = _findItemById(widget.favorites);
+      return favItem == null
+          ? _findItemById(widget.countryPhoneDataList) == null
+          ? widget.selectedItem
+          : _findItemById(widget.countryPhoneDataList)
+          : favItem;
     }
   }
 
@@ -145,7 +108,7 @@ class _PhonePickerState extends State<PhonePicker> {
               codeController.text =
               '+ (${widget.selectedItem.code.toString()})';
               if (widget.onSelected is Function) {
-                widget.onSelected(_isValid(), widget.selectedItem,
+                widget.onSelected(widget.isValid(), widget.selectedItem,
                     widget.phoneController.text);
               }
             }
@@ -158,11 +121,12 @@ class _PhonePickerState extends State<PhonePicker> {
           child: StyledTextField(
             autofocus: true,
             controller: widget.phoneController,
-            hintText: _buildDefaultPhone(),
-            borderColor:
-            _isValid() ? Theme
+            hintText: _buildDataItem().example.toString(),
+            borderColor: widget.isValid()
+                ? Theme
                 .of(context)
-                .primaryColor : Colors.redAccent,
+                .primaryColor
+                : Colors.redAccent,
             keyboardType: TextInputType.number,
           ),
         ),
