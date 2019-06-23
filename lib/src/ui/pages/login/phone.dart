@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocBuilder, BlocListener, BlocListenerTree;
 import '../../../../src/utils/route_transition.dart' show SlideRoute;
-import '../../../../temp/resources/phone_repository_test.dart';
 import '../../../../temp/styled_text_controler.dart'
     show NumberOnlyTextEditingController;
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
@@ -22,7 +21,6 @@ import '../../../blocs/phone/phone_state.dart'
     PhoneUninitialized;
 import '../../../models/phone/country_phone_data.dart' show CountryPhoneData;
 import '../../../resources/auth_repository.dart' show AuthRepository;
-import '../../../resources/phone_repository.dart' show PhoneRepository;
 import '../../components/page_template.dart' show PageTemplate;
 import '../../components/pickers/phone/phone_picker.dart' show PhonePicker;
 import '../../components/styled/styled_alert_dialog.dart'
@@ -33,10 +31,10 @@ import '../../components/styled/styled_circular_progress.dart'
 import 'otp.dart' show OtpScreen;
 
 class PhoneScreen extends StatefulWidget {
-  PhoneScreen({@required this.authBloc, @required this.phoneBloc});
+  const PhoneScreen({@required this.authBloc, @required this.phoneBloc});
 
   final AuthBloc authBloc;
-  PhoneBloc phoneBloc;
+  final PhoneBloc phoneBloc;
 
   @override
   _PhoneScreenState createState() => _PhoneScreenState();
@@ -77,8 +75,6 @@ class _PhoneScreenState extends State<PhoneScreen> {
   @override
   void initState() {
     super.initState();
-//    widget.phoneBloc = PhoneBloc(TestPhoneRepository());
-    widget.phoneBloc = PhoneBloc(PhoneRepository());
     widget.phoneBloc.dispatch(PhoneCountriesDataRequested());
     _loginBloc = LoginBloc(widget.authBloc, AuthRepository());
     phoneController.addListener(_phoneListener);

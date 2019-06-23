@@ -5,7 +5,7 @@ import '../../../components/styled/styled_text_field.dart' show StyledTextField;
 import 'phone_search.dart';
 
 class PhonePicker extends StatefulWidget {
-  PhonePicker(
+  const PhonePicker(
       {this.favorites,
         @required this.countryPhoneDataList,
         @required this.onSelected,
@@ -20,7 +20,7 @@ class PhonePicker extends StatefulWidget {
   final CountryPhoneData itemByIp;
   final TextEditingController phoneController;
   final Function isValid;
-  CountryPhoneData selectedItem;
+  final CountryPhoneData selectedItem;
 
   @override
   _PhonePickerState createState() => _PhonePickerState();
@@ -28,21 +28,23 @@ class PhonePicker extends StatefulWidget {
 
 class _PhonePickerState extends State<PhonePicker> {
   TextEditingController codeController = TextEditingController();
+  CountryPhoneData item;
 
   @override
   void initState() {
     super.initState();
     codeController.text = '+ (${_buildDataItem().code.toString()})';
     widget.phoneController.addListener(_phoneListener);
+    item = widget.selectedItem;
   }
 
   @override
   void didChangeDependencies() {
-    if (widget.selectedItem == null && widget.countryPhoneDataList != null) {
+    if (item == null && widget.countryPhoneDataList != null) {
       setState(() {
         print(
             '===> widget.countryPhoneDataList[0]: ${widget.countryPhoneDataList[0].countryId}');
-        widget.selectedItem = _buildDataItem();
+        item = _buildDataItem();
       });
     }
     super.didChangeDependencies();
@@ -50,20 +52,19 @@ class _PhonePickerState extends State<PhonePicker> {
 
   void _phoneListener() {
     if (widget.onSelected is Function) {
-      widget.onSelected(
-          widget.isValid(), widget.selectedItem, widget.phoneController.text);
+      widget.onSelected(widget.isValid(), item, widget.phoneController.text);
     }
   }
 
   CountryPhoneData _findItemById(List<CountryPhoneData> list) {
     return list.firstWhere(
-            (CountryPhoneData item) =>
-        item.countryId == widget.selectedItem.countryId,
+            (CountryPhoneData foundItem) =>
+        foundItem.countryId == item.countryId,
         orElse: () => null);
   }
 
   CountryPhoneData _buildDataItem() {
-    if (widget.selectedItem == null) {
+    if (item == null) {
       if (widget.itemByIp == null) {
         return widget.favorites.isNotEmpty
             ? widget.favorites.first
@@ -75,7 +76,7 @@ class _PhonePickerState extends State<PhonePicker> {
       final CountryPhoneData favItem = _findItemById(widget.favorites);
       return favItem == null
           ? _findItemById(widget.countryPhoneDataList) == null
-          ? widget.selectedItem
+          ? item
           : _findItemById(widget.countryPhoneDataList)
           : favItem;
     }
@@ -102,12 +103,11 @@ class _PhonePickerState extends State<PhonePicker> {
           );
           setState(() {
             if (result != null) {
-              widget.selectedItem = result;
-              codeController.text =
-              '+ (${widget.selectedItem.code.toString()})';
+              item = result;
+              codeController.text = '+ (${item.code.toString()})';
               if (widget.onSelected is Function) {
-                widget.onSelected(widget.isValid(), result,
-                    widget.phoneController.text);
+                widget.onSelected(
+                    widget.isValid(), item, widget.phoneController.text);
               }
             }
           });
