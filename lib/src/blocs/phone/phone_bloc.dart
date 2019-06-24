@@ -21,7 +21,6 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
     if (event is PhoneCountriesDataRequested) {
       yield PhoneLoading();
       try {
-        print(currentState.props);
         final List<dynamic> waitList = await Future.wait(<Future<dynamic>>[
           repository.getCountriesPhoneData(
               creationDate: getCreationDate(currentState)),
@@ -42,7 +41,7 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
           final String countryIdByIp = await storage.read(key: 'countryId');
           countryPhoneData = getCountryPhone(
               countryPhoneDataList, topCountryPhoneDataList, countryIdByIp);
-        }else{
+        } else {
           await storage.write(
               key: 'countryId', value: countryPhoneData.countryId);
         }
