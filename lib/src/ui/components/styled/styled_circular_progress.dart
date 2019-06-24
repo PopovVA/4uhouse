@@ -20,12 +20,15 @@ class StyledCircularProgress extends StatelessWidget {
     final double chosenSize = sizes[size];
     final AlwaysStoppedAnimation<Color> chosenColor = getColor(context, color);
 
-    return Center(
-      child: SizedBox(
-        height: chosenSize,
-        width: chosenSize,
-        child: CircularProgressIndicator(
-          valueColor: chosenColor,
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      child: Center(
+        child: SizedBox(
+          height: chosenSize,
+          width: chosenSize,
+          child: CircularProgressIndicator(
+            valueColor: chosenColor,
+          ),
         ),
       ),
     );
