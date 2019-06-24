@@ -9,8 +9,6 @@ import 'phone_state.dart';
 class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
   PhoneBloc(this.repository);
 
-  List<CountryPhoneData> list = <CountryPhoneData>[];
-
   PhoneRepository repository;
 
   @override
@@ -19,6 +17,10 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
   @override
   Stream<PhoneState> mapEventToState(PhoneEvent event) async* {
     if (event is PhoneCountriesDataRequested) {
+      List<CountryPhoneData> countryPhoneDataList;
+      List<CountryPhoneData> topCountryPhoneDataList;
+      int creationDate;
+      CountryPhoneData countryPhoneData;
       yield PhoneLoading();
       try {
         final List<dynamic> waitList = await Future.wait(<Future<dynamic>>[
@@ -26,25 +28,25 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
               creationDate: getCreationDate(currentState)),
           repository.getCountryByIp(),
         ]);
+
         final AllPhoneResponse allPhoneResponse = waitList[0];
-        final List<CountryPhoneData> countryPhoneDataList =
-            allPhoneResponse.countryPhonesData;
-        final List<CountryPhoneData> topCountryPhoneDataList =
-            allPhoneResponse.topCountryPhonesData;
-        final int creationDate = allPhoneResponse.creationDate;
         final String countryIdByIp = waitList[1];
-
-        CountryPhoneData countryPhoneData = getCountryPhone(
-            countryPhoneDataList, topCountryPhoneDataList, countryIdByIp);
-
-        if (countryPhoneData == null && list.isNotEmpty) {
-          countryPhoneData = list[list.length - 1];
+        if (allPhoneResponse != null) {
+          countryPhoneDataList = allPhoneResponse.countryPhonesData;
+          topCountryPhoneDataList = allPhoneResponse.topCountryPhonesData;
+          creationDate = allPhoneResponse.creationDate;
+          countryPhoneData = getCountryPhone(
+              countryPhoneDataList, topCountryPhoneDataList, countryIdByIp);
         } else {
-          list.add(countryPhoneData);
+          countryPhoneData = getCountryPhoneDataByState(currentState);
+          countryPhoneDataList = getListCountryPhoneDataByState(currentState);
+          topCountryPhoneDataList =
+              getListTopCountryPhoneDataByState(currentState);
+          creationDate = getCreationDate(currentState);
         }
 
         yield PhoneCountriesDataLoaded(countryPhoneDataList,
-            topCountryPhoneDataList, creationDate, list[list.length - 1]);
+            topCountryPhoneDataList, creationDate, countryPhoneData);
       } catch (error) {
         print('=> phone bloc error => $error');
         yield PhoneLoadingError(error: error.toString());
@@ -64,6 +66,29 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
   int getCreationDate(PhoneState currentState) {
     if (currentState is PhoneCountriesDataLoaded)
       return currentState.creationDate;
+    else
+      return null;
+  }
+
+  CountryPhoneData getCountryPhoneDataByState(PhoneState currentState) {
+    if (currentState is PhoneCountriesDataLoaded)
+      return currentState.countryPhoneByIp;
+    else
+      return null;
+  }
+
+  List<CountryPhoneData> getListCountryPhoneDataByState(
+      PhoneState currentState) {
+    if (currentState is PhoneCountriesDataLoaded)
+      return currentState.countryData;
+    else
+      return null;
+  }
+
+  List<CountryPhoneData> getListTopCountryPhoneDataByState(
+      PhoneState currentState) {
+    if (currentState is PhoneCountriesDataLoaded)
+      return currentState.topCountryData;
     else
       return null;
   }
