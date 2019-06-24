@@ -112,7 +112,7 @@ class _ScreenState extends State<Screen> {
             {
               items.add(PropertyCard(component,
                   makeTransition:
-                  component.isTransition ? makeTransition : null));
+                      component.isTransition ? makeTransition : null));
               break;
             }
 
@@ -130,47 +130,41 @@ class _ScreenState extends State<Screen> {
 
       if (scrollToId is String) {
         final dynamic scrollItemList =
-        items.where((dynamic item) => item.id == scrollToId).toList();
+            items.where((dynamic item) => item.id == scrollToId).toList();
         scrollItemKey = scrollItemList.isEmpty ? null : scrollItemList[0].key;
         SchedulerBinding.instance
             .addPostFrameCallback((_) => _scrollToItem(scrollItemKey));
       }
 
-      return RefreshIndicator(
-        onRefresh: _refresh,
-        color: Theme
-            .of(context)
-            .primaryColor,
-        child: Ink(
-          height: double.infinity,
-          padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-          child: Stack(
-            children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      child: SingleChildScrollView(
-                        controller: widget.scrollController,
-                        child: Column(
-                          children: items,
-                        ),
+      return Ink(
+        height: double.infinity,
+        padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+        child: Stack(
+          children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    child: SingleChildScrollView(
+                      controller: widget.scrollController,
+                      child: Column(
+                        children: items,
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: buttons,
-                    ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: buttons,
                   ),
-                ],
-              )
-            ],
-          ),
+                ),
+              ],
+            )
+          ],
         ),
       );
     }
@@ -186,7 +180,7 @@ class _ScreenState extends State<Screen> {
           path.substring(0, path.lastIndexOf('/')),
           arguments: <String, String>{
             'scrollToId':
-            widget.route.substring(widget.route.lastIndexOf('/') + 1),
+                widget.route.substring(widget.route.lastIndexOf('/') + 1),
           },
         );
       };
@@ -225,7 +219,11 @@ class _ScreenState extends State<Screen> {
             builder: (BuildContext context, ScreenState state) {
               return PageTemplate(
                 drawer: widget.drawer,
-                body: buildBody(state),
+                body: RefreshIndicator(
+                  onRefresh: _refresh,
+                  color: Theme.of(context).primaryColor,
+                  child: buildBody(state),
+                ),
                 goBack: getHandleGoBack(state),
                 title: buildTitle(state),
               );
