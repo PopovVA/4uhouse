@@ -16,15 +16,15 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
 
   @override
   Stream<PhoneState> mapEventToState(PhoneEvent event) async* {
+    final List<CountryPhoneData> listCountryPhoneData = <CountryPhoneData>[];
     if (event is PhoneCountriesDataRequested) {
       yield PhoneLoading();
       try {
         final List<dynamic> waitList = await Future.wait(<Future<dynamic>>[
           repository.getCountriesPhoneData(
-              creationDate: getCountryPhoneData(currentState)),
+              creationDate: getCreationDate(currentState)),
           repository.getCountryByIp(),
         ]);
-
         final AllPhoneResponse countryPhoneDataResponse = waitList[0];
         final List<CountryPhoneData> countryPhoneDataList =
             countryPhoneDataResponse.countryPhonesData;
@@ -35,12 +35,19 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
 
         final CountryPhoneData countryPhoneByIp =
             getCountryPhoneDataByIp(countryPhoneDataList, countryIdByIp);
-        final CountryPhoneData countryPhoneDataByIp = countryPhoneByIp != null
+        CountryPhoneData countryPhoneDataByIp = countryPhoneByIp != null
             ? countryPhoneByIp
             : getCountryPhoneDataByIp(topCountryPhoneDataList, countryIdByIp);
+        if (countryPhoneByIp == null && listCountryPhoneData.isNotEmpty)
+          countryPhoneDataByIp =
+              listCountryPhoneData[listCountryPhoneData.length - 1];
 
-        yield PhoneCountriesDataLoaded(countryPhoneDataList,
-            topCountryPhoneDataList, creationDate, countryPhoneDataByIp);
+        listCountryPhoneData.add(countryPhoneDataByIp);
+        yield PhoneCountriesDataLoaded(
+            countryPhoneDataList,
+            topCountryPhoneDataList,
+            creationDate,
+            listCountryPhoneData[listCountryPhoneData.length - 1]);
       } catch (error) {
         print('=> phone bloc error => $error');
         yield PhoneLoadingError(error: error.toString());
@@ -55,10 +62,17 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
     return index != -1 ? list[index] : null;
   }
 
-  int getCountryPhoneData(PhoneState currentState) {
+  int getCreationDate(PhoneState currentState) {
     if (currentState is PhoneCountriesDataLoaded)
       return currentState.creationDate;
     else
       return null;
+  }
+
+  CountryPhoneData getCountryData(PhoneState state) {
+    final int index = state.props.indexWhere((dynamic data) {
+      return data == null;
+    });
+    return index != -1 || index != 0 ? state.props[index - 1] : null;
   }
 }
