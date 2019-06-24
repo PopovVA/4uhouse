@@ -17,30 +17,36 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
   @override
   Stream<PhoneState> mapEventToState(PhoneEvent event) async* {
     if (event is PhoneCountriesDataRequested) {
+      List<CountryPhoneData> countryPhoneDataList;
+      List<CountryPhoneData> topCountryPhoneDataList;
+      int creationDate;
+      CountryPhoneData countryPhoneData;
       yield PhoneLoading();
       try {
         final List<dynamic> waitList = await Future.wait(<Future<dynamic>>[
           repository.getCountriesPhoneData(
-              creationDate: getCountryPhoneData(currentState)),
+              creationDate: getCreationDate(currentState)),
           repository.getCountryByIp(),
         ]);
 
-        final AllPhoneResponse countryPhoneDataResponse = waitList[0];
-        final List<CountryPhoneData> countryPhoneDataList =
-            countryPhoneDataResponse.countryPhonesData;
-        final List<CountryPhoneData> topCountryPhoneDataList =
-            countryPhoneDataResponse.topCountryPhonesData;
-        final int creationDate = countryPhoneDataResponse.creationDate;
+        final AllPhoneResponse allPhoneResponse = waitList[0];
         final String countryIdByIp = waitList[1];
-
-        final CountryPhoneData countryPhoneByIp =
-            getCountryPhoneDataByIp(countryPhoneDataList, countryIdByIp);
-        final CountryPhoneData countryPhoneDataByIp = countryPhoneByIp != null
-            ? countryPhoneByIp
-            : getCountryPhoneDataByIp(topCountryPhoneDataList, countryIdByIp);
+        if (allPhoneResponse != null) {
+          countryPhoneDataList = allPhoneResponse.countryPhonesData;
+          topCountryPhoneDataList = allPhoneResponse.topCountryPhonesData;
+          creationDate = allPhoneResponse.creationDate;
+          countryPhoneData = getCountryPhone(
+              countryPhoneDataList, topCountryPhoneDataList, countryIdByIp);
+        } else {
+          countryPhoneData = getCountryPhoneDataByState(currentState);
+          countryPhoneDataList = getListCountryPhoneDataByState(currentState);
+          topCountryPhoneDataList =
+              getListTopCountryPhoneDataByState(currentState);
+          creationDate = getCreationDate(currentState);
+        }
 
         yield PhoneCountriesDataLoaded(countryPhoneDataList,
-            topCountryPhoneDataList, creationDate, countryPhoneDataByIp);
+            topCountryPhoneDataList, creationDate, countryPhoneData);
       } catch (error) {
         print('=> phone bloc error => $error');
         yield PhoneLoadingError(error: error.toString());
@@ -48,17 +54,49 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
     }
   }
 
+  CountryPhoneData getCountryPhone(List<CountryPhoneData> countryPhoneDataList,
+      List<CountryPhoneData> topCountryPhoneDataList, String countryIdByIp) {
+    final CountryPhoneData countryPhoneByIp =
+        getCountryPhoneDataByIp(countryPhoneDataList, countryIdByIp);
+    return countryPhoneByIp != null
+        ? countryPhoneByIp
+        : getCountryPhoneDataByIp(topCountryPhoneDataList, countryIdByIp);
+  }
+
+  int getCreationDate(PhoneState currentState) {
+    if (currentState is PhoneCountriesDataLoaded)
+      return currentState.creationDate;
+    else
+      return null;
+  }
+
+  CountryPhoneData getCountryPhoneDataByState(PhoneState currentState) {
+    if (currentState is PhoneCountriesDataLoaded)
+      return currentState.countryPhoneByIp;
+    else
+      return null;
+  }
+
+  List<CountryPhoneData> getListCountryPhoneDataByState(
+      PhoneState currentState) {
+    if (currentState is PhoneCountriesDataLoaded)
+      return currentState.countryData;
+    else
+      return null;
+  }
+
+  List<CountryPhoneData> getListTopCountryPhoneDataByState(
+      PhoneState currentState) {
+    if (currentState is PhoneCountriesDataLoaded)
+      return currentState.topCountryData;
+    else
+      return null;
+  }
+
   CountryPhoneData getCountryPhoneDataByIp(
       List<CountryPhoneData> list, String countryIdByIp) {
     final int index =
         list.indexWhere((CountryPhoneData it) => it.countryId == countryIdByIp);
     return index != -1 ? list[index] : null;
-  }
-
-  int getCountryPhoneData(PhoneState currentState) {
-    if (currentState is PhoneCountriesDataLoaded)
-      return currentState.creationDate;
-    else
-      return null;
   }
 }
