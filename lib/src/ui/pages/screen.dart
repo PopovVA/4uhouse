@@ -58,8 +58,8 @@ class _ScreenState extends State<Screen> {
     super.initState();
     screenBloc = ScreenBloc(
         screenRepository: ScreenRepository(), authRepository: AuthRepository());
-//        screenRepository: TestScreenRepository(),
-    //      authRepository: AuthRepository());
+ //      screenRepository: TestScreenRepository(),
+  //        authRepository: AuthRepository());
     scrollToId = widget.scrollToId;
     screenBloc.dispatch(ScreenRequested(query: widget.route));
   }
@@ -140,36 +140,33 @@ class _ScreenState extends State<Screen> {
       return RefreshIndicator(
         onRefresh: _refresh,
         color: Theme.of(context).primaryColor,
-        child: Ink(
-          height: double.infinity,
-          child: Stack(
-            children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      child: SingleChildScrollView(
-                        controller: widget.scrollController,
-                        child: Column(
-                          children: items,
-                        ),
+        child: Stack(
+          children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    child: SingleChildScrollView(
+                      controller: widget.scrollController,
+                      child: Column(
+                        children: items,
                       ),
                     ),
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: buttons,
-                    ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: buttons,
                   ),
-                ],
-              )
-            ],
-          ),
+                ),
+              ],
+            )
+          ],
         ),
       );
     }
