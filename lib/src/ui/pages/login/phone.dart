@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocBuilder, BlocListener, BlocListenerTree;
 import '../../../../src/utils/route_transition.dart' show SlideRoute;
+import '../../../../temp/resources/phone_repository_test.dart'
+    show TestPhoneRepository;
 import '../../../../temp/styled_text_controler.dart'
     show NumberOnlyTextEditingController;
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
@@ -21,6 +23,7 @@ import '../../../blocs/phone/phone_state.dart'
     PhoneUninitialized;
 import '../../../models/phone/country_phone_data.dart' show CountryPhoneData;
 import '../../../resources/auth_repository.dart' show AuthRepository;
+import '../../../resources/phone_repository.dart' show PhoneRepository;
 import '../../components/page_template.dart' show PageTemplate;
 import '../../components/pickers/phone/phone_picker.dart' show PhonePicker;
 import '../../components/styled/styled_alert_dialog.dart'
@@ -31,10 +34,9 @@ import '../../components/styled/styled_circular_progress.dart'
 import 'otp.dart' show OtpScreen;
 
 class PhoneScreen extends StatefulWidget {
-  const PhoneScreen({@required this.authBloc, @required this.phoneBloc});
+  const PhoneScreen({@required this.authBloc});
 
   final AuthBloc authBloc;
-  final PhoneBloc phoneBloc;
 
   @override
   _PhoneScreenState createState() => _PhoneScreenState();
@@ -45,6 +47,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
   bool isAgree = true;
   bool validPhone = false;
   LoginBloc _loginBloc;
+  PhoneBloc _phoneBloc;
   TextEditingController phoneController = NumberOnlyTextEditingController();
   String number;
 
@@ -75,7 +78,9 @@ class _PhoneScreenState extends State<PhoneScreen> {
   @override
   void initState() {
     super.initState();
-    widget.phoneBloc.dispatch(PhoneCountriesDataRequested());
+//    _phoneBloc = PhoneBloc(TestPhoneRepository());
+    _phoneBloc = PhoneBloc(PhoneRepository());
+    _phoneBloc.dispatch(PhoneCountriesDataRequested());
     _loginBloc = LoginBloc(widget.authBloc, AuthRepository());
     phoneController.addListener(_phoneListener);
   }
@@ -83,7 +88,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
   @override
   void dispose() {
     super.dispose();
-    widget.phoneBloc.dispose();
+    _phoneBloc.dispose();
   }
 
   void _showError(BuildContext context, dynamic state) {
@@ -120,7 +125,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                                   widget: OtpScreen(
                                       authBloc: widget.authBloc,
                                       loginBloc: _loginBloc,
-                                      phoneBloc: widget.phoneBloc,
+                                      phoneBloc: _phoneBloc,
                                       selectedItem: selectedItem,
                                       number: number),
                                   side: 'left'));
@@ -130,7 +135,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                         }
                       }),
                   BlocListener<PhoneEvent, PhoneState>(
-                    bloc: widget.phoneBloc,
+                    bloc: _phoneBloc,
                     listener: (BuildContext context, PhoneState state) {
                       print('===> state listener name  ${state.runtimeType}');
                       if (state is PhoneLoadingError) {
@@ -140,7 +145,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                   )
                 ],
                 child: BlocBuilder<PhoneEvent, PhoneState>(
-                    bloc: widget.phoneBloc,
+                    bloc: _phoneBloc,
                     builder: (BuildContext context, PhoneState state) {
                       return Column(
                         children: <Widget>[

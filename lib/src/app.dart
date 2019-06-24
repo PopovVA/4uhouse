@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocProvider;
 import 'package:meta/meta.dart' show required;
 import '../src/blocs/phone/phone_bloc.dart' show PhoneBloc;
-import '../temp/resources/phone_repository_test.dart' show TestPhoneRepository;
 import 'blocs/auth/auth_bloc.dart' show AuthBloc;
 import 'blocs/auth/auth_event.dart' show AppStarted;
-
 import 'pallete.dart' show accentColor, primaryColor;
 import 'resources/auth_repository.dart' show AuthRepository;
-import 'resources/phone_repository.dart' show PhoneRepository;
 import 'typography.dart' show customTextTheme;
 import 'ui/pages/home.dart' show HomeScreen;
 import 'ui/pages/login/phone.dart' show PhoneScreen;
@@ -25,7 +22,6 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   AuthBloc authBloc;
-  PhoneBloc phoneBloc;
 
   AuthRepository get authRepository => widget.authRepository;
 
@@ -35,8 +31,6 @@ class _AppState extends State<App> {
   void initState() {
     authBloc = AuthBloc(authRepository: authRepository);
     authBloc.dispatch(AppStarted());
-//    phoneBloc = PhoneBloc(TestPhoneRepository());
-    phoneBloc = PhoneBloc(PhoneRepository());
     super.initState();
   }
 
@@ -56,8 +50,7 @@ class _AppState extends State<App> {
             accentColor: accentColor,
             primaryColor: primaryColor,
             textTheme: customTextTheme),
-//        home: const HomeScreen(route: rootPage),
-        home: PhoneScreen(authBloc: authBloc, phoneBloc: phoneBloc),
+        home: const HomeScreen(route: rootPage),
         onGenerateRoute: (RouteSettings settings) {
           final String name = settings.name;
           switch (name) {
