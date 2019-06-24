@@ -3,7 +3,7 @@ import 'package:meta/meta.dart' show required;
 
 import 'package:http/http.dart' as http;
 
-import '../generic/user_data/user_data.dart' show UserData;
+import 'generic/user_data/user_data.dart' show UserData;
 
 class ScreenApi extends UserData {
   Future<Map<String, dynamic>> fetchScreen(

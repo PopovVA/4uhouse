@@ -17,11 +17,11 @@ class Api {
 
   final String authHeaderKey = 'Authorization';
 
-  bool isValidToken(String token) => token is String && token.isNotEmpty;
+  bool isTokenFormat(String token) => token is String && token.isNotEmpty;
 
   String formToken(String token) => 'Bearer $token';
 
-  Map<String, String> makeHeaders(String token) => isValidToken(token)
+  Map<String, String> makeHeaders(String token) => isTokenFormat(token)
       ? <String, String>{'$authHeaderKey': formToken(token)}
       : null;
 

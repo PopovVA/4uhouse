@@ -1,7 +1,7 @@
 import 'dart:async' show Future;
 import 'package:http/http.dart' as http;
 
-import '../../models/location.dart' show Location;
+import '../../models/phone/location.dart' show Location;
 import '../../models/phone/phone_all_response.dart' show AllPhoneResponse;
 import './constants/url.dart' show BASE_URL;
 import 'generic/api.dart' show Api;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder, BlocListener;
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
 
 import '../../blocs/component/component_bloc.dart' show ComponentBloc;
@@ -92,35 +92,40 @@ class _ScreenState extends State<Screen> {
       final List<Button> buttons = <Button>[];
       for (dynamic component in data.components) {
         switch (component.runtimeType) {
-          case NoteModel: {
-            items.add(Note(component));
-            break;
-          }
+          case NoteModel:
+            {
+              items.add(Note(component));
+              break;
+            }
 
-          case ItemModel: {
-            items.add(Item(
-              component,
-              data.path,
-              makeTransition,
-              screenBloc,
-            ));
-            break;
-          }
+          case ItemModel:
+            {
+              items.add(Item(
+                component,
+                data.path,
+                makeTransition,
+                screenBloc,
+              ));
+              break;
+            }
 
-          case PropertyModel: {
-            items.add(PropertyCard(component,
-                makeTransition: component.isTransition ? makeTransition : null));
-            break;
-          }
+          case PropertyModel:
+            {
+              items.add(PropertyCard(component,
+                  makeTransition:
+                      component.isTransition ? makeTransition : null));
+              break;
+            }
 
-          case ButtonModel: {
-            buttons.add(Button(
-              component,
-              data.path,
-              screenBloc,
-            ));
-            break;
-          }
+          case ButtonModel:
+            {
+              buttons.add(Button(
+                component,
+                data.path,
+                screenBloc,
+              ));
+              break;
+            }
         }
       }
 
