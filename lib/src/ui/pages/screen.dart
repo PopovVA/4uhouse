@@ -57,9 +57,9 @@ class _ScreenState extends State<Screen> {
   void initState() {
     super.initState();
     screenBloc = ScreenBloc(
-//        screenRepository: ScreenRepository(), authRepository: AuthRepository());
-        screenRepository: TestScreenRepository(),
-        authRepository: AuthRepository());
+        screenRepository: ScreenRepository(), authRepository: AuthRepository());
+//        screenRepository: TestScreenRepository(),
+//        authRepository: AuthRepository());
     scrollToId = widget.scrollToId;
     screenBloc.dispatch(ScreenRequested(query: widget.route));
   }
