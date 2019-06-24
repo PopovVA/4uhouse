@@ -28,7 +28,7 @@ class PropertyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 6.0),
+      margin: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 8),
       child: Ink(
         decoration: BoxDecoration(
             color: Colors.white,
@@ -52,10 +52,10 @@ class PropertyCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(30.0),
               onTap: property.isTransition
                   ? () {
-                if (makeTransition is Function) {
-                  makeTransition(context, property.id);
-                }
-              }
+                      if (makeTransition is Function) {
+                        makeTransition(context, property.id);
+                      }
+                    }
                   : null,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
