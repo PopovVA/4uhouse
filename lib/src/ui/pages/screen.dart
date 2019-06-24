@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder, BlocListener;
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
-
+import '../../../temp/resources/screen_repository_test.dart'
+    show TestScreenRepository;
 import '../../blocs/component/component_bloc.dart' show ComponentBloc;
 import '../../blocs/screen/screen_bloc.dart' show ScreenBloc;
 import '../../blocs/screen/screen_event.dart' show ScreenEvent, ScreenRequested;
@@ -15,8 +16,6 @@ import '../../models/screen/components/property_model.dart' show PropertyModel;
 import '../../models/screen/screen_model.dart' show ScreenModel;
 import '../../resources/auth_repository.dart' show AuthRepository;
 import '../../resources/screen_repository.dart' show ScreenRepository;
-import '../../../temp/resources/screen_repository_test.dart'
-    show TestScreenRepository;
 import '../../utils/show_alert.dart' show showError;
 
 import '../components/button.dart' show Button;
@@ -58,10 +57,9 @@ class _ScreenState extends State<Screen> {
   void initState() {
     super.initState();
     screenBloc = ScreenBloc(
-//        screenRepository: ScreenRepository(),
+        screenRepository: ScreenRepository(), authRepository: AuthRepository());
+//        screenRepository: TestScreenRepository(),
 //        authRepository: AuthRepository());
-        screenRepository: TestScreenRepository(),
-        authRepository: AuthRepository());
     scrollToId = widget.scrollToId;
     screenBloc.dispatch(ScreenRequested(query: widget.route));
   }
@@ -163,15 +161,15 @@ class _ScreenState extends State<Screen> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: buttons,
-                    ),
-                  ),
                 ],
-              )
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: buttons,
+                ),
+              ),
             ],
           ),
         ),
