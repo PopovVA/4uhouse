@@ -10,7 +10,7 @@ class PhoneApi extends Api {
   Future<dynamic> requestCountriesPhoneData(int creationDate) async {
     try {
       final String creationDateResponse =
-          creationDate != null ? '?creationDate=$creationDate' : '';
+      creationDate != null ? '?creationDate=$creationDate' : '';
       final http.Response response = await client
           .get('${BASE_URL}auth/country-phones-data$creationDateResponse');
       if (response.statusCode == 200) {

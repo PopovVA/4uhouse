@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocBuilder, BlocListener, BlocListenerTree;
-
-import '../../../../src/utils/route_transition.dart' show SlideRoute;
+import '../../../../src/models/phone/country_phone_data.dart'
+    show CountryPhoneData;
 import '../../../../temp/styled_text_controler.dart';
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../../blocs/auth/auth_event.dart' show AuthEvent;
@@ -18,8 +18,9 @@ import '../../../blocs/login/login_state.dart'
     OtpSent,
     PhoneEntering,
     PhoneError;
-import 'package:user_mobile/src/models/phone/country_phone_data.dart' show CountryPhoneData;
-
+import '../../../blocs/phone/phone_bloc.dart' show PhoneBloc;
+import '../../../blocs/phone/phone_event.dart'
+    show PhoneEvent, PhoneCountriesDataRequested;
 import '../../components/page_template.dart' show PageTemplate;
 import '../../components/styled/styled_alert_dialog.dart'
     show StyledAlertDialog;
@@ -29,15 +30,15 @@ import '../../components/styled/styled_text_field.dart' show StyledTextField;
 class OtpScreen extends StatefulWidget {
   const OtpScreen({@required this.authBloc,
     @required this.loginBloc,
+    @required this.phoneBloc,
       @required this.selectedItem,
-    @required this.number,
-      this.previousRoute});
+    @required this.number});
 
   final AuthBloc authBloc;
   final LoginBloc loginBloc;
   final CountryPhoneData selectedItem;
   final String number;
-  final SlideRoute previousRoute;
+  final PhoneBloc phoneBloc;
 
   @override
   _OtpScreenState createState() => _OtpScreenState();
@@ -77,6 +78,7 @@ class _OtpScreenState extends State<OtpScreen> {
     return PageTemplate(
         goBack: () {
           widget.loginBloc.dispatch(CodeEnteringCanceled());
+          widget.phoneBloc.dispatch(PhoneCountriesDataRequested());
         },
         title: 'Confirm',
         body: Container(

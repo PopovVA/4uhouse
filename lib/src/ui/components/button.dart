@@ -62,11 +62,11 @@ class _ButtonState extends State<Button> {
             text: button.key.toUpperCase(),
             onPressed: button.isAble
                 ? () async {
-                    componentBloc.dispatch(SendingComponentValueRequested(
-                      route: '${widget.path}/${button.id}',
-                      value: button.typeQuery == 'PUT' ? button.value : null,
-                    ));
-                  }
+              componentBloc.dispatch(SendingComponentValueRequested(
+                route: '${widget.path}/${button.id}',
+                value: button.typeQuery == 'PUT' ? button.value : null,
+              ));
+            }
                 : null,
             loading: state is ComponentIsFetching,
           );

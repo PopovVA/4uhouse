@@ -21,9 +21,10 @@ class Api {
 
   String formToken(String token) => 'Bearer $token';
 
-  Map<String, String> makeHeaders(String token) => isTokenFormat(token)
-      ? <String, String>{'$authHeaderKey': formToken(token)}
-      : null;
+  Map<String, String> makeHeaders(String token) =>
+      isTokenFormat(token)
+          ? <String, String>{'$authHeaderKey': formToken(token)}
+          : null;
 
   Future<dynamic> processResponse(http.BaseResponse response) async {
     print('===> response.statusCode: ${response.statusCode}');
@@ -58,7 +59,7 @@ class Api {
       final Map<String, dynamic> parsedResponse = await processResponse(object);
       final String description = parsedResponse['error_description'];
       final String message =
-          description is String ? description : parsedResponse['message'];
+      description is String ? description : parsedResponse['message'];
 
       if (statusCode == 401) {
         return AuthError(message);
@@ -73,7 +74,7 @@ class Api {
 
   Future<bool> _checkInternet() async {
     final ConnectivityResult connectivityResult =
-        await Connectivity().checkConnectivity();
+    await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile) {
       return true;
     } else if (connectivityResult == ConnectivityResult.wifi) {
