@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder, BlocListener;
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
+import 'package:user_mobile/temp/resources/screen_repository_test.dart';
 
 import '../../blocs/component/component_bloc.dart' show ComponentBloc;
 import '../../blocs/screen/screen_bloc.dart' show ScreenBloc;
@@ -58,7 +59,7 @@ class _ScreenState extends State<Screen> {
     screenBloc = ScreenBloc(
         screenRepository: ScreenRepository(), authRepository: AuthRepository());
 //        screenRepository: TestScreenRepository(),
-//        authRepository: AuthRepository());
+    //      authRepository: AuthRepository());
     scrollToId = widget.scrollToId;
     screenBloc.dispatch(ScreenRequested(query: widget.route));
   }
@@ -112,7 +113,7 @@ class _ScreenState extends State<Screen> {
             {
               items.add(PropertyCard(component,
                   makeTransition:
-                  component.isTransition ? makeTransition : null));
+                      component.isTransition ? makeTransition : null));
               break;
             }
 
@@ -130,7 +131,7 @@ class _ScreenState extends State<Screen> {
 
       if (scrollToId is String) {
         final dynamic scrollItemList =
-        items.where((dynamic item) => item.id == scrollToId).toList();
+            items.where((dynamic item) => item.id == scrollToId).toList();
         scrollItemKey = scrollItemList.isEmpty ? null : scrollItemList[0].key;
         SchedulerBinding.instance
             .addPostFrameCallback((_) => _scrollToItem(scrollItemKey));
@@ -138,12 +139,9 @@ class _ScreenState extends State<Screen> {
 
       return RefreshIndicator(
         onRefresh: _refresh,
-        color: Theme
-            .of(context)
-            .primaryColor,
+        color: Theme.of(context).primaryColor,
         child: Ink(
           height: double.infinity,
-          padding: const EdgeInsets.only(right: 8.0, left: 8.0),
           child: Stack(
             children: <Widget>[
               Column(
@@ -161,7 +159,8 @@ class _ScreenState extends State<Screen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: buttons,
@@ -186,7 +185,7 @@ class _ScreenState extends State<Screen> {
           path.substring(0, path.lastIndexOf('/')),
           arguments: <String, String>{
             'scrollToId':
-            widget.route.substring(widget.route.lastIndexOf('/') + 1),
+                widget.route.substring(widget.route.lastIndexOf('/') + 1),
           },
         );
       };
