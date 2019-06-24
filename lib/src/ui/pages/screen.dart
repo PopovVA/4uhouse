@@ -15,6 +15,8 @@ import '../../models/screen/components/property_model.dart' show PropertyModel;
 import '../../models/screen/screen_model.dart' show ScreenModel;
 import '../../resources/auth_repository.dart' show AuthRepository;
 import '../../resources/screen_repository.dart' show ScreenRepository;
+import '../../../temp/resources/screen_repository_test.dart'
+    show TestScreenRepository;
 import '../../utils/show_alert.dart' show showError;
 
 import '../components/button.dart' show Button;
@@ -56,9 +58,10 @@ class _ScreenState extends State<Screen> {
   void initState() {
     super.initState();
     screenBloc = ScreenBloc(
-        screenRepository: ScreenRepository(), authRepository: AuthRepository());
-//        screenRepository: TestScreenRepository(),
+//        screenRepository: ScreenRepository(),
 //        authRepository: AuthRepository());
+        screenRepository: TestScreenRepository(),
+        authRepository: AuthRepository());
     scrollToId = widget.scrollToId;
     screenBloc.dispatch(ScreenRequested(query: widget.route));
   }
