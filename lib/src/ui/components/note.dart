@@ -30,7 +30,7 @@ class Note extends StatelessWidget {
         color: Color(color),
         border: const Border(
           left: BorderSide(
-            color:  Color(0xFFd24444),
+            color: Color(0xFFd24444),
             width: 4.0,
           ),
           bottom: BorderSide(

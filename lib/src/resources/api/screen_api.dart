@@ -10,8 +10,8 @@ class ScreenApi extends UserData {
       {@required String query, String token}) async {
     try {
       print('===> screen request: ${getUrl(token, query)}');
-      final http.Response response = await client.get(getUrl(token, query),
-          headers: makeHeaders(token));
+      final http.Response response =
+          await client.get(getUrl(token, query), headers: makeHeaders(token));
 
       print(response.body.toString());
       if (response.statusCode == 200) {

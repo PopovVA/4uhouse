@@ -8,10 +8,10 @@ import '../../blocs/component/component_bloc.dart' show ComponentBloc;
 import '../../blocs/component/component_event.dart' show ComponentEvent;
 import '../../blocs/component/component_state.dart'
     show
-        ComponentState,
-        ComponentIsFetching,
-        ComponentFetchingSuccess,
-        ComponentFetchingError;
+    ComponentState,
+    ComponentIsFetching,
+    ComponentFetchingSuccess,
+    ComponentFetchingError;
 import '../../models/screen/components/item_model.dart';
 import '../../models/screen/components/item_model.dart' show ItemModel;
 import '../../utils/show_alert.dart' show showError;
@@ -97,7 +97,8 @@ class _DataEntryState extends State<DataEntry> {
     }
   }
 
-  Function _handleSubmit(BuildContext context) => () async {
+  Function _handleSubmit(BuildContext context) =>
+          () async {
         dynamic value;
         switch (widget.item.typeValue) {
           case 'money':

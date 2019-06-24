@@ -68,7 +68,8 @@ class _ItemState extends State<Item> {
     ));
   }
 
-  Function onTap(BuildContext context) => () {
+  Function onTap(BuildContext context) =>
+          () {
         final ItemModel item = widget.item;
         if (item.isTransition) {
           widget.makeTransition(context, item.id);
