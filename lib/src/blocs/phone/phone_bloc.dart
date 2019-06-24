@@ -68,11 +68,4 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
     else
       return null;
   }
-
-  CountryPhoneData getCountryData(PhoneState state) {
-    final int index = state.props.indexWhere((dynamic data) {
-      return data == null;
-    });
-    return index != -1 || index != 0 ? state.props[index - 1] : null;
-  }
 }
