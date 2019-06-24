@@ -202,7 +202,10 @@ class _ScreenState extends State<Screen> {
     }
 
     return SingleChildScrollView(
-      child: const StyledCircularProgress(),
+      child:
+      Container(
+          height: MediaQuery.of(context).size.height,
+          child: const StyledCircularProgress()),
     );
   }
 
