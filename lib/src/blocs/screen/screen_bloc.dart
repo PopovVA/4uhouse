@@ -8,11 +8,11 @@ import '../../resources/screen_repository.dart' show ScreenRepository;
 import 'screen_event.dart' show ScreenEvent, ScreenRequested, ScreenReceived;
 import 'screen_state.dart'
     show
-        ScreenDataLoaded,
-        ScreenDataLoadingError,
-        ScreenLoading,
-        ScreenState,
-        ScreenUninitialized;
+    ScreenDataLoaded,
+    ScreenDataLoadingError,
+    ScreenLoading,
+    ScreenState,
+    ScreenUninitialized;
 
 class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
   ScreenBloc({@required this.authRepository, @required this.screenRepository});

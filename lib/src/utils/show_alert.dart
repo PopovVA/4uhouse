@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../ui/components/styled/styled_alert_dialog.dart' show StyledAlertDialog;
+import '../ui/components/styled/styled_alert_dialog.dart'
+    show StyledAlertDialog;
 
 void showError(BuildContext context, dynamic state) {
   showDialog(
