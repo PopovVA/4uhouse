@@ -17,11 +17,11 @@ import '../../../blocs/phone/phone_event.dart'
     show PhoneEvent, PhoneCountriesDataRequested;
 import '../../../blocs/phone/phone_state.dart'
     show
-        PhoneCountriesDataLoaded,
-        PhoneLoading,
-        PhoneLoadingError,
-        PhoneState,
-        PhoneUninitialized;
+    PhoneCountriesDataLoaded,
+    PhoneLoading,
+    PhoneLoadingError,
+    PhoneState,
+    PhoneUninitialized;
 import '../../../models/phone/country_phone_data.dart' show CountryPhoneData;
 import '../../../resources/auth_repository.dart' show AuthRepository;
 import '../../../resources/phone_repository.dart' show PhoneRepository;
@@ -73,8 +73,8 @@ class _PhoneScreenState extends State<PhoneScreen> {
 
   bool _validLength(List<int> lengthList, int length) {
     return lengthList.firstWhere((int item) => item == length,
-                orElse: () => 0) >
-            0
+        orElse: () => 0) >
+        0
         ? true
         : false;
   }
@@ -158,7 +158,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                           if (state is PhoneCountriesDataLoaded)
                             Container(
                               margin:
-                                  const EdgeInsets.symmetric(horizontal: 24.0),
+                              const EdgeInsets.symmetric(horizontal: 24.0),
                               child: _buildPhonePicker(state),
                             ),
                           if (state is PhoneLoadingError)
@@ -242,22 +242,22 @@ class _PhoneScreenState extends State<PhoneScreen> {
         builder: (BuildContext context, LoginState state) {
           return Container(
               child: Expanded(
-            child: Align(
-              alignment: FractionalOffset.bottomCenter,
-              child: StyledButton(
-                loading: state is IsFetchingOtp,
-                onPressed: isAgree && validPhone
-                    ? () {
-                        _loginBloc.dispatch(OtpRequested(
-                            countryId: selectedItem.countryId,
-                            code: selectedItem.code,
-                            number: number));
-                      }
-                    : null,
-                text: 'Submit',
-              ),
-            ),
-          ));
+                child: Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: StyledButton(
+                    loading: state is IsFetchingOtp,
+                    onPressed: isAgree && validPhone
+                        ? () {
+                      _loginBloc.dispatch(OtpRequested(
+                          countryId: selectedItem.countryId,
+                          code: selectedItem.code,
+                          number: number));
+                    }
+                        : null,
+                    text: 'Submit',
+                  ),
+                ),
+              ));
         });
   }
 }
