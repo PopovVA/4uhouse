@@ -29,16 +29,14 @@ class PropertyState extends State<PropertyFooter> {
   TextStyle addInfoStyle;
   TextStyle mainValueStyle;
 
+  Color get color => widget.isInput ? ACTIVE_COLOR : DISABLED_COLOR;
+
   @override
   void initState() {
     super.initState();
-    addInfoStyle = TextStyle(fontSize: 14.0, color: getColor());
-    mainValueStyle = TextStyle(
-        fontSize: 20.0, fontWeight: FontWeight.w500, color: getColor());
-  }
-
-  Color getColor() {
-    return widget.isInput ? ACTIVE_COLOR : DISABLED_COLOR;
+    addInfoStyle = TextStyle(fontSize: 14.0, color: color);
+    mainValueStyle =
+        TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500, color: color);
   }
 
   Widget buildMainValue(int value, double padding,

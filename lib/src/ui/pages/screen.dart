@@ -6,8 +6,13 @@ import '../../blocs/component/component_bloc.dart' show ComponentBloc;
 import '../../blocs/screen/screen_bloc.dart' show ScreenBloc;
 import '../../blocs/screen/screen_event.dart' show ScreenEvent, ScreenRequested;
 import '../../blocs/screen/screen_state.dart'
-    show ScreenDataLoaded, ScreenDataLoadingError, ScreenState;
+    show
+        ScreenDataLoaded,
+        ScreenDataLoadingError,
+        ScreenAuthorizationError,
+        ScreenState;
 
+import '../../constants/navigation.dart' show loginPage;
 import '../../models/screen/components/button_model.dart' show ButtonModel;
 import '../../models/screen/components/item_model.dart' show ItemModel;
 import '../../models/screen/components/note_model.dart' show NoteModel;
@@ -210,6 +215,11 @@ class _ScreenState extends State<Screen> {
     return BlocListener<ScreenEvent, ScreenState>(
         bloc: screenBloc,
         listener: (BuildContext context, ScreenState state) {
+          if (state is ScreenAuthorizationError) {
+            Navigator.of(context).pushReplacementNamed(loginPage,
+                arguments: <String, String>{'returnTo': widget.route});
+          }
+
           if (state is ScreenDataLoadingError) {
             showError(context, state);
           }

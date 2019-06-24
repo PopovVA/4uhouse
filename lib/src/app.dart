@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocProvider;
 import 'package:meta/meta.dart' show required;
+
 import 'blocs/auth/auth_bloc.dart' show AuthBloc;
 import 'blocs/auth/auth_event.dart' show AppStarted;
+import 'constants/navigation.dart' show rootPage, loginPage;
 import 'pallete.dart' show accentColor, primaryColor;
 import 'resources/auth_repository.dart' show AuthRepository;
 import 'typography.dart' show customTextTheme;
+
 import 'ui/pages/home.dart' show HomeScreen;
 import 'ui/pages/login/phone.dart' show PhoneScreen;
 import 'ui/pages/screen.dart' show Screen;
@@ -23,8 +26,6 @@ class _AppState extends State<App> {
   AuthBloc authBloc;
 
   AuthRepository get authRepository => widget.authRepository;
-
-  static const String rootPage = 'user/property';
 
   @override
   void initState() {
@@ -52,11 +53,20 @@ class _AppState extends State<App> {
         home: const HomeScreen(route: rootPage),
         onGenerateRoute: (RouteSettings settings) {
           final String name = settings.name;
+          final Map<String, dynamic> arguments = settings.arguments;
+          print('===> NAME: ${name}');
           switch (name) {
             case rootPage:
               return MaterialPageRoute<HomeScreen>(
                 builder: (BuildContext context) =>
-                    HomeScreen(route: name, arguments: settings.arguments),
+                    HomeScreen(route: name, arguments: arguments),
+              );
+            case loginPage:
+              return MaterialPageRoute<HomeScreen>(
+                builder: (BuildContext context) => PhoneScreen(
+                  authBloc: authBloc,
+                  arguments: arguments,
+                ),
               );
             default:
               return MaterialPageRoute<Screen>(

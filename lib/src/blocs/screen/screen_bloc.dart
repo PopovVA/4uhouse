@@ -1,7 +1,8 @@
-import 'package:bloc/bloc.dart';
+import 'package:bloc/bloc.dart' show Bloc;
 import 'package:meta/meta.dart' show required;
 //import '../../../temp/screen_repository_test.dart';
 
+import '../../../src/models/errors/auth_error.dart' show AuthError;
 import '../../../src/models/screen/screen_model.dart' show ScreenModel;
 import '../../resources/auth_repository.dart' show AuthRepository;
 import '../../resources/screen_repository.dart' show ScreenRepository;
@@ -10,6 +11,7 @@ import 'screen_state.dart'
     show
     ScreenDataLoaded,
     ScreenDataLoadingError,
+    ScreenAuthorizationError,
     ScreenLoading,
     ScreenState,
     ScreenUninitialized;
@@ -34,7 +36,11 @@ class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
         yield ScreenDataLoaded(data);
       } catch (error) {
         print('===> screen bloc error: $error');
-        yield ScreenDataLoadingError(error.toString());
+        if (error is AuthError) {
+          yield ScreenAuthorizationError();
+        } else {
+          yield ScreenDataLoadingError(error.toString());
+        }
       }
     }
 

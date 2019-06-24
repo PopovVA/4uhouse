@@ -37,3 +37,8 @@ class ScreenDataLoadingError extends ScreenState {
   @override
   String toString() => error;
 }
+
+class ScreenAuthorizationError extends ScreenState {
+  @override
+  String toString() => 'ScreenAuthorizationError';
+}

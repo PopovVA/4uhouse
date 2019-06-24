@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocBuilder, BlocListener, BlocListenerTree;
+
 import '../../../../src/utils/route_transition.dart' show SlideRoute;
-import '../../../../temp/resources/phone_repository_test.dart'
-    show TestPhoneRepository;
 import '../../../../temp/styled_text_controler.dart'
     show NumberOnlyTextEditingController;
+import '../../../../temp/resources/phone_repository_test.dart'
+    show TestPhoneRepository;
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../../blocs/login/login_bloc.dart' show LoginBloc;
 import '../../../blocs/login/login_event.dart' show LoginEvent, OtpRequested;
@@ -24,19 +25,25 @@ import '../../../blocs/phone/phone_state.dart'
 import '../../../models/phone/country_phone_data.dart' show CountryPhoneData;
 import '../../../resources/auth_repository.dart' show AuthRepository;
 import '../../../resources/phone_repository.dart' show PhoneRepository;
+import '../../../utils/show_alert.dart' show showError;
 import '../../components/page_template.dart' show PageTemplate;
 import '../../components/pickers/phone/phone_picker.dart' show PhonePicker;
-import '../../components/styled/styled_alert_dialog.dart'
-    show StyledAlertDialog;
 import '../../components/styled/styled_button.dart' show StyledButton;
 import '../../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
+
 import 'otp.dart' show OtpScreen;
 
 class PhoneScreen extends StatefulWidget {
-  const PhoneScreen({@required this.authBloc});
+  factory PhoneScreen({AuthBloc authBloc, Map<String, dynamic> arguments}) {
+    final String returnTo = arguments != null ? arguments['returnTo'] : null;
+    return PhoneScreen._(authBloc: authBloc, returnTo: returnTo);
+  }
+
+  const PhoneScreen._({@required this.authBloc, this.returnTo});
 
   final AuthBloc authBloc;
+  final String returnTo;
 
   @override
   _PhoneScreenState createState() => _PhoneScreenState();
@@ -93,19 +100,6 @@ class _PhoneScreenState extends State<PhoneScreen> {
     _phoneBloc.dispose();
   }
 
-  void _showError(BuildContext context, dynamic state) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return StyledAlertDialog(
-            content: state.toString(),
-            onOk: () {
-              Navigator.of(context).pop();
-            },
-          );
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     return PageTemplate(
@@ -128,23 +122,24 @@ class _PhoneScreenState extends State<PhoneScreen> {
                               context,
                               SlideRoute(
                                   widget: OtpScreen(
-                                      authBloc: widget.authBloc,
-                                      loginBloc: _loginBloc,
-                                      phoneBloc: _phoneBloc,
-                                      selectedItem: selectedItem,
-                                      number: number),
+                                    authBloc: widget.authBloc,
+                                    loginBloc: _loginBloc,
+                                    phoneBloc: _phoneBloc,
+                                    selectedItem: selectedItem,
+                                    number: number,
+                                    returnTo: widget.returnTo,
+                                  ),
                                   side: 'left'));
                         }
                         if (state is PhoneError) {
-                          _showError(context, state);
+                          showError(context, state);
                         }
                       }),
                   BlocListener<PhoneEvent, PhoneState>(
                     bloc: _phoneBloc,
                     listener: (BuildContext context, PhoneState state) {
-                      print('===> state listener name  ${state.runtimeType}');
                       if (state is PhoneLoadingError) {
-                        _showError(context, state);
+                        showError(context, state);
                       }
                     },
                   )

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocBuilder, BlocListener, BlocListenerTree;
-import '../../../../src/models/phone/country_phone_data.dart'
-    show CountryPhoneData;
+
 import '../../../../temp/styled_text_controler.dart';
+import '../../../models/phone/country_phone_data.dart' show CountryPhoneData;
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../../blocs/auth/auth_event.dart' show AuthEvent;
 import '../../../blocs/auth/auth_state.dart' show AuthState, AuthAuthorized;
@@ -12,33 +12,36 @@ import '../../../blocs/login/login_event.dart'
     show CodeEnteringCanceled, LoginEvent, SubmitCodeTapped;
 import '../../../blocs/login/login_state.dart'
     show
-    CodeError,
-    IsFetchingCode,
-    LoginState,
-    OtpSent,
-    PhoneEntering,
-    PhoneError;
+        CodeError,
+        IsFetchingCode,
+        LoginState,
+        OtpSent,
+        PhoneEntering,
+        PhoneError;
 import '../../../blocs/phone/phone_bloc.dart' show PhoneBloc;
-import '../../../blocs/phone/phone_event.dart'
-    show PhoneEvent, PhoneCountriesDataRequested;
+import '../../../blocs/phone/phone_event.dart' show PhoneCountriesDataRequested;
+import '../../../constants/navigation.dart' show rootPage;
+import '../../../utils/show_alert.dart' show showError;
+
 import '../../components/page_template.dart' show PageTemplate;
-import '../../components/styled/styled_alert_dialog.dart'
-    show StyledAlertDialog;
 import '../../components/styled/styled_button.dart' show StyledButton;
 import '../../components/styled/styled_text_field.dart' show StyledTextField;
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({@required this.authBloc,
-    @required this.loginBloc,
-    @required this.phoneBloc,
+  const OtpScreen(
+      {@required this.authBloc,
+      @required this.loginBloc,
+      @required this.phoneBloc,
       @required this.selectedItem,
-    @required this.number});
+      @required this.number,
+      this.returnTo});
 
   final AuthBloc authBloc;
   final LoginBloc loginBloc;
   final CountryPhoneData selectedItem;
   final String number;
   final PhoneBloc phoneBloc;
+  final String returnTo;
 
   @override
   _OtpScreenState createState() => _OtpScreenState();
@@ -59,20 +62,6 @@ class _OtpScreenState extends State<OtpScreen> {
     setState(() {});
   }
 
-  void _showError(BuildContext context, LoginState state) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return StyledAlertDialog(
-            content: state.toString(),
-            onOk: () {
-              Navigator.of(context)
-                  .popUntil(ModalRoute.withName(Navigator.defaultRouteName));
-            },
-          );
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     return PageTemplate(
@@ -91,9 +80,13 @@ class _OtpScreenState extends State<OtpScreen> {
                 listener: (BuildContext context, AuthState state) {
                   if (state is AuthAuthorized) {
                     // Убиваем оба рута (страница ввода номера телефона, страница ввода sms-кода).
-                    Navigator.of(context)
-                        .removeRouteBelow(ModalRoute.of(context));
-                    Navigator.of(context).removeRoute(ModalRoute.of(context));
+                    print('===> returnTo: ${widget.returnTo}');
+                    print(
+                        '===> widget.returnTo is String ? widget.returnTo : rootPage: ${widget.returnTo is String ? widget.returnTo : rootPage}');
+                    Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        widget.returnTo is String ? widget.returnTo : rootPage,
+                        (Route<dynamic> route) => false);
                   }
                 },
               ),
@@ -101,12 +94,12 @@ class _OtpScreenState extends State<OtpScreen> {
                 bloc: widget.loginBloc,
                 listener: (BuildContext context, LoginState state) {
                   if (state is PhoneError || state is CodeError) {
-                    _showError(context, state);
+                    showError(context, state);
                   }
 
                   if (state is CodeError) {
                     code.clear();
-                    _showError(context, state);
+                    showError(context, state);
                   }
 
                   if (state is PhoneEntering) {
@@ -172,10 +165,10 @@ class _OtpScreenState extends State<OtpScreen> {
           onPressed: isFetchingCode == false && code.text.length != maxLength
               ? null
               : () {
-            widget.loginBloc.dispatch(SubmitCodeTapped(
-                code: widget.selectedItem.code,
-                number: widget.number,
-                otp: code.text));
+                  widget.loginBloc.dispatch(SubmitCodeTapped(
+                      code: widget.selectedItem.code,
+                      number: widget.number,
+                      otp: code.text));
                 },
           text: 'Send',
         ),
@@ -190,9 +183,7 @@ class _OtpScreenState extends State<OtpScreen> {
         autofocus: true,
         borderColor: code.text.length != maxLength
             ? Colors.redAccent
-            : Theme
-            .of(context)
-            .primaryColor,
+            : Theme.of(context).primaryColor,
         controller: code,
         textAlign: TextAlign.center,
         maxLength: maxLength,
