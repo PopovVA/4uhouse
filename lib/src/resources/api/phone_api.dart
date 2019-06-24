@@ -14,8 +14,10 @@ class PhoneApi extends Api {
       final http.Response response = await client
           .get('${BASE_URL}auth/country-phones-data$creationDateResponse');
       if (response.statusCode == 200) {
-        return AllPhoneResponse.fromJson(await processResponse(response));
+        final List<dynamic> body = await processResponse(response);
+        return AllPhoneResponse.fromJson(body[0]);
       } else if (response.statusCode == 204) {
+        // do nothing
       } else {
         throw response;
       }

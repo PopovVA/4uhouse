@@ -8,7 +8,6 @@ import '../../blocs/screen/screen_event.dart' show ScreenEvent, ScreenRequested;
 import '../../blocs/screen/screen_state.dart'
     show ScreenDataLoaded, ScreenDataLoadingError, ScreenState;
 
-import '../../constants/layout.dart' show standardHorizontalPadding;
 import '../../models/screen/components/button_model.dart' show ButtonModel;
 import '../../models/screen/components/item_model.dart' show ItemModel;
 import '../../models/screen/components/note_model.dart' show NoteModel;
@@ -141,30 +140,33 @@ class _ScreenState extends State<Screen> {
         onRefresh: _refresh,
         color: Theme.of(context).primaryColor,
         child: Ink(
-          color: const Color(0xFFEBECED),
           height: double.infinity,
           padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
             children: <Widget>[
-              Expanded(
-                child: Container(
-                  child: SingleChildScrollView(
-                    controller: widget.scrollController,
-                    child: Column(
-                      children: items,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      child: SingleChildScrollView(
+                        controller: widget.scrollController,
+                        child: Column(
+                          children: items,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-              Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: standardHorizontalPadding),
-                child: Column(
-                  children: buttons,
-                ),
-              ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: buttons,
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),
