@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../models/phone/country_phone_data.dart';
 import '../../models/phone/phone_all_response.dart';
 import '../../resources/phone_repository.dart';
@@ -10,6 +9,8 @@ import 'phone_state.dart';
 class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
   PhoneBloc(this.repository);
 
+  List<CountryPhoneData> list = <CountryPhoneData>[];
+
   PhoneRepository repository;
 
   @override
@@ -17,7 +18,6 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
 
   @override
   Stream<PhoneState> mapEventToState(PhoneEvent event) async* {
-    final FlutterSecureStorage storage = FlutterSecureStorage();
     if (event is PhoneCountriesDataRequested) {
       yield PhoneLoading();
       try {
@@ -37,17 +37,14 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
         CountryPhoneData countryPhoneData = getCountryPhone(
             countryPhoneDataList, topCountryPhoneDataList, countryIdByIp);
 
-        if (countryPhoneData == null) {
-          final String countryIdByIp = await storage.read(key: 'countryId');
-          countryPhoneData = getCountryPhone(
-              countryPhoneDataList, topCountryPhoneDataList, countryIdByIp);
+        if (countryPhoneData == null && list.isNotEmpty) {
+          countryPhoneData = list[list.length - 1];
         } else {
-          await storage.write(
-              key: 'countryId', value: countryPhoneData.countryId);
+          list.add(countryPhoneData);
         }
 
         yield PhoneCountriesDataLoaded(countryPhoneDataList,
-            topCountryPhoneDataList, creationDate, countryPhoneData);
+            topCountryPhoneDataList, creationDate, list[list.length - 1]);
       } catch (error) {
         print('=> phone bloc error => $error');
         yield PhoneLoadingError(error: error.toString());
