@@ -52,7 +52,9 @@ class _PhoneScreenState extends State<PhoneScreen> {
   String number;
 
   void _phoneListener() {
-    validPhone = _isValid();
+    setState(() {
+      validPhone = _isValid();
+    });
   }
 
   bool _isValid() {
@@ -223,8 +225,8 @@ class _PhoneScreenState extends State<PhoneScreen> {
         onSelected:
             (bool value, CountryPhoneData countryPhone, String inputtedPhone) {
           setState(() {
-            validPhone = value;
             selectedItem = countryPhone;
+            validPhone = _isValid();
             number = inputtedPhone;
           });
         },

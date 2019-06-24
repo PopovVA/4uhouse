@@ -1,24 +1,23 @@
 import 'dart:async' show Future;
 import 'package:http/http.dart' as http;
-import '../../models/location.dart';
-import '../../models/phone/phone_all_response.dart';
+
+import '../../models/phone/location.dart' show Location;
+import '../../models/phone/phone_all_response.dart' show AllPhoneResponse;
 import './constants/url.dart' show BASE_URL;
-import 'api.dart';
+import 'generic/api.dart' show Api;
 
 class PhoneApi extends Api {
-
-
-  final http.Client _client = http.Client();
-
   Future<dynamic> requestCountriesPhoneData(int creationDate) async {
     try {
       final String creationDateResponse =
       creationDate != null ? '?creationDate=$creationDate' : '';
-      final http.Response response = await _client
+      final http.Response response = await client
           .get('${BASE_URL}auth/country-phones-data$creationDateResponse');
       if (response.statusCode == 200) {
-        return AllPhoneResponse.fromJson(await processResponse(response));
+        final List<dynamic> body = await processResponse(response);
+        return AllPhoneResponse.fromJson(body[0]);
       } else if (response.statusCode == 204) {
+        // do nothing
       } else {
         throw response;
       }

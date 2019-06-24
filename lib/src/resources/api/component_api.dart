@@ -4,44 +4,17 @@ import 'package:meta/meta.dart' show required;
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart' show MediaType;
 
-import '../api.dart';
-import 'constants/url.dart' show GUEST_URL, USER_URL;
+import 'generic/user_data/user_data.dart' show UserData;
 
-class ScreenApi extends Api {
-  final http.Client _client = http.Client();
-
-  static String _getUrl(String token, String route) {
-    final String context = route.replaceFirst('user', '');
-    return Api.isValidToken(token) ? '$USER_URL$context' : '$GUEST_URL$context';
-  }
-
-  static Uri _componentUri({
+class ComponentApi extends UserData {
+  Uri _componentUri({
     @required String token,
     @required String route,
     dynamic value,
   }) =>
       value != null
-          ? Uri.parse('${_getUrl(token, route)}?value=${value.toString()}')
-          : Uri.parse(_getUrl(token, route));
-
-  Future<Map<String, dynamic>> fetchScreen(
-      {@required String query, String token}) async {
-    try {
-      print('===> request: ${_getUrl(token, query)}');
-      final http.Response response = await _client
-          .get('${_getUrl(token, query)}', headers: Api.makeHeaders(token));
-
-      print(response.body.toString());
-      if (response.statusCode == 200) {
-        final dynamic json = await processResponse(response);
-        return json;
-      } else {
-        throw response;
-      }
-    } catch (error) {
-      throw await inferError(error);
-    }
-  }
+          ? Uri.parse('${getUrl(token, route)}?value=${value.toString()}')
+          : Uri.parse(getUrl(token, route));
 
   Future<Map<String, dynamic>> sendComponentValue({
     @required String query,
@@ -50,9 +23,9 @@ class ScreenApi extends Api {
   }) async {
     // Form and send request
     try {
-      final http.Response response = await _client.put(
+      final http.Response response = await client.put(
           _componentUri(route: query, value: value, token: token),
-          headers: Api.makeHeaders(token));
+          headers: makeHeaders(token));
 
       // Process response
       if (response.statusCode == 200) {
@@ -61,6 +34,7 @@ class ScreenApi extends Api {
         throw response;
       }
     } catch (error) {
+      print('===> await inferError(error): ${await inferError(error)}');
       throw await inferError(error);
     }
   }
@@ -70,7 +44,6 @@ class ScreenApi extends Api {
       @required dynamic value,
       @required List<int> jpg,
       String token}) async {
-    // Form request
     final http.MultipartRequest request = http.MultipartRequest(
         'PUT', _componentUri(route: query, value: value, token: token));
     final http.MultipartFile multipartFile = http.MultipartFile.fromBytes(
@@ -82,10 +55,9 @@ class ScreenApi extends Api {
     );
     request.files.add(multipartFile);
     if ((token is String) && token.isNotEmpty) {
-      request.headers['${Api.authHeaderKey}'] = Api.formToken(token);
+      request.headers['${authHeaderKey}'] = formToken(token);
     }
 
-    // Send and process
     try {
       final http.StreamedResponse response = await request.send();
       if (response.statusCode == 200) {
