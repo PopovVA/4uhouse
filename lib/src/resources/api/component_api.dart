@@ -25,14 +25,16 @@ class ComponentApi extends UserData {
     // Form and send request
     try {
       print(
-          '===> component uri: ${_componentUri(token: token, route: query, value: value)}');
+          '===> component uri: ${_componentUri(
+              token: token, route: query, value: value)}');
       final http.Response response = await client.put(
           _componentUri(route: query, value: value, token: token),
           headers: makeHeaders(token));
 
       // Process response
       print(
-          '===> component await processResponse(response): ${await processResponse(response)}');
+          '===> component await processResponse(response): ${await processResponse(
+              response)}');
       if (response.statusCode == 200) {
         return ScreenModel.fromJson(await processResponse(response));
       } else {
