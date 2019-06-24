@@ -136,39 +136,35 @@ class _ScreenState extends State<Screen> {
             .addPostFrameCallback((_) => _scrollToItem(scrollItemKey));
       }
 
-      return RefreshIndicator(
-        onRefresh: _refresh,
-        color: Theme.of(context).primaryColor,
-        child: Ink(
-          height: double.infinity,
-          padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-          child: Stack(
-            children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      child: SingleChildScrollView(
-                        controller: widget.scrollController,
-                        child: Column(
-                          children: items,
-                        ),
+      return Ink(
+        height: double.infinity,
+        padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+        child: Stack(
+          children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    child: SingleChildScrollView(
+                      controller: widget.scrollController,
+                      child: Column(
+                        children: items,
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: buttons,
-                    ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: buttons,
                   ),
-                ],
-              )
-            ],
-          ),
+                ),
+              ],
+            )
+          ],
         ),
       );
     }
@@ -223,7 +219,11 @@ class _ScreenState extends State<Screen> {
             builder: (BuildContext context, ScreenState state) {
               return PageTemplate(
                 drawer: widget.drawer,
-                body: buildBody(state),
+                body: RefreshIndicator(
+                  onRefresh: _refresh,
+                  color: Theme.of(context).primaryColor,
+                  child: buildBody(state),
+                ),
                 goBack: getHandleGoBack(state),
                 title: buildTitle(state),
               );

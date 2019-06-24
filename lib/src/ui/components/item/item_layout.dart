@@ -81,8 +81,8 @@ class ItemLayout extends StatelessWidget {
       return Text(
         isNotNull(value) ? value.toString() : '--',
         style: disabled
-            ? const TextStyle(fontSize: fontSize, color: ACTIVE_COLOR)
-            : const TextStyle(fontSize: fontSize, color: DISABLED_COLOR),
+            ? const TextStyle(fontSize: fontSize, color: DISABLED_COLOR)
+            : const TextStyle(fontSize: fontSize, color: ACTIVE_COLOR),
       );
     }
 
