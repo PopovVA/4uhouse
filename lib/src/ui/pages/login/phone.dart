@@ -55,7 +55,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
   bool _isValid() {
     return phoneController.text.isNotEmpty &&
         selectedItem != null &&
-        _validLength(selectedItem.length, phoneController.text.length) &&
+        _validLength(selectedItem.lengths, phoneController.text.length) &&
         hasMatch(phoneController.text, selectedItem.numberPattern);
   }
 
