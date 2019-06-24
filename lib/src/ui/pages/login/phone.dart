@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocBuilder, BlocListener, BlocListenerTree;
-
 import '../../../../src/utils/route_transition.dart' show SlideRoute;
+import '../../../../temp/resources/phone_repository_test.dart'
+    show TestPhoneRepository;
+import '../../../../temp/styled_text_controler.dart'
+    show NumberOnlyTextEditingController;
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../../blocs/login/login_bloc.dart' show LoginBloc;
 import '../../../blocs/login/login_event.dart' show LoginEvent, OtpRequested;
@@ -13,16 +16,14 @@ import '../../../blocs/phone/phone_event.dart'
     show PhoneEvent, PhoneCountriesDataRequested;
 import '../../../blocs/phone/phone_state.dart'
     show
-        PhoneCountriesDataLoaded,
-        PhoneLoading,
-        PhoneLoadingError,
-        PhoneState,
-        PhoneUninitialized;
-import '../../../models/phone/country_phone_data.dart'
-    show CountryPhoneData;
+    PhoneCountriesDataLoaded,
+    PhoneLoading,
+    PhoneLoadingError,
+    PhoneState,
+    PhoneUninitialized;
+import '../../../models/phone/country_phone_data.dart' show CountryPhoneData;
 import '../../../resources/auth_repository.dart' show AuthRepository;
 import '../../../resources/phone_repository.dart' show PhoneRepository;
-
 import '../../components/page_template.dart' show PageTemplate;
 import '../../components/pickers/phone/phone_picker.dart' show PhonePicker;
 import '../../components/styled/styled_alert_dialog.dart'
@@ -31,8 +32,6 @@ import '../../components/styled/styled_button.dart' show StyledButton;
 import '../../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
 import 'otp.dart' show OtpScreen;
-
-import '../../../../temp/resources/phone_repository_test.dart';
 
 class PhoneScreen extends StatefulWidget {
   const PhoneScreen({@required this.authBloc});
@@ -44,20 +43,48 @@ class PhoneScreen extends StatefulWidget {
 }
 
 class _PhoneScreenState extends State<PhoneScreen> {
+  CountryPhoneData selectedItem;
   bool isAgree = true;
   bool validPhone = false;
-  PhoneBloc _phoneBloc;
   LoginBloc _loginBloc;
-  CountryPhoneData selectedItem;
+  PhoneBloc _phoneBloc;
+  TextEditingController phoneController = NumberOnlyTextEditingController();
   String number;
+
+  void _phoneListener() {
+    setState(() {
+      validPhone = _isValid();
+    });
+  }
+
+  bool _isValid() {
+    return phoneController.text.isNotEmpty &&
+        selectedItem != null &&
+        _validLength(selectedItem.lengths, phoneController.text.length) &&
+        hasMatch(phoneController.text, selectedItem.numberPattern);
+  }
+
+  bool _validLength(List<int> lengthList, int length) {
+    return lengthList.firstWhere((int item) => item == length,
+        orElse: () => 0) >
+        0
+        ? true
+        : false;
+  }
+
+  bool hasMatch(String value, String reg) {
+    final RegExp regExp = RegExp(reg);
+    return regExp.hasMatch(value);
+  }
 
   @override
   void initState() {
     super.initState();
-    //_phoneBloc = PhoneBloc(TestPhoneRepository());
+//    _phoneBloc = PhoneBloc(TestPhoneRepository());
     _phoneBloc = PhoneBloc(PhoneRepository());
     _phoneBloc.dispatch(PhoneCountriesDataRequested());
     _loginBloc = LoginBloc(widget.authBloc, AuthRepository());
+    phoneController.addListener(_phoneListener);
   }
 
   @override
@@ -92,6 +119,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                   BlocListener<LoginEvent, LoginState>(
                       bloc: _loginBloc,
                       listener: (BuildContext context, LoginState state) {
+                        print('===> state listener name  ${state.runtimeType}');
                         if (state is OtpSent) {
                           Navigator.push(
                               context,
@@ -99,7 +127,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                                   widget: OtpScreen(
                                       authBloc: widget.authBloc,
                                       loginBloc: _loginBloc,
-                                      previousRoute: ModalRoute.of(context),
+                                      phoneBloc: _phoneBloc,
                                       selectedItem: selectedItem,
                                       number: number),
                                   side: 'left'));
@@ -111,6 +139,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                   BlocListener<PhoneEvent, PhoneState>(
                     bloc: _phoneBloc,
                     listener: (BuildContext context, PhoneState state) {
+                      print('===> state listener name  ${state.runtimeType}');
                       if (state is PhoneLoadingError) {
                         _showError(context, state);
                       }
@@ -131,7 +160,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                           if (state is PhoneCountriesDataLoaded)
                             Container(
                               margin:
-                                  const EdgeInsets.symmetric(horizontal: 24.0),
+                              const EdgeInsets.symmetric(horizontal: 24.0),
                               child: _buildPhonePicker(state),
                             ),
                           if (state is PhoneLoadingError)
@@ -196,13 +225,17 @@ class _PhoneScreenState extends State<PhoneScreen> {
         onSelected:
             (bool value, CountryPhoneData countryPhone, String inputtedPhone) {
           setState(() {
-            validPhone = value;
             selectedItem = countryPhone;
+            validPhone = _isValid();
             number = inputtedPhone;
           });
         },
+        selectedItem: selectedItem,
+        phoneController: phoneController,
         countryPhoneDataList: state.countryData,
-        favorites: const <String>['RU', 'CY']);
+        favorites: state.topCountryData,
+        itemByIp: state.countryPhoneByIp,
+        isValid: _isValid);
   }
 
   Widget _buildSubmit({@required LoginBloc loginBloc}) {
@@ -211,22 +244,22 @@ class _PhoneScreenState extends State<PhoneScreen> {
         builder: (BuildContext context, LoginState state) {
           return Container(
               child: Expanded(
-            child: Align(
-              alignment: FractionalOffset.bottomCenter,
-              child: StyledButton(
-                loading: state is IsFetchingOtp,
-                onPressed: isAgree && validPhone
-                    ? () {
-                        _loginBloc.dispatch(OtpRequested(
-                            countryId: selectedItem.countryId,
-                            code: selectedItem.code,
-                            number: number));
-                      }
-                    : null,
-                text: 'Submit',
-              ),
-            ),
-          ));
+                child: Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: StyledButton(
+                    loading: state is IsFetchingOtp,
+                    onPressed: isAgree && validPhone
+                        ? () {
+                      _loginBloc.dispatch(OtpRequested(
+                          countryId: selectedItem.countryId,
+                          code: selectedItem.code,
+                          number: number));
+                    }
+                        : null,
+                    text: 'Submit',
+                  ),
+                ),
+              ));
         });
   }
 }

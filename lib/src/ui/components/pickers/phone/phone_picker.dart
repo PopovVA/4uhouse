@@ -1,46 +1,50 @@
 import 'package:flutter/material.dart';
 import '../../../../../temp/styled_text_controler.dart';
-
 import '../../../../models/phone/country_phone_data.dart';
-
 import '../../../components/styled/styled_text_field.dart' show StyledTextField;
 import 'phone_search.dart';
 
 class PhonePicker extends StatefulWidget {
   const PhonePicker(
       {this.favorites,
-      @required this.countryPhoneDataList,
-      @required this.onSelected});
+        @required this.countryPhoneDataList,
+        @required this.onSelected,
+        @required this.selectedItem,
+        @required this.itemByIp,
+        @required this.isValid,
+        @required this.phoneController});
 
-  final List<String> favorites;
+  final List<CountryPhoneData> favorites;
   final List<CountryPhoneData> countryPhoneDataList;
   final Function onSelected;
+  final CountryPhoneData itemByIp;
+  final TextEditingController phoneController;
+  final Function isValid;
+  final CountryPhoneData selectedItem;
 
   @override
   _PhonePickerState createState() => _PhonePickerState();
 }
 
 class _PhonePickerState extends State<PhonePicker> {
-  TextEditingController phoneController =
-      NumberOnlyTextEditingController();
   TextEditingController codeController = TextEditingController();
-  CountryPhoneData selectedItem;
+  CountryPhoneData item;
 
   @override
   void initState() {
     super.initState();
-    codeController.text =
-        '+ (${widget.countryPhoneDataList[0].code.toString()})';
-    phoneController.addListener(_phoneListener);
+    codeController.text = '+ (${_buildDataItem().code.toString()})';
+    widget.phoneController.addListener(_phoneListener);
+    item = widget.selectedItem;
   }
 
   @override
   void didChangeDependencies() {
-    if (selectedItem == null && widget.countryPhoneDataList != null) {
+    if (item == null && widget.countryPhoneDataList != null) {
       setState(() {
         print(
             '===> widget.countryPhoneDataList[0]: ${widget.countryPhoneDataList[0].countryId}');
-        selectedItem = widget.countryPhoneDataList[0];
+        item = _buildDataItem();
       });
     }
     super.didChangeDependencies();
@@ -48,28 +52,34 @@ class _PhonePickerState extends State<PhonePicker> {
 
   void _phoneListener() {
     if (widget.onSelected is Function) {
-      widget.onSelected(_isValid(), selectedItem, phoneController.text);
+      widget.onSelected(widget.isValid(), item, widget.phoneController.text);
     }
   }
 
-  bool _isValid() {
-    return phoneController.text.isNotEmpty &&
-        selectedItem != null &&
-        _validLength(selectedItem.length, phoneController.text.length) &&
-        hasMatch(phoneController.text, selectedItem.numberPattern);
+  CountryPhoneData _findItemById(List<CountryPhoneData> list) {
+    return list.firstWhere(
+            (CountryPhoneData foundItem) =>
+        foundItem.countryId == item.countryId,
+        orElse: () => null);
   }
 
-  bool _validLength(List<int> lengthList, int length) {
-    return lengthList.firstWhere((int item) => item == length,
-                orElse: () => 0) >
-            0
-        ? true
-        : false;
-  }
-
-  bool hasMatch(String value, String reg) {
-    final RegExp regExp = RegExp(reg);
-    return regExp.hasMatch(value);
+  CountryPhoneData _buildDataItem() {
+    if (item == null) {
+      if (widget.itemByIp == null) {
+        return widget.favorites.isNotEmpty
+            ? widget.favorites.first
+            : widget.countryPhoneDataList.first;
+      } else {
+        return widget.itemByIp;
+      }
+    } else {
+      final CountryPhoneData favItem = _findItemById(widget.favorites);
+      return favItem == null
+          ? _findItemById(widget.countryPhoneDataList) == null
+          ? item
+          : _findItemById(widget.countryPhoneDataList)
+          : favItem;
+    }
   }
 
   @override
@@ -80,8 +90,8 @@ class _PhonePickerState extends State<PhonePicker> {
             width: 70.0,
             child: IgnorePointer(
                 child: StyledTextField(
-              controller: codeController,
-            ))),
+                  controller: codeController,
+                ))),
         onTap: () async {
           final CountryPhoneData result = await showSearch(
             context: context,
@@ -93,8 +103,12 @@ class _PhonePickerState extends State<PhonePicker> {
           );
           setState(() {
             if (result != null) {
-              selectedItem = result;
-              codeController.text = '+ (${selectedItem.code.toString()})';
+              item = result;
+              codeController.text = '+ (${item.code.toString()})';
+              if (widget.onSelected is Function) {
+                widget.onSelected(
+                    widget.isValid(), item, widget.phoneController.text);
+              }
             }
           });
         },
@@ -104,12 +118,13 @@ class _PhonePickerState extends State<PhonePicker> {
           padding: const EdgeInsets.only(left: 12.0),
           child: StyledTextField(
             autofocus: true,
-            controller: phoneController,
-            hintText: selectedItem == null
-                ? widget.countryPhoneDataList[0].example.toString()
-                : selectedItem.example.toString(),
-            borderColor:
-                _isValid() ? Theme.of(context).primaryColor : Colors.redAccent,
+            controller: widget.phoneController,
+            hintText: _buildDataItem().example.toString(),
+            borderColor: widget.isValid()
+                ? Theme
+                .of(context)
+                .primaryColor
+                : Colors.redAccent,
             keyboardType: TextInputType.number,
           ),
         ),

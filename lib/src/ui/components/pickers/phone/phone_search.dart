@@ -9,7 +9,7 @@ class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
       @required this.countryPhoneDataList,
       @required this.onSelected});
 
-  List<String> favorites;
+  List<CountryPhoneData> favorites;
   List<CountryPhoneData> countryPhoneDataList;
   Function onSelected;
 
@@ -39,10 +39,14 @@ class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
   Widget buildResults(BuildContext context) {
     final List<CountryPhoneData> dummySearchList = <CountryPhoneData>[];
     if (query.isNotEmpty && query != '+') {
-      dummySearchList.addAll(countryPhoneDataList.where(
-          (CountryPhoneData item) =>
-              (item.name.toLowerCase() + '+' + item.code.toString())
-                  .contains(query.toLowerCase())));
+      final List<CountryPhoneData> totalList = <CountryPhoneData>[];
+      if (favorites.isNotEmpty) {
+        totalList.addAll(favorites);
+      }
+      totalList.addAll(countryPhoneDataList);
+      dummySearchList.addAll(totalList.where((CountryPhoneData item) =>
+          (item.name.toLowerCase() + '+' + item.code.toString())
+              .contains(query.toLowerCase())));
 
       if (dummySearchList.isNotEmpty) {
         return _buildSearchRows(dummySearchList);
@@ -57,10 +61,7 @@ class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
   Widget _buildRows() {
     final List<CountryPhoneData> list = <CountryPhoneData>[];
     if (favorites.isNotEmpty) {
-      for (String fav in favorites) {
-        list.addAll(countryPhoneDataList.where((CountryPhoneData item) =>
-            item.countryId.toLowerCase().contains(fav.toLowerCase())));
-      }
+      list.addAll(favorites);
     }
     list.addAll(countryPhoneDataList);
 
@@ -116,10 +117,14 @@ class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
     } else {
       final List<CountryPhoneData> dummySearchList = <CountryPhoneData>[];
       if (query.isNotEmpty) {
-        dummySearchList.addAll(countryPhoneDataList.where(
-            (CountryPhoneData item) =>
-                (item.name.toLowerCase() + '+' + item.code.toString())
-                    .contains(query.toLowerCase())));
+        final List<CountryPhoneData> totalList = <CountryPhoneData>[];
+        if (favorites.isNotEmpty) {
+          totalList.addAll(favorites);
+        }
+        totalList.addAll(countryPhoneDataList);
+        dummySearchList.addAll(totalList.where((CountryPhoneData item) =>
+            (item.name.toLowerCase() + '+' + item.code.toString())
+                .contains(query.toLowerCase())));
 
         if (dummySearchList.isNotEmpty) {
           return _buildSearchRows(dummySearchList);

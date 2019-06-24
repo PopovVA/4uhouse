@@ -5,7 +5,7 @@
       "countryId": "RU",
       "code": 7,
       "name": "Russia",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 9123456789,
@@ -15,7 +15,7 @@
       "countryId": "CY",
       "code": 357,
       "name": "Cyprus",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 96123456,
@@ -27,7 +27,7 @@
       "countryId": "AF",
       "code": 93,
       "name": "Afghanistan",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 701234567,
@@ -37,7 +37,7 @@
       "countryId": "AL",
       "code": 355,
       "name": "Albania",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 662123456,
@@ -47,7 +47,7 @@
       "countryId": "DZ",
       "code": 213,
       "name": "Algeria",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 551234567,
@@ -57,7 +57,7 @@
       "countryId": "AS",
       "code": 1,
       "name": "American Samoa",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 6847331234,
@@ -67,7 +67,7 @@
       "countryId": "AD",
       "code": 376,
       "name": "Andorra",
-      "length": [
+      "lengths": [
         6,
         9
       ],
@@ -78,7 +78,7 @@
       "countryId": "AO",
       "code": 244,
       "name": "Angola",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 923123456,
@@ -88,7 +88,7 @@
       "countryId": "AI",
       "code": 1,
       "name": "Anguilla",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 2642351234,
@@ -98,7 +98,7 @@
       "countryId": "AG",
       "code": 1,
       "name": "Antigua & Barbuda",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 2684641234,
@@ -108,7 +108,7 @@
       "countryId": "AR",
       "code": 54,
       "name": "Argentina",
-      "length": [
+      "lengths": [
         10,
         11
       ],
@@ -119,7 +119,7 @@
       "countryId": "AM",
       "code": 374,
       "name": "Armenia",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 77123456,
@@ -129,7 +129,7 @@
       "countryId": "AW",
       "code": 297,
       "name": "Aruba",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 5601234,
@@ -139,7 +139,7 @@
       "countryId": "AC",
       "code": 247,
       "name": "Ascension Island",
-      "length": [
+      "lengths": [
         5
       ],
       "example": 40123,
@@ -149,7 +149,7 @@
       "countryId": "AU",
       "code": 61,
       "name": "Australia",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 412345678,
@@ -159,7 +159,7 @@
       "countryId": "AT",
       "code": 43,
       "name": "Austria",
-      "length": [
+      "lengths": [
         7,
         8,
         9,
@@ -175,7 +175,7 @@
       "countryId": "AZ",
       "code": 994,
       "name": "Azerbaijan",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 401234567,
@@ -185,7 +185,7 @@
       "countryId": "BS",
       "code": 1,
       "name": "Bahamas",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 2423591234,
@@ -195,7 +195,7 @@
       "countryId": "BH",
       "code": 973,
       "name": "Bahrain",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 36001234,
@@ -205,7 +205,7 @@
       "countryId": "BD",
       "code": 880,
       "name": "Bangladesh",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 1812345678,
@@ -215,7 +215,7 @@
       "countryId": "BB",
       "code": 1,
       "name": "Barbados",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 2462501234,
@@ -225,7 +225,7 @@
       "countryId": "BY",
       "code": 375,
       "name": "Belarus",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 294911911,
@@ -235,7 +235,7 @@
       "countryId": "BE",
       "code": 32,
       "name": "Belgium",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 470123456,
@@ -245,7 +245,7 @@
       "countryId": "BZ",
       "code": 501,
       "name": "Belize",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 6221234,
@@ -255,7 +255,7 @@
       "countryId": "BJ",
       "code": 229,
       "name": "Benin",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 90011234,
@@ -265,7 +265,7 @@
       "countryId": "BM",
       "code": 1,
       "name": "Bermuda",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 4413701234,
@@ -275,7 +275,7 @@
       "countryId": "BT",
       "code": 975,
       "name": "Bhutan",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 17123456,
@@ -285,7 +285,7 @@
       "countryId": "BO",
       "code": 591,
       "name": "Bolivia",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 71234567,
@@ -295,7 +295,7 @@
       "countryId": "BA",
       "code": 387,
       "name": "Bosnia & Herzegovina",
-      "length": [
+      "lengths": [
         8,
         9
       ],
@@ -306,7 +306,7 @@
       "countryId": "BW",
       "code": 267,
       "name": "Botswana",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 71123456,
@@ -316,7 +316,7 @@
       "countryId": "BR",
       "code": 55,
       "name": "Brazil",
-      "length": [
+      "lengths": [
         10,
         11
       ],
@@ -327,7 +327,7 @@
       "countryId": "IO",
       "code": 246,
       "name": "British Indian Ocean Territory",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 3801234,
@@ -337,7 +337,7 @@
       "countryId": "VG",
       "code": 1,
       "name": "British Virgin Islands",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 2843001234,
@@ -347,7 +347,7 @@
       "countryId": "BN",
       "code": 673,
       "name": "Brunei",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 7123456,
@@ -357,7 +357,7 @@
       "countryId": "BG",
       "code": 359,
       "name": "Bulgaria",
-      "length": [
+      "lengths": [
         8,
         9
       ],
@@ -368,7 +368,7 @@
       "countryId": "BF",
       "code": 226,
       "name": "Burkina Faso",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 70123456,
@@ -378,7 +378,7 @@
       "countryId": "BI",
       "code": 257,
       "name": "Burundi",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 79561234,
@@ -388,7 +388,7 @@
       "countryId": "KH",
       "code": 855,
       "name": "Cambodia",
-      "length": [
+      "lengths": [
         8,
         9
       ],
@@ -399,7 +399,7 @@
       "countryId": "CM",
       "code": 237,
       "name": "Cameroon",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 671234567,
@@ -409,7 +409,7 @@
       "countryId": "CA",
       "code": 1,
       "name": "Canada",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 5062345678,
@@ -419,7 +419,7 @@
       "countryId": "CV",
       "code": 238,
       "name": "Cape Verde",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 9911234,
@@ -429,7 +429,7 @@
       "countryId": "BQ",
       "code": 599,
       "name": "Caribbean Netherlands",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 3181234,
@@ -439,7 +439,7 @@
       "countryId": "KY",
       "code": 1,
       "name": "Cayman Islands",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 3453231234,
@@ -449,7 +449,7 @@
       "countryId": "CF",
       "code": 236,
       "name": "Central African Republic",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 70012345,
@@ -459,7 +459,7 @@
       "countryId": "TD",
       "code": 235,
       "name": "Chad",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 63012345,
@@ -469,7 +469,7 @@
       "countryId": "CL",
       "code": 56,
       "name": "Chile",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 221234567,
@@ -479,7 +479,7 @@
       "countryId": "CN",
       "code": 86,
       "name": "China",
-      "length": [
+      "lengths": [
         11
       ],
       "example": 13123456789,
@@ -489,7 +489,7 @@
       "countryId": "CX",
       "code": 61,
       "name": "Christmas Island",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 412345678,
@@ -499,7 +499,7 @@
       "countryId": "CC",
       "code": 61,
       "name": "Cocos (Keeling) Islands",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 412345678,
@@ -509,7 +509,7 @@
       "countryId": "CO",
       "code": 57,
       "name": "Colombia",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 3211234567,
@@ -519,7 +519,7 @@
       "countryId": "KM",
       "code": 269,
       "name": "Comoros",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 3212345,
@@ -529,7 +529,7 @@
       "countryId": "CG",
       "code": 242,
       "name": "Congo - Brazzaville",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 61234567,
@@ -539,7 +539,7 @@
       "countryId": "CD",
       "code": 243,
       "name": "Congo - Kinshasa",
-      "length": [
+      "lengths": [
         7,
         9
       ],
@@ -550,7 +550,7 @@
       "countryId": "CK",
       "code": 682,
       "name": "Cook Islands",
-      "length": [
+      "lengths": [
         5
       ],
       "example": 71234,
@@ -560,7 +560,7 @@
       "countryId": "CR",
       "code": 506,
       "name": "Costa Rica",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 83123456,
@@ -570,7 +570,7 @@
       "countryId": "HR",
       "code": 385,
       "name": "Croatia",
-      "length": [
+      "lengths": [
         8,
         9
       ],
@@ -581,7 +581,7 @@
       "countryId": "CU",
       "code": 53,
       "name": "Cuba",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 51234567,
@@ -591,7 +591,7 @@
       "countryId": "CW",
       "code": 599,
       "name": "Curacao",
-      "length": [
+      "lengths": [
         7,
         8
       ],
@@ -602,7 +602,7 @@
       "countryId": "CZ",
       "code": 420,
       "name": "Czechia",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 601123456,
@@ -612,7 +612,7 @@
       "countryId": "CI",
       "code": 225,
       "name": "Cote d’Ivoire",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 1234567,
@@ -622,7 +622,7 @@
       "countryId": "DK",
       "code": 45,
       "name": "Denmark",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 32123456,
@@ -632,7 +632,7 @@
       "countryId": "DJ",
       "code": 253,
       "name": "Djibouti",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 77831001,
@@ -642,7 +642,7 @@
       "countryId": "DM",
       "code": 1,
       "name": "Dominica",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 7672251234,
@@ -652,7 +652,7 @@
       "countryId": "DO",
       "code": 1,
       "name": "Dominican Republic",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 8092345678,
@@ -662,7 +662,7 @@
       "countryId": "EC",
       "code": 593,
       "name": "Ecuador",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 991234567,
@@ -672,7 +672,7 @@
       "countryId": "EG",
       "code": 20,
       "name": "Egypt",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 1001234567,
@@ -682,7 +682,7 @@
       "countryId": "SV",
       "code": 503,
       "name": "El Salvador",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 70123456,
@@ -692,7 +692,7 @@
       "countryId": "GQ",
       "code": 240,
       "name": "Equatorial Guinea",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 222123456,
@@ -702,7 +702,7 @@
       "countryId": "ER",
       "code": 291,
       "name": "Eritrea",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 7123456,
@@ -712,7 +712,7 @@
       "countryId": "EE",
       "code": 372,
       "name": "Estonia",
-      "length": [
+      "lengths": [
         7,
         8
       ],
@@ -723,7 +723,7 @@
       "countryId": "SZ",
       "code": 268,
       "name": "Eswatini",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 76123456,
@@ -733,7 +733,7 @@
       "countryId": "ET",
       "code": 251,
       "name": "Ethiopia",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 911234567,
@@ -743,7 +743,7 @@
       "countryId": "FK",
       "code": 500,
       "name": "Falkland Islands (Islas Malvinas)",
-      "length": [
+      "lengths": [
         5
       ],
       "example": 51234,
@@ -753,7 +753,7 @@
       "countryId": "FO",
       "code": 298,
       "name": "Faroe Islands",
-      "length": [
+      "lengths": [
         6
       ],
       "example": 211234,
@@ -763,7 +763,7 @@
       "countryId": "FJ",
       "code": 679,
       "name": "Fiji",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 7012345,
@@ -773,7 +773,7 @@
       "countryId": "FI",
       "code": 358,
       "name": "Finland",
-      "length": [
+      "lengths": [
         6,
         7,
         8,
@@ -787,7 +787,7 @@
       "countryId": "FR",
       "code": 33,
       "name": "France",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 612345678,
@@ -797,7 +797,7 @@
       "countryId": "GF",
       "code": 594,
       "name": "French Guiana",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 694201234,
@@ -807,7 +807,7 @@
       "countryId": "PF",
       "code": 689,
       "name": "French Polynesia",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 87123456,
@@ -817,7 +817,7 @@
       "countryId": "GA",
       "code": 241,
       "name": "Gabon",
-      "length": [
+      "lengths": [
         7,
         8
       ],
@@ -828,7 +828,7 @@
       "countryId": "GM",
       "code": 220,
       "name": "Gambia",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 3012345,
@@ -838,7 +838,7 @@
       "countryId": "GE",
       "code": 995,
       "name": "Georgia",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 555123456,
@@ -848,7 +848,7 @@
       "countryId": "DE",
       "code": 49,
       "name": "Germany",
-      "length": [
+      "lengths": [
         10,
         11
       ],
@@ -859,7 +859,7 @@
       "countryId": "GH",
       "code": 233,
       "name": "Ghana",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 231234567,
@@ -869,7 +869,7 @@
       "countryId": "GI",
       "code": 350,
       "name": "Gibraltar",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 57123456,
@@ -879,7 +879,7 @@
       "countryId": "GR",
       "code": 30,
       "name": "Greece",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 6912345678,
@@ -889,7 +889,7 @@
       "countryId": "GL",
       "code": 299,
       "name": "Greenland",
-      "length": [
+      "lengths": [
         6
       ],
       "example": 221234,
@@ -899,7 +899,7 @@
       "countryId": "GD",
       "code": 1,
       "name": "Grenada",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 4734031234,
@@ -909,7 +909,7 @@
       "countryId": "GP",
       "code": 590,
       "name": "Guadeloupe",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 690001234,
@@ -919,7 +919,7 @@
       "countryId": "GU",
       "code": 1,
       "name": "Guam",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 6713001234,
@@ -929,7 +929,7 @@
       "countryId": "GT",
       "code": 502,
       "name": "Guatemala",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 51234567,
@@ -939,7 +939,7 @@
       "countryId": "GG",
       "code": 44,
       "name": "Guernsey",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 7781123456,
@@ -949,7 +949,7 @@
       "countryId": "GN",
       "code": 224,
       "name": "Guinea",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 601123456,
@@ -959,7 +959,7 @@
       "countryId": "GW",
       "code": 245,
       "name": "Guinea-Bissau",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 955012345,
@@ -969,7 +969,7 @@
       "countryId": "GY",
       "code": 592,
       "name": "Guyana",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 6091234,
@@ -979,7 +979,7 @@
       "countryId": "HT",
       "code": 509,
       "name": "Haiti",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 34101234,
@@ -989,7 +989,7 @@
       "countryId": "HN",
       "code": 504,
       "name": "Honduras",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 91234567,
@@ -999,7 +999,7 @@
       "countryId": "HK",
       "code": 852,
       "name": "Hong Kong",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 51234567,
@@ -1009,7 +1009,7 @@
       "countryId": "HU",
       "code": 36,
       "name": "Hungary",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 201234567,
@@ -1019,7 +1019,7 @@
       "countryId": "IS",
       "code": 354,
       "name": "Iceland",
-      "length": [
+      "lengths": [
         7,
         9
       ],
@@ -1030,7 +1030,7 @@
       "countryId": "IN",
       "code": 91,
       "name": "India",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 8123456789,
@@ -1040,7 +1040,7 @@
       "countryId": "ID",
       "code": 62,
       "name": "Indonesia",
-      "length": [
+      "lengths": [
         9,
         10,
         11,
@@ -1053,7 +1053,7 @@
       "countryId": "IR",
       "code": 98,
       "name": "Iran",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 9123456789,
@@ -1063,7 +1063,7 @@
       "countryId": "IQ",
       "code": 964,
       "name": "Iraq",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 7912345678,
@@ -1073,7 +1073,7 @@
       "countryId": "IE",
       "code": 353,
       "name": "Ireland",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 850123456,
@@ -1083,7 +1083,7 @@
       "countryId": "IM",
       "code": 44,
       "name": "Isle of Man",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 7924123456,
@@ -1093,7 +1093,7 @@
       "countryId": "IL",
       "code": 972,
       "name": "Israel",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 502345678,
@@ -1103,7 +1103,7 @@
       "countryId": "IT",
       "code": 39,
       "name": "Italy",
-      "length": [
+      "lengths": [
         9,
         10,
         11
@@ -1115,7 +1115,7 @@
       "countryId": "JM",
       "code": 1,
       "name": "Jamaica",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 8762101234,
@@ -1125,7 +1125,7 @@
       "countryId": "JP",
       "code": 81,
       "name": "Japan",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 9012345678,
@@ -1135,7 +1135,7 @@
       "countryId": "JE",
       "code": 44,
       "name": "Jersey",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 7797712345,
@@ -1145,7 +1145,7 @@
       "countryId": "JO",
       "code": 962,
       "name": "Jordan",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 790123456,
@@ -1155,7 +1155,7 @@
       "countryId": "KZ",
       "code": 7,
       "name": "Kazakhstan",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 7710009998,
@@ -1165,7 +1165,7 @@
       "countryId": "KE",
       "code": 254,
       "name": "Kenya",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 712123456,
@@ -1175,7 +1175,7 @@
       "countryId": "KI",
       "code": 686,
       "name": "Kiribati",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 72001234,
@@ -1185,7 +1185,7 @@
       "countryId": "XK",
       "code": 383,
       "name": "Kosovo",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 43201234,
@@ -1195,7 +1195,7 @@
       "countryId": "KW",
       "code": 965,
       "name": "Kuwait",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 50012345,
@@ -1205,7 +1205,7 @@
       "countryId": "KG",
       "code": 996,
       "name": "Kyrgyzstan",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 700123456,
@@ -1215,7 +1215,7 @@
       "countryId": "LA",
       "code": 856,
       "name": "Laos",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 2023123456,
@@ -1225,7 +1225,7 @@
       "countryId": "LV",
       "code": 371,
       "name": "Latvia",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 21234567,
@@ -1235,7 +1235,7 @@
       "countryId": "LB",
       "code": 961,
       "name": "Lebanon",
-      "length": [
+      "lengths": [
         7,
         8
       ],
@@ -1246,7 +1246,7 @@
       "countryId": "LS",
       "code": 266,
       "name": "Lesotho",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 50123456,
@@ -1256,7 +1256,7 @@
       "countryId": "LR",
       "code": 231,
       "name": "Liberia",
-      "length": [
+      "lengths": [
         7,
         9
       ],
@@ -1267,7 +1267,7 @@
       "countryId": "LY",
       "code": 218,
       "name": "Libya",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 912345678,
@@ -1277,7 +1277,7 @@
       "countryId": "LI",
       "code": 423,
       "name": "Liechtenstein",
-      "length": [
+      "lengths": [
         7,
         9
       ],
@@ -1288,7 +1288,7 @@
       "countryId": "LT",
       "code": 370,
       "name": "Lithuania",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 61234567,
@@ -1298,7 +1298,7 @@
       "countryId": "LU",
       "code": 352,
       "name": "Luxembourg",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 628123456,
@@ -1308,7 +1308,7 @@
       "countryId": "MO",
       "code": 853,
       "name": "Macao",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 66123456,
@@ -1318,7 +1318,7 @@
       "countryId": "MG",
       "code": 261,
       "name": "Madagascar",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 321234567,
@@ -1328,7 +1328,7 @@
       "countryId": "MW",
       "code": 265,
       "name": "Malawi",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 991234567,
@@ -1338,7 +1338,7 @@
       "countryId": "MY",
       "code": 60,
       "name": "Malaysia",
-      "length": [
+      "lengths": [
         9,
         10
       ],
@@ -1349,7 +1349,7 @@
       "countryId": "MV",
       "code": 960,
       "name": "Maldives",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 7712345,
@@ -1359,7 +1359,7 @@
       "countryId": "ML",
       "code": 223,
       "name": "Mali",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 65012345,
@@ -1369,7 +1369,7 @@
       "countryId": "MT",
       "code": 356,
       "name": "Malta",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 96961234,
@@ -1379,7 +1379,7 @@
       "countryId": "MH",
       "code": 692,
       "name": "Marshall Islands",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 2351234,
@@ -1389,7 +1389,7 @@
       "countryId": "MQ",
       "code": 596,
       "name": "Martinique",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 696201234,
@@ -1399,7 +1399,7 @@
       "countryId": "MR",
       "code": 222,
       "name": "Mauritania",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 22123456,
@@ -1409,7 +1409,7 @@
       "countryId": "MU",
       "code": 230,
       "name": "Mauritius",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 52512345,
@@ -1419,7 +1419,7 @@
       "countryId": "YT",
       "code": 262,
       "name": "Mayotte",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 639012345,
@@ -1429,7 +1429,7 @@
       "countryId": "MX",
       "code": 52,
       "name": "Mexico",
-      "length": [
+      "lengths": [
         11
       ],
       "example": 12221234567,
@@ -1439,7 +1439,7 @@
       "countryId": "FM",
       "code": 691,
       "name": "Micronesia",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 3501234,
@@ -1449,7 +1449,7 @@
       "countryId": "MD",
       "code": 373,
       "name": "Moldova",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 62112345,
@@ -1459,7 +1459,7 @@
       "countryId": "MC",
       "code": 377,
       "name": "Monaco",
-      "length": [
+      "lengths": [
         8,
         9
       ],
@@ -1470,7 +1470,7 @@
       "countryId": "MN",
       "code": 976,
       "name": "Mongolia",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 88123456,
@@ -1480,7 +1480,7 @@
       "countryId": "ME",
       "code": 382,
       "name": "Montenegro",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 67622901,
@@ -1490,7 +1490,7 @@
       "countryId": "MS",
       "code": 1,
       "name": "Montserrat",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 6644923456,
@@ -1500,7 +1500,7 @@
       "countryId": "MA",
       "code": 212,
       "name": "Morocco",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 650123456,
@@ -1510,7 +1510,7 @@
       "countryId": "MZ",
       "code": 258,
       "name": "Mozambique",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 821234567,
@@ -1520,7 +1520,7 @@
       "countryId": "MM",
       "code": 95,
       "name": "Myanmar (Burma)",
-      "length": [
+      "lengths": [
         7,
         8,
         9,
@@ -1533,7 +1533,7 @@
       "countryId": "NA",
       "code": 264,
       "name": "Namibia",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 811234567,
@@ -1543,7 +1543,7 @@
       "countryId": "NR",
       "code": 674,
       "name": "Nauru",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 5551234,
@@ -1553,7 +1553,7 @@
       "countryId": "NP",
       "code": 977,
       "name": "Nepal",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 9841234567,
@@ -1563,7 +1563,7 @@
       "countryId": "NL",
       "code": 31,
       "name": "Netherlands",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 612345678,
@@ -1573,7 +1573,7 @@
       "countryId": "NC",
       "code": 687,
       "name": "New Caledonia",
-      "length": [
+      "lengths": [
         6
       ],
       "example": 751234,
@@ -1583,7 +1583,7 @@
       "countryId": "NZ",
       "code": 64,
       "name": "New Zealand",
-      "length": [
+      "lengths": [
         8,
         9,
         10
@@ -1595,7 +1595,7 @@
       "countryId": "NI",
       "code": 505,
       "name": "Nicaragua",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 81234567,
@@ -1605,7 +1605,7 @@
       "countryId": "NE",
       "code": 227,
       "name": "Niger",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 93123456,
@@ -1615,7 +1615,7 @@
       "countryId": "NG",
       "code": 234,
       "name": "Nigeria",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 8021234567,
@@ -1625,7 +1625,7 @@
       "countryId": "NU",
       "code": 683,
       "name": "Niue",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 8884012,
@@ -1635,7 +1635,7 @@
       "countryId": "NF",
       "code": 672,
       "name": "Norfolk Island",
-      "length": [
+      "lengths": [
         6
       ],
       "example": 381234,
@@ -1645,7 +1645,7 @@
       "countryId": "KP",
       "code": 850,
       "name": "North Korea",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 1921234567,
@@ -1655,7 +1655,7 @@
       "countryId": "MK",
       "code": 389,
       "name": "North Macedonia",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 72345678,
@@ -1665,7 +1665,7 @@
       "countryId": "MP",
       "code": 1,
       "name": "Northern Mariana Islands",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 6702345678,
@@ -1675,7 +1675,7 @@
       "countryId": "NO",
       "code": 47,
       "name": "Norway",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 40612345,
@@ -1685,7 +1685,7 @@
       "countryId": "OM",
       "code": 968,
       "name": "Oman",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 92123456,
@@ -1695,7 +1695,7 @@
       "countryId": "PK",
       "code": 92,
       "name": "Pakistan",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 3012345678,
@@ -1705,7 +1705,7 @@
       "countryId": "PW",
       "code": 680,
       "name": "Palau",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 6201234,
@@ -1715,7 +1715,7 @@
       "countryId": "PS",
       "code": 970,
       "name": "Palestine",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 599123456,
@@ -1725,7 +1725,7 @@
       "countryId": "PA",
       "code": 507,
       "name": "Panama",
-      "length": [
+      "lengths": [
         7,
         8
       ],
@@ -1736,7 +1736,7 @@
       "countryId": "PG",
       "code": 675,
       "name": "Papua New Guinea",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 70123456,
@@ -1746,7 +1746,7 @@
       "countryId": "PY",
       "code": 595,
       "name": "Paraguay",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 961456789,
@@ -1756,7 +1756,7 @@
       "countryId": "PE",
       "code": 51,
       "name": "Peru",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 912345678,
@@ -1766,7 +1766,7 @@
       "countryId": "PH",
       "code": 63,
       "name": "Philippines",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 9051234567,
@@ -1776,7 +1776,7 @@
       "countryId": "PL",
       "code": 48,
       "name": "Poland",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 512345678,
@@ -1786,7 +1786,7 @@
       "countryId": "PT",
       "code": 351,
       "name": "Portugal",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 912345678,
@@ -1796,7 +1796,7 @@
       "countryId": "PR",
       "code": 1,
       "name": "Puerto Rico",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 7872345678,
@@ -1806,7 +1806,7 @@
       "countryId": "QA",
       "code": 974,
       "name": "Qatar",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 33123456,
@@ -1816,7 +1816,7 @@
       "countryId": "RO",
       "code": 40,
       "name": "Romania",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 712034567,
@@ -1826,7 +1826,7 @@
       "countryId": "RW",
       "code": 250,
       "name": "Rwanda",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 720123456,
@@ -1836,7 +1836,7 @@
       "countryId": "RE",
       "code": 262,
       "name": "Reunion",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 692123456,
@@ -1846,7 +1846,7 @@
       "countryId": "WS",
       "code": 685,
       "name": "Samoa",
-      "length": [
+      "lengths": [
         7,
         10
       ],
@@ -1857,7 +1857,7 @@
       "countryId": "SM",
       "code": 378,
       "name": "San Marino",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 66661212,
@@ -1867,7 +1867,7 @@
       "countryId": "SA",
       "code": 966,
       "name": "Saudi Arabia",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 512345678,
@@ -1877,7 +1877,7 @@
       "countryId": "SN",
       "code": 221,
       "name": "Senegal",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 701234567,
@@ -1887,7 +1887,7 @@
       "countryId": "RS",
       "code": 381,
       "name": "Serbia",
-      "length": [
+      "lengths": [
         8,
         9,
         10
@@ -1899,7 +1899,7 @@
       "countryId": "SC",
       "code": 248,
       "name": "Seychelles",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 2510123,
@@ -1909,7 +1909,7 @@
       "countryId": "SL",
       "code": 232,
       "name": "Sierra Leone",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 25123456,
@@ -1919,7 +1919,7 @@
       "countryId": "SG",
       "code": 65,
       "name": "Singapore",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 81234567,
@@ -1929,7 +1929,7 @@
       "countryId": "SX",
       "code": 1,
       "name": "Sint Maarten",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 7215205678,
@@ -1939,7 +1939,7 @@
       "countryId": "SK",
       "code": 421,
       "name": "Slovakia",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 912123456,
@@ -1949,7 +1949,7 @@
       "countryId": "SI",
       "code": 386,
       "name": "Slovenia",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 31234567,
@@ -1959,7 +1959,7 @@
       "countryId": "SB",
       "code": 677,
       "name": "Solomon Islands",
-      "length": [
+      "lengths": [
         5,
         7
       ],
@@ -1970,7 +1970,7 @@
       "countryId": "SO",
       "code": 252,
       "name": "Somalia",
-      "length": [
+      "lengths": [
         7,
         8,
         9
@@ -1982,7 +1982,7 @@
       "countryId": "ZA",
       "code": 27,
       "name": "South Africa",
-      "length": [
+      "lengths": [
         5,
         6,
         7,
@@ -1996,7 +1996,7 @@
       "countryId": "KR",
       "code": 82,
       "name": "South Korea",
-      "length": [
+      "lengths": [
         9,
         10
       ],
@@ -2007,7 +2007,7 @@
       "countryId": "SS",
       "code": 211,
       "name": "South Sudan",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 977123456,
@@ -2017,7 +2017,7 @@
       "countryId": "ES",
       "code": 34,
       "name": "Spain",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 612345678,
@@ -2027,7 +2027,7 @@
       "countryId": "LK",
       "code": 94,
       "name": "Sri Lanka",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 712345678,
@@ -2037,7 +2037,7 @@
       "countryId": "BL",
       "code": 590,
       "name": "St. Barthelemy",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 690001234,
@@ -2047,7 +2047,7 @@
       "countryId": "SH",
       "code": 290,
       "name": "St. Helena",
-      "length": [
+      "lengths": [
         5
       ],
       "example": 51234,
@@ -2057,7 +2057,7 @@
       "countryId": "KN",
       "code": 1,
       "name": "St. Kitts & Nevis",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 8697652917,
@@ -2067,7 +2067,7 @@
       "countryId": "LC",
       "code": 1,
       "name": "St. Lucia",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 7582845678,
@@ -2077,7 +2077,7 @@
       "countryId": "MF",
       "code": 590,
       "name": "St. Martin",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 690001234,
@@ -2087,7 +2087,7 @@
       "countryId": "PM",
       "code": 508,
       "name": "St. Pierre & Miquelon",
-      "length": [
+      "lengths": [
         6
       ],
       "example": 551234,
@@ -2097,7 +2097,7 @@
       "countryId": "VC",
       "code": 1,
       "name": "St. Vincent & Grenadines",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 7844301234,
@@ -2107,7 +2107,7 @@
       "countryId": "SD",
       "code": 249,
       "name": "Sudan",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 911231234,
@@ -2117,7 +2117,7 @@
       "countryId": "SR",
       "code": 597,
       "name": "Suriname",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 7412345,
@@ -2127,7 +2127,7 @@
       "countryId": "SJ",
       "code": 47,
       "name": "Svalbard & Jan Mayen",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 41234567,
@@ -2137,7 +2137,7 @@
       "countryId": "SE",
       "code": 46,
       "name": "Sweden",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 701234567,
@@ -2147,7 +2147,7 @@
       "countryId": "CH",
       "code": 41,
       "name": "Switzerland",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 781234567,
@@ -2157,7 +2157,7 @@
       "countryId": "SY",
       "code": 963,
       "name": "Syria",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 944567890,
@@ -2167,7 +2167,7 @@
       "countryId": "ST",
       "code": 239,
       "name": "Sao Tome & Principe",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 9812345,
@@ -2177,7 +2177,7 @@
       "countryId": "TW",
       "code": 886,
       "name": "Taiwan",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 912345678,
@@ -2187,7 +2187,7 @@
       "countryId": "TJ",
       "code": 992,
       "name": "Tajikistan",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 917123456,
@@ -2197,7 +2197,7 @@
       "countryId": "TZ",
       "code": 255,
       "name": "Tanzania",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 621234567,
@@ -2207,7 +2207,7 @@
       "countryId": "TH",
       "code": 66,
       "name": "Thailand",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 812345678,
@@ -2217,7 +2217,7 @@
       "countryId": "TL",
       "code": 670,
       "name": "Timor-Leste",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 77212345,
@@ -2227,7 +2227,7 @@
       "countryId": "TG",
       "code": 228,
       "name": "Togo",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 90112345,
@@ -2237,7 +2237,7 @@
       "countryId": "TK",
       "code": 690,
       "name": "Tokelau",
-      "length": [
+      "lengths": [
         4,
         5,
         6,
@@ -2250,7 +2250,7 @@
       "countryId": "TO",
       "code": 676,
       "name": "Tonga",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 7715123,
@@ -2260,7 +2260,7 @@
       "countryId": "TT",
       "code": 1,
       "name": "Trinidad & Tobago",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 8682911234,
@@ -2270,14 +2270,14 @@
       "countryId": "TA",
       "code": 290,
       "name": "Tristan da Cunha",
-      "length": [
+      "lengths": [
       ]
     },
     {
       "countryId": "TN",
       "code": 216,
       "name": "Tunisia",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 20123456,
@@ -2287,7 +2287,7 @@
       "countryId": "TR",
       "code": 90,
       "name": "Turkey",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 5012345678,
@@ -2297,7 +2297,7 @@
       "countryId": "TM",
       "code": 993,
       "name": "Turkmenistan",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 66123456,
@@ -2307,7 +2307,7 @@
       "countryId": "TC",
       "code": 1,
       "name": "Turks & Caicos Islands",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 6492311234,
@@ -2317,7 +2317,7 @@
       "countryId": "TV",
       "code": 688,
       "name": "Tuvalu",
-      "length": [
+      "lengths": [
         6,
         7
       ],
@@ -2328,7 +2328,7 @@
       "countryId": "VI",
       "code": 1,
       "name": "U.S. Virgin Islands",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 3406421234,
@@ -2338,7 +2338,7 @@
       "countryId": "UG",
       "code": 256,
       "name": "Uganda",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 712345678,
@@ -2348,7 +2348,7 @@
       "countryId": "UA",
       "code": 380,
       "name": "Ukraine",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 501234567,
@@ -2358,7 +2358,7 @@
       "countryId": "AE",
       "code": 971,
       "name": "United Arab Emirates",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 501234567,
@@ -2368,7 +2368,7 @@
       "countryId": "GB",
       "code": 44,
       "name": "United Kingdom",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 7400123456,
@@ -2378,7 +2378,7 @@
       "countryId": "US",
       "code": 1,
       "name": "United States",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 2015550123,
@@ -2388,7 +2388,7 @@
       "countryId": "UY",
       "code": 598,
       "name": "Uruguay",
-      "length": [
+      "lengths": [
         8
       ],
       "example": 94231234,
@@ -2398,7 +2398,7 @@
       "countryId": "UZ",
       "code": 998,
       "name": "Uzbekistan",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 912345678,
@@ -2408,7 +2408,7 @@
       "countryId": "VU",
       "code": 678,
       "name": "Vanuatu",
-      "length": [
+      "lengths": [
         7
       ],
       "example": 5912345,
@@ -2418,7 +2418,7 @@
       "countryId": "VA",
       "code": 39,
       "name": "Vatican City",
-      "length": [
+      "lengths": [
         9,
         10,
         11
@@ -2430,7 +2430,7 @@
       "countryId": "VE",
       "code": 58,
       "name": "Venezuela",
-      "length": [
+      "lengths": [
         10
       ],
       "example": 4121234567,
@@ -2440,7 +2440,7 @@
       "countryId": "VN",
       "code": 84,
       "name": "Vietnam",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 912345678,
@@ -2450,7 +2450,7 @@
       "countryId": "WF",
       "code": 681,
       "name": "Wallis & Futuna",
-      "length": [
+      "lengths": [
         6
       ],
       "example": 501234,
@@ -2460,7 +2460,7 @@
       "countryId": "EH",
       "code": 212,
       "name": "Western Sahara",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 650123456,
@@ -2470,7 +2470,7 @@
       "countryId": "YE",
       "code": 967,
       "name": "Yemen",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 712345678,
@@ -2480,7 +2480,7 @@
       "countryId": "ZM",
       "code": 260,
       "name": "Zambia",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 955123456,
@@ -2490,7 +2490,7 @@
       "countryId": "ZW",
       "code": 263,
       "name": "Zimbabwe",
-      "length": [
+      "lengths": [
         9
       ],
       "example": 712345678,
@@ -2500,7 +2500,7 @@
       "countryId": "AX",
       "code": 358,
       "name": "Aland Islands",
-      "length": [
+      "lengths": [
         6,
         7,
         8,
