@@ -26,12 +26,14 @@ import '../pickers/photo_uploader.dart' show openPhotoUploader;
 import './item_layout.dart' show ItemLayout;
 
 class Item extends StatefulWidget {
-  const Item(this.item, this.path, this.makeTransition, this.screenBloc);
+  Item(this.item, this.path, this.makeTransition, this.screenBloc)
+      : id = item.id;
 
   final ItemModel item;
   final String path;
   final Function makeTransition;
   final ScreenBloc screenBloc;
+  final String id;
 
   @override
   State<StatefulWidget> createState() {

@@ -109,7 +109,10 @@ class _PhoneScreenState extends State<PhoneScreen> {
   @override
   Widget build(BuildContext context) {
     return PageTemplate(
-        goBack: null,
+        goBack: () {
+          Navigator.of(context)
+              .pushReplacementNamed(Navigator.defaultRouteName);
+        },
         title: 'Log in',
         body: Container(
             padding: const EdgeInsets.only(left: 14.0, right: 14.0),

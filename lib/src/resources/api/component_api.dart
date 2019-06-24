@@ -4,6 +4,7 @@ import 'package:meta/meta.dart' show required;
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart' show MediaType;
 
+import '../../models/screen/screen_model.dart' show ScreenModel;
 import 'generic/user_data/user_data.dart' show UserData;
 
 class ComponentApi extends UserData {
@@ -16,20 +17,26 @@ class ComponentApi extends UserData {
           ? Uri.parse('${getUrl(token, route)}?value=${value.toString()}')
           : Uri.parse(getUrl(token, route));
 
-  Future<Map<String, dynamic>> sendComponentValue({
+  Future<ScreenModel> sendComponentValue({
     @required String query,
     dynamic value,
     String token,
   }) async {
     // Form and send request
     try {
+      print(
+          '===> component uri: ${_componentUri(
+              token: token, route: query, value: value)}');
       final http.Response response = await client.put(
           _componentUri(route: query, value: value, token: token),
           headers: makeHeaders(token));
 
       // Process response
+      print(
+          '===> component await processResponse(response): ${await processResponse(
+              response)}');
       if (response.statusCode == 200) {
-        return processResponse(response);
+        return ScreenModel.fromJson(await processResponse(response));
       } else {
         throw response;
       }
@@ -39,7 +46,7 @@ class ComponentApi extends UserData {
     }
   }
 
-  Future<Map<String, dynamic>> uploadImage(
+  Future<ScreenModel> uploadImage(
       {@required String query,
       @required dynamic value,
       @required List<int> jpg,
@@ -61,7 +68,7 @@ class ComponentApi extends UserData {
     try {
       final http.StreamedResponse response = await request.send();
       if (response.statusCode == 200) {
-        return processResponse(response);
+        return ScreenModel.fromJson(await processResponse(response));
       } else {
         throw response;
       }
