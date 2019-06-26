@@ -4,8 +4,25 @@
     "path": "user/property/9/InputInitialPropertyData",
     "components": [
       {
-        "component": "note",
-        "value": "Photo of electricity bill is not quality"
+        "id": "list.picker",
+        "key": "List",
+        "list": [
+          "test1",
+          "test2",
+          "test3",
+          "test4",
+          "test5",
+          "test6",
+          "test7",
+          "test8",
+          "test9",
+          "test10"
+        ],
+        "typeValue": "list",
+        "value": "test5",
+        "component": "item",
+        "isInput": true,
+        "isTransition": false
       },
       {
         "id": "rent.signature",

@@ -11,6 +11,7 @@ class ItemModel extends ComponentModel {
         _value = json['value'],
         _min = json['min'],
         _max = json['max'],
+        _list = json['list'],
         super.fromJson(json['component']);
 
   String _id;
@@ -20,6 +21,7 @@ class ItemModel extends ComponentModel {
   bool _isInput;
   String _typeValue;
   dynamic _value;
+  List<dynamic> _list;
 
   // date specific props
   int _min;
@@ -36,6 +38,8 @@ class ItemModel extends ComponentModel {
   bool get isInput => _isInput;
 
   String get typeValue => _typeValue;
+
+  List<dynamic> get list => _list;
 
   dynamic get value {
     return ((typeValue == 'money') && (_value is int))

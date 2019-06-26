@@ -22,6 +22,7 @@ import '../../components/styled/styled_circular_progress.dart'
 import '../../helpers/money_controller.dart' show formatCost;
 import '../../pages/data_entry.dart' show DataEntry;
 import '../pickers/date_picker/date_picker_modal.dart' show openDatePicker;
+import '../pickers/list_picker/list_picker_modal.dart' show openListPicker;
 import '../pickers/photo_uploader.dart' show openPhotoUploader;
 import './item_layout.dart' show ItemLayout;
 
@@ -77,6 +78,13 @@ class _ItemState extends State<Item> {
           widget.makeTransition(context, item.id);
         } else if (item.isInput) {
           switch (item.typeValue) {
+            case 'list':
+              isNotNull(item.list) ?
+              openListPicker(context,
+                  initialItem: item.value,
+                  onOk: onChanged,
+                  listItems: item.list) : null;
+              break;
             case 'date':
               openDatePicker(
                 context,
