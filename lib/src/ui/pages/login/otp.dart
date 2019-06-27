@@ -70,69 +70,77 @@ class _OtpScreenState extends State<OtpScreen> {
           widget.phoneBloc.dispatch(PhoneCountriesDataRequested());
         },
         title: 'Confirm',
-        body: Container(
-          padding: const EdgeInsets.only(left: 14.0, right: 14.0),
-          margin: const EdgeInsets.only(bottom: 12.0),
-          child: BlocListenerTree(
-            blocListeners: <BlocListener<dynamic, dynamic>>[
-              BlocListener<AuthEvent, AuthState>(
-                bloc: widget.authBloc,
-                listener: (BuildContext context, AuthState state) {
-                  if (state is AuthAuthorized) {
-                    // Убиваем оба рута (страница ввода номера телефона, страница ввода sms-кода).
-                    print('===> returnTo: ${widget.returnTo}');
-                    print(
-                        '===> widget.returnTo is String ? widget.returnTo : rootPage: ${widget.returnTo is String ? widget.returnTo : rootPage}');
-                    Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        widget.returnTo is String ? widget.returnTo : rootPage,
-                        (Route<dynamic> route) => false);
-                  }
-                },
-              ),
-              BlocListener<LoginEvent, LoginState>(
-                bloc: widget.loginBloc,
-                listener: (BuildContext context, LoginState state) {
-                  if (state is PhoneError || state is CodeError) {
-                    showError(context, state);
-                  }
+        body: RefreshIndicator(
+          onRefresh: _refresh,
+          child: Container(
+            padding: const EdgeInsets.only(left: 14.0, right: 14.0),
+            margin: const EdgeInsets.only(bottom: 12.0),
+            child: BlocListenerTree(
+              blocListeners: <BlocListener<dynamic, dynamic>>[
+                BlocListener<AuthEvent, AuthState>(
+                  bloc: widget.authBloc,
+                  listener: (BuildContext context, AuthState state) {
+                    if (state is AuthAuthorized) {
+                      // Убиваем оба рута (страница ввода номера телефона, страница ввода sms-кода).
+                      print('===> returnTo: ${widget.returnTo}');
+                      print(
+                          '===> widget.returnTo is String ? widget.returnTo : rootPage: ${widget.returnTo is String ? widget.returnTo : rootPage}');
+                      Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          widget.returnTo is String ? widget.returnTo : rootPage,
+                          (Route<dynamic> route) => false);
+                    }
+                  },
+                ),
+                BlocListener<LoginEvent, LoginState>(
+                  bloc: widget.loginBloc,
+                  listener: (BuildContext context, LoginState state) {
+                    if (state is PhoneError || state is CodeError) {
+                      showError(context, state);
+                    }
 
-                  if (state is CodeError) {
-                    code.clear();
-                    showError(context, state);
-                  }
+                    if (state is CodeError) {
+                      code.clear();
+                      showError(context, state);
+                    }
 
-                  if (state is PhoneEntering) {
-                    // Убиваем рут (возвращаемся на экран ввода номера телефона).
-                    Navigator.pop(context);
-                  }
-                },
-              )
-            ],
-            child: BlocBuilder<LoginEvent, LoginState>(
-                bloc: widget.loginBloc,
-                builder: (BuildContext context, LoginState state) {
-                  if (state is OtpSent) {
-                    return Column(children: <Widget>[
-                      _buildHeadLine(),
-                      _buildCodeInput(),
-                      _buildSendButton()
-                    ]);
-                  }
+                    if (state is PhoneEntering) {
+                      // Убиваем рут (возвращаемся на экран ввода номера телефона).
+                      Navigator.pop(context);
+                    }
+                  },
+                )
+              ],
+              child: BlocBuilder<LoginEvent, LoginState>(
+                  bloc: widget.loginBloc,
+                  builder: (BuildContext context, LoginState state) {
+                    if (state is OtpSent) {
+                      return Column(children: <Widget>[
+                        _buildHeadLine(),
+                        _buildCodeInput(),
+                        _buildSendButton()
+                      ]);
+                    }
 
-                  if (state is IsFetchingCode) {
-                    isFetchingCode = true;
-                    return Column(children: <Widget>[
-                      _buildHeadLine(),
-                      _buildCodeInput(),
-                      _buildSendButton()
-                    ]);
-                  }
+                    if (state is IsFetchingCode) {
+                      isFetchingCode = true;
+                      return Column(children: <Widget>[
+                        _buildHeadLine(),
+                        _buildCodeInput(),
+                        _buildSendButton()
+                      ]);
+                    }
 
-                  return Container(width: 0.0, height: 0.0);
-                }),
+                    return Container(width: 0.0, height: 0.0);
+                  }),
+            ),
           ),
         ));
+  }
+
+
+  Future<void> _refresh() async {
+
   }
 
   Widget _buildHeadLine() {
