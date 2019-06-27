@@ -153,6 +153,7 @@ class _ScreenState extends State<Screen> {
                 Expanded(
                   child: Container(
                     child: SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
                       controller: widget.scrollController,
                       child: Column(
                         children: items,
@@ -199,7 +200,12 @@ class _ScreenState extends State<Screen> {
       return buildComponents(state.data);
     }
 
-    return const StyledCircularProgress();
+    return SingleChildScrollView(
+      child:
+      Container(
+          height: MediaQuery.of(context).size.height,
+          child: const StyledCircularProgress()),
+    );
   }
 
   String buildTitle(ScreenState state) {
