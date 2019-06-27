@@ -28,7 +28,7 @@ class PropertyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 4),
+      margin: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 4),
       child: Ink(
         decoration: BoxDecoration(
             color: Colors.white,
