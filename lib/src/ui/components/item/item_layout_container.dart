@@ -10,9 +10,15 @@ class ItemLayoutContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (onTap is Function) {
-      return InkWell(
-        onTap: onTap,
-        child: buildContainer(child),
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 3.0),
+        child: Ink(
+          color: Colors.white,
+          child: InkWell(
+            onTap: onTap,
+            child: buildContainer(child),
+          ),
+        ),
       );
     }
 
@@ -20,23 +26,19 @@ class ItemLayoutContainer extends StatelessWidget {
   }
 
   Widget buildContainer(Widget child) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 3.0),
-      child: Container(
-        constraints: const BoxConstraints(
-          minHeight: 72.0,
-        ),
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            border: Border(
-                left: BorderSide(
-                    color: Color.fromRGBO(249, 171, 60, 1),
-                    width: 4.0,
-                    style: BorderStyle.solid))),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: standardHorizontalPadding),
-          child: child,
-        ),
+    return Container(
+      constraints: const BoxConstraints(
+        minHeight: 72.0,
+      ),
+      decoration: const BoxDecoration(
+          border: Border(
+              left: BorderSide(
+                  color: Color.fromRGBO(249, 171, 60, 1),
+                  width: 4.0,
+                  style: BorderStyle.solid))),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: standardHorizontalPadding),
+        child: child,
       ),
     );
   }
