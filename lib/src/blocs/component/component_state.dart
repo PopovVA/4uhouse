@@ -9,7 +9,7 @@ abstract class ComponentState extends Equatable {
   String toString();
 }
 
-class ComponentInitState extends ComponentState {
+class ComponentNotFetching extends ComponentState {
   @override
   String toString() => 'ComponentInitState';
 }

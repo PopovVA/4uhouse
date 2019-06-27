@@ -25,3 +25,8 @@ class ScreenReceived extends ScreenEvent {
   @override
   String toString() => 'ScreenRequested';
 }
+
+class ComponentAuthError extends ScreenEvent {
+  @override
+  String toString() => 'ComponentAuthError';
+}
