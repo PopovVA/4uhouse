@@ -53,7 +53,7 @@ Future<Widget> openDatePicker(
               }
               _value = null;
 
-              Future<int>.delayed(Duration(milliseconds: 100), () {
+              Future<void>.delayed(Duration(milliseconds: 100), () {
                 Navigator.pop(context);
               });
             },

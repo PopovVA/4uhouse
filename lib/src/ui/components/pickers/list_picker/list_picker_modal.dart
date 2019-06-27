@@ -1,18 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import '../../../../utils/type_check.dart' show isNotNull;
 import '../generic/open_modal_bottom.dart' show openModalBottom;
 import 'list_picker.dart';
 
-//DateTime _timestampToDateTime(Object timestamp) {
-//  if (timestamp is int) {
-//    final DateTime ms = DateTime.fromMillisecondsSinceEpoch(timestamp);
-//    return ms;
-//  }
-//
-//  return null;
-//}
-//
+
 dynamic _selectedItem;
 
 Future<Widget> openListPicker(
@@ -39,7 +30,7 @@ Future<Widget> openListPicker(
               }
               _selectedItem = null;
 
-              Future<int>.delayed(Duration(milliseconds: 100), () {
+              Future<void>.delayed(Duration(milliseconds: 100), () {
                 Navigator.pop(context);
               });
             },
