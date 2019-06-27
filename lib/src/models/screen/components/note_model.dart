@@ -9,11 +9,11 @@ class NoteModel extends ComponentModel {
 
   String _id;
   String _value;
-  int _color;
+  String _color;
 
   dynamic get value => _value;
 
   String get id => _id;
 
-  int get color => _color;
+  String get color => _color;
 }

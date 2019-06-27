@@ -13,7 +13,7 @@ import '../../blocs/screen/screen_state.dart'
         ScreenAuthorizationError,
         ScreenState;
 
-import '../../constants/navigation.dart' show loginPage;
+import '../../constants/navigation.dart' show LOGIN_PAGE;
 import '../../models/screen/components/button_model.dart' show ButtonModel;
 import '../../models/screen/components/item_model.dart' show ItemModel;
 import '../../models/screen/components/note_model.dart' show NoteModel;
@@ -63,7 +63,7 @@ class _ScreenState extends State<Screen> {
     super.initState();
     screenBloc = ScreenBloc(
         screenRepository: ScreenRepository(), authRepository: AuthRepository());
-//        screenRepository: TestScreenRepository(),
+    //       screenRepository: TestScreenRepository(),
 //        authRepository: AuthRepository());
     scrollToId = widget.scrollToId;
     screenBloc.dispatch(ScreenRequested(query: widget.route));
@@ -144,6 +144,7 @@ class _ScreenState extends State<Screen> {
 
       return Ink(
         height: double.infinity,
+        color: const Color.fromRGBO(235, 236, 237, 1),
         child: Stack(
           children: <Widget>[
             Column(
@@ -153,8 +154,10 @@ class _ScreenState extends State<Screen> {
                 Expanded(
                   child: Container(
                     child: SingleChildScrollView(
-                      padding: buttons.isNotEmpty ? EdgeInsets.only(
-                          bottom: 64 * buttons.length.toDouble()) : null,
+                      padding: buttons.isNotEmpty
+                          ? EdgeInsets.only(
+                              bottom: 64 * buttons.length.toDouble())
+                          : null,
                       physics: const AlwaysScrollableScrollPhysics(),
                       controller: widget.scrollController,
                       child: Column(
@@ -203,8 +206,8 @@ class _ScreenState extends State<Screen> {
     }
 
     return SingleChildScrollView(
-      child:
-      Container(
+      physics: const AlwaysScrollableScrollPhysics(),
+      child: Container(
           height: MediaQuery.of(context).size.height,
           child: const StyledCircularProgress()),
     );
@@ -224,7 +227,7 @@ class _ScreenState extends State<Screen> {
         bloc: screenBloc,
         listener: (BuildContext context, ScreenState state) {
           if (state is ScreenAuthorizationError) {
-            Navigator.of(context).pushReplacementNamed(loginPage,
+            Navigator.of(context).pushReplacementNamed(LOGIN_PAGE,
                 arguments: <String, String>{'returnTo': widget.route});
           }
 

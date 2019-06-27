@@ -10,12 +10,10 @@ class PhoneApi extends Api {
   Future<AllPhoneResponse> requestCountriesPhoneData(int creationDate) async {
     try {
       final String creationDateResponse =
-      creationDate != null ? '?creationDate=$creationDate' : '';
+          creationDate != null ? '?creationDate=$creationDate' : '';
       final http.Response response = await client
           .get('${BASE_URL}auth/country-phones-data$creationDateResponse');
       if (response.statusCode == 200) {
-        print('===> await processResponse(response): ${await processResponse(
-            response)}');
         return AllPhoneResponse.fromJson(await processResponse(response));
       } else if (response.statusCode == 204) {
         // do nothing

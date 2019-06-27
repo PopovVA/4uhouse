@@ -1,16 +1,17 @@
 import 'dart:async' show Future;
 import 'dart:io' show File;
 import 'package:flutter/material.dart';
+import 'package:flutter_exif_rotation/flutter_exif_rotation.dart';
 import 'package:image_picker/image_picker.dart' show ImagePicker, ImageSource;
 
 import '../../../pallete.dart' show primaryColor;
 import 'generic/open_modal_bottom.dart' show openModalBottom;
 
 Future<Widget> openPhotoUploader(BuildContext context,
-    {Function onLoad}) async {
+    {Function onChoose, Function onLoad}) async {
   return openModalBottom(
     context: context,
-    child: _Uploader(onLoad: onLoad),
+    child: _Uploader(onChoose: onChoose, onLoad: onLoad),
   );
 }
 
@@ -44,11 +45,16 @@ class _UploaderButton extends StatelessWidget {
 }
 
 class _Uploader extends StatelessWidget {
-  const _Uploader({@required this.onLoad});
+  const _Uploader({this.onChoose, this.onLoad});
 
+  final Function onChoose;
   final Function onLoad;
 
-  Future<void> chooseImage(BuildContext context, String type) async {
+  Future<void> handleChooseImage(BuildContext context, String type) async {
+    if (onChoose is Function) {
+      onChoose();
+    }
+
     ImageSource source;
 
     switch (type) {
@@ -60,10 +66,21 @@ class _Uploader extends StatelessWidget {
         break;
     }
 
-    final Future<File> cb =
-        ImagePicker.pickImage(source: source, maxWidth: 640);
+    final Future<File> cb = pickImage(source);
     Navigator.of(context).pop();
-    onLoad(cb);
+    if (onLoad is Function) {
+      onLoad(cb);
+    }
+  }
+
+  // with Android rotation fix
+  Future<File> pickImage(ImageSource source) async {
+    final File image =
+        await ImagePicker.pickImage(source: source, maxWidth: 640);
+
+    return image != null
+        ? FlutterExifRotation.rotateImage(path: image.path)
+        : null;
   }
 
   @override
@@ -75,12 +92,12 @@ class _Uploader extends StatelessWidget {
           _UploaderButton(
               title: 'Take Photo',
               onTap: () {
-                chooseImage(context, 'take');
+                handleChooseImage(context, 'take');
               }),
           _UploaderButton(
               title: 'Choose Photo',
               onTap: () {
-                chooseImage(context, 'choose');
+                handleChooseImage(context, 'choose');
               }),
         ],
       ),

@@ -1,6 +1,7 @@
+import 'package:meta/meta.dart' show required;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'
-    show BlocProvider, BlocListener, BlocBuilder;
+    show BlocListener, BlocBuilder;
 import 'package:flutter_masked_text/flutter_masked_text.dart'
     show MoneyMaskedTextController;
 
@@ -8,10 +9,10 @@ import '../../blocs/component/component_bloc.dart' show ComponentBloc;
 import '../../blocs/component/component_event.dart' show ComponentEvent;
 import '../../blocs/component/component_state.dart'
     show
-    ComponentState,
-    ComponentIsFetching,
-    ComponentFetchingSuccess,
-    ComponentFetchingError;
+        ComponentState,
+        ComponentIsFetching,
+        ComponentFetchingSuccess,
+        ComponentFetchingError;
 import '../../models/screen/components/item_model.dart';
 import '../../models/screen/components/item_model.dart' show ItemModel;
 import '../../utils/show_alert.dart' show showError;
@@ -23,10 +24,14 @@ import '../components/styled/styled_button.dart' show StyledButton;
 import '../helpers/money_controller.dart' show createMoneyController;
 
 class DataEntry extends StatefulWidget {
-  const DataEntry(this.item, this.onChanged);
+  const DataEntry(
+      {@required this.item,
+      @required this.onChanged,
+      @required this.componentBloc});
 
   final ItemModel item;
   final Function onChanged;
+  final ComponentBloc componentBloc;
 
   @override
   State<StatefulWidget> createState() {
@@ -49,9 +54,8 @@ class _DataEntryState extends State<DataEntry> {
 
   @override
   Widget build(BuildContext context) {
-    final ComponentBloc componentBloc = BlocProvider.of<ComponentBloc>(context);
     return BlocListener<ComponentEvent, ComponentState>(
-      bloc: componentBloc,
+      bloc: widget.componentBloc,
       listener: (BuildContext context, ComponentState state) {
         if (state is ComponentFetchingSuccess) {
           Navigator.of(context).pop();
@@ -62,7 +66,7 @@ class _DataEntryState extends State<DataEntry> {
         }
       },
       child: BlocBuilder<ComponentEvent, ComponentState>(
-        bloc: componentBloc,
+        bloc: widget.componentBloc,
         builder: (BuildContext context, ComponentState state) {
           return PageTemplate(
             title: widget.item.key,
@@ -97,8 +101,7 @@ class _DataEntryState extends State<DataEntry> {
     }
   }
 
-  Function _handleSubmit(BuildContext context) =>
-          () async {
+  Function _handleSubmit(BuildContext context) => () async {
         dynamic value;
         switch (widget.item.typeValue) {
           case 'money':

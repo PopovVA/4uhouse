@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bloc/bloc.dart';
+import 'package:bloc/bloc.dart' show Bloc, BlocDelegate, BlocSupervisor;
 
 import 'src/app.dart' show App;
 import 'src/resources/auth_repository.dart' show AuthRepository;
@@ -17,6 +17,9 @@ class AppBlocDelegate extends BlocDelegate {
 
 void main() {
 //  debugPaintSizeEnabled = true;
+final str = 'user/property/15';
+  final test = str.substring(0, str.lastIndexOf('/'));
+print('===> test: ${test}');
   BlocSupervisor().delegate = AppBlocDelegate();
   runApp(App(authRepository: AuthRepository()));
   //runApp(AppScreens());

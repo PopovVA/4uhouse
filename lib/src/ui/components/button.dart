@@ -60,14 +60,15 @@ class _ButtonState extends State<Button> {
         builder: (BuildContext context, ComponentState state) {
           return StyledButton(
             color: button.color,
-            text: button.key.toUpperCase(),
+            text: button.key,
             onPressed: button.isAble
                 ? () async {
-                    componentBloc.dispatch(SendingComponentValueRequested(
-                      route: '${widget.path}/${button.id}',
-                      value: button.typeQuery == 'PUT' ? button.value : null,
-                    ));
-                  }
+              componentBloc.dispatch(SendingComponentValueRequested(
+                route: '${widget.path}/${button.id}',
+                value: button.typeQuery == 'PUT' ? button.value : null,
+                typeQuery: button.typeQuery,
+              ));
+            }
                 : null,
             loading: state is ComponentIsFetching,
           );

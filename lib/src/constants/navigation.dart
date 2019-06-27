@@ -1,2 +1,2 @@
-const String rootPage = 'user/property';
-const String loginPage = 'login';
+const String ROOT_PAGE = 'user/property';
+const String LOGIN_PAGE = 'login';

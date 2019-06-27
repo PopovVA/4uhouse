@@ -8,7 +8,7 @@ class ScreenRepository {
 
   Future<ScreenModel> fetchScreen({String query = '', String token}) async {
     final Map<String, dynamic> response =
-        await screenApi.fetchScreen(query: query, token: token);
+        await screenApi.fetchScreen(route: query, token: token);
     return ScreenModel.fromJson(response);
   }
 }

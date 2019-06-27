@@ -31,6 +31,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
+    print('---> -----------------------------------------');
+    print('===> event: ${event}');
     if (event is OtpRequested) {
       yield* _mapOtpRequestedToState(event);
     } else if (event is CodeEnteringCanceled) {

@@ -8,13 +8,15 @@ MoneyMaskedTextController createMoneyController(initialValue,
     decimalSeparator: '.',
     thousandSeparator: ' ',
   );
+
+  print('===> initialValue: ${(initialValue).toString()}');
   _moneyController.text =
       initialValue != null ? (initialValue * 10).toString() : defaultValue;
 
   return _moneyController;
 }
 
-String formatCost(double cost) {
+String formatCost(num cost) {
   if (cost == null) {
     return null;
   }

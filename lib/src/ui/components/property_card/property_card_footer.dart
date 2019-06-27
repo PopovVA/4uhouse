@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../typography.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
+
+import '../../../typography.dart' show ACTIVE_COLOR, DISABLED_COLOR;
 import '../../../utils/type_check.dart' show isNotNull;
+import '../../helpers/money_controller.dart' show formatCost;
 
 class PropertyFooter extends StatefulWidget {
   const PropertyFooter(
@@ -39,7 +42,7 @@ class PropertyState extends State<PropertyFooter> {
         TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500, color: color);
   }
 
-  Widget buildMainValue(int value, double padding,
+  Widget buildMainValue(num value, double padding,
       {bool includePaymentPeriod = false}) {
     Widget renderPaymentPeriod() {
       return Row(
@@ -54,12 +57,12 @@ class PropertyState extends State<PropertyFooter> {
       );
     }
 
-    if (value is int) {
+    if (value is num) {
       return Padding(
         padding: EdgeInsets.only(bottom: padding),
         child: Row(
           children: <Widget>[
-            Text('${widget.currency} ${value.toString()}',
+            Text('${widget.currency} ${formatCost(value)}',
                 style: mainValueStyle),
             includePaymentPeriod ? renderPaymentPeriod() : null,
           ].where(isNotNull).toList(),
@@ -91,7 +94,7 @@ class PropertyState extends State<PropertyFooter> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(16.0, 4.0, 16.0, 8.0),
+      padding: const EdgeInsets.fromLTRB(16.0, 13.0, 16.0, 12.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

@@ -93,8 +93,8 @@ class DrawerState extends State<DrawerOnly> {
                 context: context,
                 builder: (BuildContext context) {
                   return StyledAlertDialog(
-                    title: 'Logout',
-                    content: 'Are you sure you want to log out?',
+                    title: 'Sign out',
+                    content: 'Are you sure you want to sign out?',
                     onOk: () {
                       Navigator.of(context).pop(true);
                     },

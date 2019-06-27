@@ -5,36 +5,48 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart' show MediaType;
 
 import '../../models/screen/screen_model.dart' show ScreenModel;
-import 'generic/user_data/user_data.dart' show UserData;
+import 'constants/url.dart' show BASE_URL;
+import 'generic/api.dart' show Api;
 
-class ComponentApi extends UserData {
+class ComponentApi extends Api {
   Uri _componentUri({
     @required String token,
     @required String route,
     dynamic value,
   }) =>
       value != null
-          ? Uri.parse('${getUrl(token, route)}?value=${value.toString()}')
-          : Uri.parse(getUrl(token, route));
+          ? Uri.parse('$BASE_URL$route?value=${value.toString()}')
+          : Uri.parse('$BASE_URL$route');
 
   Future<ScreenModel> sendComponentValue({
     @required String query,
     dynamic value,
     String token,
+    String typeQuery,
   }) async {
     // Form and send request
     try {
       print(
-          '===> component uri: ${_componentUri(
-              token: token, route: query, value: value)}');
-      final http.Response response = await client.put(
-          _componentUri(route: query, value: value, token: token),
-          headers: makeHeaders(token));
+          '===> component uri: ${_componentUri(token: token, route: query, value: value)}');
+      final Uri uri = _componentUri(token: token, route: query, value: value);
+      final Map<String, String> headers = makeHeaders(token);
+      print('===> typeQuery: ${typeQuery}');
+
+      Future<http.Response> request;
+      switch (typeQuery) {
+        case 'POST':
+          request = client.post(uri, headers: headers);
+          break;
+        case 'PUT':
+        default:
+          request = client.put(uri, headers: headers);
+      }
+
+      final http.Response response = await request;
 
       // Process response
       print(
-          '===> component await processResponse(response): ${await processResponse(
-              response)}');
+          '===> component await processResponse(response): ${await processResponse(response)}');
       if (response.statusCode == 200) {
         return ScreenModel.fromJson(await processResponse(response));
       } else {

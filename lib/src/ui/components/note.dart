@@ -8,7 +8,7 @@ class Note extends StatelessWidget {
 
   final NoteModel note;
   final String id;
-  final int color;
+  final String color;
 
   static const int HIGHLIGHT_COLOR = 0xFFdeff0000;
 
@@ -23,11 +23,11 @@ class Note extends StatelessWidget {
         note.value,
         style: const TextStyle(
           fontSize: 16.0,
-          color: Color(0xFFdeff0000),
+          color: Colors.white,
         ),
       ),
       decoration: BoxDecoration(
-        color: Color(color),
+        color: color is String ? Color(int.parse(color)) : null,
         border: const Border(
           left: BorderSide(
             color: Color(0xFFd24444),

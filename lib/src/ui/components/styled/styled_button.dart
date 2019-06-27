@@ -43,7 +43,7 @@ class StyledButton extends StatelessWidget {
     }
 
     return Text(
-      text.toUpperCase(),
+      text,
       style: Theme.of(context).textTheme.button,
     );
   }

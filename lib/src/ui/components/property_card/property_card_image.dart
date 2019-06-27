@@ -135,7 +135,7 @@ class PropertyImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double height = 140.0;
+    const double height = 160.0;
     return Container(
       width: double.infinity,
       height: height,

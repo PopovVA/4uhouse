@@ -6,7 +6,8 @@ import '../../../src/models/errors/auth_error.dart' show AuthError;
 import '../../../src/models/screen/screen_model.dart' show ScreenModel;
 import '../../resources/auth_repository.dart' show AuthRepository;
 import '../../resources/screen_repository.dart' show ScreenRepository;
-import 'screen_event.dart' show ScreenEvent, ScreenRequested, ScreenReceived;
+import 'screen_event.dart'
+    show ScreenEvent, ScreenRequested, ScreenReceived, ComponentAuthError;
 import 'screen_state.dart'
     show
     ScreenDataLoaded,
@@ -46,6 +47,10 @@ class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
 
     if (event is ScreenReceived) {
       yield ScreenDataLoaded(event.screen);
+    }
+
+    if (event is ComponentAuthError) {
+      yield ScreenAuthorizationError();
     }
   }
 }

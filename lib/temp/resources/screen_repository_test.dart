@@ -35,7 +35,6 @@ Map<String, dynamic> updateMap(
         value1.forEach((dynamic item) {
           item.forEach((String key2, dynamic value2) {
             if (key2 == 'id' && value2 == id) {
-              print(item);
               item.update('value', (dynamic value3) => value3 = value);
             }
           });
@@ -47,7 +46,6 @@ Map<String, dynamic> updateMap(
 }
 
 Future<Map<String, dynamic>> parseJsonFromAssets(String assetsPath) async {
-  print('--- Parse json from: $assetsPath');
   return rootBundle.loadString(assetsPath).then((String jsonStr) {
     return json.decode(jsonStr)[0];
   });
