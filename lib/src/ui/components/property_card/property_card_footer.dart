@@ -91,7 +91,7 @@ class PropertyState extends State<PropertyFooter> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(20.0, 13.0, 20.0, 12.0),
+      padding: const EdgeInsets.fromLTRB(16.0, 13.0, 16.0, 12.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
