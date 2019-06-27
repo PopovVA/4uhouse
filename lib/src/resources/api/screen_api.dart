@@ -10,6 +10,7 @@ import 'generic/api.dart' show Api;
 class ScreenApi extends Api {
   String getUrl(String token, String route) {
     final String context = route.replaceFirst('user/', '');
+    print('===> token: ${token}');
     if (!isTokenFormat(token) &&
         (route.substring(0, route.lastIndexOf('/')) == ROOT_PAGE)) {
       return '$GUEST_URL$context';

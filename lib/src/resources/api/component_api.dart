@@ -5,20 +5,18 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart' show MediaType;
 
 import '../../models/screen/screen_model.dart' show ScreenModel;
-import 'constants/url.dart' show USER_URL;
+import 'constants/url.dart' show BASE_URL;
 import 'generic/api.dart' show Api;
 
 class ComponentApi extends Api {
-  String getUrl(String route) => '$USER_URL$route';
-  
   Uri _componentUri({
     @required String token,
     @required String route,
     dynamic value,
   }) =>
       value != null
-          ? Uri.parse('${getUrl(route)}?value=${value.toString()}')
-          : Uri.parse(getUrl(route));
+          ? Uri.parse('$BASE_URL$route?value=${value.toString()}')
+          : Uri.parse('$BASE_URL$route');
 
   Future<ScreenModel> sendComponentValue({
     @required String query,
