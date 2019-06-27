@@ -14,6 +14,7 @@ class ItemLayout extends StatelessWidget {
     this.onTap,
     this.disabled = false,
   });
+
   final String picture;
   final String body;
   final dynamic suffix;
@@ -93,6 +94,7 @@ class ItemLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return ItemLayoutContainer(
       Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           _buildPicture(),
           _buildTextContent(context),

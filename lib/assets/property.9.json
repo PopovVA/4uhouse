@@ -6,8 +6,8 @@
       {
         "id": "InputInitialPropertyData",
         "component": "item",
-        "picture": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"3\" fill=\"#FFA726\"/></svg>",
-        "key": "Input initial property data",
+        "picture": "<svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<g id=\"icon/content/send_24px\">\n<path id=\"icon/content/send_24px_2\" fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M4.7438 13.4765L1.86057 10.585L14.2308 5.63936L9.28519 18.0096L6.39371 15.1264L11.7559 8.11424L4.7438 13.4765ZM3.93536 11.0099L8.36126 9.24035L4.84694 11.9297L3.93536 11.0099ZM10.6258 11.513L8.85625 15.9389L7.94054 15.0232L10.6258 11.513Z\" fill=\"black\" fill-opacity=\"0.54\"/>\n</g>\n</svg>",
+        "key": "Prepare the property and select date",
         "isTransition": true,
         "isInput": true
       },
@@ -27,8 +27,9 @@
         "costRent": 50000,
         "paymentPeriod": "month",
         "costSale": 35000000,
-        "address": "📍 , ",
-        "isInput": false,
+        "mainInfo": "4 Bed, house",
+        "address": "📍 Tsada, PAPHOS",
+        "isInput": true,
         "isTransition": false,
         "statusValue": "Note",
         "statusColor": "0xFFDB4437"
@@ -41,7 +42,8 @@
         "costRent": 50000,
         "paymentPeriod": "month",
         "costSale": 35000000,
-        "address": "📍 , ",
+        "mainInfo": "4 Bed, house",
+        "address": "📍 Tsada, PAPHOS",
         "isInput": false,
         "isTransition": false,
         "statusValue": "Note",

@@ -63,7 +63,7 @@ class _ScreenState extends State<Screen> {
     super.initState();
     screenBloc = ScreenBloc(
         screenRepository: ScreenRepository(), authRepository: AuthRepository());
-//        screenRepository: TestScreenRepository(),
+    //       screenRepository: TestScreenRepository(),
 //        authRepository: AuthRepository());
     scrollToId = widget.scrollToId;
     screenBloc.dispatch(ScreenRequested(query: widget.route));
@@ -144,6 +144,7 @@ class _ScreenState extends State<Screen> {
 
       return Ink(
         height: double.infinity,
+        color: const Color.fromRGBO(235, 236, 237, 1),
         child: Stack(
           children: <Widget>[
             Column(
