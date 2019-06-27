@@ -108,73 +108,76 @@ class _PhoneScreenState extends State<PhoneScreen> {
               .pushReplacementNamed(Navigator.defaultRouteName);
         },
         title: 'Log in',
-        body: RefreshIndicator(
-          onRefresh: _refresh,
-          child: Container(
-              padding: const EdgeInsets.only(left: 14.0, right: 14.0),
-              margin: const EdgeInsets.only(bottom: 12.0),
-              child: BlocListenerTree(
-                  blocListeners: <BlocListener<dynamic, dynamic>>[
-                    BlocListener<LoginEvent, LoginState>(
-                        bloc: _loginBloc,
-                        listener: (BuildContext context, LoginState state) {
-                          print(
-                              '===> state listener name  ${state.runtimeType}');
-                          if (state is OtpSent) {
-                            Navigator.push(
-                                context,
-                                SlideRoute(
-                                    widget: OtpScreen(
-                                      authBloc: widget.authBloc,
-                                      loginBloc: _loginBloc,
-                                      phoneBloc: _phoneBloc,
-                                      selectedItem: selectedItem,
-                                      number: number,
-                                      returnTo: widget.returnTo,
-                                    ),
-                                    side: 'left'));
-                          }
-                          if (state is PhoneError) {
-                            showError(context, state);
-                          }
-                        }),
-                    BlocListener<PhoneEvent, PhoneState>(
-                      bloc: _phoneBloc,
-                      listener: (BuildContext context, PhoneState state) {
-                        if (state is PhoneLoadingError) {
+        body: Container(
+            padding: const EdgeInsets.only(left: 14.0, right: 14.0),
+            margin: const EdgeInsets.only(bottom: 12.0),
+            child: BlocListenerTree(
+                blocListeners: <BlocListener<dynamic, dynamic>>[
+                  BlocListener<LoginEvent, LoginState>(
+                      bloc: _loginBloc,
+                      listener: (BuildContext context, LoginState state) {
+                        print('===> state listener name  ${state.runtimeType}');
+                        if (state is OtpSent) {
+                          Navigator.push(
+                              context,
+                              SlideRoute(
+                                  widget: OtpScreen(
+                                    authBloc: widget.authBloc,
+                                    loginBloc: _loginBloc,
+                                    phoneBloc: _phoneBloc,
+                                    selectedItem: selectedItem,
+                                    number: number,
+                                    returnTo: widget.returnTo,
+                                  ),
+                                  side: 'left'));
+                        }
+                        if (state is PhoneError) {
                           showError(context, state);
                         }
-                      },
-                    )
-                  ],
-                  child: BlocBuilder<PhoneEvent, PhoneState>(
-                      bloc: _phoneBloc,
-                      builder: (BuildContext context, PhoneState state) {
-                        return Column(
+                      }),
+                  BlocListener<PhoneEvent, PhoneState>(
+                    bloc: _phoneBloc,
+                    listener: (BuildContext context, PhoneState state) {
+                      if (state is PhoneLoadingError) {
+                        showError(context, state);
+                      }
+                    },
+                  )
+                ],
+                child: BlocBuilder<PhoneEvent, PhoneState>(
+                    bloc: _phoneBloc,
+                    builder: (BuildContext context, PhoneState state) {
+                      return RefreshIndicator(
+                        onRefresh: _refresh,
+                        child: Stack(
                           children: <Widget>[
-                            _buildTittle(),
-                            if (state is PhoneUninitialized ||
-                                state is PhoneLoading)
-                              StyledCircularProgress(
-                                  size: 'small',
-                                  color: Theme.of(context).primaryColor),
-                            if (state is PhoneCountriesDataLoaded)
-                              Container(
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 24.0),
-                                child: _buildPhonePicker(state),
-                              ),
-                            if (state is PhoneLoadingError)
-                              Text(state.toString()),
-                            Container(
-                              margin: const EdgeInsets.only(left: 8.0),
-                              child: _buildTerms(),
+                            ListView(
+                              children: <Widget>[
+                                _buildTittle(),
+                                if (state is PhoneUninitialized ||
+                                    state is PhoneLoading)
+                                  StyledCircularProgress(
+                                      size: 'small',
+                                      color: Theme.of(context).primaryColor),
+                                if (state is PhoneCountriesDataLoaded)
+                                  Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 24.0),
+                                    child: _buildPhonePicker(state),
+                                  ),
+                                if (state is PhoneLoadingError)
+                                  Text(state.toString()),
+                                Container(
+                                  margin: const EdgeInsets.only(left: 8.0),
+                                  child: _buildTerms(),
+                                ),
+                              ],
                             ),
-                            _buildSubmit(loginBloc: _loginBloc),
+                            _buildSubmit(loginBloc: _loginBloc)
                           ],
-                        );
-                      }))),
-        ));
+                        ),
+                      );
+                    }))));
   }
 
   Future<void> _refresh() async {
@@ -248,24 +251,21 @@ class _PhoneScreenState extends State<PhoneScreen> {
     return BlocBuilder<LoginEvent, LoginState>(
         bloc: loginBloc,
         builder: (BuildContext context, LoginState state) {
-          return Container(
-              child: Expanded(
-            child: Align(
-              alignment: FractionalOffset.bottomCenter,
-              child: StyledButton(
-                loading: state is IsFetchingOtp,
-                onPressed: isAgree && validPhone
-                    ? () {
-                        _loginBloc.dispatch(OtpRequested(
-                            countryId: selectedItem.countryId,
-                            code: selectedItem.code,
-                            number: number));
-                      }
-                    : null,
-                text: 'Submit',
-              ),
+          return Align(
+            alignment: FractionalOffset.bottomCenter,
+            child: StyledButton(
+              loading: state is IsFetchingOtp,
+              onPressed: isAgree && validPhone
+                  ? () {
+                      _loginBloc.dispatch(OtpRequested(
+                          countryId: selectedItem.countryId,
+                          code: selectedItem.code,
+                          number: number));
+                    }
+                  : null,
+              text: 'Submit',
             ),
-          ));
+          );
         });
   }
 }
