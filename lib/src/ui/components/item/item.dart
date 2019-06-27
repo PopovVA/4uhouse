@@ -77,14 +77,12 @@ class _ItemState extends State<Item> {
         if (item.isTransition) {
           widget.makeTransition(context, item.id);
         } else if (item.isInput) {
+          if (isNotNull(item.list)) {
+            openListPicker(context,
+                initialItem: item.value, onOk: onChanged, listItems: item.list);
+            return;
+          }
           switch (item.typeValue) {
-            case 'list':
-              isNotNull(item.list) ?
-              openListPicker(context,
-                  initialItem: item.value,
-                  onOk: onChanged,
-                  listItems: item.list) : null;
-              break;
             case 'date':
               openDatePicker(
                 context,
