@@ -25,7 +25,7 @@ class ItemLayout extends StatelessWidget {
   Widget _buildPicture() {
     if (picture is String) {
       return Container(
-        margin: const EdgeInsets.only(right: 26.0),
+        margin: const EdgeInsets.only(right: 8.0),
         child: Center(
           child: picture.startsWith('<svg')
               ? SvgPicture.string(picture)
