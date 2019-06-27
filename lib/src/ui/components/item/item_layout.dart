@@ -24,7 +24,7 @@ class ItemLayout extends StatelessWidget {
   Widget _buildPicture() {
     if (picture is String) {
       return Container(
-        margin: const EdgeInsets.only(right: 8.0),
+        margin: const EdgeInsets.only(right: 26.0),
         child: Center(
           child: picture.startsWith('<svg')
               ? SvgPicture.string(picture)
@@ -93,6 +93,7 @@ class ItemLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return ItemLayoutContainer(
       Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           _buildPicture(),
           _buildTextContent(context),
