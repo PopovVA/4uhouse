@@ -14,6 +14,7 @@ class ItemLayout extends StatelessWidget {
     this.onTap,
     this.disabled = false,
   });
+
   final String picture;
   final String body;
   final dynamic suffix;

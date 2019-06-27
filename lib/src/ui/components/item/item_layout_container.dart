@@ -21,15 +21,15 @@ class ItemLayoutContainer extends StatelessWidget {
 
   Widget buildContainer(Widget child) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical:3.0),
+      padding: const EdgeInsets.symmetric(vertical: 3.0),
       child: Container(
         constraints: const BoxConstraints(
           minHeight: 72.0,
         ),
-        decoration:const BoxDecoration(
-          color: Colors.white,
+        decoration: const BoxDecoration(
+            color: Colors.white,
             border: Border(
-                left:  BorderSide(
+                left: BorderSide(
                     color: Color.fromRGBO(249, 171, 60, 1),
                     width: 4.0,
                     style: BorderStyle.solid))),
