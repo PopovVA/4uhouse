@@ -13,7 +13,7 @@ import '../../blocs/screen/screen_state.dart'
         ScreenAuthorizationError,
         ScreenState;
 
-import '../../constants/navigation.dart' show loginPage;
+import '../../constants/navigation.dart' show LOGIN_PAGE;
 import '../../models/screen/components/button_model.dart' show ButtonModel;
 import '../../models/screen/components/item_model.dart' show ItemModel;
 import '../../models/screen/components/note_model.dart' show NoteModel;
@@ -227,7 +227,7 @@ class _ScreenState extends State<Screen> {
         bloc: screenBloc,
         listener: (BuildContext context, ScreenState state) {
           if (state is ScreenAuthorizationError) {
-            Navigator.of(context).pushReplacementNamed(loginPage,
+            Navigator.of(context).pushReplacementNamed(LOGIN_PAGE,
                 arguments: <String, String>{'returnTo': widget.route});
           }
 

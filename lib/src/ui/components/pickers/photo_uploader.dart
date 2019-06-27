@@ -77,7 +77,6 @@ class _Uploader extends StatelessWidget {
   Future<File> pickImage(ImageSource source) async {
     final File image =
         await ImagePicker.pickImage(source: source, maxWidth: 640);
-    print('===> image: ${image}');
 
     return image != null
         ? FlutterExifRotation.rotateImage(path: image.path)

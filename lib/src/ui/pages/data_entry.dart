@@ -44,11 +44,8 @@ class _DataEntryState extends State<DataEntry> {
 
   @override
   void initState() {
-    print('---> init state');
     switch (widget.item.typeValue) {
       case 'money':
-        // hardcode
-      print('===> widget.item.value: ${widget.item.value}');
         _moneyController = createMoneyController(widget.item.value);
         break;
     }

@@ -43,7 +43,6 @@ class Api {
   }
 
   Future<dynamic> inferError(dynamic object) async {
-    print('===> object.runtimeType: ${object.runtimeType}');
     if (object is SocketException) {
       final bool internet = await _checkInternet();
       if (internet) {
@@ -60,7 +59,6 @@ class Api {
       final String message =
           description is String ? description : parsedResponse['message'];
 
-      print('===> error description: $message');
       if (<int>[401, 403, 409].contains(statusCode)) {
         return AuthError(message);
       }

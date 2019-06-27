@@ -20,7 +20,7 @@ import '../../../blocs/login/login_state.dart'
         PhoneError;
 import '../../../blocs/phone/phone_bloc.dart' show PhoneBloc;
 import '../../../blocs/phone/phone_event.dart' show PhoneCountriesDataRequested;
-import '../../../constants/navigation.dart' show rootPage;
+import '../../../constants/navigation.dart' show ROOT_PAGE;
 import '../../../utils/show_alert.dart' show showError;
 
 import '../../components/page_template.dart' show PageTemplate;
@@ -80,12 +80,9 @@ class _OtpScreenState extends State<OtpScreen> {
                 listener: (BuildContext context, AuthState state) {
                   if (state is AuthAuthorized) {
                     // Убиваем оба рута (страница ввода номера телефона, страница ввода sms-кода).
-                    print('===> returnTo: ${widget.returnTo}');
-                    print(
-                        '===> widget.returnTo is String ? widget.returnTo : rootPage: ${widget.returnTo is String ? widget.returnTo : rootPage}');
                     Navigator.pushNamedAndRemoveUntil(
                         context,
-                        widget.returnTo is String ? widget.returnTo : rootPage,
+                        widget.returnTo is String ? widget.returnTo : ROOT_PAGE,
                         (Route<dynamic> route) => false);
                   }
                 },

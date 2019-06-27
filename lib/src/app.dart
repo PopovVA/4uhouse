@@ -4,7 +4,7 @@ import 'package:meta/meta.dart' show required;
 
 import 'blocs/auth/auth_bloc.dart' show AuthBloc;
 import 'blocs/auth/auth_event.dart' show AppStarted;
-import 'constants/navigation.dart' show rootPage, loginPage;
+import 'constants/navigation.dart' show ROOT_PAGE, LOGIN_PAGE;
 import 'pallete.dart' show accentColor, primaryColor;
 import 'resources/auth_repository.dart' show AuthRepository;
 import 'typography.dart' show customTextTheme;
@@ -50,18 +50,17 @@ class _AppState extends State<App> {
             accentColor: accentColor,
             primaryColor: primaryColor,
             textTheme: customTextTheme),
-        home: const HomeScreen(route: rootPage),
+        home: const HomeScreen(route: ROOT_PAGE),
         onGenerateRoute: (RouteSettings settings) {
           final String name = settings.name;
           final Map<String, dynamic> arguments = settings.arguments;
-          print('===> NAME: ${name}');
           switch (name) {
-            case rootPage:
+            case ROOT_PAGE:
               return MaterialPageRoute<HomeScreen>(
                 builder: (BuildContext context) =>
                     HomeScreen(route: name, arguments: arguments),
               );
-            case loginPage:
+            case LOGIN_PAGE:
               return MaterialPageRoute<HomeScreen>(
                 builder: (BuildContext context) => PhoneScreen(
                   authBloc: authBloc,
