@@ -7,6 +7,7 @@ class ButtonModel extends ComponentModel {
         _isAble = json['isAble'],
         _value = json['value'],
         _typeQuery = json['typeQuery'],
+        _color = json['color'],
         super.fromJson(json['component']);
 
   String _id;
@@ -14,6 +15,7 @@ class ButtonModel extends ComponentModel {
   bool _isAble;
   dynamic _value;
   String _typeQuery;
+  String _color;
 
   String get id => _id;
 
@@ -24,4 +26,6 @@ class ButtonModel extends ComponentModel {
   dynamic get value => _value;
 
   String get typeQuery => _typeQuery;
+
+  String get color => _color;
 }

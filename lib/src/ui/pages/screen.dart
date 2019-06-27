@@ -64,7 +64,7 @@ class _ScreenState extends State<Screen> {
     screenBloc = ScreenBloc(
         screenRepository: ScreenRepository(), authRepository: AuthRepository());
 //        screenRepository: TestScreenRepository(),
-//        authRepository: AuthRepository());
+    //      authRepository: AuthRepository());
     scrollToId = widget.scrollToId;
     screenBloc.dispatch(ScreenRequested(query: widget.route));
   }
@@ -163,8 +163,7 @@ class _ScreenState extends State<Screen> {
               ],
             ),
             Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: buttons,
