@@ -155,6 +155,7 @@ class _ScreenState extends State<Screen> {
                     child: SingleChildScrollView(
                       padding: buttons.isNotEmpty ? EdgeInsets.only(
                           bottom: 64 * buttons.length.toDouble()) : null,
+                      physics: const AlwaysScrollableScrollPhysics(),
                       controller: widget.scrollController,
                       child: Column(
                         children: items,
@@ -165,8 +166,7 @@ class _ScreenState extends State<Screen> {
               ],
             ),
             Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: buttons,
@@ -202,7 +202,12 @@ class _ScreenState extends State<Screen> {
       return buildComponents(state.data);
     }
 
-    return const StyledCircularProgress();
+    return SingleChildScrollView(
+      child:
+      Container(
+          height: MediaQuery.of(context).size.height,
+          child: const StyledCircularProgress()),
+    );
   }
 
   String buildTitle(ScreenState state) {

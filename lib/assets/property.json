@@ -65,6 +65,7 @@
       {
         "id": "Case",
         "component": "button",
+        "color": "0xFF31ADB6",
         "typeQuery": "POST",
         "isAble": true,
         "key": "Add property"
