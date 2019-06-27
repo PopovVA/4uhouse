@@ -59,7 +59,8 @@ class _ButtonState extends State<Button> {
         bloc: componentBloc,
         builder: (BuildContext context, ComponentState state) {
           return StyledButton(
-            text: button.key.toUpperCase(),
+            color: button.color,
+            text: button.key,
             onPressed: button.isAble
                 ? () async {
               componentBloc.dispatch(SendingComponentValueRequested(

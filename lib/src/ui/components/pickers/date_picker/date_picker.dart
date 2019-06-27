@@ -7,56 +7,22 @@ import 'helpers/generate_range_list.dart' show generateRangeList;
 import 'helpers/grey_color.dart' show greyColourInclude, greyColourBegin;
 import 'picker.dart' show Picker;
 
-// ignore: must_be_immutable
 class DatePicker extends StatefulWidget {
   DatePicker({
     @required this.onDateTimeChanged,
-    @required DateTime initialDateTime,
-    DateTime minimumDate,
-    DateTime maximumDate,
-    int minimumYear = 1970,
-    int maximumYear = 2030,
-  }) {
-    // ignore: prefer_asserts_in_initializer_lists
-    assert(
-      onDateTimeChanged != null,
-      'onDateTimeChanged argument is required!',
-    );
-    // ignore: prefer_asserts_in_initializer_lists
-    assert(
-      minimumDate.isBefore(maximumDate),
-      'Minimum date should be before maximum date.',
-    );
-
-    this.initialDateTime =
-        initialDateTime is DateTime ? initialDateTime : DateTime(2000, 1, 1);
-
-    yFullArray = generateRangeList(<int>[
-      (minimumDate is DateTime) ? minimumDate.year : minimumYear,
-      (maximumDate is DateTime) ? maximumDate.year : maximumYear,
-    ]);
-
-    dMin = minimumDate.day - 1;
-    mMin = minimumDate.month - 1;
-    yMin = 0;
-
-    dMax = maximumDate.day - 1;
-    mMax = maximumDate.month - 1;
-    yMax = yFullArray.length - 1;
-  }
+    @required this.initialDateTime,
+    this.minimumDate,
+    this.maximumDate,
+  })
+      : assert(onDateTimeChanged != null,
+  'onDateTimeChanged argument is required!'),
+        assert(minimumDate.isBefore(maximumDate),
+        'Minimum date should be before maximum date.');
 
   final Function onDateTimeChanged;
-  DateTime initialDateTime;
-
-  List<int> yFullArray;
-
-  int dMin;
-  int mMin;
-  int yMin;
-
-  int dMax;
-  int mMax;
-  int yMax;
+  final DateTime initialDateTime;
+  final DateTime minimumDate;
+  final DateTime maximumDate;
 
   @override
   State<StatefulWidget> createState() {
@@ -65,19 +31,25 @@ class DatePicker extends StatefulWidget {
 }
 
 class _DatePickerState extends State<DatePicker> {
+  final int minimumYear = 1970;
+  final int maximumYear = 2030;
+  static DateTime initialDateTime;
+  int dMin;
+  int mMin;
+  final int yMin = 0;
+  List<int> yFullArray;
+  int dMax;
+  int mMax;
+  int yMax;
   FixedExtentScrollController dayScrollController;
   FixedExtentScrollController monthScrollController;
   FixedExtentScrollController yearScrollController;
-
   ReplaySubject<int> subject;
-
   int dIndex;
   int mIndex;
   int yIndex;
-
   List<int> dArray = INITIAL_D_FULL_ARRAY;
   List<int> mArray = INITIAL_M_FULL_ARRAY;
-
   bool isPanning;
 
   @override
@@ -85,13 +57,26 @@ class _DatePickerState extends State<DatePicker> {
     // Initialize indexes
     dIndex = widget.initialDateTime.day - 1;
     mIndex = widget.initialDateTime.month - 1;
-    final int indexOfYear =
-        widget.yFullArray.indexOf(widget.initialDateTime.year);
+    yFullArray = generateRangeList(<int>[
+      (widget.minimumDate is DateTime) ? widget.minimumDate.year : minimumYear,
+      (widget.maximumDate is DateTime) ? widget.maximumDate.year : maximumYear,
+    ]);
+    final int indexOfYear = yFullArray.indexOf(widget.initialDateTime.year);
     yIndex = indexOfYear != -1 ? indexOfYear : 0;
 
     dayScrollController = FixedExtentScrollController(initialItem: dIndex);
     monthScrollController = FixedExtentScrollController(initialItem: mIndex);
     yearScrollController = FixedExtentScrollController(initialItem: yIndex);
+
+    initialDateTime = widget.initialDateTime is DateTime
+        ? widget.initialDateTime
+        : DateTime(2000, 1, 1);
+    dMin = widget.minimumDate.day - 1;
+    mMin = widget.minimumDate.month - 1;
+
+    dMax = widget.maximumDate.day - 1;
+    mMax = widget.maximumDate.month - 1;
+    yMax = yFullArray.length - 1;
 
     // Calc greys
     recalculateIndexes();
@@ -114,9 +99,8 @@ class _DatePickerState extends State<DatePicker> {
       }
     } else {
       if (mIndex + 1 == 2) {
-        if (widget.yFullArray[yIndex] % 400 == 0 ||
-            (widget.yFullArray[yIndex] % 100 != 0 &&
-                widget.yFullArray[yIndex] % 4 == 0)) {
+        if (yFullArray[yIndex] % 400 == 0 ||
+            (yFullArray[yIndex] % 100 != 0 && yFullArray[yIndex] % 4 == 0)) {
           dArray = greyColourBegin(dArray, 29);
           if (dIndex > 28) {
             dIndex = 27;
@@ -129,10 +113,6 @@ class _DatePickerState extends State<DatePicker> {
         }
       }
     }
-
-    final int dMax = widget.dMax;
-    final int mMax = widget.mMax;
-    final int yMax = widget.yMax;
     if (yIndex >= yMax) {
       yIndex = yMax;
       mArray = greyColourBegin(mArray, mMax + 1);
@@ -144,10 +124,6 @@ class _DatePickerState extends State<DatePicker> {
         }
       }
     }
-
-    final int dMin = widget.dMin;
-    final int mMin = widget.mMin;
-    final int yMin = widget.yMin;
     if (yIndex <= yMin) {
       yIndex = yMin;
       mArray = greyColourInclude(mArray, mMin);
@@ -165,7 +141,7 @@ class _DatePickerState extends State<DatePicker> {
     recalculateIndexes();
     widget.onDateTimeChanged(
       DateTime(
-        widget.yFullArray[yIndex],
+        yFullArray[yIndex],
         mArray[mIndex],
         dArray[dIndex],
       ).toUtc().millisecondsSinceEpoch,
@@ -207,7 +183,7 @@ class _DatePickerState extends State<DatePicker> {
     return Picker(
       controller: yearScrollController,
       index: yIndex,
-      rangeList: widget.yFullArray,
+      rangeList: yFullArray,
       onSelectedItemChanged: (int index) {
         setState(() {
           yIndex = index;

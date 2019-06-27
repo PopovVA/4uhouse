@@ -4,11 +4,13 @@ import '../../../constants/layout.dart';
 import 'styled_circular_progress.dart';
 
 class StyledButton extends StatelessWidget {
-  const StyledButton({this.text = '', this.onPressed, this.loading = false});
+  const StyledButton(
+      {this.text = '', this.onPressed, this.loading = false, this.color});
 
   final String text;
   final Function onPressed;
   final bool loading;
+  final String color;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +24,9 @@ class StyledButton extends StatelessWidget {
           height: 48.0,
           width: double.infinity,
           child: RaisedButton(
-            color: Theme
-                .of(context)
-                .primaryColor,
+            color: color != null
+                ? Color(int.parse(color))
+                : Theme.of(context).primaryColor,
             disabledColor: const Color(0xE6CACACA),
             elevation: 8,
             onPressed: loading ? null : onPressed,
