@@ -67,18 +67,15 @@ Future<Widget> openDatePicker(
           ),
           Divider(),
           DatePicker(
-            onDateTimeChanged: (int timestamp) {
-              _value = timestamp;
-              if (onDateTimeChanged is Function) {
-                onDateTimeChanged(timestamp);
-              }
-            },
-            initialDateTime: _timestampToDateTime(initialDateTime),
-            minimumDate: _timestampToDateTime(minimumDate),
-            maximumDate: _timestampToDateTime(maximumDate),
-            minimumYear: minimumYear,
-            maximumYear: maximumYear,
-          ),
+              onDateTimeChanged: (int timestamp) {
+                _value = timestamp;
+                if (onDateTimeChanged is Function) {
+                  onDateTimeChanged(timestamp);
+                }
+              },
+              initialDateTime: _timestampToDateTime(initialDateTime),
+              minimumDate: _timestampToDateTime(minimumDate),
+              maximumDate: _timestampToDateTime(maximumDate)),
         ],
       ),
     ),
