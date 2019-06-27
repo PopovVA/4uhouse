@@ -8,20 +8,24 @@ import '../../resources/component_repository.dart' show ComponentRepository;
 import '../screen/screen_bloc.dart' show ScreenBloc;
 import '../screen/screen_event.dart' show ScreenReceived, ComponentAuthError;
 import 'component_event.dart'
-    show ComponentEvent, SendingComponentValueRequested;
+    show
+        ComponentEvent,
+        SendingComponentValueRequested,
+        FileUploadingStart,
+        FileUploadingCanceled;
 import 'component_state.dart'
     show
-    ComponentState,
-    ComponentNotFetching,
-    ComponentIsFetching,
-    ComponentFetchingSuccess,
-    ComponentFetchingError;
+        ComponentState,
+        ComponentNotFetching,
+        ComponentIsFetching,
+        ComponentFetchingSuccess,
+        ComponentFetchingError;
 
 class ComponentBloc extends Bloc<ComponentEvent, ComponentState> {
   ComponentBloc(
       {@required this.screenBloc,
-        @required this.authRepository,
-        @required this.componentRepository});
+      @required this.authRepository,
+      @required this.componentRepository});
 
   final ScreenBloc screenBloc;
   final AuthRepository authRepository;
@@ -33,14 +37,18 @@ class ComponentBloc extends Bloc<ComponentEvent, ComponentState> {
   @override
   Stream<ComponentState> mapEventToState(dynamic event) async* {
     if (event is SendingComponentValueRequested) {
-      yield ComponentIsFetching();
+      if (!(currentState is ComponentIsFetching)) {
+        yield ComponentIsFetching();
+      }
+
       try {
         final String token = await authRepository.accessToken;
         final ScreenModel screen = await componentRepository.sendItemValue(
             event.route, event.value,
-            body: event.body, token: token);
+            body: event.body, token: token, typeQuery: event.typeQuery);
 
         yield ComponentFetchingSuccess();
+        yield ComponentNotFetching();
         if (screen != null) {
           screenBloc.dispatch(ScreenReceived(screen));
         }
@@ -53,6 +61,14 @@ class ComponentBloc extends Bloc<ComponentEvent, ComponentState> {
           yield ComponentFetchingError(error.toString());
         }
       }
+    }
+
+    if (event is FileUploadingStart) {
+      yield ComponentIsFetching();
+    }
+
+    if (event is FileUploadingCanceled) {
+      yield ComponentNotFetching();
     }
   }
 }

@@ -10,7 +10,7 @@ class ComponentRepository {
   final ComponentApi componentApi = ComponentApi();
 
   Future<ScreenModel> sendItemValue(String query, dynamic value,
-      {dynamic body, String token}) async {
+      {dynamic body, String token, String typeQuery}) async {
     ScreenModel screen;
     if (body is File) {
       screen = await componentApi.uploadImage(
@@ -20,7 +20,7 @@ class ComponentRepository {
           jpg: img.encodeJpg(img.decodeImage(body.readAsBytesSync())));
     } else {
       screen = await componentApi.sendComponentValue(
-          query: query, value: value, token: token);
+          query: query, value: value, token: token, typeQuery: typeQuery);
     }
 
     return screen;

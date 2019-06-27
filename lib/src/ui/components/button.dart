@@ -65,6 +65,7 @@ class _ButtonState extends State<Button> {
               componentBloc.dispatch(SendingComponentValueRequested(
                 route: '${widget.path}/${button.id}',
                 value: button.typeQuery == 'PUT' ? button.value : null,
+                typeQuery: button.typeQuery,
               ));
             }
                 : null,

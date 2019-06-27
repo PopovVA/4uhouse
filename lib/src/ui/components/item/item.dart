@@ -6,7 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart'
 
 import '../../../blocs/component/component_bloc.dart' show ComponentBloc;
 import '../../../blocs/component/component_event.dart'
-    show ComponentEvent, SendingComponentValueRequested;
+    show
+        ComponentEvent,
+        SendingComponentValueRequested,
+        FileUploadingStart,
+        FileUploadingCanceled;
 import '../../../blocs/component/component_state.dart'
     show ComponentState, ComponentIsFetching, ComponentFetchingError;
 import '../../../blocs/screen/screen_bloc.dart' show ScreenBloc;
@@ -42,7 +46,7 @@ class Item extends StatefulWidget {
 }
 
 class _ItemState extends State<Item> {
-  final DateFormat formatter = DateFormat('dd.MM.yyyy');
+  final DateFormat formatter = DateFormat('dd MMM yyyy');
   ComponentBloc componentBloc;
 
   @override
@@ -70,8 +74,7 @@ class _ItemState extends State<Item> {
     ));
   }
 
-  Function onTap(BuildContext context) =>
-          () {
+  Function onTap(BuildContext context) => () {
         final ItemModel item = widget.item;
         if (item.isTransition) {
           widget.makeTransition(context, item.id);
@@ -90,10 +93,14 @@ class _ItemState extends State<Item> {
               openDataEntry(context);
               break;
             case 'photo':
-              openPhotoUploader(context, onLoad: (Future<File> cb) async {
+              openPhotoUploader(context, onChoose: () {
+                componentBloc.dispatch(FileUploadingStart());
+              }, onLoad: (Future<File> cb) async {
                 final File photo = await cb;
                 if (photo != null) {
                   onChanged(item.value, body: photo);
+                } else {
+                  componentBloc.dispatch(FileUploadingCanceled());
                 }
               });
               break;
@@ -110,8 +117,9 @@ class _ItemState extends State<Item> {
     Navigator.of(context).push(
       MaterialPageRoute<Widget>(
         builder: (BuildContext context) => DataEntry(
-          widget.item,
-          onChanged,
+          item: widget.item,
+          onChanged: onChanged,
+          componentBloc: componentBloc,
         ),
       ),
     );
