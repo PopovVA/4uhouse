@@ -21,6 +21,7 @@ class StyledButton extends StatelessWidget {
           right: standardHorizontalPadding),
       child: SafeArea(
         child: Container(
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0)),
           height: 48.0,
           width: double.infinity,
           child: RaisedButton(
