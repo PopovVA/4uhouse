@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../pallete.dart' show primaryColor;
 
@@ -11,6 +12,8 @@ class StyledTextField extends StatelessWidget {
     this.keyboardType,
     this.maxLength,
     this.textAlign = TextAlign.left,
+    this.onChanged,
+    this.inputFormatters,
   });
 
   final Color borderColor;
@@ -22,10 +25,14 @@ class StyledTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final int maxLength;
   final TextAlign textAlign;
+  final Function onChanged;
+  final List<TextInputFormatter> inputFormatters;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onChanged: onChanged,
+      inputFormatters: inputFormatters,
       autofocus: autofocus,
       controller: controller,
       keyboardType: keyboardType,
