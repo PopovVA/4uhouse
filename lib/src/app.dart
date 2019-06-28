@@ -50,15 +50,15 @@ class _AppState extends State<App> {
             accentColor: accentColor,
             primaryColor: primaryColor,
             textTheme: customTextTheme),
-        home: const HomeScreen(route: ROOT_PAGE),
+        home: HomeScreen(authBloc: authBloc, route: ROOT_PAGE),
         onGenerateRoute: (RouteSettings settings) {
           final String name = settings.name;
           final Map<String, dynamic> arguments = settings.arguments;
           switch (name) {
             case ROOT_PAGE:
               return MaterialPageRoute<HomeScreen>(
-                builder: (BuildContext context) =>
-                    HomeScreen(route: name, arguments: arguments),
+                builder: (BuildContext context) => HomeScreen(
+                    authBloc: authBloc, route: name, arguments: arguments),
               );
             case LOGIN_PAGE:
               return MaterialPageRoute<HomeScreen>(
@@ -69,8 +69,10 @@ class _AppState extends State<App> {
               );
             default:
               return MaterialPageRoute<Screen>(
-                  builder: (BuildContext context) =>
-                      Screen(name, arguments: settings.arguments));
+                  builder: (BuildContext context) => Screen(
+                      authBloc: authBloc,
+                      route: name,
+                      arguments: settings.arguments));
           }
         },
       ),

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder, BlocListener;
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
 import '../../../temp/resources/screen_repository_test.dart'
     show TestScreenRepository;
+import '../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../blocs/component/component_bloc.dart' show ComponentBloc;
 import '../../blocs/screen/screen_bloc.dart' show ScreenBloc;
 import '../../blocs/screen/screen_event.dart' show ScreenEvent, ScreenRequested;
@@ -32,15 +33,19 @@ import '../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
 
 class Screen extends StatefulWidget {
-  factory Screen(String route,
-      {Widget drawer, Map<String, dynamic> arguments}) {
+  factory Screen(
+      {@required AuthBloc authBloc,
+      @required String route,
+      Widget drawer,
+      Map<String, dynamic> arguments}) {
     final String scrollToId =
         arguments != null ? arguments['scrollToId'] : null;
-    return Screen._(route, drawer: drawer, scrollToId: scrollToId);
+    return Screen._(authBloc, route, drawer: drawer, scrollToId: scrollToId);
   }
 
-  Screen._(this.route, {this.drawer, this.scrollToId});
+  Screen._(this.authBloc, this.route, {this.drawer, this.scrollToId});
 
+  final AuthBloc authBloc;
   final String route;
   final String scrollToId;
   final Widget drawer;
@@ -62,7 +67,9 @@ class _ScreenState extends State<Screen> {
   void initState() {
     super.initState();
     screenBloc = ScreenBloc(
-        screenRepository: ScreenRepository(), authRepository: AuthRepository());
+        authBloc: widget.authBloc,
+        screenRepository: ScreenRepository(),
+        authRepository: AuthRepository());
     //       screenRepository: TestScreenRepository(),
 //        authRepository: AuthRepository());
     scrollToId = widget.scrollToId;
@@ -201,8 +208,13 @@ class _ScreenState extends State<Screen> {
   }
 
   Widget buildBody(ScreenState state) {
+    print('===> buildBody state: ${state}');
     if (state is ScreenDataLoaded) {
       return buildComponents(state.data);
+    }
+
+    if (state is ScreenAuthorizationError) {
+      return Container(width: 0.0, height: 0.0);
     }
 
     return SingleChildScrollView(
