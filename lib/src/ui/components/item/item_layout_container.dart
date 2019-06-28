@@ -26,13 +26,17 @@ class ItemLayoutContainer extends StatelessWidget {
   }
 
   Widget buildContainer(Widget child) {
-    return Container(
-      constraints: const BoxConstraints(
-        minHeight: 72.0,
-      ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: standardHorizontalPadding),
-        child: child,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 3.0),
+      child: Container(
+        constraints: const BoxConstraints(
+          minHeight: 72.0,
+        ),
+        color: Colors.white,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: standardHorizontalPadding),
+          child: child,
+        ),
       ),
     );
   }
