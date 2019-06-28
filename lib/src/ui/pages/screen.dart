@@ -98,7 +98,8 @@ class _ScreenState extends State<Screen> {
         .pushReplacementNamed('${widget.route}${id is String ? '/$id' : ''}');
   }
 
-  Widget buildComponents(ScreenModel data) {
+  Widget buildComponents(ScreenDataLoaded state) {
+    final ScreenModel data = state.data;
     if (data != null) {
       final List<Widget> items = <Widget>[];
       final List<Button> buttons = <Button>[];
@@ -161,7 +162,7 @@ class _ScreenState extends State<Screen> {
                 Expanded(
                   child: Container(
                     child: SingleChildScrollView(
-                      padding: buttons.isNotEmpty
+                      padding: buttons.isNotEmpty && state is ScreenDataLoaded
                           ? EdgeInsets.only(
                               bottom: 64 * buttons.length.toDouble())
                           : null,
@@ -208,9 +209,8 @@ class _ScreenState extends State<Screen> {
   }
 
   Widget buildBody(ScreenState state) {
-    print('===> buildBody state: ${state}');
     if (state is ScreenDataLoaded) {
-      return buildComponents(state.data);
+      return buildComponents(state);
     }
 
     if (state is ScreenAuthorizationError) {
