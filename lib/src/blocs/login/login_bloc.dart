@@ -57,6 +57,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       SubmitCodeTapped event) async* {
     try {
       yield IsFetchingCode();
+      print('---> AUTH REPO LOGIN CALL');
       await _authRepository.login(
           number: event.number, code: event.code, otp: event.otp);
       _authBloc.dispatch(UserLoggedIn());

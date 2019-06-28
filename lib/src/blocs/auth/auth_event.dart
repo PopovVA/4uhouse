@@ -22,3 +22,8 @@ class LogoutButtonPressed extends AuthEvent {
   @override
   String toString() => 'LogoutButtonPressed';
 }
+
+class RefreshTokenFailed extends AuthEvent {
+  @override
+  String toString() => 'RefreshTokenFailed';
+}

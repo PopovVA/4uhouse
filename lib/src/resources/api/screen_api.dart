@@ -10,9 +10,9 @@ import 'generic/api.dart' show Api;
 class ScreenApi extends Api {
   String getUrl(String token, String route) {
     final String context = route.replaceFirst('user/', '');
-    print('===> token: ${token}');
     if (!isTokenFormat(token) &&
-        (route.substring(0, route.lastIndexOf('/')) == ROOT_PAGE)) {
+        (route == ROOT_PAGE ||
+            (route.substring(0, route.lastIndexOf('/')) == ROOT_PAGE))) {
       return '$GUEST_URL$context';
     }
 
@@ -26,7 +26,6 @@ class ScreenApi extends Api {
       final http.Response response =
           await client.get(getUrl(token, route), headers: makeHeaders(token));
 
-      print(response.body.toString());
       if (response.statusCode == 200) {
         final dynamic json = await processResponse(response);
         return json;
