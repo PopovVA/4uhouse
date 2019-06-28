@@ -89,7 +89,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
     super.initState();
 //    _phoneBloc = PhoneBloc(TestPhoneRepository());
     _phoneBloc = PhoneBloc(PhoneRepository());
-    _phoneBloc.dispatch(PhoneCountriesDataRequested());
+    init();
     _loginBloc = LoginBloc(widget.authBloc, AuthRepository());
     phoneController.addListener(_phoneListener);
   }
@@ -181,6 +181,10 @@ class _PhoneScreenState extends State<PhoneScreen> {
   }
 
   Future<void> _refresh() async {
+    init();
+  }
+
+  void init() {
     _phoneBloc.dispatch(PhoneCountriesDataRequested());
   }
 

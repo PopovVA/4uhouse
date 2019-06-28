@@ -9,7 +9,7 @@ import '../../../blocs/auth/auth_event.dart' show AuthEvent;
 import '../../../blocs/auth/auth_state.dart' show AuthState, AuthAuthorized;
 import '../../../blocs/login/login_bloc.dart' show LoginBloc;
 import '../../../blocs/login/login_event.dart'
-    show CodeEnteringCanceled, LoginEvent, OtpRequested, SubmitCodeTapped;
+    show CodeEnteringCanceled, LoginEvent, SubmitCodeTapped;
 import '../../../blocs/login/login_state.dart'
     show
         CodeError,
@@ -110,18 +110,11 @@ class _OtpScreenState extends State<OtpScreen> {
                 bloc: widget.loginBloc,
                 builder: (BuildContext context, LoginState state) {
                   if (state is OtpSent) {
-                    return RefreshIndicator(
-                      onRefresh: _refresh,
-                      child: Stack(
-                        children: <Widget>[
-                          ListView(children: <Widget>[
-                            _buildHeadLine(),
-                            _buildCodeInput(),
-                          ]),
-                          _buildSendButton()
-                        ],
-                      ),
-                    );
+                    return Column(children: <Widget>[
+                      _buildHeadLine(),
+                      _buildCodeInput(),
+                      _buildSendButton()
+                    ]);
                   }
 
                   if (state is IsFetchingCode) {
@@ -137,13 +130,6 @@ class _OtpScreenState extends State<OtpScreen> {
                 }),
           ),
         ));
-  }
-
-  Future<void> _refresh() async {
-    widget.loginBloc.dispatch(OtpRequested(
-        countryId: widget.selectedItem.countryId,
-        code: widget.selectedItem.code,
-        number: widget.number));
   }
 
   Widget _buildHeadLine() {
@@ -167,21 +153,24 @@ class _OtpScreenState extends State<OtpScreen> {
   }
 
   Widget _buildSendButton() {
-    return Align(
-      alignment: FractionalOffset.bottomCenter,
-      child: StyledButton(
-        loading: isFetchingCode ? true : false,
-        onPressed: isFetchingCode == false && code.text.length != maxLength
-            ? null
-            : () {
-                widget.loginBloc.dispatch(SubmitCodeTapped(
-                    code: widget.selectedItem.code,
-                    number: widget.number,
-                    otp: code.text));
-              },
-        text: 'Send',
+    return Container(
+        child: Expanded(
+      child: Align(
+        alignment: FractionalOffset.bottomCenter,
+        child: StyledButton(
+          loading: isFetchingCode ? true : false,
+          onPressed: isFetchingCode == false && code.text.length != maxLength
+              ? null
+              : () {
+                  widget.loginBloc.dispatch(SubmitCodeTapped(
+                      code: widget.selectedItem.code,
+                      number: widget.number,
+                      otp: code.text));
+                },
+          text: 'Send',
+        ),
       ),
-    );
+    ));
   }
 
   Widget _buildCodeInput() {
