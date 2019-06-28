@@ -21,19 +21,19 @@ class StyledButton extends StatelessWidget {
           right: standardHorizontalPadding),
       child: SafeArea(
         child: Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0)),
-          height: 48.0,
-          width: double.infinity,
-          child: RaisedButton(
-            color: color != null
-                ? Color(int.parse(color))
-                : Theme.of(context).primaryColor,
-            disabledColor: const Color(0xE6CACACA),
-            elevation: 8,
-            onPressed: loading ? null : onPressed,
-            child: buildChild(context),
-          ),
-        ),
+            height: 48.0,
+            width: double.infinity,
+            child: RaisedButton(
+              color: color != null
+                  ? Color(int.parse(color))
+                  : Theme.of(context).primaryColor,
+              disabledColor: const Color(0xE6CACACA),
+              elevation: 8,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0)),
+              onPressed: loading ? null : onPressed,
+              child: buildChild(context),
+            )),
       ),
     );
   }
