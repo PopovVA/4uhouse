@@ -111,19 +111,20 @@ class PropertyImage extends StatelessWidget {
   Widget buildId(double height) {
     if (id != null) {
       return Positioned(
-        bottom: height * 0.039,
+        top: height * 0.085,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
-              padding: const EdgeInsets.fromLTRB(3.0, 4.0, 12.0, 3.0),
+              padding: const EdgeInsets.fromLTRB(3.0, 4.0, 6.0, 3.0),
               decoration: const BoxDecoration(
                 color: Color(0xFFcccccc),
                 borderRadius: BorderRadius.all(radius),
               ),
+              height: 22.0,
               margin: const EdgeInsets.only(left: 16.0),
               child: Text('#$id',
-                  style: const TextStyle(fontSize: 10.0, color: Colors.white)),
+                  style: const TextStyle(fontSize: 14.0, color: Colors.white)),
             ),
           ],
         ),
