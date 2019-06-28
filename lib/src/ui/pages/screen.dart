@@ -62,9 +62,9 @@ class _ScreenState extends State<Screen> {
   void initState() {
     super.initState();
     screenBloc = ScreenBloc(
-        screenRepository: ScreenRepository(), authRepository: AuthRepository());
-    //       screenRepository: TestScreenRepository(),
-//        authRepository: AuthRepository());
+             screenRepository: ScreenRepository(), authRepository: AuthRepository());
+       // screenRepository: TestScreenRepository(),
+      //  authRepository: AuthRepository());
     scrollToId = widget.scrollToId;
     screenBloc.dispatch(ScreenRequested(query: widget.route));
   }
@@ -91,7 +91,7 @@ class _ScreenState extends State<Screen> {
         .pushReplacementNamed('${widget.route}${id is String ? '/$id' : ''}');
   }
 
-  Widget buildComponents(ScreenModel data) {
+  Widget buildComponents(ScreenModel data, ScreenState state) {
     if (data != null) {
       final List<Widget> items = <Widget>[];
       final List<Button> buttons = <Button>[];
@@ -141,7 +141,6 @@ class _ScreenState extends State<Screen> {
         SchedulerBinding.instance
             .addPostFrameCallback((_) => _scrollToItem(scrollItemKey));
       }
-
       return Ink(
         height: double.infinity,
         color: const Color.fromRGBO(235, 236, 237, 1),
@@ -154,7 +153,7 @@ class _ScreenState extends State<Screen> {
                 Expanded(
                   child: Container(
                     child: SingleChildScrollView(
-                      padding: buttons.isNotEmpty
+                      padding: buttons.isNotEmpty && state is ScreenDataLoaded
                           ? EdgeInsets.only(
                               bottom: 64 * buttons.length.toDouble())
                           : null,
@@ -202,7 +201,7 @@ class _ScreenState extends State<Screen> {
 
   Widget buildBody(ScreenState state) {
     if (state is ScreenDataLoaded) {
-      return buildComponents(state.data);
+      return buildComponents(state.data, state);
     }
 
     return SingleChildScrollView(
