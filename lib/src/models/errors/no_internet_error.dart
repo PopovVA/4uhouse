@@ -1,4 +1,4 @@
 class NoInternetError implements Exception {
   @override
-  String toString() => 'You\'re offline';
+  String toString() => "You're offline";
 }
