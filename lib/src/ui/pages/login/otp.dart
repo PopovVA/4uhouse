@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocBuilder, BlocListener, BlocListenerTree;
 
 import '../../../../temp/styled_text_controler.dart';
-import '../../../models/phone/country_phone_data.dart' show CountryPhoneData;
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../../blocs/auth/auth_event.dart' show AuthEvent;
 import '../../../blocs/auth/auth_state.dart' show AuthState, AuthAuthorized;
@@ -21,6 +20,7 @@ import '../../../blocs/login/login_state.dart'
 import '../../../blocs/phone/phone_bloc.dart' show PhoneBloc;
 import '../../../blocs/phone/phone_event.dart' show PhoneCountriesDataRequested;
 import '../../../constants/navigation.dart' show ROOT_PAGE;
+import '../../../models/phone/country_phone_data.dart' show CountryPhoneData;
 import '../../../utils/show_alert.dart' show showError;
 
 import '../../components/page_template.dart' show PageTemplate;
@@ -62,13 +62,15 @@ class _OtpScreenState extends State<OtpScreen> {
     setState(() {});
   }
 
+  void _goBack() {
+    widget.loginBloc.dispatch(CodeEnteringCanceled());
+    widget.phoneBloc.dispatch(PhoneCountriesDataRequested());
+  }
+
   @override
   Widget build(BuildContext context) {
     return PageTemplate(
-        goBack: () {
-          widget.loginBloc.dispatch(CodeEnteringCanceled());
-          widget.phoneBloc.dispatch(PhoneCountriesDataRequested());
-        },
+        goBack: _goBack,
         title: 'Confirm',
         body: Container(
           padding: const EdgeInsets.only(left: 14.0, right: 14.0),
@@ -91,12 +93,11 @@ class _OtpScreenState extends State<OtpScreen> {
                 bloc: widget.loginBloc,
                 listener: (BuildContext context, LoginState state) {
                   if (state is PhoneError || state is CodeError) {
-                    showError(context, state);
+                    showError(context, state, onOk: _goBack);
                   }
 
                   if (state is CodeError) {
                     code.clear();
-                    showError(context, state);
                   }
 
                   if (state is PhoneEntering) {
