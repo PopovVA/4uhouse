@@ -6,20 +6,27 @@ import '../../../src/models/errors/auth_error.dart' show AuthError;
 import '../../../src/models/screen/screen_model.dart' show ScreenModel;
 import '../../resources/auth_repository.dart' show AuthRepository;
 import '../../resources/screen_repository.dart' show ScreenRepository;
+import '../auth/auth_bloc.dart' show AuthBloc;
+import '../auth/auth_event.dart' show RefreshTokenFailed;
+import '../generic/helpers/is_refresh_error.dart' show isRefreshError;
 import 'screen_event.dart'
     show ScreenEvent, ScreenRequested, ScreenReceived, ComponentAuthError;
 import 'screen_state.dart'
     show
-    ScreenDataLoaded,
-    ScreenDataLoadingError,
-    ScreenAuthorizationError,
-    ScreenLoading,
-    ScreenState,
-    ScreenUninitialized;
+        ScreenDataLoaded,
+        ScreenDataLoadingError,
+        ScreenAuthorizationError,
+        ScreenLoading,
+        ScreenState,
+        ScreenUninitialized;
 
 class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
-  ScreenBloc({@required this.authRepository, @required this.screenRepository});
+  ScreenBloc(
+      {@required this.authBloc,
+      @required this.authRepository,
+      @required this.screenRepository});
 
+  final AuthBloc authBloc;
   final ScreenRepository screenRepository;
   final AuthRepository authRepository;
 
@@ -28,21 +35,8 @@ class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
 
   @override
   Stream<ScreenState> mapEventToState(ScreenEvent event) async* {
-    final String token = await authRepository.accessToken;
     if (event is ScreenRequested) {
-      try {
-        yield ScreenLoading();
-        final ScreenModel data = await screenRepository.fetchScreen(
-            query: event.query, token: token);
-        yield ScreenDataLoaded(data);
-      } catch (error) {
-        print('===> screen bloc error: $error');
-        if (error is AuthError) {
-          yield ScreenAuthorizationError();
-        } else {
-          yield ScreenDataLoadingError(error.toString());
-        }
-      }
+      yield* _requestScreen(event, tryToRefresh: true);
     }
 
     if (event is ScreenReceived) {
@@ -50,7 +44,61 @@ class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
     }
 
     if (event is ComponentAuthError) {
+      authBloc.dispatch(RefreshTokenFailed());
       yield ScreenAuthorizationError();
     }
+  }
+
+  Stream<ScreenState> _requestScreen(ScreenRequested event,
+      {bool tryToRefresh = false}) async* {
+    try {
+      if (!(currentState is ScreenLoading)) {
+        yield ScreenLoading();
+      }
+
+      final String token = await authRepository.accessToken;
+      print('===> screen token: ${token}');
+      final ScreenModel screen =
+          await screenRepository.fetchScreen(query: event.query, token: token);
+      yield ScreenDataLoaded(screen);
+    } catch (error) {
+      if (error is AuthError) {
+
+        if (tryToRefresh) {
+          final String refreshToken = await authRepository.refreshToken;
+//        var refreshToken = 'c382a820-f0d2-43d8-b6e2-58c0f6d66708';
+          if (refreshToken != null) {
+            try {
+              // refresh and try to request screen again
+              await authRepository.refresh();
+              yield* _requestScreen(event);
+            } catch (error) {
+              if (isRefreshError(error)) {
+                yield* _emitAuthError();
+              } else {
+                // didn't refresh because of no connection/server error etc
+                yield ScreenDataLoadingError(error.toString());
+              }
+            }
+          } else {
+            // no refresh token stored
+            print('---> no refresh token stored');
+            yield* _emitAuthError();
+          }
+          // tryRefresh block end
+
+        } else {
+          yield* _emitAuthError();
+        }
+      } else {
+        yield ScreenDataLoadingError(error.toString());
+      }
+    }
+  }
+
+  Stream<ScreenState> _emitAuthError() async* {
+    print('---> emit auth error');
+    authBloc.dispatch(RefreshTokenFailed());
+    yield ScreenAuthorizationError();
   }
 }

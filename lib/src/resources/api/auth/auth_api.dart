@@ -54,7 +54,7 @@ class AuthApi extends Api {
           'app_id': deviceId,
           'country_id': countryId,
           'country_code': code,
-          'number': number
+          'number': number,
         }),
       );
 
@@ -106,7 +106,7 @@ class AuthApi extends Api {
         body: _encodeMapToUrl(<String, dynamic>{
           'grant_type': 'refresh_token',
           'client_id': clientId,
-          'refreshToken': refreshToken,
+          'refresh_token': refreshToken,
         }),
       );
 
