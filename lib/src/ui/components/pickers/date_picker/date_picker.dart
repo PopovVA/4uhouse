@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart' show ReplaySubject;
+import '../generic/picker.dart' show Picker;
 import 'constants/initial_arrays.dart'
     show INITIAL_D_FULL_ARRAY, INITIAL_M_FULL_ARRAY;
 import 'constants/months.dart' show MONTHS;
 import 'helpers/generate_range_list.dart' show generateRangeList;
 import 'helpers/grey_color.dart' show greyColourInclude, greyColourBegin;
-import 'picker.dart' show Picker;
+
 
 class DatePicker extends StatefulWidget {
   DatePicker({
@@ -153,13 +154,13 @@ class _DatePickerState extends State<DatePicker> {
       animateDuration: 1000,
       controller: dayScrollController,
       index: dIndex,
-      onSelectedItemChanged: (int index) {
+      onSelectedItemChanged: (dynamic item) {
         setState(() {
-          dIndex = index;
+          dIndex = dArray.indexOf(item);
           updateValues();
         });
       },
-      rangeList: dArray,
+      itemList: dArray,
     );
   }
 
@@ -169,13 +170,13 @@ class _DatePickerState extends State<DatePicker> {
       controller: monthScrollController,
       displayFunction: (int value) => MONTHS[value - 1],
       index: mIndex,
-      onSelectedItemChanged: (int index) {
+      onSelectedItemChanged: (dynamic item) {
         setState(() {
-          mIndex = index;
+          mIndex = mArray.indexOf(item);
           updateValues();
         });
       },
-      rangeList: mArray,
+      itemList: mArray,
     );
   }
 
@@ -183,10 +184,10 @@ class _DatePickerState extends State<DatePicker> {
     return Picker(
       controller: yearScrollController,
       index: yIndex,
-      rangeList: yFullArray,
-      onSelectedItemChanged: (int index) {
+      itemList: yFullArray,
+      onSelectedItemChanged: (dynamic item) {
         setState(() {
-          yIndex = index;
+          yIndex = yFullArray.indexOf(item);
           updateValues();
         });
       },
