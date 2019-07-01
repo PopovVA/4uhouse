@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocBuilder, BlocListener, BlocListenerTree;
-
+import 'package:flutter/services.dart';
 import '../../../../temp/styled_text_controler.dart';
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../../blocs/auth/auth_event.dart' show AuthEvent;
@@ -182,7 +182,10 @@ class _OtpScreenState extends State<OtpScreen> {
         borderColor: code.text.length != maxLength
             ? Colors.redAccent
             : Theme.of(context).primaryColor,
-        controller: code,
+        onChanged: (String val) => code.text = val,
+        inputFormatters: <TextInputFormatter>[
+          WhitelistingTextInputFormatter.digitsOnly
+        ],
         textAlign: TextAlign.center,
         maxLength: maxLength,
         keyboardType: const TextInputType.numberWithOptions(decimal: true),

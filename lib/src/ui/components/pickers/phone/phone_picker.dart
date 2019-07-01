@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../../../temp/styled_text_controler.dart';
 import '../../../../models/phone/country_phone_data.dart';
 import '../../../components/styled/styled_text_field.dart' show StyledTextField;
@@ -118,7 +119,10 @@ class _PhonePickerState extends State<PhonePicker> {
           padding: const EdgeInsets.only(left: 12.0),
           child: StyledTextField(
             autofocus: true,
-            controller: widget.phoneController,
+            onChanged: (String val) => widget.phoneController.text = val,
+            inputFormatters: <TextInputFormatter>[
+              WhitelistingTextInputFormatter.digitsOnly
+            ],
             hintText: _buildDataItem().example.toString(),
             borderColor: widget.isValid()
                 ? Theme

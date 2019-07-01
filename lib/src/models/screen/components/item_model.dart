@@ -1,4 +1,5 @@
 import 'component_model.dart' show ComponentModel;
+import 'helpers/parse_money_value.dart' show parseMoneyValue;
 
 class ItemModel extends ComponentModel {
   ItemModel.fromJson(Map<String, dynamic> json)
@@ -42,9 +43,7 @@ class ItemModel extends ComponentModel {
   List<dynamic> get list => _list;
 
   dynamic get value {
-    return ((typeValue == 'money') && (_value is int))
-        ? (_value / 100)
-        : _value;
+    return (typeValue == 'money') ? parseMoneyValue(_value) : _value;
   }
 
   set value(Object value) {
