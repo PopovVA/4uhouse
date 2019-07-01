@@ -159,41 +159,37 @@ class _ScreenState extends State<Screen> {
             .addPostFrameCallback((_) => _scrollToItem(scrollItemKey));
       }
 
-      return Ink(
-        height: double.infinity,
-        color: const Color.fromRGBO(235, 236, 237, 1),
-        child: Stack(
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    child: SingleChildScrollView(
-                      padding: buttons.isNotEmpty && state is ScreenDataLoaded
-                          ? EdgeInsets.only(
-                              bottom: 64 * buttons.length.toDouble())
-                          : null,
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      controller: widget.scrollController,
-                      child: Column(
-                        children: items,
-                      ),
+      return Stack(
+        children: <Widget>[
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  child: SingleChildScrollView(
+                    padding: buttons.isNotEmpty && state is ScreenDataLoaded
+                        ? EdgeInsets.only(
+                            bottom: 64 * buttons.length.toDouble())
+                        : null,
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    controller: widget.scrollController,
+                    child: Column(
+                      children: items,
                     ),
                   ),
                 ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: buttons,
               ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: buttons,
             ),
-          ],
-        ),
+          ),
+        ],
       );
     }
 
@@ -222,11 +218,26 @@ class _ScreenState extends State<Screen> {
       return Container(width: 0.0, height: 0.0);
     }
 
-    return SingleChildScrollView(
-      physics: const AlwaysScrollableScrollPhysics(),
-      child: Container(
-          height: MediaQuery.of(context).size.height,
-          child: const StyledCircularProgress()),
+    return Stack(
+      children: <Widget>[
+        Positioned.fill(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: Container(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Align(
+            alignment: FractionalOffset.center,
+            child: const StyledCircularProgress())
+      ],
     );
   }
 
@@ -281,7 +292,8 @@ class _ScreenState extends State<Screen> {
                 body: RefreshIndicator(
                   onRefresh: () => _refresh(state),
                   color: Theme.of(context).primaryColor,
-                  child: buildBody(state),
+                  child: Ink(
+                      color : const Color.fromRGBO(235, 236, 237, 1),child: buildBody(state)),
                 ),
                 goBack: getHandleGoBack(state),
                 title: buildTitle(state),
