@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocProvider;
 import 'package:meta/meta.dart' show required;
 
@@ -30,6 +31,7 @@ class _AppState extends State<App> {
   @override
   void initState() {
     authBloc = AuthBloc(authRepository: authRepository);
+    _checkingStorage();
     authBloc.dispatch(AppStarted());
     super.initState();
   }
@@ -78,4 +80,14 @@ class _AppState extends State<App> {
       ),
     );
   }
+
+  void _checkingStorage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final bool firstRun = prefs.getBool('firstRun');
+    if (firstRun == null) {
+      authRepository.clearAll();
+      prefs.setBool("firstRun", true);
+    }
+  }
+
 }
