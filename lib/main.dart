@@ -4,8 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart' show BlocProvider;
 
 import 'src/app.dart' show App;
 import 'src/blocs/auth/auth_bloc.dart' show AuthBloc;
-import 'src/blocs/auth/auth_event.dart' show AuthEvent;
-import 'src/blocs/auth/auth_state.dart' show AuthState;
 import 'src/resources/auth_repository.dart' show AuthRepository;
 //import 'temp/app_old.dart';
 
