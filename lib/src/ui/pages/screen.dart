@@ -217,11 +217,18 @@ class _ScreenState extends State<Screen> {
       return Container(width: 0.0, height: 0.0);
     }
 
-    return SingleChildScrollView(
-      physics: const AlwaysScrollableScrollPhysics(),
-      child: Container(
-          height: MediaQuery.of(context).size.height,
-          child: const StyledCircularProgress()),
+    return Stack(
+      children: <Widget>[
+        SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Container(
+            height: MediaQuery.of(context).size.height - 100,
+          ),
+        ),
+        Align(
+            alignment: FractionalOffset.center,
+            child: const StyledCircularProgress())
+      ],
     );
   }
 
