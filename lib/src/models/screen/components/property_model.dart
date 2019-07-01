@@ -1,5 +1,6 @@
 import '../../../models/screen/components/component_model.dart'
     show ComponentModel;
+import 'helpers/parse_money_value.dart' show parseMoneyValue;
 
 class PropertyModel extends ComponentModel {
   PropertyModel.fromJson(Map<String, dynamic> json)
@@ -13,8 +14,9 @@ class PropertyModel extends ComponentModel {
         _paymentPeriod = json['paymentPeriod'],
         _mainInfo = json['mainInfo'],
         _address = json['address'],
-        _isTransition = json['isTransition']!=null?json['isTransition']:false,
-        _isInput = json['isInput']!=null?json['isInput']:false,
+        _isTransition =
+            json['isTransition'] != null ? json['isTransition'] : false,
+        _isInput = json['isInput'] != null ? json['isInput'] : false,
         super.fromJson(json['component']);
 
   String _id;
@@ -40,9 +42,9 @@ class PropertyModel extends ComponentModel {
 
   String get currency => _currency;
 
-  int get costSale => _costSale;
+  double get costSale => parseMoneyValue(_costSale);
 
-  int get costRent => _costRent;
+  double get costRent => parseMoneyValue(_costRent);
 
   String get paymentPeriod => _paymentPeriod;
 
