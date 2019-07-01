@@ -37,7 +37,7 @@ class _ListPickerState extends State<ListPicker> {
   }
 
   void updateValues() {
-    widget.onItemChanged(Text(selectedItem));
+    widget.onItemChanged(selectedItem);
   }
 
   Widget _buildListPicker() {
