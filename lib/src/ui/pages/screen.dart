@@ -222,7 +222,7 @@ class _ScreenState extends State<Screen> {
         SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Container(
-            height: MediaQuery.of(context).size.height - 100,
+            height: MediaQuery.of(context).size.height - 68,
           ),
         ),
         Align(
