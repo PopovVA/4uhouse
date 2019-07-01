@@ -31,6 +31,7 @@ import '../components/page_template.dart' show PageTemplate;
 import '../components/property_card/property_card.dart' show PropertyCard;
 import '../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
+const  Color FON_SCREEN = Color.fromRGBO(235, 236, 237, 1);
 
 class Screen extends StatefulWidget {
   factory Screen(
@@ -152,7 +153,7 @@ class _ScreenState extends State<Screen> {
 
       return Ink(
         height: double.infinity,
-        color: const Color.fromRGBO(235, 236, 237, 1),
+        color: FON_SCREEN,
         child: Stack(
           children: <Widget>[
             Column(
@@ -222,6 +223,7 @@ class _ScreenState extends State<Screen> {
         SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Container(
+            color: FON_SCREEN,
             height: MediaQuery.of(context).size.height - 68,
           ),
         ),
