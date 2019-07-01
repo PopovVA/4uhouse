@@ -21,7 +21,7 @@
           2,
           3
         ],
-        "value": "test5",
+        "value": null,
         "component": "item",
         "isInput": true,
         "isTransition": false
