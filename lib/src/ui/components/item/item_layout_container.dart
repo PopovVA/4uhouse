@@ -9,13 +9,12 @@ class ItemLayoutContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isOnTap = onTap is Function;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3.0),
       child: Ink(
         color: Colors.white,
         child: InkWell(
-          onTap: isOnTap ? onTap : null,
+          onTap: onTap is Function ? onTap : null,
           child: buildContainer(child),
         ),
       ),
