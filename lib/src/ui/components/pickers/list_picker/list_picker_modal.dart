@@ -35,7 +35,7 @@ Future<Widget> openListPicker(
               });
             },
             child: Text(
-              'Ok',
+              'OK',
               style: TextStyle(
                 fontSize: 16.0,
                 color: Theme.of(context).primaryColor,

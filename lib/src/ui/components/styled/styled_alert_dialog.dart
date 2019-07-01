@@ -17,7 +17,13 @@ class StyledAlertDialog extends StatelessWidget {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              Navigator.of(context).pop();
+              if (onCancel is Function) {
+                onCancel();
+              } else if (onOk is Function) {
+                onOk();
+              } else {
+                Navigator.of(context).pop();
+              }
             },
           ),
           Align(

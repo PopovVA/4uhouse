@@ -16,7 +16,10 @@
           "test7",
           "test8",
           "test9",
-          "test10"
+          "test10",
+          1,
+          2,
+          3
         ],
         "value": "test5",
         "component": "item",

@@ -16,8 +16,8 @@ class PropertyFooter extends StatefulWidget {
       this.address});
 
   final String currency;
-  final int costSale;
-  final int costRent;
+  final double costSale;
+  final double costRent;
   final String paymentPeriod;
   final String mainInfo;
   final String address;

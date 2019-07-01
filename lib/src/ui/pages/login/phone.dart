@@ -17,11 +17,11 @@ import '../../../blocs/phone/phone_event.dart'
     show PhoneEvent, PhoneCountriesDataRequested;
 import '../../../blocs/phone/phone_state.dart'
     show
-    PhoneCountriesDataLoaded,
-    PhoneLoading,
-    PhoneLoadingError,
-    PhoneState,
-    PhoneUninitialized;
+        PhoneCountriesDataLoaded,
+        PhoneLoading,
+        PhoneLoadingError,
+        PhoneState,
+        PhoneUninitialized;
 import '../../../models/phone/country_phone_data.dart' show CountryPhoneData;
 import '../../../resources/auth_repository.dart' show AuthRepository;
 import '../../../resources/phone_repository.dart' show PhoneRepository;
@@ -73,8 +73,8 @@ class _PhoneScreenState extends State<PhoneScreen> {
 
   bool _validLength(List<int> lengthList, int length) {
     return lengthList.firstWhere((int item) => item == length,
-        orElse: () => 0) >
-        0
+                orElse: () => 0) >
+            0
         ? true
         : false;
   }
@@ -89,7 +89,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
     super.initState();
 //    _phoneBloc = PhoneBloc(TestPhoneRepository());
     _phoneBloc = PhoneBloc(PhoneRepository());
-    _phoneBloc.dispatch(PhoneCountriesDataRequested());
+    init();
     _loginBloc = LoginBloc(widget.authBloc, AuthRepository());
     phoneController.addListener(_phoneListener);
   }
@@ -147,30 +147,45 @@ class _PhoneScreenState extends State<PhoneScreen> {
                 child: BlocBuilder<PhoneEvent, PhoneState>(
                     bloc: _phoneBloc,
                     builder: (BuildContext context, PhoneState state) {
-                      return Column(
-                        children: <Widget>[
-                          _buildTittle(),
-                          if (state is PhoneUninitialized ||
-                              state is PhoneLoading)
-                            StyledCircularProgress(
-                                size: 'small',
-                                color: Theme.of(context).primaryColor),
-                          if (state is PhoneCountriesDataLoaded)
-                            Container(
-                              margin:
-                              const EdgeInsets.symmetric(horizontal: 24.0),
-                              child: _buildPhonePicker(state),
+                      return RefreshIndicator(
+                        onRefresh: _refresh,
+                        child: Stack(
+                          children: <Widget>[
+                            ListView(
+                              children: <Widget>[
+                                _buildTittle(),
+                                if (state is PhoneUninitialized ||
+                                    state is PhoneLoading)
+                                  StyledCircularProgress(
+                                      size: 'small',
+                                      color: Theme.of(context).primaryColor),
+                                if (state is PhoneCountriesDataLoaded)
+                                  Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 24.0),
+                                    child: _buildPhonePicker(state),
+                                  ),
+                                if (state is PhoneLoadingError)
+                                  Text(state.toString()),
+                                Container(
+                                  margin: const EdgeInsets.only(left: 8.0),
+                                  child: _buildTerms(),
+                                ),
+                              ],
                             ),
-                          if (state is PhoneLoadingError)
-                            Text(state.toString()),
-                          Container(
-                            margin: const EdgeInsets.only(left: 8.0),
-                            child: _buildTerms(),
-                          ),
-                          _buildSubmit(loginBloc: _loginBloc),
-                        ],
+                            _buildSubmit(loginBloc: _loginBloc)
+                          ],
+                        ),
                       );
                     }))));
+  }
+
+  Future<void> _refresh() async {
+    init();
+  }
+
+  void init() {
+    _phoneBloc.dispatch(PhoneCountriesDataRequested());
   }
 
   Widget _buildTittle() {
@@ -240,24 +255,21 @@ class _PhoneScreenState extends State<PhoneScreen> {
     return BlocBuilder<LoginEvent, LoginState>(
         bloc: loginBloc,
         builder: (BuildContext context, LoginState state) {
-          return Container(
-              child: Expanded(
-                child: Align(
-                  alignment: FractionalOffset.bottomCenter,
-                  child: StyledButton(
-                    loading: state is IsFetchingOtp,
-                    onPressed: isAgree && validPhone
-                        ? () {
+          return Align(
+            alignment: FractionalOffset.bottomCenter,
+            child: StyledButton(
+              loading: state is IsFetchingOtp,
+              onPressed: isAgree && validPhone
+                  ? () {
                       _loginBloc.dispatch(OtpRequested(
                           countryId: selectedItem.countryId,
                           code: selectedItem.code,
                           number: number));
                     }
-                        : null,
-                    text: 'Submit',
-                  ),
-                ),
-              ));
+                  : null,
+              text: 'Submit',
+            ),
+          );
         });
   }
 }
