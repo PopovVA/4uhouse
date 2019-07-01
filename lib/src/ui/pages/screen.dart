@@ -32,7 +32,6 @@ import '../components/property_card/property_card.dart' show PropertyCard;
 import '../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
 
-
 class Screen extends StatefulWidget {
   factory Screen(
       {@required AuthBloc authBloc,
@@ -216,9 +215,18 @@ class _ScreenState extends State<Screen> {
 
     return Stack(
       children: <Widget>[
-        SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
+        Positioned.fill(
           child: Container(
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: Container(),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         Align(
