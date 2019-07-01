@@ -219,11 +219,15 @@ class _ScreenState extends State<Screen> {
 
     return Stack(
       children: <Widget>[
-        SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: Container(
-            height: MediaQuery.of(context).size.height - 68,
-          ),
+        Column(
+          children: <Widget>[
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Container(),
+              ),
+            ),
+          ],
         ),
         Align(
             alignment: FractionalOffset.center,
