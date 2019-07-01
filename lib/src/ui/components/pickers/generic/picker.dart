@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart' show CupertinoPicker;
-
-import 'debouncer.dart';
+import 'package:user_mobile/src/ui/components/pickers/generic/debouncer.dart';
 
 class Picker extends StatefulWidget {
   const Picker({
     @required this.controller,
     @required this.index,
-    @required this.rangeList,
+    @required this.itemList,
     this.animateDuration,
     this.displayFunction,
     this.looping = false,
@@ -16,7 +15,7 @@ class Picker extends StatefulWidget {
 
   final FixedExtentScrollController controller;
   final int index;
-  final List<int> rangeList;
+  final List<dynamic> itemList;
 
   final int animateDuration;
   final Function displayFunction;
@@ -35,7 +34,7 @@ class _PickerState extends State<Picker> {
   bool isDragging;
 
   static List<Widget> generateListOfItems(
-      List<int> list, Function displayFunction, BuildContext context) {
+      List<dynamic> list, Function displayFunction, BuildContext context) {
     Function renderer = (Object value) => value;
 
     if (displayFunction is Function) {
@@ -43,15 +42,19 @@ class _PickerState extends State<Picker> {
     }
 
     return List<Widget>.generate(list.length, (int i) {
-      final int value = list[i];
+      final dynamic value = list[i];
       return Container(
         height: 10.0,
         alignment: Alignment.center,
         child: Text(
-          renderer(value.abs()).toString(),
+          value is int
+              ? renderer(value.abs()).toString()
+              : value.toString(),
           style: TextStyle(
             fontSize: 16.0,
-            color: value < 0 ? Colors.grey : Colors.black,
+            color: value is int
+                ? value < 0 ? Colors.grey : Colors.black
+                : value.isEmpty ? Colors.grey : Colors.black,
           ),
         ),
       );
@@ -94,15 +97,15 @@ class _PickerState extends State<Picker> {
         child: CupertinoPicker(
           backgroundColor: Colors.white,
           children: _PickerState.generateListOfItems(
-            widget.rangeList,
+            widget.itemList,
             widget.displayFunction,
             context,
           ),
           magnification: 1.1,
           itemExtent: 45.0,
-          onSelectedItemChanged: (int index) {
-            realIndex = index;
-            widget.onSelectedItemChanged(index);
+          onSelectedItemChanged: (dynamic _selectedItem) {
+            realIndex = _selectedItem;
+            widget.onSelectedItemChanged(widget.itemList[realIndex]);
           },
           scrollController: widget.controller,
           useMagnifier: true,
