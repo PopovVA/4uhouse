@@ -31,7 +31,8 @@ import '../components/page_template.dart' show PageTemplate;
 import '../components/property_card/property_card.dart' show PropertyCard;
 import '../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
-const  Color FON_SCREEN = Color.fromRGBO(235, 236, 237, 1);
+
+const Color FON_SCREEN = Color.fromRGBO(235, 236, 237, 1);
 
 class Screen extends StatefulWidget {
   factory Screen(
