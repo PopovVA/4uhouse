@@ -32,6 +32,7 @@ dependencies:
   intl: ^0.15.8
   outline_material_icons: ^0.1.0
   rxdart: ^0.22.0
+  uuid: 2.0.1
   tel_input:
 
 
