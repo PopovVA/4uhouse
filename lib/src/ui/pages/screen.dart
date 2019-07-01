@@ -32,7 +32,6 @@ import '../components/property_card/property_card.dart' show PropertyCard;
 import '../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
 
-const Color FON_SCREEN = Color.fromRGBO(235, 236, 237, 1);
 
 class Screen extends StatefulWidget {
   factory Screen(
@@ -72,8 +71,8 @@ class _ScreenState extends State<Screen> {
         authBloc: widget.authBloc,
         screenRepository: ScreenRepository(),
         authRepository: AuthRepository());
-//           screenRepository: TestScreenRepository(),
-//        authRepository: AuthRepository());
+    //       screenRepository: TestScreenRepository(),
+    //    authRepository: AuthRepository());
     scrollToId = widget.scrollToId;
     screenBloc.dispatch(ScreenRequested(query: widget.route));
   }
@@ -152,41 +151,37 @@ class _ScreenState extends State<Screen> {
             .addPostFrameCallback((_) => _scrollToItem(scrollItemKey));
       }
 
-      return Ink(
-        height: double.infinity,
-        color: FON_SCREEN,
-        child: Stack(
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    child: SingleChildScrollView(
-                      padding: buttons.isNotEmpty && state is ScreenDataLoaded
-                          ? EdgeInsets.only(
-                              bottom: 64 * buttons.length.toDouble())
-                          : null,
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      controller: widget.scrollController,
-                      child: Column(
-                        children: items,
-                      ),
+      return Stack(
+        children: <Widget>[
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  child: SingleChildScrollView(
+                    padding: buttons.isNotEmpty && state is ScreenDataLoaded
+                        ? EdgeInsets.only(
+                            bottom: 64 * buttons.length.toDouble())
+                        : null,
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    controller: widget.scrollController,
+                    child: Column(
+                      children: items,
                     ),
                   ),
                 ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: buttons,
               ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: buttons,
             ),
-          ],
-        ),
+          ),
+        ],
       );
     }
 
@@ -224,8 +219,6 @@ class _ScreenState extends State<Screen> {
         SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Container(
-            color: FON_SCREEN,
-            height: MediaQuery.of(context).size.height - 68,
           ),
         ),
         Align(
@@ -265,7 +258,8 @@ class _ScreenState extends State<Screen> {
                 body: RefreshIndicator(
                   onRefresh: _refresh,
                   color: Theme.of(context).primaryColor,
-                  child: buildBody(state),
+                  child: Ink(
+                      color : const Color.fromRGBO(235, 236, 237, 1),child: buildBody(state)),
                 ),
                 goBack: getHandleGoBack(state),
                 title: buildTitle(state),
