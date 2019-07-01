@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder, BlocListener;
+import 'package:flutter_bloc/flutter_bloc.dart'
+    show BlocBuilder, BlocListener, BlocListenerTree;
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
+
 import '../../../temp/resources/screen_repository_test.dart'
     show TestScreenRepository;
 import '../../blocs/auth/auth_bloc.dart' show AuthBloc;
+import '../../blocs/auth/auth_event.dart' show AuthEvent;
+import '../../blocs/auth/auth_state.dart'
+    show AuthState, AuthUnauthorized, AuthAuthorized;
 import '../../blocs/component/component_bloc.dart' show ComponentBloc;
 import '../../blocs/screen/screen_bloc.dart' show ScreenBloc;
 import '../../blocs/screen/screen_event.dart' show ScreenEvent, ScreenRequested;
 import '../../blocs/screen/screen_state.dart'
     show
         ScreenDataLoaded,
+        ScreenLoading,
         ScreenDataLoadingError,
         ScreenAuthorizationError,
         ScreenState;
 
-import '../../constants/navigation.dart' show LOGIN_PAGE;
+import '../../constants/navigation.dart' show ROOT_PAGE, LOGIN_PAGE;
 import '../../models/screen/components/button_model.dart' show ButtonModel;
 import '../../models/screen/components/item_model.dart' show ItemModel;
 import '../../models/screen/components/note_model.dart' show NoteModel;
@@ -25,6 +31,7 @@ import '../../resources/screen_repository.dart' show ScreenRepository;
 import '../../utils/show_alert.dart' show showError;
 
 import '../components/button.dart' show Button;
+import '../components/drawer/drawer.dart' show DrawerOnly;
 import '../components/item/item.dart' show Item;
 import '../components/note.dart' show Note;
 import '../components/page_template.dart' show PageTemplate;
@@ -33,22 +40,10 @@ import '../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
 
 class Screen extends StatefulWidget {
-  factory Screen(
-      {@required AuthBloc authBloc,
-      @required String route,
-      Widget drawer,
-      Map<String, dynamic> arguments}) {
-    final String scrollToId =
-        arguments != null ? arguments['scrollToId'] : null;
-    return Screen._(authBloc, route, drawer: drawer, scrollToId: scrollToId);
-  }
-
-  Screen._(this.authBloc, this.route, {this.drawer, this.scrollToId});
+  Screen({@required this.authBloc, this.route});
 
   final AuthBloc authBloc;
   final String route;
-  final String scrollToId;
-  final Widget drawer;
   final ScrollController scrollController = ScrollController();
 
   @override
@@ -72,7 +67,6 @@ class _ScreenState extends State<Screen> {
         authRepository: AuthRepository());
 //           screenRepository: TestScreenRepository(),
 //        authRepository: AuthRepository());
-    scrollToId = widget.scrollToId;
     screenBloc.dispatch(ScreenRequested(query: widget.route));
   }
 
@@ -82,27 +76,42 @@ class _ScreenState extends State<Screen> {
     super.dispose();
   }
 
+  bool isHomePage(String path) => path == ROOT_PAGE;
+
   void _scrollToItem(GlobalKey key) {
     if (key != null) {
       Scrollable.ensureVisible(key.currentContext);
     }
   }
 
-  Future<void> _refresh() async {
+  Future<void> _refresh(ScreenState state) async {
     scrollToId = null;
-    screenBloc.dispatch(ScreenRequested(query: widget.route));
+    String query;
+
+    if (state is ScreenDataLoaded) {
+      query = state.data.path;
+    } else if (state is ScreenLoading) {
+      query = state.query;
+    }
+
+    if (query != null) {
+      screenBloc.dispatch(ScreenRequested(query: query));
+    }
   }
 
-  void makeTransition(BuildContext context, String id) {
-    Navigator.of(context)
-        .pushReplacementNamed('${widget.route}${id is String ? '/$id' : ''}');
-  }
+  Function makeTransition(String path) => (BuildContext context, String id) {
+        screenBloc.dispatch(
+            ScreenRequested(query: '$path${id is String ? '/$id' : ''}'));
+      };
 
   Widget buildComponents(ScreenDataLoaded state) {
     final ScreenModel data = state.data;
+
     if (data != null) {
+      final String path = data.path;
       final List<Widget> items = <Widget>[];
       final List<Button> buttons = <Button>[];
+
       for (dynamic component in data.components) {
         switch (component.runtimeType) {
           case NoteModel:
@@ -115,8 +124,8 @@ class _ScreenState extends State<Screen> {
             {
               items.add(Item(
                 component,
-                data.path,
-                makeTransition,
+                path,
+                makeTransition(path),
                 screenBloc,
               ));
               break;
@@ -126,7 +135,7 @@ class _ScreenState extends State<Screen> {
             {
               items.add(PropertyCard(component,
                   makeTransition:
-                      component.isTransition ? makeTransition : null));
+                      component.isTransition ? makeTransition(path) : null));
               break;
             }
 
@@ -134,7 +143,7 @@ class _ScreenState extends State<Screen> {
             {
               buttons.add(Button(
                 component,
-                data.path,
+                path,
                 screenBloc,
               ));
               break;
@@ -192,16 +201,12 @@ class _ScreenState extends State<Screen> {
   }
 
   Function getHandleGoBack(ScreenState state) {
-    if (widget.drawer == null && state is ScreenDataLoaded) {
+    if (state is ScreenDataLoaded && !isHomePage(state.data.path)) {
       return () {
         final String path = state.data.path;
-        Navigator.of(context).pushReplacementNamed(
-          path.substring(0, path.lastIndexOf('/')),
-          arguments: <String, String>{
-            'scrollToId':
-                widget.route.substring(widget.route.lastIndexOf('/') + 1),
-          },
-        );
+        scrollToId = path.substring(path.lastIndexOf('/') + 1);
+        screenBloc.dispatch(
+            ScreenRequested(query: path.substring(0, path.lastIndexOf('/'))));
       };
     }
 
@@ -233,27 +238,48 @@ class _ScreenState extends State<Screen> {
     return 'Loading';
   }
 
+  Widget getDrawer(ScreenState state) {
+    if (state is ScreenDataLoaded) {
+      return isHomePage(state.data.path) ? DrawerOnly() : null;
+    }
+
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ScreenEvent, ScreenState>(
-        bloc: screenBloc,
-        listener: (BuildContext context, ScreenState state) {
-          if (state is ScreenAuthorizationError) {
-            Navigator.of(context).pushReplacementNamed(LOGIN_PAGE,
-                arguments: <String, String>{'returnTo': widget.route});
-          }
+    return BlocListenerTree(
+        blocListeners: <BlocListener<dynamic, dynamic>>[
+          BlocListener<AuthEvent, AuthState>(
+            bloc: widget.authBloc,
+            listener: (BuildContext context, AuthState state) {
+              if (state is AuthUnauthorized) {
+                Navigator.of(context).pushReplacementNamed(ROOT_PAGE);
+              }
+            },
+          ),
+          BlocListener<ScreenEvent, ScreenState>(
+            bloc: screenBloc,
+            listener: (BuildContext context, ScreenState state) {
+              if (state is ScreenAuthorizationError) {
+                Navigator.of(context).pushReplacementNamed(LOGIN_PAGE,
+                    arguments: <String, String>{'returnTo': widget.route});
+              }
 
-          if (state is ScreenDataLoadingError) {
-            showError(context, state);
-          }
-        },
+              if (state is ScreenDataLoadingError) {
+                showError(context, state);
+              }
+            },
+          ),
+        ],
         child: BlocBuilder<ScreenEvent, ScreenState>(
             bloc: screenBloc,
             builder: (BuildContext context, ScreenState state) {
               return PageTemplate(
-                drawer: widget.drawer,
+                drawer: getDrawer(state),
+                loading: state is ScreenLoading,
                 body: RefreshIndicator(
-                  onRefresh: _refresh,
+                  onRefresh: () => _refresh(state),
                   color: Theme.of(context).primaryColor,
                   child: buildBody(state),
                 ),

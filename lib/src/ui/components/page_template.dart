@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../components/styled/styled_circular_progress.dart'
+    show StyledCircularProgress;
+
 class PageTemplate extends StatelessWidget {
   const PageTemplate({
     this.title,
@@ -7,6 +10,7 @@ class PageTemplate extends StatelessWidget {
     this.body,
     this.goBack,
     this.drawer,
+    this.loading = false,
     this.padding = false,
   });
 
@@ -18,6 +22,7 @@ class PageTemplate extends StatelessWidget {
   final Widget body;
   final Function goBack;
   final Widget drawer;
+  final bool loading;
   final bool padding;
 
   @override
@@ -27,19 +32,21 @@ class PageTemplate extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFFe9e7e7),
         iconTheme: const IconThemeData(color: color),
-        leading: drawer == null
-            ? IconButton(
-                color: color,
-                tooltip: 'go back',
-                icon: const Icon(Icons.arrow_back_ios),
-                onPressed: () {
-                  if (goBack is Function) {
-                    goBack();
-                  } else if (Navigator.canPop(context)) {
-                    Navigator.pop(context);
-                  }
-                })
-            : null,
+        leading: loading
+            ? const StyledCircularProgress(size: 'small')
+            : drawer == null
+                ? IconButton(
+                    color: color,
+                    tooltip: 'go back',
+                    icon: const Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      if (goBack is Function) {
+                        goBack();
+                      } else if (Navigator.canPop(context)) {
+                        Navigator.pop(context);
+                      }
+                    })
+                : null,
         centerTitle: true,
         title:
             Text(title, style: const TextStyle(color: color, fontSize: 20.0)),

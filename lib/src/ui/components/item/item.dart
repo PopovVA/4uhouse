@@ -170,21 +170,18 @@ class _ItemState extends State<Item> {
           showError(context, state);
         }
       },
-      child: BlocProvider<ComponentBloc>(
+      child: BlocBuilder<ComponentEvent, ComponentState>(
         bloc: componentBloc,
-        child: BlocBuilder<ComponentEvent, ComponentState>(
-          bloc: componentBloc,
-          builder: (BuildContext context, ComponentState state) {
-            return ItemLayout(
-              picture: item.picture,
-              body: item.key,
-              suffix: buildSuffix(context, state),
-              link: item.isTransition,
-              disabled: !item.isInput,
-              onTap: isTapable ? onTap(context) : null,
-            );
-          },
-        ),
+        builder: (BuildContext context, ComponentState state) {
+          return ItemLayout(
+            picture: item.picture,
+            body: item.key,
+            suffix: buildSuffix(context, state),
+            link: item.isTransition,
+            disabled: !item.isInput,
+            onTap: isTapable ? onTap(context) : null,
+          );
+        },
       ),
     );
   }
