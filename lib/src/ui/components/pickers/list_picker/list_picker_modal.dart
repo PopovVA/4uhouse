@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import '../../../../utils/type_check.dart' show isNotNull;
 import '../generic/open_modal_bottom.dart' show openModalBottom;
 import 'list_picker.dart';
-
 
 dynamic _selectedItem;
 
@@ -13,7 +13,7 @@ Future<Widget> openListPicker(
   Function onOk,
   dynamic initialItem,
 }) async {
-  _selectedItem = initialItem;
+  _selectedItem = isNotNull(initialItem) ? initialItem : listItems.first;
   return openModalBottom(
     context: context,
     child: Container(
@@ -26,7 +26,7 @@ Future<Widget> openListPicker(
           FlatButton(
             onPressed: () {
               if (onOk is Function) {
-                onOk(_selectedItem != null ? _selectedItem : listItems.first);
+                onOk(_selectedItem);
               }
               _selectedItem = null;
 
