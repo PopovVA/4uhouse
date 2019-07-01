@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../generic/picker.dart'
-    show Picker;
+import '../generic/picker.dart' show Picker;
 
 class ListPicker extends StatefulWidget {
   const ListPicker({this.onItemChanged, this.initialItem, this.listItems});
@@ -37,7 +36,7 @@ class _ListPickerState extends State<ListPicker> {
   }
 
   void updateValues() {
-    widget.onItemChanged(Text(selectedItem));
+    widget.onItemChanged(selectedItem);
   }
 
   Widget _buildListPicker() {
