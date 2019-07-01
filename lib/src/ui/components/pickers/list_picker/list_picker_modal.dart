@@ -26,7 +26,7 @@ Future<Widget> openListPicker(
           FlatButton(
             onPressed: () {
               if (onOk is Function) {
-                onOk(_selectedItem);
+                onOk(_selectedItem != null ? _selectedItem : listItems.first);
               }
               _selectedItem = null;
 
