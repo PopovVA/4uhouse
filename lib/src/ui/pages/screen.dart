@@ -7,8 +7,7 @@ import '../../../temp/resources/screen_repository_test.dart'
     show TestScreenRepository;
 import '../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../blocs/auth/auth_event.dart' show AuthEvent;
-import '../../blocs/auth/auth_state.dart'
-    show AuthState, AuthUnauthorized, AuthAuthorized;
+import '../../blocs/auth/auth_state.dart' show AuthState, AuthUnauthorized;
 import '../../blocs/component/component_bloc.dart' show ComponentBloc;
 import '../../blocs/screen/screen_bloc.dart' show ScreenBloc;
 import '../../blocs/screen/screen_event.dart' show ScreenEvent, ScreenRequested;
@@ -293,7 +292,8 @@ class _ScreenState extends State<Screen> {
                   onRefresh: () => _refresh(state),
                   color: Theme.of(context).primaryColor,
                   child: Ink(
-                      color : const Color.fromRGBO(235, 236, 237, 1),child: buildBody(state)),
+                      color: const Color.fromRGBO(235, 236, 237, 1),
+                      child: buildBody(state)),
                 ),
                 goBack: getHandleGoBack(state),
                 title: buildTitle(state),
