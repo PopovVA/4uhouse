@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../../../temp/styled_text_controler.dart';
 import '../../../../models/phone/country_phone_data.dart';
 import '../../../components/styled/styled_text_field.dart' show StyledTextField;
 import 'phone_search.dart';
@@ -34,9 +33,11 @@ class _PhonePickerState extends State<PhonePicker> {
   @override
   void initState() {
     super.initState();
-    codeController.text = '+ (${_buildDataItem().code.toString()})';
-    widget.phoneController.addListener(_phoneListener);
     item = widget.selectedItem;
+    codeController.text =
+    '+ (${item == null ? _buildDataItem().code.toString() : item.code
+        .toString()})';
+    widget.phoneController.addListener(_phoneListener);
   }
 
   @override
@@ -119,7 +120,7 @@ class _PhonePickerState extends State<PhonePicker> {
           padding: const EdgeInsets.only(left: 12.0),
           child: StyledTextField(
             autofocus: true,
-            onChanged: (String val) => widget.phoneController.text = val,
+            controller: widget.phoneController,
             inputFormatters: <TextInputFormatter>[
               WhitelistingTextInputFormatter.digitsOnly
             ],
