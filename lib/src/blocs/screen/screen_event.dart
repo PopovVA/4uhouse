@@ -9,9 +9,9 @@ abstract class ScreenEvent extends Equatable {
 }
 
 class ScreenRequested extends ScreenEvent {
-  ScreenRequested({this.query});
+  ScreenRequested({this.route});
 
-  final String query;
+  final String route;
 
   @override
   String toString() => 'ScreenRequested';
@@ -27,6 +27,10 @@ class ScreenReceived extends ScreenEvent {
 }
 
 class ComponentAuthError extends ScreenEvent {
+  ComponentAuthError([this.route]) : super(<dynamic>[route]);
+
+  final String route;
+
   @override
   String toString() => 'ComponentAuthError';
 }
