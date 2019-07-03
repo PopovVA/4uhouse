@@ -109,7 +109,7 @@ class _DrawerState extends State<DrawerOnly> {
 
         if (state is IsFetchingLogout) {
           return StyledCircularProgress(
-              size: 'small', color: Theme.of(context).primaryColor);
+              size: 'sm', color: Theme.of(context).primaryColor);
         }
 
         return Container(width: 0.0, height: 0.0);

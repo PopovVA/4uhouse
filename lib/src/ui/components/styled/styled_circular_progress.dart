@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class StyledCircularProgress extends StatelessWidget {
   const StyledCircularProgress({
-    this.size = 'default',
+    this.size = 'md',
     this.color,
   });
 
@@ -10,9 +10,11 @@ class StyledCircularProgress extends StatelessWidget {
   final Color color;
 
   static const Map<String, double> sizes = <String, double>{
-    'small': 20.0,
-    'default': 30.0,
-    'large': 40.0,
+    'xs': 10.0,
+    'sm': 20.0,
+    'md': 30.0,
+    'lg': 40.0,
+    'xl': 50.0,
   };
 
   @override
