@@ -11,10 +11,10 @@ import 'auth_event.dart'
         AppStarted,
         AuthEvent,
         UserLoggedIn,
-        LogoutButtonPressed,
-        RefreshTokenFailed;
+        RefreshTokenFailed,
+        UserLoggedOut;
 import 'auth_state.dart'
-    show AuthState, AuthUnauthorized, AuthAuthorized, IsFetchingLogout;
+    show AuthState, AuthUnauthorized, AuthAuthorized;
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({@required AuthRepository authRepository})
@@ -34,9 +34,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       yield* _mapAppStartedToState();
     } else if (event is UserLoggedIn) {
       yield* _mapUserLoggedInToState();
-    } else if (event is LogoutButtonPressed) {
-      yield* _mapLogoutButtonPressedToState();
     } else if (event is RefreshTokenFailed) {
+      yield* _unauthorize();
+    } else if (event is UserLoggedOut) {
       yield* _unauthorize();
     }
   }
@@ -62,12 +62,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       // set authorized state anyway
       yield AuthAuthorized();
     }
-  }
-
-  Stream<AuthState> _mapLogoutButtonPressedToState() async* {
-    yield IsFetchingLogout();
-    await _authRepository.logout();
-    yield* _unauthorize();
   }
 
   Stream<AuthState> _unauthorize() async* {

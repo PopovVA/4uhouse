@@ -6,7 +6,8 @@ import 'package:crypto/crypto.dart' show sha256;
 import 'package:device_info/device_info.dart'
     show AndroidDeviceInfo, DeviceInfoPlugin, IosDeviceInfo;
 import 'package:meta/meta.dart' show required;
-import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
+import 'package:shared_preferences/shared_preferences.dart'
+    show SharedPreferences;
 import 'package:uuid/uuid.dart' show Uuid;
 
 import '../models/auth/token_response_model.dart' show TokenResponseModel;
@@ -140,9 +141,6 @@ class AuthRepository {
   /* Auth operations */
   Future<void> logout() async {
     final String accessToken = await this.accessToken;
-    if (!(accessToken is String && accessToken.isNotEmpty)) {
-      throw Exception('auth_repository.logout: No access token specified.');
-    }
 
     await _authApi.logout(accessToken: accessToken);
   }

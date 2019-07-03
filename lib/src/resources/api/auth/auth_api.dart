@@ -16,7 +16,7 @@ class AuthApi extends Api {
   // endpoints
   static const String _otpEndpoint = '${OAUTH_URL}otp';
   static const String _tokenEndpoint = '${OAUTH_URL}token';
-  static const String _logoutEndpoint = '${USER_URL}logout';
+  static const String _logoutEndpoint = '${OAUTH_URL}logout';
   static const String _userInfoEndpoint = '${USER_URL}userinfo';
 
   static String _encodeMapToUrl(Map<String, dynamic> parameters) {
@@ -124,15 +124,15 @@ class AuthApi extends Api {
     try {
       final http.Response response = await client.post(
         _logoutEndpoint,
-        headers: _makeHeaders(accessToken: accessToken),
+          body: _encodeMapToUrl(<String, dynamic>{
+            'accessToken': accessToken != null ? accessToken : ''
+          })
       );
 
       if (response.statusCode != 204) {
         throw response;
       }
     } catch (error) {
-      print('===> logout error: ${error.statusCode}');
-      print('===> logout error body: ${error.body}');
       throw await inferError(error);
     }
   }

@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
-import 'package:flutter_bloc/flutter_bloc.dart' show BlocProvider, BlocBuilder;
-
+import 'package:flutter_bloc/flutter_bloc.dart'
+    show BlocProvider, BlocBuilder, BlocListener, BlocListenerTree;
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../../blocs/auth/auth_event.dart'
     show AuthEvent, LogoutButtonPressed;
 import '../../../blocs/auth/auth_state.dart'
     show AuthState, AuthUnauthorized, AuthAuthorized, IsFetchingLogout;
-
+import '../../../blocs/logout/logout_bloc.dart' show LogOutBloc;
+import '../../../blocs/logout/logout_event.dart'
+    show LogOutEvent, LogoutButtonTapped;
+import '../../../blocs/logout/logout_state.dart'
+    show LogOutError, LogOutNotActive, LogOutSending, LogOutSent, LogOutState;
+import '../../../blocs/screen/screen_bloc.dart' show ScreenBloc;
+import '../../../resources/auth_repository.dart' show AuthRepository;
+import '../../../utils/show_alert.dart' show showError;
 import '../styled/styled_alert_dialog.dart' show StyledAlertDialog;
 import '../styled/styled_circular_progress.dart' show StyledCircularProgress;
+
 import 'drawer_header.dart' show Header;
 
 class DrawerOnly extends StatefulWidget {
@@ -80,41 +88,54 @@ class _DrawerState extends State<DrawerOnly> {
 
   Widget buildSignOut(
       {@required BuildContext context, @required AuthBloc authBloc}) {
-    return BlocBuilder<AuthEvent, AuthState>(
-      bloc: authBloc,
-      builder: (BuildContext context, AuthState state) {
-        if (state is AuthAuthorized) {
-          return buildListTile(context, 'Sign out',
-              icon: const Icon(OMIcons.exitToApp),
-              position: 8, onTap: () async {
-            final bool logoutApproved = await showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return StyledAlertDialog(
-                    title: 'Sign out',
-                    content: 'Are you sure you want to sign out?',
-                    onOk: () {
-                      Navigator.of(context).pop(true);
-                    },
-                    onCancel: () {
-                      Navigator.of(context).pop(false);
-                    },
-                  );
-                });
-            if (logoutApproved) {
-              authBloc.dispatch(LogoutButtonPressed());
+    final LogOutBloc logOutBloc = LogOutBloc(authBloc, AuthRepository());
+    return BlocListenerTree(
+        blocListeners: <BlocListener<dynamic, dynamic>>[
+          BlocListener<LogOutEvent, LogOutState>(
+            bloc: logOutBloc,
+            listener: (BuildContext context, LogOutState state) {
+              if (state is LogOutError) {
+                showError(context, state);
+              }
+            },
+          )
+        ],
+        child: BlocBuilder<LogOutEvent, LogOutState>(
+          bloc: logOutBloc,
+          builder: (BuildContext context, LogOutState state) {
+            if (state is LogOutNotActive || state is LogOutError) {
+              return buildListTile(context, 'Sign out',
+                  icon: const Icon(OMIcons.exitToApp),
+                  position: 8, onTap: () async {
+                    final bool logoutApproved = await showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return StyledAlertDialog(
+                            title: 'Sign out',
+                            content: 'Are you sure you want to sign out?',
+                            onOk: () {
+                              Navigator.of(context).pop(true);
+                            },
+                            onCancel: () {
+                              Navigator.of(context).pop(false);
+                            },
+                          );
+                        });
+                    if (logoutApproved) {
+                      logOutBloc.dispatch(LogoutButtonTapped());
+                    }
+                  });
             }
-          });
-        }
+            if (state is LogOutSending) {
+              return StyledCircularProgress(
+                  size: 'small', color: Theme
+                  .of(context)
+                  .primaryColor);
+            }
 
-        if (state is IsFetchingLogout) {
-          return StyledCircularProgress(
-              size: 'small', color: Theme.of(context).primaryColor);
-        }
-
-        return Container(width: 0.0, height: 0.0);
-      },
-    );
+            return Container(width: 0.0, height: 0.0);
+          },
+        ));
   }
 
   Widget buildSignIn({@required AuthBloc authBloc}) {
