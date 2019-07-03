@@ -41,7 +41,7 @@ class AuthApi extends Api {
 
   Future<void> requestOtp(
       {@required String codeChallenge,
-        @required String appId,
+      @required String appId,
       @required String countryId,
       @required int code,
       @required String number}) async {
@@ -71,7 +71,7 @@ class AuthApi extends Api {
       @required int code,
       @required String otp,
       @required String codeVerifier,
-        @required String appId}) async {
+      @required String appId}) async {
     final String phone = '$code$number';
     try {
       final http.Response response = await client.post(
