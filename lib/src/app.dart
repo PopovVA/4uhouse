@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocProvider;
 import 'package:meta/meta.dart' show required;
-import 'package:uuid/uuid.dart';
 
 import 'blocs/auth/auth_bloc.dart' show AuthBloc;
 import 'blocs/auth/auth_event.dart' show AppStarted;
@@ -32,7 +30,6 @@ class _AppState extends State<App> {
   @override
   void initState() {
     authBloc = AuthBloc(authRepository: authRepository);
-    _checkingStorage();
     authBloc.dispatch(AppStarted());
     super.initState();
   }
@@ -81,17 +78,4 @@ class _AppState extends State<App> {
       ),
     );
   }
-
-  Future<void> _checkingStorage() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String appId = prefs.getString('app_id');
-    final Uuid uuid = Uuid();
-    if (appId == null) {
-      authRepository.clearAll();
-      appId = uuid.v4();
-      prefs.setString('app_id', appId);
-    }
-    print('===>app_id  is $appId');
-  }
-
 }
