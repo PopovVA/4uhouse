@@ -30,7 +30,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> mapEventToState(
     AuthEvent event,
   ) async* {
-    print('===> auth event: ${event}');
     if (event is AppStarted) {
       yield* _mapAppStartedToState();
     } else if (event is UserLoggedIn) {
@@ -43,6 +42,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Stream<AuthState> _mapAppStartedToState() async* {
+    await _authRepository.setAppId();
+
     final String refreshToken = await _authRepository.refreshToken;
     if (refreshToken is String && refreshToken.isNotEmpty) {
       final UserModel userProfile = await _authRepository.userProfile;

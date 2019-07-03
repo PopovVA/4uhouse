@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart' show immutable;
+
 import '../../../src/models/screen/screen_model.dart';
 
 @immutable
@@ -43,6 +44,10 @@ class ScreenDataLoadingError extends ScreenState {
 }
 
 class ScreenAuthorizationError extends ScreenState {
+  ScreenAuthorizationError([this.route]) : super(<dynamic>[route]);
+
+  final String route;
+
   @override
   String toString() => 'ScreenAuthorizationError';
 }

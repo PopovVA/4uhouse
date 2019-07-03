@@ -32,12 +32,12 @@ class _PhonePickerState extends State<PhonePicker> {
 
   @override
   void initState() {
-    super.initState();
     item = widget.selectedItem;
     codeController.text =
     '+ (${item == null ? _buildDataItem().code.toString() : item.code
         .toString()})';
     widget.phoneController.addListener(_phoneListener);
+    super.initState();
   }
 
   @override

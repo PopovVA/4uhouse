@@ -9,7 +9,6 @@ MoneyMaskedTextController createMoneyController(initialValue,
     thousandSeparator: ' ',
   );
 
-  print('===> initialValue: ${(initialValue).toString()}');
   _moneyController.text =
       initialValue != null ? (initialValue * 10).toString() : defaultValue;
 

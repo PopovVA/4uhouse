@@ -45,7 +45,7 @@ class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
 
     if (event is ComponentAuthError) {
       authBloc.dispatch(RefreshTokenFailed());
-      yield ScreenAuthorizationError();
+      yield ScreenAuthorizationError(event.route);
     }
   }
 
@@ -58,7 +58,7 @@ class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
 
       final String token = await authRepository.accessToken;
       final ScreenModel screen =
-          await screenRepository.fetchScreen(query: event.query, token: token);
+      await screenRepository.fetchScreen(query: event.route, token: token);
       yield ScreenDataLoaded(screen);
     } catch (error) {
       if (error is AuthError) {
@@ -72,7 +72,7 @@ class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
               yield* _requestScreen(event);
             } catch (error) {
               if (isRefreshError(error)) {
-                yield* _emitAuthError();
+                yield* _emitAuthError(event);
               } else {
                 // didn't refresh because of no connection/server error etc
                 yield ScreenDataLoadingError(error.toString());
@@ -81,12 +81,12 @@ class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
           } else {
             // no refresh token stored
             print('---> no refresh token stored');
-            yield* _emitAuthError();
+            yield* _emitAuthError(event);
           }
           // tryRefresh block end
 
         } else {
-          yield* _emitAuthError();
+          yield* _emitAuthError(event);
         }
       } else {
         yield ScreenDataLoadingError(error.toString());
@@ -94,9 +94,9 @@ class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
     }
   }
 
-  Stream<ScreenState> _emitAuthError() async* {
+  Stream<ScreenState> _emitAuthError(ScreenRequested event) async* {
     print('---> emit auth error');
     authBloc.dispatch(RefreshTokenFailed());
-    yield ScreenAuthorizationError();
+    yield ScreenAuthorizationError(event.route);
   }
 }

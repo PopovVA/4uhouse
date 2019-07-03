@@ -1,5 +1,5 @@
 import 'dart:async' show Future;
-import 'dart:io' show File;
+import 'dart:io' show File, Platform;
 import 'package:flutter/material.dart';
 import 'package:flutter_exif_rotation/flutter_exif_rotation.dart';
 import 'package:image_picker/image_picker.dart' show ImagePicker, ImageSource;
@@ -79,7 +79,9 @@ class _Uploader extends StatelessWidget {
         await ImagePicker.pickImage(source: source, maxWidth: 640);
 
     return image != null
+        ? Platform.isAndroid
         ? FlutterExifRotation.rotateImage(path: image.path)
+        : image
         : null;
   }
 

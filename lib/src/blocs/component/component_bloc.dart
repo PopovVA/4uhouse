@@ -78,7 +78,7 @@ class ComponentBloc extends Bloc<ComponentEvent, ComponentState> {
               yield* _sendItemValue(event);
             } catch (error) {
               if (isRefreshError(error)) {
-                yield* _emitAuthError();
+                yield* _emitAuthError(event);
               } else {
                 // didn't refresh because of no connection/server error etc
                 yield ComponentFetchingError(error.toString());
@@ -86,19 +86,20 @@ class ComponentBloc extends Bloc<ComponentEvent, ComponentState> {
             }
           } else {
             // no refresh token stored
-            yield* _emitAuthError();
+            yield* _emitAuthError(event);
           }
           // tryRefresh block end
 
         } else {
-          yield* _emitAuthError();
+          yield* _emitAuthError(event);
         }
       }
     }
   }
 
-  Stream<ComponentState> _emitAuthError() async* {
+  Stream<ComponentState> _emitAuthError(
+      SendingComponentValueRequested event) async* {
     yield ComponentNotFetching();
-    screenBloc.dispatch(ComponentAuthError());
+    screenBloc.dispatch(ComponentAuthError(event.route));
   }
 }

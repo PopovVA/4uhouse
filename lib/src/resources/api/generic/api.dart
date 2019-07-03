@@ -30,6 +30,7 @@ class Api {
     if (response is http.Response) {
       print('===> response.body: ${response.body}');
     }
+
     if (response is http.Response) {
       return json.decode(response.body);
     } else if (response is http.StreamedResponse) {

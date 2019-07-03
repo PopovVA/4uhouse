@@ -66,7 +66,7 @@ class _ScreenState extends State<Screen> {
         authRepository: AuthRepository());
 //           screenRepository: TestScreenRepository(),
 //        authRepository: AuthRepository());
-    screenBloc.dispatch(ScreenRequested(query: widget.route));
+    screenBloc.dispatch(ScreenRequested(route: widget.route));
   }
 
   @override
@@ -94,13 +94,13 @@ class _ScreenState extends State<Screen> {
     }
 
     if (query != null) {
-      screenBloc.dispatch(ScreenRequested(query: query));
+      screenBloc.dispatch(ScreenRequested(route: query));
     }
   }
 
   Function makeTransition(String path) => (BuildContext context, String id) {
         screenBloc.dispatch(
-            ScreenRequested(query: '$path${id is String ? '/$id' : ''}'));
+            ScreenRequested(route: '$path${id is String ? '/$id' : ''}'));
       };
 
   Widget buildComponents(ScreenDataLoaded state) {
@@ -201,7 +201,7 @@ class _ScreenState extends State<Screen> {
         final String path = state.data.path;
         scrollToId = path.substring(path.lastIndexOf('/') + 1);
         screenBloc.dispatch(
-            ScreenRequested(query: path.substring(0, path.lastIndexOf('/'))));
+            ScreenRequested(route: path.substring(0, path.lastIndexOf('/'))));
       };
     }
 
@@ -273,7 +273,7 @@ class _ScreenState extends State<Screen> {
             listener: (BuildContext context, ScreenState state) {
               if (state is ScreenAuthorizationError) {
                 Navigator.of(context).pushReplacementNamed(LOGIN_PAGE,
-                    arguments: <String, String>{'returnTo': widget.route});
+                    arguments: <String, String>{'returnTo': state.route});
               }
 
               if (state is ScreenDataLoadingError) {
