@@ -2,10 +2,12 @@ import 'dart:async' show Future;
 import 'dart:convert' show base64, json, ascii;
 import 'dart:math' show Random;
 
-import 'package:crypto/crypto.dart' show sha256, Hash;
+import 'package:crypto/crypto.dart' show sha256;
 import 'package:device_info/device_info.dart'
     show AndroidDeviceInfo, DeviceInfoPlugin, IosDeviceInfo;
 import 'package:meta/meta.dart' show required;
+import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
+import 'package:uuid/uuid.dart' show Uuid;
 
 import '../models/auth/token_response_model.dart' show TokenResponseModel;
 import '../models/auth/user_model.dart' show UserModel;
@@ -26,17 +28,18 @@ class AuthRepository {
   static const String _refresh = 'refreshToken';
   static const String _userProfile = 'userProfile';
   static const String _verifier = 'verifier';
+  static const String _appId = 'appId';
 
   /* Login flow */
   Future<void> getOtp(
       {@required String countryId,
       @required int code,
       @required String number}) async {
-    final String deviceId = await _getDeviceId();
+    final String appId = await getAppId();
     final String codeChallenge = await _generatePKCE();
     return _authApi.requestOtp(
         codeChallenge: codeChallenge,
-        deviceId: deviceId,
+        appId: appId,
         countryId: countryId,
         code: code,
         number: number);
@@ -47,8 +50,7 @@ class AuthRepository {
       @required int code,
       @required String otp}) async {
     final String codeVerifier = await readData(_verifier);
-    final String deviceId = await _getDeviceId();
-    print('---> AUTH REPO.login');
+    final String appId = await getAppId();
 
     if (!(codeVerifier is String && codeVerifier.isNotEmpty)) {
       throw Exception('auth_repository.login: no codeVerifier specified.');
@@ -63,11 +65,9 @@ class AuthRepository {
       code: code,
       otp: otp,
       codeVerifier: codeVerifier,
-      deviceId: deviceId,
+      appId: appId,
     );
 
-    print('===> tokenResponse a: ${tokenResponse.accessToken}');
-    print('===> tokenResponse r: ${tokenResponse.refreshToken}');
     await _storeTokens(tokenResponse: tokenResponse);
   }
 
@@ -109,13 +109,27 @@ class AuthRepository {
     final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     try {
       final IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
-      print('Running on ${iosInfo.utsname.machine}');
       return iosInfo.utsname.machine;
     } catch (error) {
       final AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-      print('Running on ${androidInfo.model}');
       return androidInfo.model;
     }
+  }
+
+  Future<void> setAppId() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String appId = prefs.getString(_appId);
+    if (appId == null) {
+      clearAll();
+      appId = Uuid().v4();
+      prefs.setString(_appId, appId);
+    }
+    print('===> appId: ${appId}');
+  }
+
+  Future<String> getAppId() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_appId);
   }
 
   Future<void> _storeTokens(
