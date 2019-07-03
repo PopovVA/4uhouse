@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocBuilder, BlocListener, BlocListenerTree;
 
 import '../../../../src/utils/route_transition.dart' show SlideRoute;
-import '../../../../temp/styled_text_controler.dart'
-    show NumberOnlyTextEditingController;
 import '../../../../temp/resources/phone_repository_test.dart'
     show TestPhoneRepository;
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
@@ -55,7 +53,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
   bool validPhone = false;
   LoginBloc _loginBloc;
   PhoneBloc _phoneBloc;
-  TextEditingController phoneController = NumberOnlyTextEditingController();
+  TextEditingController phoneController = TextEditingController();
   String number;
 
   void _phoneListener() {
