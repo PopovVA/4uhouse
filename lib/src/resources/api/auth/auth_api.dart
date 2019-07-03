@@ -21,8 +21,11 @@ class AuthApi extends Api {
 
   static String _encodeMapToUrl(Map<String, dynamic> parameters) {
     final List<String> urlEncodedForm = <String>[];
-    parameters.forEach((String key, dynamic value) => urlEncodedForm
-        .add('${Uri.encodeFull(key)}=${Uri.encodeFull(value.toString())}'));
+    parameters.forEach((String key, dynamic value) =>
+    value != null
+        ? urlEncodedForm
+        .add('${Uri.encodeFull(key)}=${Uri.encodeFull(value.toString())}')
+        : null);
 
     return urlEncodedForm.join('&');
   }
@@ -125,7 +128,7 @@ class AuthApi extends Api {
       final http.Response response = await client.post(
         _logoutEndpoint,
           body: _encodeMapToUrl(<String, dynamic>{
-            'accessToken': accessToken != null ? accessToken : ''
+            'accessToken': accessToken
           })
       );
 
