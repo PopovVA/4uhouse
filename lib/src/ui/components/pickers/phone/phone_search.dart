@@ -4,10 +4,11 @@ import '../../../../models/phone/country_phone_data.dart';
 import '../../../components/styled/styled_text_field.dart' show StyledTextField;
 
 class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
-  CustomSearchDelegate(
-      {this.favorites,
-      @required this.countryPhoneDataList,
-      @required this.onSelected});
+  CustomSearchDelegate({
+    this.favorites,
+    @required this.countryPhoneDataList,
+    @required this.onSelected,
+  });
 
   List<CountryPhoneData> favorites;
   List<CountryPhoneData> countryPhoneDataList;
@@ -75,7 +76,7 @@ class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
                   children: <Widget>[
                     ListTile(
                         title: Text(
-                            '${"🇷🇺 " + totalList[index].name + ' +' + totalList[index].code.toString()}'),
+                            '${totalList[index].flag + totalList[index].name + ' +' + totalList[index].code.toString()}'),
                         onTap: () {
                           return onSelected is Function
                               ? onSelected(close(context, totalList[index]))
@@ -86,7 +87,7 @@ class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
                 )
               : ListTile(
                   title: Text(
-                      '${"🇷🇺 " + totalList[index].name + ' +' + totalList[index].code.toString()}'),
+                      '${totalList[index].flag + totalList[index].name + ' +' + totalList[index].code.toString()}'),
                   onTap: () {
                     return onSelected is Function
                         ? onSelected(close(context, totalList[index]))
@@ -101,7 +102,7 @@ class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
               title: Text(
-                  '${"🇷🇺 " + totalList[index].name + ' +' + totalList[index].code.toString()}'),
+                  '${totalList[index].flag + totalList[index].name + ' +' + totalList[index].code.toString()}'),
               onTap: () {
                 return onSelected is Function
                     ? onSelected(close(context, totalList[index]))
