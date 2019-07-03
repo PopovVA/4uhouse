@@ -141,9 +141,6 @@ class AuthRepository {
   /* Auth operations */
   Future<void> logout() async {
     final String accessToken = await this.accessToken;
-    if (!(accessToken is String && accessToken.isNotEmpty)) {
-      throw Exception('auth_repository.logout: No access token specified.');
-    }
 
     await _authApi.logout(accessToken: accessToken);
   }

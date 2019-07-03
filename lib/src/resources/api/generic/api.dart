@@ -60,7 +60,7 @@ class Api {
       final String message =
           description is String ? description : parsedResponse['message'];
 
-      if (<int>[401, 403, 409].contains(statusCode)) {
+      if (statusCode == 401) {
         return AuthError(message: message, statusCode: statusCode);
       }
 

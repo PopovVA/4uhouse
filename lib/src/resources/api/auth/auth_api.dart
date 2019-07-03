@@ -16,13 +16,16 @@ class AuthApi extends Api {
   // endpoints
   static const String _otpEndpoint = '${OAUTH_URL}otp';
   static const String _tokenEndpoint = '${OAUTH_URL}token';
-  static const String _logoutEndpoint = '${USER_URL}logout';
+  static const String _logoutEndpoint = '${OAUTH_URL}logout';
   static const String _userInfoEndpoint = '${USER_URL}userinfo';
 
   static String _encodeMapToUrl(Map<String, dynamic> parameters) {
     final List<String> urlEncodedForm = <String>[];
-    parameters.forEach((String key, dynamic value) => urlEncodedForm
-        .add('${Uri.encodeFull(key)}=${Uri.encodeFull(value.toString())}'));
+    parameters.forEach((String key, dynamic value) =>
+    value != null
+        ? urlEncodedForm
+        .add('${Uri.encodeFull(key)}=${Uri.encodeFull(value.toString())}')
+        : null);
 
     return urlEncodedForm.join('&');
   }
@@ -120,19 +123,20 @@ class AuthApi extends Api {
     }
   }
 
-  Future<void> logout({@required String accessToken}) async {
+  Future<void> logout({String accessToken}) async {
     try {
       final http.Response response = await client.post(
         _logoutEndpoint,
-        headers: _makeHeaders(accessToken: accessToken),
+          headers: _makeHeaders(),
+          body: _encodeMapToUrl(<String, dynamic>{
+            'accessToken': accessToken
+          })
       );
 
       if (response.statusCode != 204) {
         throw response;
       }
     } catch (error) {
-      print('===> logout error: ${error.statusCode}');
-      print('===> logout error body: ${error.body}');
       throw await inferError(error);
     }
   }
