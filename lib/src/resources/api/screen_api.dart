@@ -23,6 +23,7 @@ class ScreenApi extends Api {
       {@required String route, String token}) async {
     try {
       print('===> screen request: ${getUrl(token, route)}');
+      print('===>  makeHeaders(token): ${ makeHeaders(token)}');
       final http.Response response =
           await client.get(getUrl(token, route), headers: makeHeaders(token));
 

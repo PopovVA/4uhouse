@@ -16,6 +16,10 @@ class ScreenUninitialized extends ScreenState {
 }
 
 class ScreenLoading extends ScreenState {
+  ScreenLoading([this.query]) : super(<dynamic>[query]);
+
+  final String query;
+
   @override
   String toString() => 'ScreenLoading';
 }

@@ -18,7 +18,7 @@ dependencies:
 
   equatable: ^0.2.4
   flutter_appauth: ^0.2.1+1
-  flutter_bloc: ^0.13.0
+  flutter_bloc: ^0.18.3
   flutter_masked_text: ^0.8.0
   flutter_secure_storage: ^3.2.1+1
   shared_preferences: ^0.5.3+1

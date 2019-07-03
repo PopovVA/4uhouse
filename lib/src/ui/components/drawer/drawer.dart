@@ -8,18 +8,16 @@ import '../../../blocs/auth/auth_event.dart'
 import '../../../blocs/auth/auth_state.dart'
     show AuthState, AuthUnauthorized, AuthAuthorized, IsFetchingLogout;
 
-import '../../../utils/route_transition.dart' show SlideRoute;
-import '../../pages/login/phone.dart';
 import '../styled/styled_alert_dialog.dart' show StyledAlertDialog;
 import '../styled/styled_circular_progress.dart' show StyledCircularProgress;
 import 'drawer_header.dart' show Header;
 
 class DrawerOnly extends StatefulWidget {
   @override
-  State createState() => DrawerState();
+  State createState() => _DrawerState();
 }
 
-class DrawerState extends State<DrawerOnly> {
+class _DrawerState extends State<DrawerOnly> {
   int _selectedDrawerIndex = 0;
 
   @override

@@ -57,13 +57,11 @@ class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
       }
 
       final String token = await authRepository.accessToken;
-      print('===> screen token: ${token}');
       final ScreenModel screen =
           await screenRepository.fetchScreen(query: event.query, token: token);
       yield ScreenDataLoaded(screen);
     } catch (error) {
       if (error is AuthError) {
-
         if (tryToRefresh) {
           final String refreshToken = await authRepository.refreshToken;
 //        var refreshToken = 'c382a820-f0d2-43d8-b6e2-58c0f6d66708';
