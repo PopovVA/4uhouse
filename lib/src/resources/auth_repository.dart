@@ -35,11 +35,11 @@ class AuthRepository {
       {@required String countryId,
       @required int code,
       @required String number}) async {
-    final String deviceId = await _getDeviceId();
+    final String appId = await getAppId();
     final String codeChallenge = await _generatePKCE();
     return _authApi.requestOtp(
         codeChallenge: codeChallenge,
-        deviceId: deviceId,
+        appId: appId,
         countryId: countryId,
         code: code,
         number: number);
@@ -50,7 +50,7 @@ class AuthRepository {
       @required int code,
       @required String otp}) async {
     final String codeVerifier = await readData(_verifier);
-    final String deviceId = await _getDeviceId();
+    final String appId = await getAppId();
 
     if (!(codeVerifier is String && codeVerifier.isNotEmpty)) {
       throw Exception('auth_repository.login: no codeVerifier specified.');
@@ -65,7 +65,7 @@ class AuthRepository {
       code: code,
       otp: otp,
       codeVerifier: codeVerifier,
-      deviceId: deviceId,
+      appId: appId,
     );
 
     await _storeTokens(tokenResponse: tokenResponse);
