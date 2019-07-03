@@ -68,7 +68,7 @@ class _ScreenState extends State<Screen> {
   //      authRepository: AuthRepository());
     screenBloc.dispatch(ScreenRequested(route: widget.route));
   }
-//
+
   @override
   void dispose() {
     screenBloc.dispose();
