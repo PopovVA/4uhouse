@@ -1,7 +1,7 @@
 import 'dart:async' show Future;
 
 import '../models/screen/screen_model.dart' show ScreenModel;
-import 'package:user_mobile/src/resources/api/screen_api.dart' show ScreenApi;
+import 'api/screen_api.dart' show ScreenApi;
 
 class ScreenRepository {
   final ScreenApi screenApi = ScreenApi();
