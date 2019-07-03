@@ -99,7 +99,8 @@ class ComponentBloc extends Bloc<ComponentEvent, ComponentState> {
     }
   }
 
-  Stream<ComponentState> _emitAuthError(SendingComponentValueRequested event) async* {
+  Stream<ComponentState> _emitAuthError(
+      SendingComponentValueRequested event) async* {
     yield ComponentNotFetching();
     screenBloc.dispatch(ComponentAuthError(event.route));
   }

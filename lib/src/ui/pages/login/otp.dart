@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocBuilder, BlocListener, BlocListenerTree;
 import 'package:flutter/services.dart';
-import '../../../../temp/styled_text_controler.dart';
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../../blocs/auth/auth_event.dart' show AuthEvent;
 import '../../../blocs/auth/auth_state.dart' show AuthState, AuthAuthorized;
@@ -50,7 +49,7 @@ class OtpScreen extends StatefulWidget {
 class _OtpScreenState extends State<OtpScreen> {
   bool isFetchingCode = false;
   final int maxLength = 4;
-  TextEditingController code = NumberOnlyTextEditingController();
+  TextEditingController code = TextEditingController();
 
   @override
   void initState() {
@@ -182,7 +181,7 @@ class _OtpScreenState extends State<OtpScreen> {
         borderColor: code.text.length != maxLength
             ? Colors.redAccent
             : Theme.of(context).primaryColor,
-        onChanged: (String val) => code.text = val,
+        controller: code,
         inputFormatters: <TextInputFormatter>[
           WhitelistingTextInputFormatter.digitsOnly
         ],
