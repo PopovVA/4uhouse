@@ -64,8 +64,8 @@ class _ScreenState extends State<Screen> {
         authBloc: widget.authBloc,
         screenRepository: ScreenRepository(),
         authRepository: AuthRepository());
-//           screenRepository: TestScreenRepository(),
-//        authRepository: AuthRepository());
+ //       screenRepository: TestScreenRepository(),
+  //      authRepository: AuthRepository());
     screenBloc.dispatch(ScreenRequested(route: widget.route));
   }
 
@@ -166,16 +166,14 @@ class _ScreenState extends State<Screen> {
             children: <Widget>[
               Expanded(
                 child: Container(
-                  child: SingleChildScrollView(
+                  child: ListView(
                     padding: buttons.isNotEmpty && state is ScreenDataLoaded
                         ? EdgeInsets.only(
                             bottom: 64 * buttons.length.toDouble())
                         : null,
-                    physics: const AlwaysScrollableScrollPhysics(),
                     controller: widget.scrollController,
-                    child: Column(
-                      children: items,
-                    ),
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    children: items,
                   ),
                 ),
               ),
