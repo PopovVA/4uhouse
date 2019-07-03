@@ -14,11 +14,6 @@ class LogOutSending extends LogOutState {
   String toString() => 'LogOutSending';
 }
 
-class LogOutSent extends LogOutState {
-  @override
-  String toString() => 'LogOutSent';
-}
-
 class LogOutNotActive extends LogOutState {
   @override
   String toString() => 'LogOutNotActive';

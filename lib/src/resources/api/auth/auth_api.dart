@@ -123,10 +123,11 @@ class AuthApi extends Api {
     }
   }
 
-  Future<void> logout({@required String accessToken}) async {
+  Future<void> logout({String accessToken}) async {
     try {
       final http.Response response = await client.post(
         _logoutEndpoint,
+          headers: _makeHeaders(),
           body: _encodeMapToUrl(<String, dynamic>{
             'accessToken': accessToken
           })

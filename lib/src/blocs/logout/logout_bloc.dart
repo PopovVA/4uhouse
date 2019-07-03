@@ -1,15 +1,17 @@
+import 'package:meta/meta.dart' show required;
 import 'package:bloc/bloc.dart' show Bloc;
-import 'package:user_mobile/src/blocs/auth/auth_bloc.dart' show AuthBloc;
-import 'package:user_mobile/src/blocs/screen/screen_bloc.dart' show ScreenBloc;
-import 'package:user_mobile/src/resources/auth_repository.dart'
-    show AuthRepository;
+
+import '../../resources/auth_repository.dart' show AuthRepository;
+import '../auth/auth_bloc.dart' show AuthBloc;
 import '../auth/auth_event.dart' show UserLoggedOut;
+
 import 'logout_event.dart' show LogoutButtonTapped, LogOutEvent;
 import 'logout_state.dart'
-    show LogOutSending, LogOutSent, LogOutError, LogOutNotActive, LogOutState;
+    show LogOutSending, LogOutError, LogOutNotActive, LogOutState;
 
 class LogOutBloc extends Bloc<LogOutEvent, LogOutState> {
-  LogOutBloc(AuthBloc authBloc, AuthRepository authRepository)
+  LogOutBloc(
+      {@required AuthBloc authBloc, @required AuthRepository authRepository})
       : assert(authBloc != null),
         assert(authRepository != null),
         _authBloc = authBloc,
@@ -35,7 +37,7 @@ class LogOutBloc extends Bloc<LogOutEvent, LogOutState> {
       await _authRepository.logout();
       await _authRepository.clearAll();
       _authBloc.dispatch(UserLoggedOut());
-      yield LogOutSent();
+      yield LogOutNotActive();
     } catch (error) {
       yield LogOutError(error.toString());
     }

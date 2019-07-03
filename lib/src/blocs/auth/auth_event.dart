@@ -15,7 +15,7 @@ class AppStarted extends AuthEvent {
 
 class UserLoggedIn extends AuthEvent {
   @override
-  String toString() => 'LogInButtonPressed';
+  String toString() => 'UserLoggedIn';
 }
 
 class UserLoggedOut extends AuthEvent {
