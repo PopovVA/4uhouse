@@ -74,25 +74,23 @@ class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
           return favorites.isNotEmpty && index == favorites.length - 1
               ? Column(
                   children: <Widget>[
-                    ListTile(
-                        title: Text(
-                            '${totalList[index].flag + totalList[index].name + ' +' + totalList[index].code.toString()}'),
-                        onTap: () {
-                          return onSelected is Function
-                              ? onSelected(close(context, totalList[index]))
-                              : Navigator.pop(context);
-                        }),
+                    _buildListTile(totalList, index, context),
                     const Divider(height: 10.0, color: Colors.black)
                   ],
                 )
-              : ListTile(
-                  title: Text(
-                      '${totalList[index].flag + totalList[index].name + ' +' + totalList[index].code.toString()}'),
-                  onTap: () {
-                    return onSelected is Function
-                        ? onSelected(close(context, totalList[index]))
-                        : Navigator.pop(context);
-                  });
+              : _buildListTile(totalList, index, context);
+        });
+  }
+
+  Widget _buildListTile(
+      List<CountryPhoneData> totalList, int index, BuildContext context) {
+    return ListTile(
+        title: Text(
+            '${totalList[index].flag + ' ' + totalList[index].name + ' +' + totalList[index].code.toString()}'),
+        onTap: () {
+          return onSelected is Function
+              ? onSelected(close(context, totalList[index]))
+              : Navigator.pop(context);
         });
   }
 
@@ -100,14 +98,7 @@ class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
     return ListView.builder(
         itemCount: totalList.length,
         itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-              title: Text(
-                  '${totalList[index].flag + totalList[index].name + ' +' + totalList[index].code.toString()}'),
-              onTap: () {
-                return onSelected is Function
-                    ? onSelected(close(context, totalList[index]))
-                    : Navigator.pop(context);
-              });
+          return _buildListTile(totalList, index, context);
         });
   }
 
