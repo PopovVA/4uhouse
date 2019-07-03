@@ -35,7 +35,7 @@ class AuthRepository {
       {@required String countryId,
       @required int code,
       @required String number}) async {
-    final String appId = await getAppId();
+    final String appId = await _getAppId();
     final String codeChallenge = await _generatePKCE();
     return _authApi.requestOtp(
         codeChallenge: codeChallenge,
@@ -50,13 +50,13 @@ class AuthRepository {
       @required int code,
       @required String otp}) async {
     final String codeVerifier = await readData(_verifier);
-    final String appId = await getAppId();
+    final String appId = await _getAppId();
 
     if (!(codeVerifier is String && codeVerifier.isNotEmpty)) {
       throw Exception('auth_repository.login: no codeVerifier specified.');
     }
 
-    if (!(deviceId is String && deviceId.isNotEmpty)) {
+    if (!(appId is String && appId.isNotEmpty)) {
       throw Exception('auth_repository.login: no deviceId specified.');
     }
 
@@ -124,10 +124,9 @@ class AuthRepository {
       appId = Uuid().v4();
       prefs.setString(_appId, appId);
     }
-    print('===> appId: ${appId}');
   }
 
-  Future<String> getAppId() async {
+  Future<String> _getAppId() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString(_appId);
   }
