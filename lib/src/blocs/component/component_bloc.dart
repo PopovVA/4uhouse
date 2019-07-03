@@ -93,6 +93,8 @@ class ComponentBloc extends Bloc<ComponentEvent, ComponentState> {
         } else {
           yield* _emitAuthError(event);
         }
+      } else {
+        yield ComponentFetchingError(error.toString());
       }
     }
   }

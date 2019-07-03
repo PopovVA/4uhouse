@@ -120,7 +120,7 @@ class AuthRepository {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String appId = prefs.getString(_appId);
     if (appId == null) {
-      clearAll();
+      await clearAll();
       appId = Uuid().v4();
       prefs.setString(_appId, appId);
     }

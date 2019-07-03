@@ -45,15 +45,12 @@ class ComponentApi extends Api {
       final http.Response response = await request;
 
       // Process response
-      print(
-          '===> component await processResponse(response): ${await processResponse(response)}');
       if (response.statusCode == 200) {
         return ScreenModel.fromJson(await processResponse(response));
       } else {
         throw response;
       }
     } catch (error) {
-      print('===> await inferError(error): ${await inferError(error)}');
       throw await inferError(error);
     }
   }
