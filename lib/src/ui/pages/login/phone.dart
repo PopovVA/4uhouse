@@ -152,11 +152,6 @@ class _PhoneScreenState extends State<PhoneScreen> {
                             ListView(
                               children: <Widget>[
                                 _buildTittle(),
-                                if (state is PhoneUninitialized ||
-                                    state is PhoneLoading)
-                                  StyledCircularProgress(
-                                      size: 'small',
-                                      color: Theme.of(context).primaryColor),
                                 if (state is PhoneCountriesDataLoaded)
                                   Container(
                                     margin: const EdgeInsets.symmetric(
@@ -171,7 +166,15 @@ class _PhoneScreenState extends State<PhoneScreen> {
                                 ),
                               ],
                             ),
-                            _buildSubmit(loginBloc: _loginBloc)
+                            _buildSubmit(loginBloc: _loginBloc),
+                            if (state is PhoneUninitialized ||
+                                state is PhoneLoading)
+                              Align(
+                                alignment: FractionalOffset.center,
+                                child: StyledCircularProgress(
+                                    size: 'small',
+                                    color: Theme.of(context).primaryColor),
+                              )
                           ],
                         ),
                       );
