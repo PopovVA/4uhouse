@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import '../../../src/models/screen/components/property_model.dart';
+import 'property_card_footer.dart';
+import 'property_card_image.dart';
 
-import '../src/models/screen/components/property_model.dart'
-    show PropertyModel;
-
-import '../src/ui/components/property_card/property_card_footer.dart' show PropertyFooter;
-import '../src/ui/components/property_card/property_card_image.dart' show PropertyImage;
 
 class PropertyCard extends StatelessWidget {
   factory PropertyCard(PropertyModel property, {Function makeTransition}) {
