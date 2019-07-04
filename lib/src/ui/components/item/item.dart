@@ -133,7 +133,7 @@ class _ItemState extends State<Item> {
 
   Object buildSuffix(BuildContext context, ComponentState state) {
     if (state is ComponentIsFetching) {
-      return const StyledCircularProgress(size: 'small');
+      return const StyledCircularProgress(size: 'sm');
     }
 
     final ItemModel item = widget.item;

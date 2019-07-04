@@ -55,7 +55,7 @@ class StyledAlertDialog extends StatelessWidget {
                                 padding: const EdgeInsets.only(
                                     bottom: 12.0, left: 24, right: 24, top: 10),
                                 child: Text(
-                                  title is String ? title : 'Opps...',
+                                  title is String ? title : 'Oops...',
                                   style: const TextStyle(
                                     fontSize: 20,
                                     color: Color.fromRGBO(0, 0, 0, 0.87),

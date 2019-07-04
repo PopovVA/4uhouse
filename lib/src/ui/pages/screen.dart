@@ -62,10 +62,10 @@ class _ScreenState extends State<Screen> {
     super.initState();
     screenBloc = ScreenBloc(
         authBloc: widget.authBloc,
-        screenRepository: ScreenRepository(),
+//        screenRepository: ScreenRepository(),
+//        authRepository: AuthRepository());
+        screenRepository: TestScreenRepository(),
         authRepository: AuthRepository());
- //       screenRepository: TestScreenRepository(),
-  //      authRepository: AuthRepository());
     screenBloc.dispatch(ScreenRequested(route: widget.route));
   }
 
@@ -248,7 +248,9 @@ class _ScreenState extends State<Screen> {
 
   Widget getDrawer(ScreenState state) {
     if (state is ScreenDataLoaded) {
-      return isHomePage(state.data.path) ? DrawerOnly() : null;
+      return isHomePage(state.data.path)
+          ? DrawerOnly(authBloc: widget.authBloc)
+          : null;
     }
 
     return null;

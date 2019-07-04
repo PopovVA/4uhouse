@@ -85,8 +85,8 @@ class _PhoneScreenState extends State<PhoneScreen> {
   @override
   void initState() {
     super.initState();
-    //   _phoneBloc = PhoneBloc(TestPhoneRepository());
-    _phoneBloc = PhoneBloc(PhoneRepository());
+    _phoneBloc = PhoneBloc(TestPhoneRepository());
+//    _phoneBloc = PhoneBloc(PhoneRepository());
     init();
     _loginBloc = LoginBloc(widget.authBloc, AuthRepository());
     phoneController.addListener(_phoneListener);
@@ -156,7 +156,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                                     state is PhoneLoading)
                                   Padding(
                                     child: StyledCircularProgress(
-                                        size: 'small',
+                                        size: 'sm',
                                         color: Theme.of(context).primaryColor),
                                     padding:
                                         const EdgeInsets.symmetric(vertical: 8),
@@ -175,7 +175,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                                 ),
                               ],
                             ),
-                            _buildSubmit(loginBloc: _loginBloc),
+                            _buildSubmit(loginBloc: _loginBloc)
                           ],
                         ),
                       );

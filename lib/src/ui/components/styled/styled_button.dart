@@ -40,7 +40,7 @@ class StyledButton extends StatelessWidget {
 
   Widget buildChild(BuildContext context) {
     if (loading) {
-      return const StyledCircularProgress(size: 'small', color: Colors.white);
+      return const StyledCircularProgress(size: 'sm', color: Colors.white);
     }
 
     return Text(

@@ -121,7 +121,7 @@ class AuthRepository {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String appId = prefs.getString(_appId);
     if (appId == null) {
-      clearAll();
+      await clearAll();
       appId = Uuid().v4();
       prefs.setString(_appId, appId);
     }
@@ -141,9 +141,6 @@ class AuthRepository {
   /* Auth operations */
   Future<void> logout() async {
     final String accessToken = await this.accessToken;
-    if (!(accessToken is String && accessToken.isNotEmpty)) {
-      throw Exception('auth_repository.logout: No access token specified.');
-    }
 
     await _authApi.logout(accessToken: accessToken);
   }

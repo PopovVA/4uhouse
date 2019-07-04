@@ -15,12 +15,12 @@ class AppStarted extends AuthEvent {
 
 class UserLoggedIn extends AuthEvent {
   @override
-  String toString() => 'LogoutButtonPressed';
+  String toString() => 'UserLoggedIn';
 }
 
-class LogoutButtonPressed extends AuthEvent {
+class UserLoggedOut extends AuthEvent {
   @override
-  String toString() => 'LogoutButtonPressed';
+  String toString() => 'UserLoggedOut';
 }
 
 class RefreshTokenFailed extends AuthEvent {
