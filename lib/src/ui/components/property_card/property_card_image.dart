@@ -69,17 +69,13 @@ class PropertyImage extends StatelessWidget {
     if (statusValue != null) {
       return Positioned(
         right: 0.0,
-        top: height * 0.085,
+        top: height * 0.1,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
               decoration: BoxDecoration(
                 color: Color(int.parse(statusColor)),
-                borderRadius: const BorderRadius.only(
-                  topLeft: radius,
-                  bottomLeft: radius,
-                ),
               ),
               alignment: Alignment.center,
               height: 22.0,
@@ -111,18 +107,18 @@ class PropertyImage extends StatelessWidget {
   Widget buildId(double height) {
     if (id != null) {
       return Positioned(
-        top: height * 0.085,
+        top: height * 0.1,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
-              padding: const EdgeInsets.fromLTRB(3.0, 4.0, 6.0, 3.0),
+              padding:
+                  const EdgeInsets.only(left: 3, top: 4, right: 3, bottom: 3),
               decoration: const BoxDecoration(
-                color: Color(0xFFcccccc),
-                borderRadius: BorderRadius.all(radius),
+                color: Color.fromRGBO(129, 129, 129, 0.28),
               ),
               height: 22.0,
-              margin: const EdgeInsets.only(left: 16.0),
+              margin: const EdgeInsets.only(left: 19.0),
               child: Text('#$id',
                   style: const TextStyle(fontSize: 14.0, color: Colors.white)),
             ),
