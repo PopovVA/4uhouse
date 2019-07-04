@@ -139,8 +139,7 @@ class _DrawerState extends State<DrawerOnly> {
             }
 
             if (state is LogOutSending) {
-              return StyledCircularProgress(
-                  size: 'sm', color: Theme.of(context).primaryColor);
+              return buildListTile(context, 'Sign out', loading: true, position: 8);
             }
 
             return Container(width: 0.0, height: 0.0);
@@ -156,16 +155,24 @@ class _DrawerState extends State<DrawerOnly> {
   }
 
   Widget buildListTile(BuildContext context, String title,
-      {Icon icon, int position, Function onTap}) {
+      {Icon icon, int position, Function onTap, bool loading = false}) {
     return ListTile(
-      onTap: () {
-        _selectedDrawerIndex = position;
-        onTap();
-        Navigator.canPop(context);
-      },
+      onTap: loading
+          ? null
+          : () {
+              _selectedDrawerIndex = position;
+              onTap();
+              Navigator.canPop(context);
+            },
       selected: _selectedDrawerIndex == position,
       dense: true,
-      leading: icon,
+      leading: Container(
+          width: 20,
+          height: 20,
+          child: loading
+              ? StyledCircularProgress(
+                  size: 'small', color: Theme.of(context).primaryColor)
+              : icon),
       title: Text(title),
     );
   }

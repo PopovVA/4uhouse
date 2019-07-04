@@ -154,9 +154,13 @@ class _PhoneScreenState extends State<PhoneScreen> {
                                 _buildTittle(),
                                 if (state is PhoneUninitialized ||
                                     state is PhoneLoading)
-                                  StyledCircularProgress(
-                                      size: 'sm',
-                                      color: Theme.of(context).primaryColor),
+                                  Padding(
+                                    child: StyledCircularProgress(
+                                        size: 'sm',
+                                        color: Theme.of(context).primaryColor),
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 8),
+                                  ),
                                 if (state is PhoneCountriesDataLoaded)
                                   Container(
                                     margin: const EdgeInsets.symmetric(
