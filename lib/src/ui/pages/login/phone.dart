@@ -85,7 +85,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
   @override
   void initState() {
     super.initState();
-//    _phoneBloc = PhoneBloc(TestPhoneRepository());
+    //   _phoneBloc = PhoneBloc(TestPhoneRepository());
     _phoneBloc = PhoneBloc(PhoneRepository());
     init();
     _loginBloc = LoginBloc(widget.authBloc, AuthRepository());
@@ -152,6 +152,15 @@ class _PhoneScreenState extends State<PhoneScreen> {
                             ListView(
                               children: <Widget>[
                                 _buildTittle(),
+                                if (state is PhoneUninitialized ||
+                                    state is PhoneLoading)
+                                  Padding(
+                                    child: StyledCircularProgress(
+                                        size: 'small',
+                                        color: Theme.of(context).primaryColor),
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 8),
+                                  ),
                                 if (state is PhoneCountriesDataLoaded)
                                   Container(
                                     margin: const EdgeInsets.symmetric(
@@ -167,14 +176,6 @@ class _PhoneScreenState extends State<PhoneScreen> {
                               ],
                             ),
                             _buildSubmit(loginBloc: _loginBloc),
-                            if (state is PhoneUninitialized ||
-                                state is PhoneLoading)
-                              Align(
-                                alignment: FractionalOffset.center,
-                                child: StyledCircularProgress(
-                                    size: 'small',
-                                    color: Theme.of(context).primaryColor),
-                              )
                           ],
                         ),
                       );
