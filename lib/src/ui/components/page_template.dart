@@ -67,5 +67,5 @@ class PageTemplate extends StatelessWidget {
         child: body,
       ),
     );
-  }//
+  }
 }
