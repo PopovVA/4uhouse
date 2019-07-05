@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 import '../../../typography.dart' show ACTIVE_COLOR, DISABLED_COLOR;
 import '../../../utils/type_check.dart' show isNotNull;
@@ -94,12 +93,12 @@ class PropertyState extends State<PropertyFooter> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(16.0, 13.0, 16.0, 12.0),
+      padding: const EdgeInsets.fromLTRB(16.0, 13.0, 16.0, 14.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           buildMainValue(widget.costSale, 5.0),
-          buildMainValue(widget.costRent, 13.0, includePaymentPeriod: true),
+//          buildMainValue(widget.costRent, 13.0, includePaymentPeriod: true),
           Row(
             children: <Widget>[
               buildAddInfo(widget.mainInfo, addSeparator: true),

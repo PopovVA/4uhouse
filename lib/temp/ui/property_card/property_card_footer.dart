@@ -97,7 +97,7 @@ class PropertyState extends State<PropertyFooter> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           buildMainValue(widget.costSale, 5.0),
-          buildMainValue(widget.costRent, 13.0, includePaymentPeriod: true),
+          buildMainValue(widget.costRent, 5.0, includePaymentPeriod: true),
           Row(
             children: <Widget>[
               buildAddInfo(widget.mainInfo, addSeparator: true),

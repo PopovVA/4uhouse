@@ -12,6 +12,7 @@ class PageTemplate extends StatelessWidget {
     this.drawer,
     this.loading = false,
     this.padding = false,
+    this.backgroundColor,
   });
 
   static const Color color = Color(0xFF585555);
@@ -24,6 +25,7 @@ class PageTemplate extends StatelessWidget {
   final Widget drawer;
   final bool loading;
   final bool padding;
+  final Color backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +55,7 @@ class PageTemplate extends StatelessWidget {
       ),
       drawer: drawer,
       body: Container(
+        color: backgroundColor,
         child: body,
       ),
     );

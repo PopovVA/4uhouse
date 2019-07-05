@@ -297,6 +297,7 @@ class _ScreenState extends State<Screen> {
                 ),
                 goBack: getHandleGoBack(state),
                 title: buildTitle(state),
+                backgroundColor: const Color(0xFFEBECED),
               );
             }));
   }
