@@ -13,6 +13,7 @@ class PageTemplate extends StatelessWidget {
     this.drawer,
     this.loading = false,
     this.padding = false,
+    this.actions
   });
 
   static const Color color = Color(0xFF585555);
@@ -25,6 +26,7 @@ class PageTemplate extends StatelessWidget {
   final Widget drawer;
   final bool loading;
   final bool padding;
+  final List<Widget> actions;
 
   @override
   Widget build(BuildContext context) {
@@ -51,16 +53,7 @@ class PageTemplate extends StatelessWidget {
         centerTitle: true,
         title:
             Text(title, style: const TextStyle(color: color, fontSize: 20.0)),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(OMIcons.addCircleOutline),
-            onPressed: (){},
-          ),
-          IconButton(
-            icon: Icon(OMIcons.settingsInputComponent),
-            onPressed: (){},
-          ),
-        ],
+        actions: actions
       ),
       drawer: drawer,
       body: Container(
