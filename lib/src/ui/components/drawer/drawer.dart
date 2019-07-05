@@ -3,6 +3,7 @@ import 'package:outline_material_icons/outline_material_icons.dart'
     show OMIcons;
 import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocProvider, BlocBuilder, BlocListener, BlocListenerTree;
+import 'package:user_mobile/src/models/auth/user_model.dart';
 
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../../blocs/auth/auth_event.dart' show AuthEvent;
@@ -57,25 +58,23 @@ class _DrawerState extends State<DrawerOnly> {
                           ? Header(userProfile: state.userProfile)
                           : Container(),
                       buildListTile(context, 'Market',
-                          icon: const Icon(OMIcons.search), position: 0),
+                          icon: OMIcons.search, position: 0),
                       buildListTile(context, 'Likes',
-                          icon: const Icon(OMIcons.favoriteBorder),
-                          position: 1),
+                          icon: OMIcons.favoriteBorder, position: 1),
                       buildDivider(),
                       buildListTile(
                         context,
                         'Message',
-                        icon: const Icon(OMIcons.forum),
+                        icon: OMIcons.forum,
                         position: 2,
                       ),
                       buildListTile(context, 'Meeting',
-                          icon: const Icon(OMIcons.supervisorAccount),
-                          position: 3),
+                          icon: OMIcons.supervisorAccount, position: 3),
                       buildDivider(),
                       buildListTile(context, 'My account',
-                          icon: const Icon(OMIcons.accountCircle), position: 3),
+                          icon: OMIcons.accountCircle, position: 3),
                       buildListTile(context, 'Settings',
-                          icon: const Icon(OMIcons.settings), position: 6),
+                          icon: OMIcons.settings, position: 6),
                       buildDivider(),
                       state is AuthUnauthorized
                           ? buildSignIn(context: context)
@@ -133,8 +132,7 @@ class _DrawerState extends State<DrawerOnly> {
           builder: (BuildContext context, LogOutState state) {
             if (state is LogOutNotActive || state is LogOutError) {
               return buildListTile(context, 'Sign out',
-                  icon: const Icon(OMIcons.exitToApp),
-                  position: 8, onTap: () async {
+                  icon: OMIcons.exitToApp, position: 8, onTap: () async {
                 final bool logoutApproved = await showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -167,13 +165,13 @@ class _DrawerState extends State<DrawerOnly> {
 
   Widget buildSignIn({@required BuildContext context}) {
     return buildListTile(context, 'Sign in',
-        icon: const Icon(OMIcons.exitToApp), position: 8, onTap: () {
+        icon: OMIcons.exitToApp, position: 8, onTap: () {
       Navigator.of(context).pushNamed('login');
     });
   }
 
   Widget buildListTile(BuildContext context, String title,
-      {Icon icon, int position, Function onTap, bool loading = false}) {
+      {IconData icon, int position, Function onTap, bool loading = false}) {
     return ListTile(
       onTap: loading
           ? null
@@ -190,8 +188,14 @@ class _DrawerState extends State<DrawerOnly> {
           child: loading
               ? StyledCircularProgress(
                   size: 'small', color: Theme.of(context).primaryColor)
-              : icon),
-      title: Text(title),
+              : Icon(
+                  icon,
+                  color: const Color.fromRGBO(218, 218, 218, 1),
+                )),
+      title: Text(
+        title,
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+      ),
     );
   }
 

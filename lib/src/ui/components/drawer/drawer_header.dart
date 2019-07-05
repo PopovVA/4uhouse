@@ -13,24 +13,35 @@ class Header extends StatelessWidget {
     if (userProfile != null)
       return Column(children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(bottom: 40.0),
-          child: ListTile(
-            leading: Icon(
-              OMIcons.phone,
-            ),
-            title: Text(
-              userProfile.phone,
-              style: const TextStyle(
-                  fontSize: 16.0, color: Color.fromRGBO(0, 0, 0, 0.87)),
-            ),
-            trailing: IconButton(
-                icon: const Icon(
-                  OMIcons.close,
-                  color: Color.fromRGBO(0, 0, 0, 0.54),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                }),
+          padding: const EdgeInsets.only(left: 19, bottom: 50.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(right: 30.0),
+                    child: Icon(
+                      OMIcons.phone,
+                      color: const Color.fromRGBO(218, 218, 218, 1),
+                    ),
+                  ),
+                  Text(
+                    userProfile.phone,
+                    style: const TextStyle(
+                        fontSize: 16.0, color: Color.fromRGBO(0, 0, 0, 0.87)),
+                  ),
+                ],
+              ),
+              IconButton(
+                  icon: const Icon(
+                    OMIcons.close,
+                    color: Color.fromRGBO(0, 0, 0, 0.54),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+            ],
           ),
         ),
         Divider(
@@ -38,6 +49,9 @@ class Header extends StatelessWidget {
         ),
       ]);
 
-    return Container(height: 0, width: 0,);
+    return Container(
+      height: 0,
+      width: 0,
+    );
   }
 }
