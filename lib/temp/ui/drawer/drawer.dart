@@ -4,20 +4,21 @@ import 'package:outline_material_icons/outline_material_icons.dart'
 import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocProvider, BlocBuilder, BlocListener, BlocListenerTree;
 
-import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
-import '../../../blocs/auth/auth_event.dart' show AuthEvent;
-import '../../../blocs/auth/auth_state.dart'
+import '../../../src/blocs/auth/auth_bloc.dart' show AuthBloc;
+import '../../../src/blocs/auth/auth_event.dart' show AuthEvent;
+import '../../../src/blocs/auth/auth_state.dart'
     show AuthState, AuthUnauthorized, AuthAuthorized;
-import '../../../blocs/logout/logout_bloc.dart' show LogOutBloc;
-import '../../../blocs/logout/logout_event.dart'
+import '../../../src/blocs/logout/logout_bloc.dart' show LogOutBloc;
+import '../../../src/blocs/logout/logout_event.dart'
     show LogOutEvent, LogoutButtonTapped;
-import '../../../blocs/logout/logout_state.dart'
+import '../../../src/blocs/logout/logout_state.dart'
     show LogOutError, LogOutNotActive, LogOutSending, LogOutState;
-import '../../../resources/auth_repository.dart' show AuthRepository;
-import '../../../utils/show_alert.dart' show showError;
-
-import '../styled/styled_alert_dialog.dart' show StyledAlertDialog;
-import '../styled/styled_circular_progress.dart' show StyledCircularProgress;
+import '../../../src/resources/auth_repository.dart' show AuthRepository;
+import '../../../src/ui/components/styled/styled_alert_dialog.dart'
+    show StyledAlertDialog;
+import '../../../src/ui/components/styled/styled_circular_progress.dart'
+    show StyledCircularProgress;
+import '../../../src/utils/show_alert.dart' show showError;
 import 'drawer_header.dart' show Header;
 
 class DrawerOnly extends StatefulWidget {
@@ -76,40 +77,23 @@ class _DrawerState extends State<DrawerOnly> {
                           icon: const Icon(OMIcons.accountCircle), position: 3),
                       buildListTile(context, 'Settings',
                           icon: const Icon(OMIcons.settings), position: 6),
-                      buildDivider(),
-                      state is AuthUnauthorized
-                          ? buildSignIn(context: context)
-                          : buildSignOut(context: context)
                     ],
                   ),
                 ),
                 Padding(
-                    padding:
-                        const EdgeInsets.only(bottom: 8.0, left: 16, right: 16),
-                    child: Align(
-                      alignment: FractionalOffset.bottomCenter,
-                      child: Container(
-                        height: 48.0,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: const Color.fromRGBO(63, 180, 188, 1),
-                              width: 2),
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                        child: OutlineButton(
-                            //elevation: 8,
-                            color: Colors.white,
-                            onPressed: () {},
-                            child: const Text(
-                              'ADD PROPERTY',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Color.fromRGBO(63, 180, 188, 1),
-                              ),
-                            )),
-                      ),
-                    ))
+                  padding: const EdgeInsets.only(bottom: 20.0),
+                  child: Align(
+                    alignment: FractionalOffset.bottomCenter,
+                    child: Column(
+                      children: <Widget>[
+                        buildDivider(),
+                        state is AuthUnauthorized
+                            ? buildSignIn(context: context)
+                            : buildSignOut(context: context)
+                      ],
+                    ),
+                  ),
+                )
               ],
             ),
           );
@@ -196,10 +180,10 @@ class _DrawerState extends State<DrawerOnly> {
   }
 
   Widget buildDivider() {
-    return const Padding(
-      padding: EdgeInsets.only(left: 16.0, right: 15.0),
+    return Padding(
+      padding: const EdgeInsets.only(left: 16.0, right: 15.0),
       child: Divider(
-        color: Color.fromRGBO(66, 65, 65, 0.38),
+        color: const Color.fromRGBO(66, 65, 65, 0.38),
       ),
     );
   }
