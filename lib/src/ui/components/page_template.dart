@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 
 import '../components/styled/styled_circular_progress.dart'
     show StyledCircularProgress;
@@ -50,6 +51,16 @@ class PageTemplate extends StatelessWidget {
         centerTitle: true,
         title:
             Text(title, style: const TextStyle(color: color, fontSize: 20.0)),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(OMIcons.addCircleOutline),
+            onPressed: (){},
+          ),
+          IconButton(
+            icon: Icon(OMIcons.settingsInputComponent),
+            onPressed: (){},
+          ),
+        ],
       ),
       drawer: drawer,
       body: Container(
