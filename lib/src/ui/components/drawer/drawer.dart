@@ -190,7 +190,7 @@ class _DrawerState extends State<DrawerOnly> {
                   size: 'small', color: Theme.of(context).primaryColor)
               : Icon(
                   icon,
-                  color: const Color.fromRGBO(218, 218, 218, 1),
+                  color: const Color.fromRGBO(117, 116, 116, 1),
                 )),
       title: Text(
         title,

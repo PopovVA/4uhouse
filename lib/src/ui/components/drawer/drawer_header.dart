@@ -13,7 +13,7 @@ class Header extends StatelessWidget {
     if (userProfile != null)
       return Column(children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(left: 19, bottom: 50.0),
+          padding: const EdgeInsets.only(top: 10, left: 19, bottom: 50.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -23,7 +23,7 @@ class Header extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 30.0),
                     child: Icon(
                       OMIcons.phone,
-                      color: const Color.fromRGBO(218, 218, 218, 1),
+                      color: const Color.fromRGBO(117, 116, 116, 1),
                     ),
                   ),
                   Text(
