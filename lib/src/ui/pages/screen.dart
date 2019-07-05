@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocBuilder, BlocListener, BlocListenerTree;
 import 'package:flutter/scheduler.dart' show SchedulerBinding;
+import 'package:outline_material_icons/outline_material_icons.dart';
 
 import '../../../temp/resources/screen_repository_test.dart'
     show TestScreenRepository;
@@ -288,6 +289,16 @@ class _ScreenState extends State<Screen> {
               return PageTemplate(
                 drawer: getDrawer(state),
                 loading: state is ScreenLoading,
+                actions: <Widget>[
+                  IconButton(
+                    icon: const Icon(OMIcons.addCircleOutline),
+                    onPressed: () {},
+                  ),
+                  IconButton(
+                    icon: const Icon(OMIcons.settingsInputComponent),
+                    onPressed: () {},
+                  ),
+                ],
                 body: RefreshIndicator(
                   onRefresh: () => _refresh(state),
                   color: Theme.of(context).primaryColor,
