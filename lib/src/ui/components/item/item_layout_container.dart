@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import '../../../constants/layout.dart' show standardHorizontalPadding;
 
 class ItemLayoutContainer extends StatelessWidget {
-  const ItemLayoutContainer(this.child, {this.onTap});
+  const ItemLayoutContainer(this.child, {this.onTap, this.disabled});
 
   final Function onTap;
   final dynamic child;
+  final bool disabled;
 
   @override
   Widget build(BuildContext context) {
-    return Ink(
-      color: Colors.white,
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 3.0),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 3.0),
+      child: Ink(
+        color: Colors.white,
         child: InkWell(
           onTap: onTap is Function ? onTap : null,
           child: buildContainer(child),
@@ -22,14 +23,16 @@ class ItemLayoutContainer extends StatelessWidget {
   }
 
   Widget buildContainer(Widget child) {
-    return Container(
-      constraints: const BoxConstraints(
-        minHeight: 72.0,
-      ),
+    return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3.0),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: standardHorizontalPadding),
-        child: child,
+      child: Container(
+        constraints: BoxConstraints(
+          minHeight: !disabled ? 72.0 : 0.0,
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: standardHorizontalPadding),
+          child: child,
+        ),
       ),
     );
   }

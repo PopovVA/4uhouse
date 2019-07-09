@@ -36,7 +36,7 @@ class PageTemplate extends StatelessWidget {
         backgroundColor: const Color(0xFFe9e7e7),
         iconTheme: const IconThemeData(color: color),
         leading: loading
-            ? const StyledCircularProgress(size: 'sm')
+            ? null
             : drawer == null
                 ? IconButton(
                     color: color,

@@ -45,7 +45,10 @@ class StyledButton extends StatelessWidget {
 
     return Text(
       text,
-      style: Theme.of(context).textTheme.button,
+      style: const TextStyle(fontSize: 14.0,
+          fontStyle: FontStyle.normal,
+          fontWeight: FontWeight.w600,
+          color: Color(0xFFFFFFFFF)),
     );
   }
 }

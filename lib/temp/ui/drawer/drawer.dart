@@ -175,15 +175,15 @@ class _DrawerState extends State<DrawerOnly> {
               ? StyledCircularProgress(
                   size: 'small', color: Theme.of(context).primaryColor)
               : icon),
-      title: Text(title),
+      title: Text(title, style: TextStyle(fontSize: 16.0)),
     );
   }
 
   Widget buildDivider() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16.0, right: 15.0),
+    return const Padding(
+      padding: EdgeInsets.only(left: 16.0, right: 15.0),
       child: Divider(
-        color: const Color.fromRGBO(66, 65, 65, 0.38),
+        color: Color.fromRGBO(66, 65, 65, 0.38),
       ),
     );
   }
