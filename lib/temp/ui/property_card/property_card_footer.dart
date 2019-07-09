@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_masked_text/flutter_masked_text.dart';
-
-import '../../../typography.dart' show ACTIVE_COLOR, DISABLED_COLOR;
-import '../../../utils/type_check.dart' show isNotNull;
-import '../../helpers/money_controller.dart' show formatCost;
+import '../../../src/typography.dart' show ACTIVE_COLOR, DISABLED_COLOR;
+import '../../../src/ui/helpers/money_controller.dart' show formatCost;
+import '../../../src/utils/type_check.dart' show isNotNull;
 
 class PropertyFooter extends StatefulWidget {
   const PropertyFooter(
@@ -95,15 +93,11 @@ class PropertyState extends State<PropertyFooter> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(16.0, 13.0, 16.0, 12.0),
-      constraints: const BoxConstraints(
-        minHeight: 74
-      ),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           buildMainValue(widget.costSale, 5.0),
-          buildMainValue(widget.costRent, 13.0, includePaymentPeriod: true),
+          buildMainValue(widget.costRent, 5.0, includePaymentPeriod: true),
           Row(
             children: <Widget>[
               buildAddInfo(widget.mainInfo, addSeparator: true),
