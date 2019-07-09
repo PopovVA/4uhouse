@@ -9,19 +9,20 @@ class ItemLayoutContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 3.0),
-//      color: Colors.white,
-      child: InkWell(
-        onTap: onTap is Function ? onTap : null,
-        child: buildContainer(child),
+    return Ink(
+      color: Colors.white,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 3.0),
+        child: InkWell(
+          onTap: onTap is Function ? onTap : null,
+          child: buildContainer(child),
+        ),
       ),
     );
   }
 
   Widget buildContainer(Widget child) {
     return Container(
-      color: Colors.white,
       constraints: const BoxConstraints(
         minHeight: 72.0,
       ),
