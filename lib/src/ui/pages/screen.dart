@@ -64,9 +64,9 @@ class _ScreenState extends State<Screen> {
     screenBloc = ScreenBloc(
         authBloc: widget.authBloc,
         screenRepository: ScreenRepository(),
-              authRepository: AuthRepository());
+        authRepository: AuthRepository());
 //        screenRepository: TestScreenRepository(),
- //       authRepository: AuthRepository());
+    //       authRepository: AuthRepository());
     screenBloc.dispatch(ScreenRequested(route: widget.route));
   }
 

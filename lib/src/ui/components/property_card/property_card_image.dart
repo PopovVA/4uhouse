@@ -115,7 +115,7 @@ class PropertyImage extends StatelessWidget {
               padding:
                   const EdgeInsets.only(left: 3, top: 4, right: 3, bottom: 3),
               decoration: const BoxDecoration(
-                color: Color.fromRGBO(129, 129, 129, 0.28),
+                color: Color.fromRGBO(81, 81, 81, 0.54),
               ),
               height: 22.0,
               margin: const EdgeInsets.only(left: 19.0),
