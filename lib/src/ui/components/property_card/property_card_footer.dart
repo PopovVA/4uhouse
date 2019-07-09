@@ -95,7 +95,11 @@ class PropertyState extends State<PropertyFooter> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(16.0, 13.0, 16.0, 12.0),
+      constraints: const BoxConstraints(
+        minHeight: 74
+      ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           buildMainValue(widget.costSale, 5.0),
