@@ -103,6 +103,7 @@ class ItemLayout extends StatelessWidget {
         ].where(isNotNull).toList(),
       ),
       onTap: onTap,
+        disabled: disabled
     );
   }
 }
