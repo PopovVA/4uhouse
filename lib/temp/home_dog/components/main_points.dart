@@ -21,7 +21,8 @@ class MainPoint extends StatelessWidget {
               maxRadius: 14.0,
               foregroundColor: Colors.black,
               backgroundColor: Colors.white,
-              child: Text(_number.toString())),
+              child: Text(
+                  _number.toString(), style: const TextStyle(fontSize: 16.0))),
         ),
         Container(
             child: Flexible(

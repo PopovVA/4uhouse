@@ -168,7 +168,8 @@ class _PhoneScreenState extends State<PhoneScreen> {
                                     child: _buildPhonePicker(state),
                                   ),
                                 if (state is PhoneLoadingError)
-                                  Text(state.toString()),
+                                  Text(state.toString(),
+                                      style: const TextStyle(fontSize: 16.0)),
                                 Container(
                                   margin: const EdgeInsets.only(left: 8.0),
                                   child: _buildTerms(),
