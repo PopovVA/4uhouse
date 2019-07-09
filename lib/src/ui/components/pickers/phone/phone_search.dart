@@ -86,7 +86,9 @@ class CustomSearchDelegate extends SearchDelegate<CountryPhoneData> {
       List<CountryPhoneData> totalList, int index, BuildContext context) {
     return ListTile(
         title: Text(
-            '${totalList[index].flag + ' ' + totalList[index].name + ' +' + totalList[index].code.toString()}'),
+            '${totalList[index].flag + ' ' + totalList[index].name + ' +' +
+                totalList[index].code.toString()}',
+            style: TextStyle(fontSize: 16.0)),
         onTap: () {
           return onSelected is Function
               ? onSelected(close(context, totalList[index]))
