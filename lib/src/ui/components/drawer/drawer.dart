@@ -166,7 +166,7 @@ class _DrawerState extends State<DrawerOnly> {
       selected: _selectedDrawerIndex == position,
       dense: true,
       leading: icon,
-      title: Text(title),
+      title: Text(title, style: TextStyle(fontSize: 16.0)),
     );
   }
 
