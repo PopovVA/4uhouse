@@ -28,20 +28,20 @@ class PropertyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 3.0),
+      margin: const EdgeInsets.symmetric(vertical: 4.0),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(
+              width: 0.1,
+              style: BorderStyle.solid,
+              color: Colors.black.withOpacity(0.3)),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+                color: Colors.black.withOpacity(0.25),
+                blurRadius: 0.5,
+                offset: const Offset(0.0, 2.0))
+          ]),
       child: Ink(
-        decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(
-                width: 0.1,
-                style: BorderStyle.solid,
-                color: Colors.black.withOpacity(0.3)),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
-                  blurRadius: 0.5,
-                  offset: const Offset(0.0, 2.0))
-            ]),
         child: Container(
           child: InkWell(
             onTap: property.isTransition
