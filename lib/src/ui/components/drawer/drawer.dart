@@ -3,8 +3,6 @@ import 'package:outline_material_icons/outline_material_icons.dart'
     show OMIcons;
 import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocProvider, BlocBuilder, BlocListener, BlocListenerTree;
-import 'package:user_mobile/src/models/auth/phone_model.dart';
-import 'package:user_mobile/src/models/auth/user_info.dart';
 
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../../blocs/auth/auth_event.dart' show AuthEvent;
@@ -55,17 +53,9 @@ class _DrawerState extends State<DrawerOnly> {
                 Expanded(
                   child: ListView(
                     children: <Widget>[
-                      //(state is AuthAuthorized)
-                          //?
-                      Header(userProfile: UserInfo(
-                        preferredUsername: "Name",
-                        phone: PhoneModel(
-                          countryId: 'sdadasd',
-                          number: '212321321312'
-                        )
-                      ))
-                          //: Container()
-                ,
+                      (state is AuthAuthorized)
+                          ? Header(userProfile: state.userProfile)
+                          : Container(),
                       buildListTile(context, 'Market',
                           icon: OMIcons.search, position: 0),
                       buildListTile(context, 'Likes',
