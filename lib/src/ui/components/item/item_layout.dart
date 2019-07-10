@@ -56,7 +56,10 @@ class ItemLayout extends StatelessWidget {
     if (isNotNull(suffix)) {
       return Expanded(
         flex: 1,
-        child: Center(
+        child: Container(
+          alignment: suffix is Switch
+              ? const Alignment(1.5, 1)
+              : const Alignment(1, 1),
           child: renderText(suffix),
         ),
       );
@@ -93,17 +96,16 @@ class ItemLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ItemLayoutContainer(
-      Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          _buildPicture(),
-          _buildTextContent(context),
-          _buildSuffix(),
-          _buildLink(),
-        ].where(isNotNull).toList(),
-      ),
-      onTap: onTap,
-        disabled: disabled
-    );
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            _buildPicture(),
+            _buildTextContent(context),
+            _buildSuffix(),
+            _buildLink(),
+          ].where(isNotNull).toList(),
+        ),
+        onTap: onTap,
+        disabled: disabled);
   }
 }
