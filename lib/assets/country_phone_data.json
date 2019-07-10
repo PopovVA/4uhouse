@@ -2,7 +2,7 @@
   "creationDate": 1561730671983,
   "topCountryPhonesData": [
     {
-      "countryId": "CY",
+      "phone_country_id": "CY",
       "code": 357,
       "name": "Cyprus",
       "lengths": [
@@ -13,7 +13,7 @@
       "flag": "🇨🇾"
     },
     {
-      "countryId": "BG",
+      "phone_country_id": "BG",
       "code": 359,
       "name": "Bulgaria",
       "lengths": [
@@ -25,7 +25,7 @@
       "flag": "🇧🇬"
     },
     {
-      "countryId": "CN",
+      "phone_country_id": "CN",
       "code": 86,
       "name": "China",
       "lengths": [
@@ -36,7 +36,7 @@
       "flag": "🇨🇳"
     },
     {
-      "countryId": "GB",
+      "phone_country_id": "GB",
       "code": 44,
       "name": "United Kingdom",
       "lengths": [
@@ -47,7 +47,7 @@
       "flag": "🇬🇧"
     },
     {
-      "countryId": "GR",
+      "phone_country_id": "GR",
       "code": 30,
       "name": "Greece",
       "lengths": [
@@ -58,7 +58,7 @@
       "flag": "🇬🇷"
     },
     {
-      "countryId": "RO",
+      "phone_country_id": "RO",
       "code": 40,
       "name": "Romania",
       "lengths": [
@@ -69,7 +69,7 @@
       "flag": "🇷🇴"
     },
     {
-      "countryId": "RU",
+      "phone_country_id": "RU",
       "code": 7,
       "name": "Russia",
       "lengths": [
@@ -82,7 +82,7 @@
   ],
   "countryPhonesData": [
     {
-      "countryId": "AF",
+      "phone_country_id": "AF",
       "code": 93,
       "name": "Afghanistan",
       "lengths": [
@@ -93,7 +93,7 @@
       "flag": "🇦🇫"
     },
     {
-      "countryId": "AL",
+      "phone_country_id": "AL",
       "code": 355,
       "name": "Albania",
       "lengths": [
@@ -104,7 +104,7 @@
       "flag": "🇦🇱"
     },
     {
-      "countryId": "DZ",
+      "phone_country_id": "DZ",
       "code": 213,
       "name": "Algeria",
       "lengths": [
@@ -115,7 +115,7 @@
       "flag": "🇩🇿"
     },
     {
-      "countryId": "AS",
+      "phone_country_id": "AS",
       "code": 1,
       "name": "American Samoa",
       "lengths": [
@@ -126,7 +126,7 @@
       "flag": "🇦🇸"
     },
     {
-      "countryId": "AD",
+      "phone_country_id": "AD",
       "code": 376,
       "name": "Andorra",
       "lengths": [
@@ -138,7 +138,7 @@
       "flag": "🇦🇩"
     },
     {
-      "countryId": "AO",
+      "phone_country_id": "AO",
       "code": 244,
       "name": "Angola",
       "lengths": [
@@ -149,7 +149,7 @@
       "flag": "🇦🇴"
     },
     {
-      "countryId": "AI",
+      "phone_country_id": "AI",
       "code": 1,
       "name": "Anguilla",
       "lengths": [
@@ -160,7 +160,7 @@
       "flag": "🇦🇮"
     },
     {
-      "countryId": "AG",
+      "phone_country_id": "AG",
       "code": 1,
       "name": "Antigua & Barbuda",
       "lengths": [
@@ -171,7 +171,7 @@
       "flag": "🇦🇬"
     },
     {
-      "countryId": "AR",
+      "phone_country_id": "AR",
       "code": 54,
       "name": "Argentina",
       "lengths": [
@@ -183,7 +183,7 @@
       "flag": "🇦🇷"
     },
     {
-      "countryId": "AM",
+      "phone_country_id": "AM",
       "code": 374,
       "name": "Armenia",
       "lengths": [
@@ -194,7 +194,7 @@
       "flag": "🇦🇲"
     },
     {
-      "countryId": "AW",
+      "phone_country_id": "AW",
       "code": 297,
       "name": "Aruba",
       "lengths": [
@@ -205,7 +205,7 @@
       "flag": "🇦🇼"
     },
     {
-      "countryId": "AC",
+      "phone_country_id": "AC",
       "code": 247,
       "name": "Ascension Island",
       "lengths": [
@@ -216,7 +216,7 @@
       "flag": "🇦🇨"
     },
     {
-      "countryId": "AU",
+      "phone_country_id": "AU",
       "code": 61,
       "name": "Australia",
       "lengths": [
@@ -227,7 +227,7 @@
       "flag": "🇦🇺"
     },
     {
-      "countryId": "AT",
+      "phone_country_id": "AT",
       "code": 43,
       "name": "Austria",
       "lengths": [
@@ -244,7 +244,7 @@
       "flag": "🇦🇹"
     },
     {
-      "countryId": "AZ",
+      "phone_country_id": "AZ",
       "code": 994,
       "name": "Azerbaijan",
       "lengths": [
@@ -255,7 +255,7 @@
       "flag": "🇦🇿"
     },
     {
-      "countryId": "BS",
+      "phone_country_id": "BS",
       "code": 1,
       "name": "Bahamas",
       "lengths": [
@@ -266,7 +266,7 @@
       "flag": "🇧🇸"
     },
     {
-      "countryId": "BH",
+      "phone_country_id": "BH",
       "code": 973,
       "name": "Bahrain",
       "lengths": [
@@ -277,7 +277,7 @@
       "flag": "🇧🇭"
     },
     {
-      "countryId": "BD",
+      "phone_country_id": "BD",
       "code": 880,
       "name": "Bangladesh",
       "lengths": [
@@ -288,7 +288,7 @@
       "flag": "🇧🇩"
     },
     {
-      "countryId": "BB",
+      "phone_country_id": "BB",
       "code": 1,
       "name": "Barbados",
       "lengths": [
@@ -299,7 +299,7 @@
       "flag": "🇧🇧"
     },
     {
-      "countryId": "BY",
+      "phone_country_id": "BY",
       "code": 375,
       "name": "Belarus",
       "lengths": [
@@ -310,7 +310,7 @@
       "flag": "🇧🇾"
     },
     {
-      "countryId": "BE",
+      "phone_country_id": "BE",
       "code": 32,
       "name": "Belgium",
       "lengths": [
@@ -321,7 +321,7 @@
       "flag": "🇧🇪"
     },
     {
-      "countryId": "BZ",
+      "phone_country_id": "BZ",
       "code": 501,
       "name": "Belize",
       "lengths": [
@@ -332,7 +332,7 @@
       "flag": "🇧🇿"
     },
     {
-      "countryId": "BJ",
+      "phone_country_id": "BJ",
       "code": 229,
       "name": "Benin",
       "lengths": [
@@ -343,7 +343,7 @@
       "flag": "🇧🇯"
     },
     {
-      "countryId": "BM",
+      "phone_country_id": "BM",
       "code": 1,
       "name": "Bermuda",
       "lengths": [
@@ -354,7 +354,7 @@
       "flag": "🇧🇲"
     },
     {
-      "countryId": "BT",
+      "phone_country_id": "BT",
       "code": 975,
       "name": "Bhutan",
       "lengths": [
@@ -365,7 +365,7 @@
       "flag": "🇧🇹"
     },
     {
-      "countryId": "BO",
+      "phone_country_id": "BO",
       "code": 591,
       "name": "Bolivia",
       "lengths": [
@@ -376,7 +376,7 @@
       "flag": "🇧🇴"
     },
     {
-      "countryId": "BA",
+      "phone_country_id": "BA",
       "code": 387,
       "name": "Bosnia & Herzegovina",
       "lengths": [
@@ -388,7 +388,7 @@
       "flag": "🇧🇦"
     },
     {
-      "countryId": "BW",
+      "phone_country_id": "BW",
       "code": 267,
       "name": "Botswana",
       "lengths": [
@@ -399,7 +399,7 @@
       "flag": "🇧🇼"
     },
     {
-      "countryId": "BR",
+      "phone_country_id": "BR",
       "code": 55,
       "name": "Brazil",
       "lengths": [
@@ -411,7 +411,7 @@
       "flag": "🇧🇷"
     },
     {
-      "countryId": "IO",
+      "phone_country_id": "IO",
       "code": 246,
       "name": "British Indian Ocean Territory",
       "lengths": [
@@ -422,7 +422,7 @@
       "flag": "🇮🇴"
     },
     {
-      "countryId": "VG",
+      "phone_country_id": "VG",
       "code": 1,
       "name": "British Virgin Islands",
       "lengths": [
@@ -433,7 +433,7 @@
       "flag": "🇻🇬"
     },
     {
-      "countryId": "BN",
+      "phone_country_id": "BN",
       "code": 673,
       "name": "Brunei",
       "lengths": [
@@ -444,7 +444,7 @@
       "flag": "🇧🇳"
     },
     {
-      "countryId": "BF",
+      "phone_country_id": "BF",
       "code": 226,
       "name": "Burkina Faso",
       "lengths": [
@@ -455,7 +455,7 @@
       "flag": "🇧🇫"
     },
     {
-      "countryId": "BI",
+      "phone_country_id": "BI",
       "code": 257,
       "name": "Burundi",
       "lengths": [
@@ -466,7 +466,7 @@
       "flag": "🇧🇮"
     },
     {
-      "countryId": "KH",
+      "phone_country_id": "KH",
       "code": 855,
       "name": "Cambodia",
       "lengths": [
@@ -478,7 +478,7 @@
       "flag": "🇰🇭"
     },
     {
-      "countryId": "CM",
+      "phone_country_id": "CM",
       "code": 237,
       "name": "Cameroon",
       "lengths": [
@@ -489,7 +489,7 @@
       "flag": "🇨🇲"
     },
     {
-      "countryId": "CA",
+      "phone_country_id": "CA",
       "code": 1,
       "name": "Canada",
       "lengths": [
@@ -500,7 +500,7 @@
       "flag": "🇨🇦"
     },
     {
-      "countryId": "CV",
+      "phone_country_id": "CV",
       "code": 238,
       "name": "Cape Verde",
       "lengths": [
@@ -511,7 +511,7 @@
       "flag": "🇨🇻"
     },
     {
-      "countryId": "BQ",
+      "phone_country_id": "BQ",
       "code": 599,
       "name": "Caribbean Netherlands",
       "lengths": [
@@ -522,7 +522,7 @@
       "flag": "🇧🇶"
     },
     {
-      "countryId": "KY",
+      "phone_country_id": "KY",
       "code": 1,
       "name": "Cayman Islands",
       "lengths": [
@@ -533,7 +533,7 @@
       "flag": "🇰🇾"
     },
     {
-      "countryId": "CF",
+      "phone_country_id": "CF",
       "code": 236,
       "name": "Central African Republic",
       "lengths": [
@@ -544,7 +544,7 @@
       "flag": "🇨🇫"
     },
     {
-      "countryId": "TD",
+      "phone_country_id": "TD",
       "code": 235,
       "name": "Chad",
       "lengths": [
@@ -555,7 +555,7 @@
       "flag": "🇹🇩"
     },
     {
-      "countryId": "CL",
+      "phone_country_id": "CL",
       "code": 56,
       "name": "Chile",
       "lengths": [
@@ -566,7 +566,7 @@
       "flag": "🇨🇱"
     },
     {
-      "countryId": "CX",
+      "phone_country_id": "CX",
       "code": 61,
       "name": "Christmas Island",
       "lengths": [
@@ -577,7 +577,7 @@
       "flag": "🇨🇽"
     },
     {
-      "countryId": "CC",
+      "phone_country_id": "CC",
       "code": 61,
       "name": "Cocos (Keeling) Islands",
       "lengths": [
@@ -588,7 +588,7 @@
       "flag": "🇨🇨"
     },
     {
-      "countryId": "CO",
+      "phone_country_id": "CO",
       "code": 57,
       "name": "Colombia",
       "lengths": [
@@ -599,7 +599,7 @@
       "flag": "🇨🇴"
     },
     {
-      "countryId": "KM",
+      "phone_country_id": "KM",
       "code": 269,
       "name": "Comoros",
       "lengths": [
@@ -610,7 +610,7 @@
       "flag": "🇰🇲"
     },
     {
-      "countryId": "CG",
+      "phone_country_id": "CG",
       "code": 242,
       "name": "Congo - Brazzaville",
       "lengths": [
@@ -621,7 +621,7 @@
       "flag": "🇨🇬"
     },
     {
-      "countryId": "CD",
+      "phone_country_id": "CD",
       "code": 243,
       "name": "Congo - Kinshasa",
       "lengths": [
@@ -633,7 +633,7 @@
       "flag": "🇨🇩"
     },
     {
-      "countryId": "CK",
+      "phone_country_id": "CK",
       "code": 682,
       "name": "Cook Islands",
       "lengths": [
@@ -644,7 +644,7 @@
       "flag": "🇨🇰"
     },
     {
-      "countryId": "CR",
+      "phone_country_id": "CR",
       "code": 506,
       "name": "Costa Rica",
       "lengths": [
@@ -655,7 +655,7 @@
       "flag": "🇨🇷"
     },
     {
-      "countryId": "HR",
+      "phone_country_id": "HR",
       "code": 385,
       "name": "Croatia",
       "lengths": [
@@ -667,7 +667,7 @@
       "flag": "🇭🇷"
     },
     {
-      "countryId": "CU",
+      "phone_country_id": "CU",
       "code": 53,
       "name": "Cuba",
       "lengths": [
@@ -678,7 +678,7 @@
       "flag": "🇨🇺"
     },
     {
-      "countryId": "CW",
+      "phone_country_id": "CW",
       "code": 599,
       "name": "Curaçao",
       "lengths": [
@@ -690,7 +690,7 @@
       "flag": "🇨🇼"
     },
     {
-      "countryId": "CZ",
+      "phone_country_id": "CZ",
       "code": 420,
       "name": "Czechia",
       "lengths": [
@@ -701,7 +701,7 @@
       "flag": "🇨🇿"
     },
     {
-      "countryId": "CI",
+      "phone_country_id": "CI",
       "code": 225,
       "name": "Côte d’Ivoire",
       "lengths": [
@@ -712,7 +712,7 @@
       "flag": "🇨🇮"
     },
     {
-      "countryId": "DK",
+      "phone_country_id": "DK",
       "code": 45,
       "name": "Denmark",
       "lengths": [
@@ -723,7 +723,7 @@
       "flag": "🇩🇰"
     },
     {
-      "countryId": "DJ",
+      "phone_country_id": "DJ",
       "code": 253,
       "name": "Djibouti",
       "lengths": [
@@ -734,7 +734,7 @@
       "flag": "🇩🇯"
     },
     {
-      "countryId": "DM",
+      "phone_country_id": "DM",
       "code": 1,
       "name": "Dominica",
       "lengths": [
@@ -745,7 +745,7 @@
       "flag": "🇩🇲"
     },
     {
-      "countryId": "DO",
+      "phone_country_id": "DO",
       "code": 1,
       "name": "Dominican Republic",
       "lengths": [
@@ -756,7 +756,7 @@
       "flag": "🇩🇴"
     },
     {
-      "countryId": "EC",
+      "phone_country_id": "EC",
       "code": 593,
       "name": "Ecuador",
       "lengths": [
@@ -767,7 +767,7 @@
       "flag": "🇪🇨"
     },
     {
-      "countryId": "EG",
+      "phone_country_id": "EG",
       "code": 20,
       "name": "Egypt",
       "lengths": [
@@ -778,7 +778,7 @@
       "flag": "🇪🇬"
     },
     {
-      "countryId": "SV",
+      "phone_country_id": "SV",
       "code": 503,
       "name": "El Salvador",
       "lengths": [
@@ -789,7 +789,7 @@
       "flag": "🇸🇻"
     },
     {
-      "countryId": "GQ",
+      "phone_country_id": "GQ",
       "code": 240,
       "name": "Equatorial Guinea",
       "lengths": [
@@ -800,7 +800,7 @@
       "flag": "🇬🇶"
     },
     {
-      "countryId": "ER",
+      "phone_country_id": "ER",
       "code": 291,
       "name": "Eritrea",
       "lengths": [
@@ -811,7 +811,7 @@
       "flag": "🇪🇷"
     },
     {
-      "countryId": "EE",
+      "phone_country_id": "EE",
       "code": 372,
       "name": "Estonia",
       "lengths": [
@@ -823,7 +823,7 @@
       "flag": "🇪🇪"
     },
     {
-      "countryId": "SZ",
+      "phone_country_id": "SZ",
       "code": 268,
       "name": "Eswatini",
       "lengths": [
@@ -834,7 +834,7 @@
       "flag": "🇸🇿"
     },
     {
-      "countryId": "ET",
+      "phone_country_id": "ET",
       "code": 251,
       "name": "Ethiopia",
       "lengths": [
@@ -845,7 +845,7 @@
       "flag": "🇪🇹"
     },
     {
-      "countryId": "FK",
+      "phone_country_id": "FK",
       "code": 500,
       "name": "Falkland Islands (Islas Malvinas)",
       "lengths": [
@@ -856,7 +856,7 @@
       "flag": "🇫🇰"
     },
     {
-      "countryId": "FO",
+      "phone_country_id": "FO",
       "code": 298,
       "name": "Faroe Islands",
       "lengths": [
@@ -867,7 +867,7 @@
       "flag": "🇫🇴"
     },
     {
-      "countryId": "FJ",
+      "phone_country_id": "FJ",
       "code": 679,
       "name": "Fiji",
       "lengths": [
@@ -878,7 +878,7 @@
       "flag": "🇫🇯"
     },
     {
-      "countryId": "FI",
+      "phone_country_id": "FI",
       "code": 358,
       "name": "Finland",
       "lengths": [
@@ -893,7 +893,7 @@
       "flag": "🇫🇮"
     },
     {
-      "countryId": "FR",
+      "phone_country_id": "FR",
       "code": 33,
       "name": "France",
       "lengths": [
@@ -904,7 +904,7 @@
       "flag": "🇫🇷"
     },
     {
-      "countryId": "GF",
+      "phone_country_id": "GF",
       "code": 594,
       "name": "French Guiana",
       "lengths": [
@@ -915,7 +915,7 @@
       "flag": "🇬🇫"
     },
     {
-      "countryId": "PF",
+      "phone_country_id": "PF",
       "code": 689,
       "name": "French Polynesia",
       "lengths": [
@@ -926,7 +926,7 @@
       "flag": "🇵🇫"
     },
     {
-      "countryId": "GA",
+      "phone_country_id": "GA",
       "code": 241,
       "name": "Gabon",
       "lengths": [
@@ -938,7 +938,7 @@
       "flag": "🇬🇦"
     },
     {
-      "countryId": "GM",
+      "phone_country_id": "GM",
       "code": 220,
       "name": "Gambia",
       "lengths": [
@@ -949,7 +949,7 @@
       "flag": "🇬🇲"
     },
     {
-      "countryId": "GE",
+      "phone_country_id": "GE",
       "code": 995,
       "name": "Georgia",
       "lengths": [
@@ -960,7 +960,7 @@
       "flag": "🇬🇪"
     },
     {
-      "countryId": "DE",
+      "phone_country_id": "DE",
       "code": 49,
       "name": "Germany",
       "lengths": [
@@ -972,7 +972,7 @@
       "flag": "🇩🇪"
     },
     {
-      "countryId": "GH",
+      "phone_country_id": "GH",
       "code": 233,
       "name": "Ghana",
       "lengths": [
@@ -983,7 +983,7 @@
       "flag": "🇬🇭"
     },
     {
-      "countryId": "GI",
+      "phone_country_id": "GI",
       "code": 350,
       "name": "Gibraltar",
       "lengths": [
@@ -994,7 +994,7 @@
       "flag": "🇬🇮"
     },
     {
-      "countryId": "GL",
+      "phone_country_id": "GL",
       "code": 299,
       "name": "Greenland",
       "lengths": [
@@ -1005,7 +1005,7 @@
       "flag": "🇬🇱"
     },
     {
-      "countryId": "GD",
+      "phone_country_id": "GD",
       "code": 1,
       "name": "Grenada",
       "lengths": [
@@ -1016,7 +1016,7 @@
       "flag": "🇬🇩"
     },
     {
-      "countryId": "GP",
+      "phone_country_id": "GP",
       "code": 590,
       "name": "Guadeloupe",
       "lengths": [
@@ -1027,7 +1027,7 @@
       "flag": "🇬🇵"
     },
     {
-      "countryId": "GU",
+      "phone_country_id": "GU",
       "code": 1,
       "name": "Guam",
       "lengths": [
@@ -1038,7 +1038,7 @@
       "flag": "🇬🇺"
     },
     {
-      "countryId": "GT",
+      "phone_country_id": "GT",
       "code": 502,
       "name": "Guatemala",
       "lengths": [
@@ -1049,7 +1049,7 @@
       "flag": "🇬🇹"
     },
     {
-      "countryId": "GG",
+      "phone_country_id": "GG",
       "code": 44,
       "name": "Guernsey",
       "lengths": [
@@ -1060,7 +1060,7 @@
       "flag": "🇬🇬"
     },
     {
-      "countryId": "GN",
+      "phone_country_id": "GN",
       "code": 224,
       "name": "Guinea",
       "lengths": [
@@ -1071,7 +1071,7 @@
       "flag": "🇬🇳"
     },
     {
-      "countryId": "GW",
+      "phone_country_id": "GW",
       "code": 245,
       "name": "Guinea-Bissau",
       "lengths": [
@@ -1082,7 +1082,7 @@
       "flag": "🇬🇼"
     },
     {
-      "countryId": "GY",
+      "phone_country_id": "GY",
       "code": 592,
       "name": "Guyana",
       "lengths": [
@@ -1093,7 +1093,7 @@
       "flag": "🇬🇾"
     },
     {
-      "countryId": "HT",
+      "phone_country_id": "HT",
       "code": 509,
       "name": "Haiti",
       "lengths": [
@@ -1104,7 +1104,7 @@
       "flag": "🇭🇹"
     },
     {
-      "countryId": "HN",
+      "phone_country_id": "HN",
       "code": 504,
       "name": "Honduras",
       "lengths": [
@@ -1115,7 +1115,7 @@
       "flag": "🇭🇳"
     },
     {
-      "countryId": "HK",
+      "phone_country_id": "HK",
       "code": 852,
       "name": "Hong Kong",
       "lengths": [
@@ -1126,7 +1126,7 @@
       "flag": "🇭🇰"
     },
     {
-      "countryId": "HU",
+      "phone_country_id": "HU",
       "code": 36,
       "name": "Hungary",
       "lengths": [
@@ -1137,7 +1137,7 @@
       "flag": "🇭🇺"
     },
     {
-      "countryId": "IS",
+      "phone_country_id": "IS",
       "code": 354,
       "name": "Iceland",
       "lengths": [
@@ -1149,7 +1149,7 @@
       "flag": "🇮🇸"
     },
     {
-      "countryId": "IN",
+      "phone_country_id": "IN",
       "code": 91,
       "name": "India",
       "lengths": [
@@ -1160,7 +1160,7 @@
       "flag": "🇮🇳"
     },
     {
-      "countryId": "ID",
+      "phone_country_id": "ID",
       "code": 62,
       "name": "Indonesia",
       "lengths": [
@@ -1174,7 +1174,7 @@
       "flag": "🇮🇩"
     },
     {
-      "countryId": "IR",
+      "phone_country_id": "IR",
       "code": 98,
       "name": "Iran",
       "lengths": [
@@ -1185,7 +1185,7 @@
       "flag": "🇮🇷"
     },
     {
-      "countryId": "IQ",
+      "phone_country_id": "IQ",
       "code": 964,
       "name": "Iraq",
       "lengths": [
@@ -1196,7 +1196,7 @@
       "flag": "🇮🇶"
     },
     {
-      "countryId": "IE",
+      "phone_country_id": "IE",
       "code": 353,
       "name": "Ireland",
       "lengths": [
@@ -1207,7 +1207,7 @@
       "flag": "🇮🇪"
     },
     {
-      "countryId": "IM",
+      "phone_country_id": "IM",
       "code": 44,
       "name": "Isle of Man",
       "lengths": [
@@ -1218,7 +1218,7 @@
       "flag": "🇮🇲"
     },
     {
-      "countryId": "IL",
+      "phone_country_id": "IL",
       "code": 972,
       "name": "Israel",
       "lengths": [
@@ -1229,7 +1229,7 @@
       "flag": "🇮🇱"
     },
     {
-      "countryId": "IT",
+      "phone_country_id": "IT",
       "code": 39,
       "name": "Italy",
       "lengths": [
@@ -1242,7 +1242,7 @@
       "flag": "🇮🇹"
     },
     {
-      "countryId": "JM",
+      "phone_country_id": "JM",
       "code": 1,
       "name": "Jamaica",
       "lengths": [
@@ -1253,7 +1253,7 @@
       "flag": "🇯🇲"
     },
     {
-      "countryId": "JP",
+      "phone_country_id": "JP",
       "code": 81,
       "name": "Japan",
       "lengths": [
@@ -1264,7 +1264,7 @@
       "flag": "🇯🇵"
     },
     {
-      "countryId": "JE",
+      "phone_country_id": "JE",
       "code": 44,
       "name": "Jersey",
       "lengths": [
@@ -1275,7 +1275,7 @@
       "flag": "🇯🇪"
     },
     {
-      "countryId": "JO",
+      "phone_country_id": "JO",
       "code": 962,
       "name": "Jordan",
       "lengths": [
@@ -1286,7 +1286,7 @@
       "flag": "🇯🇴"
     },
     {
-      "countryId": "KZ",
+      "phone_country_id": "KZ",
       "code": 7,
       "name": "Kazakhstan",
       "lengths": [
@@ -1297,7 +1297,7 @@
       "flag": "🇰🇿"
     },
     {
-      "countryId": "KE",
+      "phone_country_id": "KE",
       "code": 254,
       "name": "Kenya",
       "lengths": [
@@ -1308,7 +1308,7 @@
       "flag": "🇰🇪"
     },
     {
-      "countryId": "KI",
+      "phone_country_id": "KI",
       "code": 686,
       "name": "Kiribati",
       "lengths": [
@@ -1319,7 +1319,7 @@
       "flag": "🇰🇮"
     },
     {
-      "countryId": "XK",
+      "phone_country_id": "XK",
       "code": 383,
       "name": "Kosovo",
       "lengths": [
@@ -1330,7 +1330,7 @@
       "flag": "🇽🇰"
     },
     {
-      "countryId": "KW",
+      "phone_country_id": "KW",
       "code": 965,
       "name": "Kuwait",
       "lengths": [
@@ -1341,7 +1341,7 @@
       "flag": "🇰🇼"
     },
     {
-      "countryId": "KG",
+      "phone_country_id": "KG",
       "code": 996,
       "name": "Kyrgyzstan",
       "lengths": [
@@ -1352,7 +1352,7 @@
       "flag": "🇰🇬"
     },
     {
-      "countryId": "LA",
+      "phone_country_id": "LA",
       "code": 856,
       "name": "Laos",
       "lengths": [
@@ -1363,7 +1363,7 @@
       "flag": "🇱🇦"
     },
     {
-      "countryId": "LV",
+      "phone_country_id": "LV",
       "code": 371,
       "name": "Latvia",
       "lengths": [
@@ -1374,7 +1374,7 @@
       "flag": "🇱🇻"
     },
     {
-      "countryId": "LB",
+      "phone_country_id": "LB",
       "code": 961,
       "name": "Lebanon",
       "lengths": [
@@ -1386,7 +1386,7 @@
       "flag": "🇱🇧"
     },
     {
-      "countryId": "LS",
+      "phone_country_id": "LS",
       "code": 266,
       "name": "Lesotho",
       "lengths": [
@@ -1397,7 +1397,7 @@
       "flag": "🇱🇸"
     },
     {
-      "countryId": "LR",
+      "phone_country_id": "LR",
       "code": 231,
       "name": "Liberia",
       "lengths": [
@@ -1409,7 +1409,7 @@
       "flag": "🇱🇷"
     },
     {
-      "countryId": "LY",
+      "phone_country_id": "LY",
       "code": 218,
       "name": "Libya",
       "lengths": [
@@ -1420,7 +1420,7 @@
       "flag": "🇱🇾"
     },
     {
-      "countryId": "LI",
+      "phone_country_id": "LI",
       "code": 423,
       "name": "Liechtenstein",
       "lengths": [
@@ -1432,7 +1432,7 @@
       "flag": "🇱🇮"
     },
     {
-      "countryId": "LT",
+      "phone_country_id": "LT",
       "code": 370,
       "name": "Lithuania",
       "lengths": [
@@ -1443,7 +1443,7 @@
       "flag": "🇱🇹"
     },
     {
-      "countryId": "LU",
+      "phone_country_id": "LU",
       "code": 352,
       "name": "Luxembourg",
       "lengths": [
@@ -1454,7 +1454,7 @@
       "flag": "🇱🇺"
     },
     {
-      "countryId": "MO",
+      "phone_country_id": "MO",
       "code": 853,
       "name": "Macao",
       "lengths": [
@@ -1465,7 +1465,7 @@
       "flag": "🇲🇴"
     },
     {
-      "countryId": "MG",
+      "phone_country_id": "MG",
       "code": 261,
       "name": "Madagascar",
       "lengths": [
@@ -1476,7 +1476,7 @@
       "flag": "🇲🇬"
     },
     {
-      "countryId": "MW",
+      "phone_country_id": "MW",
       "code": 265,
       "name": "Malawi",
       "lengths": [
@@ -1487,7 +1487,7 @@
       "flag": "🇲🇼"
     },
     {
-      "countryId": "MY",
+      "phone_country_id": "MY",
       "code": 60,
       "name": "Malaysia",
       "lengths": [
@@ -1499,7 +1499,7 @@
       "flag": "🇲🇾"
     },
     {
-      "countryId": "MV",
+      "phone_country_id": "MV",
       "code": 960,
       "name": "Maldives",
       "lengths": [
@@ -1510,7 +1510,7 @@
       "flag": "🇲🇻"
     },
     {
-      "countryId": "ML",
+      "phone_country_id": "ML",
       "code": 223,
       "name": "Mali",
       "lengths": [
@@ -1521,7 +1521,7 @@
       "flag": "🇲🇱"
     },
     {
-      "countryId": "MT",
+      "phone_country_id": "MT",
       "code": 356,
       "name": "Malta",
       "lengths": [
@@ -1532,7 +1532,7 @@
       "flag": "🇲🇹"
     },
     {
-      "countryId": "MH",
+      "phone_country_id": "MH",
       "code": 692,
       "name": "Marshall Islands",
       "lengths": [
@@ -1543,7 +1543,7 @@
       "flag": "🇲🇭"
     },
     {
-      "countryId": "MQ",
+      "phone_country_id": "MQ",
       "code": 596,
       "name": "Martinique",
       "lengths": [
@@ -1554,7 +1554,7 @@
       "flag": "🇲🇶"
     },
     {
-      "countryId": "MR",
+      "phone_country_id": "MR",
       "code": 222,
       "name": "Mauritania",
       "lengths": [
@@ -1565,7 +1565,7 @@
       "flag": "🇲🇷"
     },
     {
-      "countryId": "MU",
+      "phone_country_id": "MU",
       "code": 230,
       "name": "Mauritius",
       "lengths": [
@@ -1576,7 +1576,7 @@
       "flag": "🇲🇺"
     },
     {
-      "countryId": "YT",
+      "phone_country_id": "YT",
       "code": 262,
       "name": "Mayotte",
       "lengths": [
@@ -1587,7 +1587,7 @@
       "flag": "🇾🇹"
     },
     {
-      "countryId": "MX",
+      "phone_country_id": "MX",
       "code": 52,
       "name": "Mexico",
       "lengths": [
@@ -1599,7 +1599,7 @@
       "flag": "🇲🇽"
     },
     {
-      "countryId": "FM",
+      "phone_country_id": "FM",
       "code": 691,
       "name": "Micronesia",
       "lengths": [
@@ -1610,7 +1610,7 @@
       "flag": "🇫🇲"
     },
     {
-      "countryId": "MD",
+      "phone_country_id": "MD",
       "code": 373,
       "name": "Moldova",
       "lengths": [
@@ -1621,7 +1621,7 @@
       "flag": "🇲🇩"
     },
     {
-      "countryId": "MC",
+      "phone_country_id": "MC",
       "code": 377,
       "name": "Monaco",
       "lengths": [
@@ -1633,7 +1633,7 @@
       "flag": "🇲🇨"
     },
     {
-      "countryId": "MN",
+      "phone_country_id": "MN",
       "code": 976,
       "name": "Mongolia",
       "lengths": [
@@ -1644,7 +1644,7 @@
       "flag": "🇲🇳"
     },
     {
-      "countryId": "ME",
+      "phone_country_id": "ME",
       "code": 382,
       "name": "Montenegro",
       "lengths": [
@@ -1655,7 +1655,7 @@
       "flag": "🇲🇪"
     },
     {
-      "countryId": "MS",
+      "phone_country_id": "MS",
       "code": 1,
       "name": "Montserrat",
       "lengths": [
@@ -1666,7 +1666,7 @@
       "flag": "🇲🇸"
     },
     {
-      "countryId": "MA",
+      "phone_country_id": "MA",
       "code": 212,
       "name": "Morocco",
       "lengths": [
@@ -1677,7 +1677,7 @@
       "flag": "🇲🇦"
     },
     {
-      "countryId": "MZ",
+      "phone_country_id": "MZ",
       "code": 258,
       "name": "Mozambique",
       "lengths": [
@@ -1688,7 +1688,7 @@
       "flag": "🇲🇿"
     },
     {
-      "countryId": "MM",
+      "phone_country_id": "MM",
       "code": 95,
       "name": "Myanmar (Burma)",
       "lengths": [
@@ -1702,7 +1702,7 @@
       "flag": "🇲🇲"
     },
     {
-      "countryId": "NA",
+      "phone_country_id": "NA",
       "code": 264,
       "name": "Namibia",
       "lengths": [
@@ -1713,7 +1713,7 @@
       "flag": "🇳🇦"
     },
     {
-      "countryId": "NR",
+      "phone_country_id": "NR",
       "code": 674,
       "name": "Nauru",
       "lengths": [
@@ -1724,7 +1724,7 @@
       "flag": "🇳🇷"
     },
     {
-      "countryId": "NP",
+      "phone_country_id": "NP",
       "code": 977,
       "name": "Nepal",
       "lengths": [
@@ -1735,7 +1735,7 @@
       "flag": "🇳🇵"
     },
     {
-      "countryId": "NL",
+      "phone_country_id": "NL",
       "code": 31,
       "name": "Netherlands",
       "lengths": [
@@ -1746,7 +1746,7 @@
       "flag": "🇳🇱"
     },
     {
-      "countryId": "NC",
+      "phone_country_id": "NC",
       "code": 687,
       "name": "New Caledonia",
       "lengths": [
@@ -1757,7 +1757,7 @@
       "flag": "🇳🇨"
     },
     {
-      "countryId": "NZ",
+      "phone_country_id": "NZ",
       "code": 64,
       "name": "New Zealand",
       "lengths": [
@@ -1770,7 +1770,7 @@
       "flag": "🇳🇿"
     },
     {
-      "countryId": "NI",
+      "phone_country_id": "NI",
       "code": 505,
       "name": "Nicaragua",
       "lengths": [
@@ -1781,7 +1781,7 @@
       "flag": "🇳🇮"
     },
     {
-      "countryId": "NE",
+      "phone_country_id": "NE",
       "code": 227,
       "name": "Niger",
       "lengths": [
@@ -1792,7 +1792,7 @@
       "flag": "🇳🇪"
     },
     {
-      "countryId": "NG",
+      "phone_country_id": "NG",
       "code": 234,
       "name": "Nigeria",
       "lengths": [
@@ -1803,7 +1803,7 @@
       "flag": "🇳🇬"
     },
     {
-      "countryId": "NU",
+      "phone_country_id": "NU",
       "code": 683,
       "name": "Niue",
       "lengths": [
@@ -1814,7 +1814,7 @@
       "flag": "🇳🇺"
     },
     {
-      "countryId": "NF",
+      "phone_country_id": "NF",
       "code": 672,
       "name": "Norfolk Island",
       "lengths": [
@@ -1825,7 +1825,7 @@
       "flag": "🇳🇫"
     },
     {
-      "countryId": "KP",
+      "phone_country_id": "KP",
       "code": 850,
       "name": "North Korea",
       "lengths": [
@@ -1836,7 +1836,7 @@
       "flag": "🇰🇵"
     },
     {
-      "countryId": "MK",
+      "phone_country_id": "MK",
       "code": 389,
       "name": "North Macedonia",
       "lengths": [
@@ -1847,7 +1847,7 @@
       "flag": "🇲🇰"
     },
     {
-      "countryId": "MP",
+      "phone_country_id": "MP",
       "code": 1,
       "name": "Northern Mariana Islands",
       "lengths": [
@@ -1858,7 +1858,7 @@
       "flag": "🇲🇵"
     },
     {
-      "countryId": "NO",
+      "phone_country_id": "NO",
       "code": 47,
       "name": "Norway",
       "lengths": [
@@ -1869,7 +1869,7 @@
       "flag": "🇳🇴"
     },
     {
-      "countryId": "OM",
+      "phone_country_id": "OM",
       "code": 968,
       "name": "Oman",
       "lengths": [
@@ -1880,7 +1880,7 @@
       "flag": "🇴🇲"
     },
     {
-      "countryId": "PK",
+      "phone_country_id": "PK",
       "code": 92,
       "name": "Pakistan",
       "lengths": [
@@ -1891,7 +1891,7 @@
       "flag": "🇵🇰"
     },
     {
-      "countryId": "PW",
+      "phone_country_id": "PW",
       "code": 680,
       "name": "Palau",
       "lengths": [
@@ -1902,7 +1902,7 @@
       "flag": "🇵🇼"
     },
     {
-      "countryId": "PS",
+      "phone_country_id": "PS",
       "code": 970,
       "name": "Palestine",
       "lengths": [
@@ -1913,7 +1913,7 @@
       "flag": "🇵🇸"
     },
     {
-      "countryId": "PA",
+      "phone_country_id": "PA",
       "code": 507,
       "name": "Panama",
       "lengths": [
@@ -1925,7 +1925,7 @@
       "flag": "🇵🇦"
     },
     {
-      "countryId": "PG",
+      "phone_country_id": "PG",
       "code": 675,
       "name": "Papua New Guinea",
       "lengths": [
@@ -1936,7 +1936,7 @@
       "flag": "🇵🇬"
     },
     {
-      "countryId": "PY",
+      "phone_country_id": "PY",
       "code": 595,
       "name": "Paraguay",
       "lengths": [
@@ -1947,7 +1947,7 @@
       "flag": "🇵🇾"
     },
     {
-      "countryId": "PE",
+      "phone_country_id": "PE",
       "code": 51,
       "name": "Peru",
       "lengths": [
@@ -1958,7 +1958,7 @@
       "flag": "🇵🇪"
     },
     {
-      "countryId": "PH",
+      "phone_country_id": "PH",
       "code": 63,
       "name": "Philippines",
       "lengths": [
@@ -1969,7 +1969,7 @@
       "flag": "🇵🇭"
     },
     {
-      "countryId": "PL",
+      "phone_country_id": "PL",
       "code": 48,
       "name": "Poland",
       "lengths": [
@@ -1980,7 +1980,7 @@
       "flag": "🇵🇱"
     },
     {
-      "countryId": "PT",
+      "phone_country_id": "PT",
       "code": 351,
       "name": "Portugal",
       "lengths": [
@@ -1991,7 +1991,7 @@
       "flag": "🇵🇹"
     },
     {
-      "countryId": "PR",
+      "phone_country_id": "PR",
       "code": 1,
       "name": "Puerto Rico",
       "lengths": [
@@ -2002,7 +2002,7 @@
       "flag": "🇵🇷"
     },
     {
-      "countryId": "QA",
+      "phone_country_id": "QA",
       "code": 974,
       "name": "Qatar",
       "lengths": [
@@ -2013,7 +2013,7 @@
       "flag": "🇶🇦"
     },
     {
-      "countryId": "RW",
+      "phone_country_id": "RW",
       "code": 250,
       "name": "Rwanda",
       "lengths": [
@@ -2024,7 +2024,7 @@
       "flag": "🇷🇼"
     },
     {
-      "countryId": "RE",
+      "phone_country_id": "RE",
       "code": 262,
       "name": "Réunion",
       "lengths": [
@@ -2035,7 +2035,7 @@
       "flag": "🇷🇪"
     },
     {
-      "countryId": "WS",
+      "phone_country_id": "WS",
       "code": 685,
       "name": "Samoa",
       "lengths": [
@@ -2047,7 +2047,7 @@
       "flag": "🇼🇸"
     },
     {
-      "countryId": "SM",
+      "phone_country_id": "SM",
       "code": 378,
       "name": "San Marino",
       "lengths": [
@@ -2058,7 +2058,7 @@
       "flag": "🇸🇲"
     },
     {
-      "countryId": "SA",
+      "phone_country_id": "SA",
       "code": 966,
       "name": "Saudi Arabia",
       "lengths": [
@@ -2069,7 +2069,7 @@
       "flag": "🇸🇦"
     },
     {
-      "countryId": "SN",
+      "phone_country_id": "SN",
       "code": 221,
       "name": "Senegal",
       "lengths": [
@@ -2080,7 +2080,7 @@
       "flag": "🇸🇳"
     },
     {
-      "countryId": "RS",
+      "phone_country_id": "RS",
       "code": 381,
       "name": "Serbia",
       "lengths": [
@@ -2093,7 +2093,7 @@
       "flag": "🇷🇸"
     },
     {
-      "countryId": "SC",
+      "phone_country_id": "SC",
       "code": 248,
       "name": "Seychelles",
       "lengths": [
@@ -2104,7 +2104,7 @@
       "flag": "🇸🇨"
     },
     {
-      "countryId": "SL",
+      "phone_country_id": "SL",
       "code": 232,
       "name": "Sierra Leone",
       "lengths": [
@@ -2115,7 +2115,7 @@
       "flag": "🇸🇱"
     },
     {
-      "countryId": "SG",
+      "phone_country_id": "SG",
       "code": 65,
       "name": "Singapore",
       "lengths": [
@@ -2126,7 +2126,7 @@
       "flag": "🇸🇬"
     },
     {
-      "countryId": "SX",
+      "phone_country_id": "SX",
       "code": 1,
       "name": "Sint Maarten",
       "lengths": [
@@ -2137,7 +2137,7 @@
       "flag": "🇸🇽"
     },
     {
-      "countryId": "SK",
+      "phone_country_id": "SK",
       "code": 421,
       "name": "Slovakia",
       "lengths": [
@@ -2148,7 +2148,7 @@
       "flag": "🇸🇰"
     },
     {
-      "countryId": "SI",
+      "phone_country_id": "SI",
       "code": 386,
       "name": "Slovenia",
       "lengths": [
@@ -2159,7 +2159,7 @@
       "flag": "🇸🇮"
     },
     {
-      "countryId": "SB",
+      "phone_country_id": "SB",
       "code": 677,
       "name": "Solomon Islands",
       "lengths": [
@@ -2171,7 +2171,7 @@
       "flag": "🇸🇧"
     },
     {
-      "countryId": "SO",
+      "phone_country_id": "SO",
       "code": 252,
       "name": "Somalia",
       "lengths": [
@@ -2184,7 +2184,7 @@
       "flag": "🇸🇴"
     },
     {
-      "countryId": "ZA",
+      "phone_country_id": "ZA",
       "code": 27,
       "name": "South Africa",
       "lengths": [
@@ -2199,7 +2199,7 @@
       "flag": "🇿🇦"
     },
     {
-      "countryId": "KR",
+      "phone_country_id": "KR",
       "code": 82,
       "name": "South Korea",
       "lengths": [
@@ -2211,7 +2211,7 @@
       "flag": "🇰🇷"
     },
     {
-      "countryId": "SS",
+      "phone_country_id": "SS",
       "code": 211,
       "name": "South Sudan",
       "lengths": [
@@ -2222,7 +2222,7 @@
       "flag": "🇸🇸"
     },
     {
-      "countryId": "ES",
+      "phone_country_id": "ES",
       "code": 34,
       "name": "Spain",
       "lengths": [
@@ -2233,7 +2233,7 @@
       "flag": "🇪🇸"
     },
     {
-      "countryId": "LK",
+      "phone_country_id": "LK",
       "code": 94,
       "name": "Sri Lanka",
       "lengths": [
@@ -2244,7 +2244,7 @@
       "flag": "🇱🇰"
     },
     {
-      "countryId": "BL",
+      "phone_country_id": "BL",
       "code": 590,
       "name": "St. Barthélemy",
       "lengths": [
@@ -2255,7 +2255,7 @@
       "flag": "🇧🇱"
     },
     {
-      "countryId": "SH",
+      "phone_country_id": "SH",
       "code": 290,
       "name": "St. Helena",
       "lengths": [
@@ -2266,7 +2266,7 @@
       "flag": "🇸🇭"
     },
     {
-      "countryId": "KN",
+      "phone_country_id": "KN",
       "code": 1,
       "name": "St. Kitts & Nevis",
       "lengths": [
@@ -2277,7 +2277,7 @@
       "flag": "🇰🇳"
     },
     {
-      "countryId": "LC",
+      "phone_country_id": "LC",
       "code": 1,
       "name": "St. Lucia",
       "lengths": [
@@ -2288,7 +2288,7 @@
       "flag": "🇱🇨"
     },
     {
-      "countryId": "MF",
+      "phone_country_id": "MF",
       "code": 590,
       "name": "St. Martin",
       "lengths": [
@@ -2299,7 +2299,7 @@
       "flag": "🇲🇫"
     },
     {
-      "countryId": "PM",
+      "phone_country_id": "PM",
       "code": 508,
       "name": "St. Pierre & Miquelon",
       "lengths": [
@@ -2310,7 +2310,7 @@
       "flag": "🇵🇲"
     },
     {
-      "countryId": "VC",
+      "phone_country_id": "VC",
       "code": 1,
       "name": "St. Vincent & Grenadines",
       "lengths": [
@@ -2321,7 +2321,7 @@
       "flag": "🇻🇨"
     },
     {
-      "countryId": "SD",
+      "phone_country_id": "SD",
       "code": 249,
       "name": "Sudan",
       "lengths": [
@@ -2332,7 +2332,7 @@
       "flag": "🇸🇩"
     },
     {
-      "countryId": "SR",
+      "phone_country_id": "SR",
       "code": 597,
       "name": "Suriname",
       "lengths": [
@@ -2343,7 +2343,7 @@
       "flag": "🇸🇷"
     },
     {
-      "countryId": "SJ",
+      "phone_country_id": "SJ",
       "code": 47,
       "name": "Svalbard & Jan Mayen",
       "lengths": [
@@ -2354,7 +2354,7 @@
       "flag": "🇸🇯"
     },
     {
-      "countryId": "SE",
+      "phone_country_id": "SE",
       "code": 46,
       "name": "Sweden",
       "lengths": [
@@ -2365,7 +2365,7 @@
       "flag": "🇸🇪"
     },
     {
-      "countryId": "CH",
+      "phone_country_id": "CH",
       "code": 41,
       "name": "Switzerland",
       "lengths": [
@@ -2376,7 +2376,7 @@
       "flag": "🇨🇭"
     },
     {
-      "countryId": "SY",
+      "phone_country_id": "SY",
       "code": 963,
       "name": "Syria",
       "lengths": [
@@ -2387,7 +2387,7 @@
       "flag": "🇸🇾"
     },
     {
-      "countryId": "ST",
+      "phone_country_id": "ST",
       "code": 239,
       "name": "São Tomé & Príncipe",
       "lengths": [
@@ -2398,7 +2398,7 @@
       "flag": "🇸🇹"
     },
     {
-      "countryId": "TW",
+      "phone_country_id": "TW",
       "code": 886,
       "name": "Taiwan",
       "lengths": [
@@ -2409,7 +2409,7 @@
       "flag": "🇹🇼"
     },
     {
-      "countryId": "TJ",
+      "phone_country_id": "TJ",
       "code": 992,
       "name": "Tajikistan",
       "lengths": [
@@ -2420,7 +2420,7 @@
       "flag": "🇹🇯"
     },
     {
-      "countryId": "TZ",
+      "phone_country_id": "TZ",
       "code": 255,
       "name": "Tanzania",
       "lengths": [
@@ -2431,7 +2431,7 @@
       "flag": "🇹🇿"
     },
     {
-      "countryId": "TH",
+      "phone_country_id": "TH",
       "code": 66,
       "name": "Thailand",
       "lengths": [
@@ -2442,7 +2442,7 @@
       "flag": "🇹🇭"
     },
     {
-      "countryId": "TL",
+      "phone_country_id": "TL",
       "code": 670,
       "name": "Timor-Leste",
       "lengths": [
@@ -2453,7 +2453,7 @@
       "flag": "🇹🇱"
     },
     {
-      "countryId": "TG",
+      "phone_country_id": "TG",
       "code": 228,
       "name": "Togo",
       "lengths": [
@@ -2464,7 +2464,7 @@
       "flag": "🇹🇬"
     },
     {
-      "countryId": "TK",
+      "phone_country_id": "TK",
       "code": 690,
       "name": "Tokelau",
       "lengths": [
@@ -2478,7 +2478,7 @@
       "flag": "🇹🇰"
     },
     {
-      "countryId": "TO",
+      "phone_country_id": "TO",
       "code": 676,
       "name": "Tonga",
       "lengths": [
@@ -2489,7 +2489,7 @@
       "flag": "🇹🇴"
     },
     {
-      "countryId": "TT",
+      "phone_country_id": "TT",
       "code": 1,
       "name": "Trinidad & Tobago",
       "lengths": [
@@ -2500,7 +2500,7 @@
       "flag": "🇹🇹"
     },
     {
-      "countryId": "TA",
+      "phone_country_id": "TA",
       "code": 290,
       "name": "Tristan da Cunha",
       "lengths": [
@@ -2509,7 +2509,7 @@
       "flag": "🇹🇦"
     },
     {
-      "countryId": "TN",
+      "phone_country_id": "TN",
       "code": 216,
       "name": "Tunisia",
       "lengths": [
@@ -2520,7 +2520,7 @@
       "flag": "🇹🇳"
     },
     {
-      "countryId": "TR",
+      "phone_country_id": "TR",
       "code": 90,
       "name": "Turkey",
       "lengths": [
@@ -2531,7 +2531,7 @@
       "flag": "🇹🇷"
     },
     {
-      "countryId": "TM",
+      "phone_country_id": "TM",
       "code": 993,
       "name": "Turkmenistan",
       "lengths": [
@@ -2542,7 +2542,7 @@
       "flag": "🇹🇲"
     },
     {
-      "countryId": "TC",
+      "phone_country_id": "TC",
       "code": 1,
       "name": "Turks & Caicos Islands",
       "lengths": [
@@ -2553,7 +2553,7 @@
       "flag": "🇹🇨"
     },
     {
-      "countryId": "TV",
+      "phone_country_id": "TV",
       "code": 688,
       "name": "Tuvalu",
       "lengths": [
@@ -2565,7 +2565,7 @@
       "flag": "🇹🇻"
     },
     {
-      "countryId": "VI",
+      "phone_country_id": "VI",
       "code": 1,
       "name": "U.S. Virgin Islands",
       "lengths": [
@@ -2576,7 +2576,7 @@
       "flag": "🇻🇮"
     },
     {
-      "countryId": "UG",
+      "phone_country_id": "UG",
       "code": 256,
       "name": "Uganda",
       "lengths": [
@@ -2587,7 +2587,7 @@
       "flag": "🇺🇬"
     },
     {
-      "countryId": "UA",
+      "phone_country_id": "UA",
       "code": 380,
       "name": "Ukraine",
       "lengths": [
@@ -2598,7 +2598,7 @@
       "flag": "🇺🇦"
     },
     {
-      "countryId": "AE",
+      "phone_country_id": "AE",
       "code": 971,
       "name": "United Arab Emirates",
       "lengths": [
@@ -2609,7 +2609,7 @@
       "flag": "🇦🇪"
     },
     {
-      "countryId": "US",
+      "phone_country_id": "US",
       "code": 1,
       "name": "United States",
       "lengths": [
@@ -2620,7 +2620,7 @@
       "flag": "🇺🇸"
     },
     {
-      "countryId": "UY",
+      "phone_country_id": "UY",
       "code": 598,
       "name": "Uruguay",
       "lengths": [
@@ -2631,7 +2631,7 @@
       "flag": "🇺🇾"
     },
     {
-      "countryId": "UZ",
+      "phone_country_id": "UZ",
       "code": 998,
       "name": "Uzbekistan",
       "lengths": [
@@ -2642,7 +2642,7 @@
       "flag": "🇺🇿"
     },
     {
-      "countryId": "VU",
+      "phone_country_id": "VU",
       "code": 678,
       "name": "Vanuatu",
       "lengths": [
@@ -2653,7 +2653,7 @@
       "flag": "🇻🇺"
     },
     {
-      "countryId": "VA",
+      "phone_country_id": "VA",
       "code": 39,
       "name": "Vatican City",
       "lengths": [
@@ -2666,7 +2666,7 @@
       "flag": "🇻🇦"
     },
     {
-      "countryId": "VE",
+      "phone_country_id": "VE",
       "code": 58,
       "name": "Venezuela",
       "lengths": [
@@ -2677,7 +2677,7 @@
       "flag": "🇻🇪"
     },
     {
-      "countryId": "VN",
+      "phone_country_id": "VN",
       "code": 84,
       "name": "Vietnam",
       "lengths": [
@@ -2688,7 +2688,7 @@
       "flag": "🇻🇳"
     },
     {
-      "countryId": "WF",
+      "phone_country_id": "WF",
       "code": 681,
       "name": "Wallis & Futuna",
       "lengths": [
@@ -2699,7 +2699,7 @@
       "flag": "🇼🇫"
     },
     {
-      "countryId": "EH",
+      "phone_country_id": "EH",
       "code": 212,
       "name": "Western Sahara",
       "lengths": [
@@ -2710,7 +2710,7 @@
       "flag": "🇪🇭"
     },
     {
-      "countryId": "YE",
+      "phone_country_id": "YE",
       "code": 967,
       "name": "Yemen",
       "lengths": [
@@ -2721,7 +2721,7 @@
       "flag": "🇾🇪"
     },
     {
-      "countryId": "ZM",
+      "phone_country_id": "ZM",
       "code": 260,
       "name": "Zambia",
       "lengths": [
@@ -2732,7 +2732,7 @@
       "flag": "🇿🇲"
     },
     {
-      "countryId": "ZW",
+      "phone_country_id": "ZW",
       "code": 263,
       "name": "Zimbabwe",
       "lengths": [
@@ -2743,7 +2743,7 @@
       "flag": "🇿🇼"
     },
     {
-      "countryId": "AX",
+      "phone_country_id": "AX",
       "code": 358,
       "name": "Åland Islands",
       "lengths": [

@@ -8,7 +8,7 @@ class CountryPhoneData {
       this.flag});
 
   CountryPhoneData.fromJson(Map<String, dynamic> json) {
-    phoneCountryId = json['phoneCountryId'];
+    phoneCountryId = json['phone_country_id'];
     code = json['code'];
     name = json['name'];
     lengths = json['lengths'].cast<int>();
@@ -19,7 +19,7 @@ class CountryPhoneData {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['phoneCountryId'] = phoneCountryId;
+    data['phone_country_id'] = phoneCountryId;
     data['code'] = code;
     data['name'] = name;
     data['lengths'] = lengths;
