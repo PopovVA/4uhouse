@@ -7,10 +7,9 @@ class UserInfo {
     preferredUsername = json['preferred_username'];
     phone = json['phone'] != null ? PhoneModel.fromJson(json['phone']) : null;
   }
+
   String preferredUsername;
   PhoneModel phone;
-
-
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
