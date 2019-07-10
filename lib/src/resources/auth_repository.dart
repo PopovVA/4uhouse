@@ -32,7 +32,7 @@ class AuthRepository {
   static const String _appId = 'appId';
 
   /* Login flow */
-  Future<void> getOtp({@required String phoneCountryId,
+  Future<void> getOtp({@required String countryId,
       @required int code,
     @required String phoneNumber}) async {
     final String appId = await _getAppId();
@@ -40,7 +40,7 @@ class AuthRepository {
     return _authApi.requestOtp(
         codeChallenge: codeChallenge,
         appId: appId,
-        phoneCountryId: phoneCountryId,
+        countryId: countryId,
         code: code,
         phoneNumber: phoneNumber);
   }

@@ -7,12 +7,12 @@ abstract class LoginEvent extends Equatable {
 }
 
 class OtpRequested extends LoginEvent {
-  OtpRequested({@required this.phoneCountryId,
+  OtpRequested({@required this.countryId,
     @required this.code,
     @required this.phoneNumber})
       : super(<dynamic>[code, code, phoneNumber]);
 
-  final String phoneCountryId;
+  final String countryId;
   final int code;
   final String phoneNumber;
 

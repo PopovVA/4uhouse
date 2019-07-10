@@ -1,7 +1,7 @@
 {
   "countryPhoneDataList": [
     {
-      "phone_country_id": "AF",
+      "country_id": "AF",
       "code": 93,
       "name": "Afghanistan",
       "lengths": [
@@ -11,7 +11,7 @@
       "numberPattern": "7(?:[014-9]\\d|2[89]|3[01])\\d{6}"
     },
     {
-      "phone_country_id": "AL",
+      "country_id": "AL",
       "code": 355,
       "name": "Albania",
       "lengths": [
@@ -21,7 +21,7 @@
       "numberPattern": "6(?:[689][2-9]|7[2-6])\\d{6}"
     },
     {
-      "phone_country_id": "DZ",
+      "country_id": "DZ",
       "code": 213,
       "name": "Algeria",
       "lengths": [
@@ -31,7 +31,7 @@
       "numberPattern": "67[0-6]\\d{6}|(?:5[4-6]|6[569]|7[7-9])\\d{7}"
     },
     {
-      "phone_country_id": "AS",
+      "country_id": "AS",
       "code": 1,
       "name": "American Samoa",
       "lengths": [
@@ -41,7 +41,7 @@
       "numberPattern": "684(?:2(?:5[2468]|72)|7(?:3[13]|70))\\d{4}"
     },
     {
-      "phone_country_id": "AD",
+      "country_id": "AD",
       "code": 376,
       "name": "Andorra",
       "lengths": [
@@ -52,7 +52,7 @@
       "numberPattern": "690\\d{6}|[36]\\d{5}"
     },
     {
-      "phone_country_id": "AO",
+      "country_id": "AO",
       "code": 244,
       "name": "Angola",
       "lengths": [
@@ -62,7 +62,7 @@
       "numberPattern": "9[1-49]\\d{7}"
     },
     {
-      "phone_country_id": "AI",
+      "country_id": "AI",
       "code": 1,
       "name": "Anguilla",
       "lengths": [
@@ -72,7 +72,7 @@
       "numberPattern": "264(?:235|476|5(?:3[6-9]|8[1-4])|7(?:29|72))\\d{4}"
     },
     {
-      "phone_country_id": "AG",
+      "country_id": "AG",
       "code": 1,
       "name": "Antigua & Barbuda",
       "lengths": [
@@ -82,7 +82,7 @@
       "numberPattern": "268(?:464|7(?:1[3-9]|2\\d|3[246]|64|[78][0-689]))\\d{4}"
     },
     {
-      "phone_country_id": "AR",
+      "country_id": "AR",
       "code": 54,
       "name": "Argentina",
       "lengths": [
@@ -93,7 +93,7 @@
       "numberPattern": "9(?:2(?:646[0-46-9]|9(?:45[02-69]|54[2-8]))|3(?:4(?:3(?:5[0-7]|6[1-69])|5(?:4[0-4679]|[56][024-6]))|585[013-7]|7(?:(?:1[15]|81)[46]|77[2-8])|8(?:(?:21|4[16]|9[12])[46]|35[124-6]|5(?:5[0-46-9]|6[0-246-9])|6(?:5[2-8]|9[46])|86[0-68])))\\d{5}|9(?:2(?:284|657|9(?:20|66))|3(?:4(?:8[27]|92)|755|878))[2-7]\\d{5}|9(?:2(?:2(?:2[59]|44|52)|3(?:26|4[24])|473|9(?:[07]2|2[26]|34|46))|3327)[45]\\d{5}|9(?:2(?:(?:26|62)2|3(?:02|2[03])|477|9(?:42|83))|3(?:4(?:[47]6|62|89)|5(?:41|64)|873))[2-6]\\d{5}|(?:675\\d|9(?:11[2-7]\\d|2(?:2(?:0[45]|1[2-6]|3[3-6])|3(?:[06]4|7[45])|494|6(?:04|1[2-7]|[346][45])|80[45]|9(?:[17][4-6]|44|8[45]|9[3-6]))|3(?:364|4(?:1[2-7]|2[4-6]|[38]4)|5(?:1[2-8]|3[4-6]|8[46])|6(?:2[45]|44)|7[069][45]|8(?:0[45]|1[2-6]|34|5[34]|7[24-6]|8[3-5]))))\\d{6}|92(?:2(?:21|4[23]|6[145]|7[1-4]|8[356]|9[267])|3(?:16|3[13-8]|43|5[346-8]|9[3-5])|475|6(?:2[46]|4[78]|5[1568])|9(?:03|2[1457-9]|3[1356]|4[08]|[56][23]|82))4\\d{5}|9(?:2(?:2(?:57|81)|3(?:24|46|92)|9(?:01|23|64))|3(?:329|4(?:42|71)|5(?:25|37|4[347]|71)|7(?:18|5[17])|888))[3-6]\\d{5}|9(?:2(?:2(?:02|2[3467]|4[156]|5[45]|6[6-8]|91)|3(?:1[47]|[24]5|5[25]|96)|47[48]|625|932)|3(?:38[2578]|4(?:0[0-24-9]|3[78]|4[457]|58|6[03-9]|72|83|9[136-8])|5(?:2[124]|[368][23]|4[2689]|7[2-6])|7(?:16|2[15]|3[145]|4[13]|5[468]|7[2-5]|8[26])|8(?:2[5-7]|3[278]|4[3-5]|5[78]|6[1-378]|[78]7|94)))[4-6]\\d{5}"
     },
     {
-      "phone_country_id": "AM",
+      "country_id": "AM",
       "code": 374,
       "name": "Armenia",
       "lengths": [
@@ -103,7 +103,7 @@
       "numberPattern": "(?:4[1349]|55|77|88|9[13-9])\\d{6}"
     },
     {
-      "phone_country_id": "AW",
+      "country_id": "AW",
       "code": 297,
       "name": "Aruba",
       "lengths": [
@@ -113,7 +113,7 @@
       "numberPattern": "(?:290|5[69]\\d|6(?:[03]0|22|4[0-2]|[69]\\d)|7(?:[34]\\d|7[07])|9(?:6[45]|9[4-8]))\\d{4}"
     },
     {
-      "phone_country_id": "AC",
+      "country_id": "AC",
       "code": 247,
       "name": "Ascension Island",
       "lengths": [
@@ -123,7 +123,7 @@
       "numberPattern": "4\\d{4}"
     },
     {
-      "phone_country_id": "AU",
+      "country_id": "AU",
       "code": 61,
       "name": "Australia",
       "lengths": [
@@ -133,7 +133,7 @@
       "numberPattern": "4(?:[0-3]\\d|4[047-9]|5[0-25-9]|6[06-9]|7[02-9]|8[0-2457-9]|9[017-9])\\d{6}"
     },
     {
-      "phone_country_id": "AT",
+      "country_id": "AT",
       "code": 43,
       "name": "Austria",
       "lengths": [
@@ -149,7 +149,7 @@
       "numberPattern": "6(?:5[0-3579]|6[013-9]|[7-9]\\d)\\d{4,10}"
     },
     {
-      "phone_country_id": "AZ",
+      "country_id": "AZ",
       "code": 994,
       "name": "Azerbaijan",
       "lengths": [
@@ -159,7 +159,7 @@
       "numberPattern": "36554\\d{4}|(?:4[04]|5[015]|60|7[07])\\d{7}"
     },
     {
-      "phone_country_id": "BS",
+      "country_id": "BS",
       "code": 1,
       "name": "Bahamas",
       "lengths": [
@@ -169,7 +169,7 @@
       "numberPattern": "242(?:3(?:5[79]|7[56]|95)|4(?:[23][1-9]|4[1-35-9]|5[1-8]|6[2-8]|7\\d|81)|5(?:2[45]|3[35]|44|5[1-46-9]|65|77)|6[34]6|7(?:27|38)|8(?:0[1-9]|1[02-9]|2\\d|[89]9))\\d{4}"
     },
     {
-      "phone_country_id": "BH",
+      "country_id": "BH",
       "code": 973,
       "name": "Bahrain",
       "lengths": [
@@ -179,7 +179,7 @@
       "numberPattern": "(?:3(?:[1-4679]\\d|5[013-69]|8[0-47-9])\\d|6(?:3(?:00|33|6[16])|6(?:3[03-9]|[69]\\d|7[0-6])))\\d{4}"
     },
     {
-      "phone_country_id": "BD",
+      "country_id": "BD",
       "code": 880,
       "name": "Bangladesh",
       "lengths": [
@@ -189,7 +189,7 @@
       "numberPattern": "(?:1[13-9]\\d|644)\\d{7}|(?:3[78]|44|66)[02-9]\\d{7}"
     },
     {
-      "phone_country_id": "BB",
+      "country_id": "BB",
       "code": 1,
       "name": "Barbados",
       "lengths": [
@@ -199,7 +199,7 @@
       "numberPattern": "246(?:2(?:[356]\\d|4[0-57-9]|8[0-79])|45\\d|69[5-7]|8(?:[2-5]\\d|83))\\d{4}"
     },
     {
-      "phone_country_id": "BY",
+      "country_id": "BY",
       "code": 375,
       "name": "Belarus",
       "lengths": [
@@ -209,7 +209,7 @@
       "numberPattern": "(?:2(?:5[5-79]|9[1-9])|(?:33|44)\\d)\\d{6}"
     },
     {
-      "phone_country_id": "BE",
+      "country_id": "BE",
       "code": 32,
       "name": "Belgium",
       "lengths": [
@@ -219,7 +219,7 @@
       "numberPattern": "4(?:5[56]|6[0135-8]|[79]\\d|8[3-9])\\d{6}"
     },
     {
-      "phone_country_id": "BZ",
+      "country_id": "BZ",
       "code": 501,
       "name": "Belize",
       "lengths": [
@@ -229,7 +229,7 @@
       "numberPattern": "6[0-35-7]\\d{5}"
     },
     {
-      "phone_country_id": "BJ",
+      "country_id": "BJ",
       "code": 229,
       "name": "Benin",
       "lengths": [
@@ -239,7 +239,7 @@
       "numberPattern": "(?:6\\d|9[03-9])\\d{6}"
     },
     {
-      "phone_country_id": "BM",
+      "country_id": "BM",
       "code": 1,
       "name": "Bermuda",
       "lengths": [
@@ -249,7 +249,7 @@
       "numberPattern": "441(?:[37]\\d|5[0-39])\\d{5}"
     },
     {
-      "phone_country_id": "BT",
+      "country_id": "BT",
       "code": 975,
       "name": "Bhutan",
       "lengths": [
@@ -259,7 +259,7 @@
       "numberPattern": "(?:1[67]|77)\\d{6}"
     },
     {
-      "phone_country_id": "BO",
+      "country_id": "BO",
       "code": 591,
       "name": "Bolivia",
       "lengths": [
@@ -269,7 +269,7 @@
       "numberPattern": "[67]\\d{7}"
     },
     {
-      "phone_country_id": "BA",
+      "country_id": "BA",
       "code": 387,
       "name": "Bosnia & Herzegovina",
       "lengths": [
@@ -280,7 +280,7 @@
       "numberPattern": "6(?:0(?:3\\d|40)|[1-356]\\d|44[0-6]|71[137])\\d{5}"
     },
     {
-      "phone_country_id": "BW",
+      "country_id": "BW",
       "code": 267,
       "name": "Botswana",
       "lengths": [
@@ -290,7 +290,7 @@
       "numberPattern": "77200\\d{3}|7(?:[1-6]\\d|7[014-8])\\d{5}"
     },
     {
-      "phone_country_id": "BR",
+      "country_id": "BR",
       "code": 55,
       "name": "Brazil",
       "lengths": [
@@ -301,7 +301,7 @@
       "numberPattern": "(?:[189][1-9]|2[12478])(?:7|9\\d)\\d{7}|(?:3[1-578]|[46][1-9]|5[13-5]|7[13-579])(?:[6-8]\\d{7}|9\\d{7,8})"
     },
     {
-      "phone_country_id": "IO",
+      "country_id": "IO",
       "code": 246,
       "name": "British Indian Ocean Territory",
       "lengths": [
@@ -311,7 +311,7 @@
       "numberPattern": "38\\d{5}"
     },
     {
-      "phone_country_id": "VG",
+      "country_id": "VG",
       "code": 1,
       "name": "British Virgin Islands",
       "lengths": [
@@ -321,7 +321,7 @@
       "numberPattern": "284496[6-9]\\d{3}|284(?:3(?:0[0-3]|4[0-7]|68|9[34])|4(?:4[0-6]|68|99)|54[0-57])\\d{4}"
     },
     {
-      "phone_country_id": "BN",
+      "country_id": "BN",
       "code": 673,
       "name": "Brunei",
       "lengths": [
@@ -331,7 +331,7 @@
       "numberPattern": "(?:22[89]|[78]\\d\\d)\\d{4}"
     },
     {
-      "phone_country_id": "BG",
+      "country_id": "BG",
       "code": 359,
       "name": "Bulgaria",
       "lengths": [
@@ -342,7 +342,7 @@
       "numberPattern": "43[07-9]\\d{5}|(?:48|8[7-9]\\d|9(?:8\\d|9[69]))\\d{6}"
     },
     {
-      "phone_country_id": "BF",
+      "country_id": "BF",
       "code": 226,
       "name": "Burkina Faso",
       "lengths": [
@@ -352,7 +352,7 @@
       "numberPattern": "(?:5[124-8]|[67]\\d)\\d{6}"
     },
     {
-      "phone_country_id": "BI",
+      "country_id": "BI",
       "code": 257,
       "name": "Burundi",
       "lengths": [
@@ -362,7 +362,7 @@
       "numberPattern": "(?:29|31|6[189]|7[125-9])\\d{6}"
     },
     {
-      "phone_country_id": "KH",
+      "country_id": "KH",
       "code": 855,
       "name": "Cambodia",
       "lengths": [
@@ -373,7 +373,7 @@
       "numberPattern": "(?:(?:1[28]|3[18]|9[67])\\d|6[016-9]|7(?:[07-9]|[16]\\d)|8(?:[013-79]|8\\d))\\d{6}|(?:1\\d|9[0-57-9])\\d{6}|(?:2[3-6]|3[2-6]|4[2-4]|[5-7][2-5])48\\d{5}"
     },
     {
-      "phone_country_id": "CM",
+      "country_id": "CM",
       "code": 237,
       "name": "Cameroon",
       "lengths": [
@@ -383,7 +383,7 @@
       "numberPattern": "6[5-9]\\d{7}"
     },
     {
-      "phone_country_id": "CA",
+      "country_id": "CA",
       "code": 1,
       "name": "Canada",
       "lengths": [
@@ -393,7 +393,7 @@
       "numberPattern": "(?:2(?:04|[23]6|[48]9|50)|3(?:06|43|65)|4(?:03|1[68]|3[178]|50)|5(?:06|1[49]|48|79|8[17])|6(?:04|13|39|47)|7(?:0[59]|78|8[02])|8(?:[06]7|19|25|73)|90[25])[2-9]\\d{6}"
     },
     {
-      "phone_country_id": "CV",
+      "country_id": "CV",
       "code": 238,
       "name": "Cape Verde",
       "lengths": [
@@ -403,7 +403,7 @@
       "numberPattern": "(?:[34][36]|5[1-389]|9\\d)\\d{5}"
     },
     {
-      "phone_country_id": "BQ",
+      "country_id": "BQ",
       "code": 599,
       "name": "Caribbean Netherlands",
       "lengths": [
@@ -413,7 +413,7 @@
       "numberPattern": "(?:31(?:8[14-8]|9[14578])|416[14-9]|7(?:0[01]|7[07]|8\\d|9[056])\\d)\\d{3}"
     },
     {
-      "phone_country_id": "KY",
+      "country_id": "KY",
       "code": 1,
       "name": "Cayman Islands",
       "lengths": [
@@ -423,7 +423,7 @@
       "numberPattern": "345(?:32[1-9]|5(?:1[67]|2[5-79]|4[6-9]|50|76)|649|9(?:1[67]|2[2-9]|3[689]))\\d{4}"
     },
     {
-      "phone_country_id": "CF",
+      "country_id": "CF",
       "code": 236,
       "name": "Central African Republic",
       "lengths": [
@@ -433,7 +433,7 @@
       "numberPattern": "7[0257]\\d{6}"
     },
     {
-      "phone_country_id": "TD",
+      "country_id": "TD",
       "code": 235,
       "name": "Chad",
       "lengths": [
@@ -443,7 +443,7 @@
       "numberPattern": "(?:6[023568]|77|9\\d)\\d{6}"
     },
     {
-      "phone_country_id": "CL",
+      "country_id": "CL",
       "code": 56,
       "name": "Chile",
       "lengths": [
@@ -453,7 +453,7 @@
       "numberPattern": "21962\\d{4}|(?:232[0-8]|80[1-9]\\d)\\d{5}|(?:22|3[2-5]|[47][1-35]|5[1-3578]|6[13-57]|8[1-9]|9[2-9])\\d{7}"
     },
     {
-      "phone_country_id": "CN",
+      "country_id": "CN",
       "code": 86,
       "name": "China",
       "lengths": [
@@ -463,7 +463,7 @@
       "numberPattern": "1740[0-5]\\d{6}|1(?:[38]\\d|4[57]|5[0-35-9]|6[25-7]|7[0-35-8]|9[189])\\d{8}"
     },
     {
-      "phone_country_id": "CX",
+      "country_id": "CX",
       "code": 61,
       "name": "Christmas Island",
       "lengths": [
@@ -473,7 +473,7 @@
       "numberPattern": "4(?:[0-3]\\d|4[047-9]|5[0-25-9]|6[06-9]|7[02-9]|8[0-2457-9]|9[017-9])\\d{6}"
     },
     {
-      "phone_country_id": "CC",
+      "country_id": "CC",
       "code": 61,
       "name": "Cocos (Keeling) Islands",
       "lengths": [
@@ -483,7 +483,7 @@
       "numberPattern": "4(?:[0-3]\\d|4[047-9]|5[0-25-9]|6[06-9]|7[02-9]|8[0-2457-9]|9[017-9])\\d{6}"
     },
     {
-      "phone_country_id": "CO",
+      "country_id": "CO",
       "code": 57,
       "name": "Colombia",
       "lengths": [
@@ -493,7 +493,7 @@
       "numberPattern": "3(?:0[0-5]|1\\d|2[0-3]|5[01])\\d{7}"
     },
     {
-      "phone_country_id": "KM",
+      "country_id": "KM",
       "code": 269,
       "name": "Comoros",
       "lengths": [
@@ -503,7 +503,7 @@
       "numberPattern": "[34]\\d{6}"
     },
     {
-      "phone_country_id": "CG",
+      "country_id": "CG",
       "code": 242,
       "name": "Congo - Brazzaville",
       "lengths": [
@@ -513,7 +513,7 @@
       "numberPattern": "0[14-6]\\d{7}"
     },
     {
-      "phone_country_id": "CD",
+      "country_id": "CD",
       "code": 243,
       "name": "Congo - Kinshasa",
       "lengths": [
@@ -524,7 +524,7 @@
       "numberPattern": "88\\d{5}|(?:8[0-2459]|9[017-9])\\d{7}"
     },
     {
-      "phone_country_id": "CK",
+      "country_id": "CK",
       "code": 682,
       "name": "Cook Islands",
       "lengths": [
@@ -534,7 +534,7 @@
       "numberPattern": "[5-8]\\d{4}"
     },
     {
-      "phone_country_id": "CR",
+      "country_id": "CR",
       "code": 506,
       "name": "Costa Rica",
       "lengths": [
@@ -544,7 +544,7 @@
       "numberPattern": "6500[01]\\d{3}|5(?:0[01]|7[0-3])\\d{5}|(?:6[0-4]|7[0-3]|8[3-9])\\d{6}"
     },
     {
-      "phone_country_id": "HR",
+      "country_id": "HR",
       "code": 385,
       "name": "Croatia",
       "lengths": [
@@ -555,7 +555,7 @@
       "numberPattern": "9(?:751\\d{5}|8\\d{6,7})|9(?:01|[1259]\\d|7[0679])\\d{6}"
     },
     {
-      "phone_country_id": "CU",
+      "country_id": "CU",
       "code": 53,
       "name": "Cuba",
       "lengths": [
@@ -565,7 +565,7 @@
       "numberPattern": "5\\d{7}"
     },
     {
-      "phone_country_id": "CW",
+      "country_id": "CW",
       "code": 599,
       "name": "Curacao",
       "lengths": [
@@ -576,7 +576,7 @@
       "numberPattern": "953[01]\\d{4}|9(?:5[12467]|6[5-9])\\d{5}"
     },
     {
-      "phone_country_id": "CY",
+      "country_id": "CY",
       "code": 357,
       "name": "Cyprus",
       "lengths": [
@@ -586,7 +586,7 @@
       "numberPattern": "9[4-79]\\d{6}"
     },
     {
-      "phone_country_id": "CZ",
+      "country_id": "CZ",
       "code": 420,
       "name": "Czechia",
       "lengths": [
@@ -596,7 +596,7 @@
       "numberPattern": "(?:60[1-8]|7(?:0[2-5]|[2379]\\d))\\d{6}"
     },
     {
-      "phone_country_id": "CI",
+      "country_id": "CI",
       "code": 225,
       "name": "Cote d’Ivoire",
       "lengths": [
@@ -606,7 +606,7 @@
       "numberPattern": "(?:0[1-9]|[457]\\d|6[014-9]|8[4-9])\\d{6}"
     },
     {
-      "phone_country_id": "DK",
+      "country_id": "DK",
       "code": 45,
       "name": "Denmark",
       "lengths": [
@@ -616,7 +616,7 @@
       "numberPattern": "(?:[2-7]\\d|8[126-9]|9[1-36-9])\\d{6}"
     },
     {
-      "phone_country_id": "DJ",
+      "country_id": "DJ",
       "code": 253,
       "name": "Djibouti",
       "lengths": [
@@ -626,7 +626,7 @@
       "numberPattern": "77\\d{6}"
     },
     {
-      "phone_country_id": "DM",
+      "country_id": "DM",
       "code": 1,
       "name": "Dominica",
       "lengths": [
@@ -636,7 +636,7 @@
       "numberPattern": "767(?:2(?:[2-4689]5|7[5-7])|31[5-7]|61[1-7])\\d{4}"
     },
     {
-      "phone_country_id": "DO",
+      "country_id": "DO",
       "code": 1,
       "name": "Dominican Republic",
       "lengths": [
@@ -646,7 +646,7 @@
       "numberPattern": "8[024]9[2-9]\\d{6}"
     },
     {
-      "phone_country_id": "EC",
+      "country_id": "EC",
       "code": 593,
       "name": "Ecuador",
       "lengths": [
@@ -656,7 +656,7 @@
       "numberPattern": "964[0-2]\\d{5}|9(?:39|[57][89]|6[0-37-9]|[89]\\d)\\d{6}"
     },
     {
-      "phone_country_id": "EG",
+      "country_id": "EG",
       "code": 20,
       "name": "Egypt",
       "lengths": [
@@ -666,7 +666,7 @@
       "numberPattern": "1[0-25]\\d{8}"
     },
     {
-      "phone_country_id": "SV",
+      "country_id": "SV",
       "code": 503,
       "name": "El Salvador",
       "lengths": [
@@ -676,7 +676,7 @@
       "numberPattern": "[67]\\d{7}"
     },
     {
-      "phone_country_id": "GQ",
+      "country_id": "GQ",
       "code": 240,
       "name": "Equatorial Guinea",
       "lengths": [
@@ -686,7 +686,7 @@
       "numberPattern": "(?:222|55[015])\\d{6}"
     },
     {
-      "phone_country_id": "ER",
+      "country_id": "ER",
       "code": 291,
       "name": "Eritrea",
       "lengths": [
@@ -696,7 +696,7 @@
       "numberPattern": "(?:17[1-3]|7\\d\\d)\\d{4}"
     },
     {
-      "phone_country_id": "EE",
+      "country_id": "EE",
       "code": 372,
       "name": "Estonia",
       "lengths": [
@@ -707,7 +707,7 @@
       "numberPattern": "(?:5\\d|8[1-4])\\d{6}|5(?:(?:[02]\\d|5[0-478])\\d|1(?:[0-8]\\d|95)|6(?:4[0-4]|5[1-589]))\\d{3}"
     },
     {
-      "phone_country_id": "SZ",
+      "country_id": "SZ",
       "code": 268,
       "name": "Eswatini",
       "lengths": [
@@ -717,7 +717,7 @@
       "numberPattern": "7[6-9]\\d{6}"
     },
     {
-      "phone_country_id": "ET",
+      "country_id": "ET",
       "code": 251,
       "name": "Ethiopia",
       "lengths": [
@@ -727,7 +727,7 @@
       "numberPattern": "9\\d{8}"
     },
     {
-      "phone_country_id": "FK",
+      "country_id": "FK",
       "code": 500,
       "name": "Falkland Islands (Islas Malvinas)",
       "lengths": [
@@ -737,7 +737,7 @@
       "numberPattern": "[56]\\d{4}"
     },
     {
-      "phone_country_id": "FO",
+      "country_id": "FO",
       "code": 298,
       "name": "Faroe Islands",
       "lengths": [
@@ -747,7 +747,7 @@
       "numberPattern": "(?:[27][1-9]|5\\d)\\d{4}"
     },
     {
-      "phone_country_id": "FJ",
+      "country_id": "FJ",
       "code": 679,
       "name": "Fiji",
       "lengths": [
@@ -757,7 +757,7 @@
       "numberPattern": "(?:[279]\\d|45|5[01568]|8[034679])\\d{5}"
     },
     {
-      "phone_country_id": "FI",
+      "country_id": "FI",
       "code": 358,
       "name": "Finland",
       "lengths": [
@@ -771,7 +771,7 @@
       "numberPattern": "(?:4[0-8]|50)\\d{4,8}"
     },
     {
-      "phone_country_id": "FR",
+      "country_id": "FR",
       "code": 33,
       "name": "France",
       "lengths": [
@@ -781,7 +781,7 @@
       "numberPattern": "700\\d{6}|(?:6\\d|7[3-9])\\d{7}"
     },
     {
-      "phone_country_id": "GF",
+      "country_id": "GF",
       "code": 594,
       "name": "French Guiana",
       "lengths": [
@@ -791,7 +791,7 @@
       "numberPattern": "694(?:[0-249]\\d|3[0-48])\\d{4}"
     },
     {
-      "phone_country_id": "PF",
+      "country_id": "PF",
       "code": 689,
       "name": "French Polynesia",
       "lengths": [
@@ -801,7 +801,7 @@
       "numberPattern": "8[7-9]\\d{6}"
     },
     {
-      "phone_country_id": "GA",
+      "country_id": "GA",
       "code": 241,
       "name": "Gabon",
       "lengths": [
@@ -812,7 +812,7 @@
       "numberPattern": "(?:0[2-7]|[2-7])\\d{6}"
     },
     {
-      "phone_country_id": "GM",
+      "country_id": "GM",
       "code": 220,
       "name": "Gambia",
       "lengths": [
@@ -822,7 +822,7 @@
       "numberPattern": "(?:[23679]\\d|5[01])\\d{5}"
     },
     {
-      "phone_country_id": "GE",
+      "country_id": "GE",
       "code": 995,
       "name": "Georgia",
       "lengths": [
@@ -832,7 +832,7 @@
       "numberPattern": "(?:5(?:[14]4|5[0157-9]|68|7[0147-9]|9[1-35-9])|790)\\d{6}"
     },
     {
-      "phone_country_id": "DE",
+      "country_id": "DE",
       "code": 49,
       "name": "Germany",
       "lengths": [
@@ -843,7 +843,7 @@
       "numberPattern": "15[0-25-9]\\d{8}|1(?:6[023]|7\\d)\\d{7,8}"
     },
     {
-      "phone_country_id": "GH",
+      "country_id": "GH",
       "code": 233,
       "name": "Ghana",
       "lengths": [
@@ -853,7 +853,7 @@
       "numberPattern": "56[01]\\d{6}|(?:2[0346-8]|5[0457])\\d{7}"
     },
     {
-      "phone_country_id": "GI",
+      "country_id": "GI",
       "code": 350,
       "name": "Gibraltar",
       "lengths": [
@@ -863,7 +863,7 @@
       "numberPattern": "(?:5[46-8]\\d|629)\\d{5}"
     },
     {
-      "phone_country_id": "GR",
+      "country_id": "GR",
       "code": 30,
       "name": "Greece",
       "lengths": [
@@ -873,7 +873,7 @@
       "numberPattern": "6(?:8[57-9]|9\\d)\\d{7}"
     },
     {
-      "phone_country_id": "GL",
+      "country_id": "GL",
       "code": 299,
       "name": "Greenland",
       "lengths": [
@@ -883,7 +883,7 @@
       "numberPattern": "(?:[25][1-9]|4[2-9])\\d{4}"
     },
     {
-      "phone_country_id": "GD",
+      "country_id": "GD",
       "code": 1,
       "name": "Grenada",
       "lengths": [
@@ -893,7 +893,7 @@
       "numberPattern": "473(?:4(?:0[2-79]|1[04-9]|2[0-5]|58)|5(?:2[01]|3[3-8])|901)\\d{4}"
     },
     {
-      "phone_country_id": "GP",
+      "country_id": "GP",
       "code": 590,
       "name": "Guadeloupe",
       "lengths": [
@@ -903,7 +903,7 @@
       "numberPattern": "69(?:0\\d\\d|1(?:2[29]|3[0-5]))\\d{4}"
     },
     {
-      "phone_country_id": "GU",
+      "country_id": "GU",
       "code": 1,
       "name": "Guam",
       "lengths": [
@@ -913,7 +913,7 @@
       "numberPattern": "671(?:3(?:00|3[39]|4[349]|55|6[26])|4(?:00|56|7[1-9]|8[0236-9])|5(?:55|6[2-5]|88)|6(?:3[2-578]|4[24-9]|5[34]|78|8[235-9])|7(?:[0479]7|2[0167]|3[45]|8[7-9])|8(?:[2-57-9]8|6[48])|9(?:2[29]|6[79]|7[1279]|8[7-9]|9[78]))\\d{4}"
     },
     {
-      "phone_country_id": "GT",
+      "country_id": "GT",
       "code": 502,
       "name": "Guatemala",
       "lengths": [
@@ -923,7 +923,7 @@
       "numberPattern": "[3-5]\\d{7}"
     },
     {
-      "phone_country_id": "GG",
+      "country_id": "GG",
       "code": 44,
       "name": "Guernsey",
       "lengths": [
@@ -933,7 +933,7 @@
       "numberPattern": "7(?:(?:781|839)\\d|911[17])\\d{5}"
     },
     {
-      "phone_country_id": "GN",
+      "country_id": "GN",
       "code": 224,
       "name": "Guinea",
       "lengths": [
@@ -943,7 +943,7 @@
       "numberPattern": "6[02356]\\d{7}"
     },
     {
-      "phone_country_id": "GW",
+      "country_id": "GW",
       "code": 245,
       "name": "Guinea-Bissau",
       "lengths": [
@@ -953,7 +953,7 @@
       "numberPattern": "9(?:5\\d|6[569]|77)\\d{6}"
     },
     {
-      "phone_country_id": "GY",
+      "country_id": "GY",
       "code": 592,
       "name": "Guyana",
       "lengths": [
@@ -963,7 +963,7 @@
       "numberPattern": "6\\d{6}"
     },
     {
-      "phone_country_id": "HT",
+      "country_id": "HT",
       "code": 509,
       "name": "Haiti",
       "lengths": [
@@ -973,7 +973,7 @@
       "numberPattern": "[34]\\d{7}"
     },
     {
-      "phone_country_id": "HN",
+      "country_id": "HN",
       "code": 504,
       "name": "Honduras",
       "lengths": [
@@ -983,7 +983,7 @@
       "numberPattern": "[37-9]\\d{7}"
     },
     {
-      "phone_country_id": "HK",
+      "country_id": "HK",
       "code": 852,
       "name": "Hong Kong",
       "lengths": [
@@ -993,7 +993,7 @@
       "numberPattern": "(?:46(?:0[0-6]|1[0-2]|4[0-57-9])|5730|(?:626|848)[01]|707[1-5]|929[03-9])\\d{4}|(?:5(?:[1-59][0-46-9]|6[0-4689]|7[0-2469])|6(?:0[1-9]|[13-59]\\d|[268][0-57-9]|7[0-79])|9(?:0[1-9]|1[02-9]|[2358][0-8]|[467]\\d))\\d{5}"
     },
     {
-      "phone_country_id": "HU",
+      "country_id": "HU",
       "code": 36,
       "name": "Hungary",
       "lengths": [
@@ -1003,7 +1003,7 @@
       "numberPattern": "(?:[257]0|3[01])\\d{7}"
     },
     {
-      "phone_country_id": "IS",
+      "country_id": "IS",
       "code": 354,
       "name": "Iceland",
       "lengths": [
@@ -1014,7 +1014,7 @@
       "numberPattern": "(?:38[589]\\d\\d|6(?:1[1-8]|2[0-6]|3[027-9]|4[014679]|5[0159]|6[0-69]|70|8[06-8]|9\\d)|7(?:5[057]|[6-8]\\d|9[0-3])|8(?:2[0-59]|[3469]\\d|5[1-9]|8[28]))\\d{4}"
     },
     {
-      "phone_country_id": "IN",
+      "country_id": "IN",
       "code": 91,
       "name": "India",
       "lengths": [
@@ -1024,7 +1024,7 @@
       "numberPattern": "(?:6(?:1279|350[0-6])|7(?:3(?:1(?:11|7[02-8])|411)|4[47](?:11|7[02-8])|5111|700[02-9]|88(?:11|7[02-9])|9(?:313|79[07-9]))|8(?:079[04-9]|(?:16|2[014]|3[126]|6[136]|7[78]|8[34]|91)7[02-8]))\\d{5}|7(?:28[6-8]|3(?:2[0-49]|9[2-5])|4(?:1[2-4]|[29][0-7]|3[0-8]|[56]\\d|8[0-24-7])|5(?:2[1-3]|9[0-6])|6(?:0[5689]|2[5-9]|3[02-8]|4\\d|5[0-367])|70[13-7])[089]\\d{5}|(?:6(?:0(?:0[0-3569]|26|33)|2(?:[06]\\d|3[02589]|8[0-479]|9[0-79])|3(?:0[0-79]|5[1-9]|6[0-4679]|7[0-24-9]|[89]\\d)|9(?:0[019]|13))|7(?:0\\d\\d|19[0-5]|2(?:[0235-79]\\d|[14][017-9]|8[0-59])|3(?:[05-8]\\d|1[089]|2[5-8]|3[017-9]|4[07-9]|9[016-9])|4(?:0\\d|1[015-9]|[29][89]|39|[47][089]|8[389])|5(?:[0346-8]\\d|1[07-9]|2[04-9]|5[017-9]|9[7-9])|6(?:0[0-47]|1[0-257-9]|2[0-4]|3[19]|5[4589]|[6-9]\\d)|7(?:0[289]|[1-9]\\d)|8(?:[0-79]\\d|8[089])|9(?:[089]\\d|7[02-8]))|8(?:0(?:[01589]\\d|6[67]|7[02-8])|1(?:[0-57-9]\\d|6[089])|2(?:[014][089]|[235-9]\\d)|3(?:[03-57-9]\\d|[126][089])|[45]\\d\\d|6(?:[02457-9]\\d|[136][089])|7(?:0[07-9]|[1-69]\\d|[78][089])|8(?:[0-25-9]\\d|3[089]|4[0489])|9(?:[02-9]\\d|1[0289]))|9\\d{3})\\d{6}"
     },
     {
-      "phone_country_id": "ID",
+      "country_id": "ID",
       "code": 62,
       "name": "Indonesia",
       "lengths": [
@@ -1037,7 +1037,7 @@
       "numberPattern": "8[1-35-9]\\d{7,10}"
     },
     {
-      "phone_country_id": "IR",
+      "country_id": "IR",
       "code": 98,
       "name": "Iran",
       "lengths": [
@@ -1047,7 +1047,7 @@
       "numberPattern": "9(?:(?:0(?:[1-35]\\d|44)|(?:[13]\\d|2[0-2])\\d)\\d|9(?:(?:[0-2]\\d|44)\\d|510|8(?:1\\d|88)|9(?:0[013]|1[0134]|21|77|9[6-9])))\\d{5}"
     },
     {
-      "phone_country_id": "IQ",
+      "country_id": "IQ",
       "code": 964,
       "name": "Iraq",
       "lengths": [
@@ -1057,7 +1057,7 @@
       "numberPattern": "7[3-9]\\d{8}"
     },
     {
-      "phone_country_id": "IE",
+      "country_id": "IE",
       "code": 353,
       "name": "Ireland",
       "lengths": [
@@ -1067,7 +1067,7 @@
       "numberPattern": "8(?:22|[35-9]\\d)\\d{6}"
     },
     {
-      "phone_country_id": "IM",
+      "country_id": "IM",
       "code": 44,
       "name": "Isle of Man",
       "lengths": [
@@ -1077,7 +1077,7 @@
       "numberPattern": "7(?:4576|[59]24\\d|624[0-4689])\\d{5}"
     },
     {
-      "phone_country_id": "IL",
+      "country_id": "IL",
       "code": 972,
       "name": "Israel",
       "lengths": [
@@ -1087,7 +1087,7 @@
       "numberPattern": "5(?:(?:[0-489][2-9]|6\\d)\\d|5(?:01|2[2-5]|3[23]|4[45]|5[05689]|6[6-8]|7[0-267]|8[7-9]|9[1-9]))\\d{5}"
     },
     {
-      "phone_country_id": "IT",
+      "country_id": "IT",
       "code": 39,
       "name": "Italy",
       "lengths": [
@@ -1099,7 +1099,7 @@
       "numberPattern": "33\\d{9}|3[1-9]\\d{8}|3[2-9]\\d{7}"
     },
     {
-      "phone_country_id": "JM",
+      "country_id": "JM",
       "code": 1,
       "name": "Jamaica",
       "lengths": [
@@ -1109,7 +1109,7 @@
       "numberPattern": "(?:658295|876(?:(?:2[14-9]|[348]\\d)\\d|5(?:0[13-9]|17|[2-57-9]\\d|6[0-24-9])|7(?:0[07]|7\\d|8[1-47-9]|9[0-36-9])|9(?:[01]9|9[0579])))\\d{4}"
     },
     {
-      "phone_country_id": "JP",
+      "country_id": "JP",
       "code": 81,
       "name": "Japan",
       "lengths": [
@@ -1119,7 +1119,7 @@
       "numberPattern": "[7-9]0[1-9]\\d{7}"
     },
     {
-      "phone_country_id": "JE",
+      "country_id": "JE",
       "code": 44,
       "name": "Jersey",
       "lengths": [
@@ -1129,7 +1129,7 @@
       "numberPattern": "7(?:(?:(?:50|82)9|937)\\d|7(?:00[378]|97[7-9]))\\d{5}"
     },
     {
-      "phone_country_id": "JO",
+      "country_id": "JO",
       "code": 962,
       "name": "Jordan",
       "lengths": [
@@ -1139,7 +1139,7 @@
       "numberPattern": "7(?:55[0-49]|(?:7[025-9]|[89][0-25-9])\\d)\\d{5}"
     },
     {
-      "phone_country_id": "KZ",
+      "country_id": "KZ",
       "code": 7,
       "name": "Kazakhstan",
       "lengths": [
@@ -1149,7 +1149,7 @@
       "numberPattern": "7(?:0[0-2578]|47|6[02-4]|7[15-8]|85)\\d{7}"
     },
     {
-      "phone_country_id": "KE",
+      "country_id": "KE",
       "code": 254,
       "name": "Kenya",
       "lengths": [
@@ -1159,7 +1159,7 @@
       "numberPattern": "[17]\\d{8}"
     },
     {
-      "phone_country_id": "KI",
+      "country_id": "KI",
       "code": 686,
       "name": "Kiribati",
       "lengths": [
@@ -1169,7 +1169,7 @@
       "numberPattern": "73140\\d{3}|(?:630[01]|730[0-5])\\d{4}|[67]200[01]\\d{3}"
     },
     {
-      "phone_country_id": "XK",
+      "country_id": "XK",
       "code": 383,
       "name": "Kosovo",
       "lengths": [
@@ -1179,7 +1179,7 @@
       "numberPattern": "4[3-79]\\d{6}"
     },
     {
-      "phone_country_id": "KW",
+      "country_id": "KW",
       "code": 965,
       "name": "Kuwait",
       "lengths": [
@@ -1189,7 +1189,7 @@
       "numberPattern": "(?:52(?:22|5[25])|6(?:222|70[013-9]|93[039])|9(?:11[01]|702))\\d{4}|(?:5(?:[05]\\d|1[0-7]|6[56])|6(?:0[034679]|5[015-9]|6\\d|7[67]|9[069])|9(?:0[09]|22|4[01479]|55|6[0679]|7[1-9]|8[057-9]|9\\d))\\d{5}"
     },
     {
-      "phone_country_id": "KG",
+      "country_id": "KG",
       "code": 996,
       "name": "Kyrgyzstan",
       "lengths": [
@@ -1199,7 +1199,7 @@
       "numberPattern": "(?:2(?:0[0-35]|2\\d)|5(?:0[0-57-9]|[124-7]\\d)|7(?:[07]\\d|55)|99[69])\\d{6}"
     },
     {
-      "phone_country_id": "LA",
+      "country_id": "LA",
       "code": 856,
       "name": "Laos",
       "lengths": [
@@ -1209,7 +1209,7 @@
       "numberPattern": "20(?:[29]\\d|5[24-689]|7[6-8])\\d{6}"
     },
     {
-      "phone_country_id": "LV",
+      "country_id": "LV",
       "code": 371,
       "name": "Latvia",
       "lengths": [
@@ -1219,7 +1219,7 @@
       "numberPattern": "2\\d{7}"
     },
     {
-      "phone_country_id": "LB",
+      "country_id": "LB",
       "code": 961,
       "name": "Lebanon",
       "lengths": [
@@ -1230,7 +1230,7 @@
       "numberPattern": "(?:(?:3|81)\\d|7(?:[01]\\d|6[013-9]|8[89]|9[1-3]))\\d{5}"
     },
     {
-      "phone_country_id": "LS",
+      "country_id": "LS",
       "code": 266,
       "name": "Lesotho",
       "lengths": [
@@ -1240,7 +1240,7 @@
       "numberPattern": "[56]\\d{7}"
     },
     {
-      "phone_country_id": "LR",
+      "country_id": "LR",
       "code": 231,
       "name": "Liberia",
       "lengths": [
@@ -1251,7 +1251,7 @@
       "numberPattern": "(?:(?:330|555|(?:77|88)\\d)\\d|4[67])\\d{5}|5\\d{6}"
     },
     {
-      "phone_country_id": "LY",
+      "country_id": "LY",
       "code": 218,
       "name": "Libya",
       "lengths": [
@@ -1261,7 +1261,7 @@
       "numberPattern": "9[1-6]\\d{7}"
     },
     {
-      "phone_country_id": "LI",
+      "country_id": "LI",
       "code": 423,
       "name": "Liechtenstein",
       "lengths": [
@@ -1272,7 +1272,7 @@
       "numberPattern": "756\\d{4}|(?:6(?:499|5[0-3]\\d|6(?:0[0-7]|10|2[06-9]|39))|7[37-9])\\d{5}"
     },
     {
-      "phone_country_id": "LT",
+      "country_id": "LT",
       "code": 370,
       "name": "Lithuania",
       "lengths": [
@@ -1282,7 +1282,7 @@
       "numberPattern": "6\\d{7}"
     },
     {
-      "phone_country_id": "LU",
+      "country_id": "LU",
       "code": 352,
       "name": "Luxembourg",
       "lengths": [
@@ -1292,7 +1292,7 @@
       "numberPattern": "6(?:[269][18]|5[158]|7[189]|81)\\d{6}"
     },
     {
-      "phone_country_id": "MO",
+      "country_id": "MO",
       "code": 853,
       "name": "Macao",
       "lengths": [
@@ -1302,7 +1302,7 @@
       "numberPattern": "6(?:[2356]\\d\\d|8(?:[02][5-9]|[1478]\\d|[356][0-4]))\\d{4}"
     },
     {
-      "phone_country_id": "MG",
+      "country_id": "MG",
       "code": 261,
       "name": "Madagascar",
       "lengths": [
@@ -1312,7 +1312,7 @@
       "numberPattern": "3[2-49]\\d{7}"
     },
     {
-      "phone_country_id": "MW",
+      "country_id": "MW",
       "code": 265,
       "name": "Malawi",
       "lengths": [
@@ -1322,7 +1322,7 @@
       "numberPattern": "111\\d{6}|(?:77|88|99)\\d{7}"
     },
     {
-      "phone_country_id": "MY",
+      "country_id": "MY",
       "code": 60,
       "name": "Malaysia",
       "lengths": [
@@ -1333,7 +1333,7 @@
       "numberPattern": "1(?:4400|8(?:47|8[27])[0-4])\\d{4}|1(?:0(?:[23568]\\d|4[0-6]|7[016-9]|9[0-8])|1(?:[1-5]\\d\\d|6(?:0[5-9]|[1-9]\\d))|(?:[23679][2-9]|4[235-9]|59\\d)\\d|8(?:1[23]|[236]\\d|4[06]|5[7-9]|7[016-9]|8[01]|9[0-8]))\\d{5}"
     },
     {
-      "phone_country_id": "MV",
+      "country_id": "MV",
       "code": 960,
       "name": "Maldives",
       "lengths": [
@@ -1343,7 +1343,7 @@
       "numberPattern": "46[46]\\d{4}|(?:7[2-9]|9[14-9])\\d{5}"
     },
     {
-      "phone_country_id": "ML",
+      "country_id": "ML",
       "code": 223,
       "name": "Mali",
       "lengths": [
@@ -1353,7 +1353,7 @@
       "numberPattern": "2(?:079|17\\d)\\d{4}|(?:50|[679]\\d|8[239])\\d{6}"
     },
     {
-      "phone_country_id": "MT",
+      "country_id": "MT",
       "code": 356,
       "name": "Malta",
       "lengths": [
@@ -1363,7 +1363,7 @@
       "numberPattern": "(?:7(?:210|[79]\\d\\d)|9(?:2(?:1[01]|31)|69[67]|8(?:1[1-3]|89|97)|9\\d\\d))\\d{4}"
     },
     {
-      "phone_country_id": "MH",
+      "country_id": "MH",
       "code": 692,
       "name": "Marshall Islands",
       "lengths": [
@@ -1373,7 +1373,7 @@
       "numberPattern": "(?:(?:23|54)5|329|45[56])\\d{4}"
     },
     {
-      "phone_country_id": "MQ",
+      "country_id": "MQ",
       "code": 596,
       "name": "Martinique",
       "lengths": [
@@ -1383,7 +1383,7 @@
       "numberPattern": "69(?:6(?:[0-47-9]\\d|5[0-6]|6[0-4])|727)\\d{4}"
     },
     {
-      "phone_country_id": "MR",
+      "country_id": "MR",
       "code": 222,
       "name": "Mauritania",
       "lengths": [
@@ -1393,7 +1393,7 @@
       "numberPattern": "[2-4][0-46-9]\\d{6}"
     },
     {
-      "phone_country_id": "MU",
+      "country_id": "MU",
       "code": 230,
       "name": "Mauritius",
       "lengths": [
@@ -1403,7 +1403,7 @@
       "numberPattern": "5(?:4(?:2[1-389]|7[1-9])|87[15-8])\\d{4}|5(?:2[589]|4[3489]|7\\d|8[0-689]|9[0-8])\\d{5}"
     },
     {
-      "phone_country_id": "YT",
+      "country_id": "YT",
       "code": 262,
       "name": "Mayotte",
       "lengths": [
@@ -1413,7 +1413,7 @@
       "numberPattern": "639(?:0[0-79]|1[019]|[267]\\d|3[09]|[45]0|9[04-79])\\d{4}"
     },
     {
-      "phone_country_id": "MX",
+      "country_id": "MX",
       "code": 52,
       "name": "Mexico",
       "lengths": [
@@ -1423,7 +1423,7 @@
       "numberPattern": "1(?:2(?:2[1-9]|3[1-35-8]|4[13-9]|7[1-689]|8[1-578]|9[467])|3(?:1[1-79]|[2458][1-9]|3\\d|7[1-8]|9[1-5])|4(?:1[1-57-9]|[24-7][1-9]|3[1-8]|8[1-35-9]|9[2-689])|5(?:[56]\\d|88|9[1-79])|6(?:1[2-68]|[2-4][1-9]|5[1-3689]|6[1-57-9]|7[1-7]|8[67]|9[4-8])|7(?:[1-467][1-9]|5[13-9]|8[1-69]|9[17])|8(?:1\\d|2[13-689]|3[1-6]|4[124-6]|6[1246-9]|7[1-378]|9[12479])|9(?:1[346-9]|2[1-4]|3[2-46-8]|5[1348]|[69][1-9]|7[12]|8[1-8]))\\d{7}"
     },
     {
-      "phone_country_id": "FM",
+      "country_id": "FM",
       "code": 691,
       "name": "Micronesia",
       "lengths": [
@@ -1433,7 +1433,7 @@
       "numberPattern": "(?:3[2357]0[1-9]|9[2-7]\\d\\d)\\d{3}"
     },
     {
-      "phone_country_id": "MD",
+      "country_id": "MD",
       "code": 373,
       "name": "Moldova",
       "lengths": [
@@ -1443,7 +1443,7 @@
       "numberPattern": "(?:562|6\\d\\d|7(?:[189]\\d|6[07]|7[457-9]))\\d{5}"
     },
     {
-      "phone_country_id": "MC",
+      "country_id": "MC",
       "code": 377,
       "name": "Monaco",
       "lengths": [
@@ -1454,7 +1454,7 @@
       "numberPattern": "4(?:4\\d|5[1-9])\\d{5}|(?:3|6\\d)\\d{7}"
     },
     {
-      "phone_country_id": "MN",
+      "country_id": "MN",
       "code": 976,
       "name": "Mongolia",
       "lengths": [
@@ -1464,7 +1464,7 @@
       "numberPattern": "83[01]\\d{5}|(?:8[05689]|9[013-9])\\d{6}"
     },
     {
-      "phone_country_id": "ME",
+      "country_id": "ME",
       "code": 382,
       "name": "Montenegro",
       "lengths": [
@@ -1474,7 +1474,7 @@
       "numberPattern": "6(?:00|3[024]|6[0-25]|[7-9]\\d)\\d{5}"
     },
     {
-      "phone_country_id": "MS",
+      "country_id": "MS",
       "code": 1,
       "name": "Montserrat",
       "lengths": [
@@ -1484,7 +1484,7 @@
       "numberPattern": "66449[2-6]\\d{4}"
     },
     {
-      "phone_country_id": "MA",
+      "country_id": "MA",
       "code": 212,
       "name": "Morocco",
       "lengths": [
@@ -1494,7 +1494,7 @@
       "numberPattern": "(?:6(?:[0-79]\\d|8[0-247-9])|7(?:0[06-8]|6[1267]|7[0-27]))\\d{6}"
     },
     {
-      "phone_country_id": "MZ",
+      "country_id": "MZ",
       "code": 258,
       "name": "Mozambique",
       "lengths": [
@@ -1504,7 +1504,7 @@
       "numberPattern": "8[2-7]\\d{7}"
     },
     {
-      "phone_country_id": "MM",
+      "country_id": "MM",
       "code": 95,
       "name": "Myanmar (Burma)",
       "lengths": [
@@ -1517,7 +1517,7 @@
       "numberPattern": "(?:17[01]|9(?:2(?:[0-4]|[56]\\d\\d)|(?:3(?:[0-36]|4\\d)|(?:6[89]|89)\\d|7(?:3|5[0-2]|[6-9]\\d))\\d|4(?:(?:[0245]\\d|[1379])\\d|88)|5[0-6]|9(?:[089]|[5-7]\\d\\d))\\d)\\d{4}|9[69]1\\d{6}|9[68]\\d{6}"
     },
     {
-      "phone_country_id": "NA",
+      "country_id": "NA",
       "code": 264,
       "name": "Namibia",
       "lengths": [
@@ -1527,7 +1527,7 @@
       "numberPattern": "(?:60|8[1245])\\d{7}"
     },
     {
-      "phone_country_id": "NR",
+      "country_id": "NR",
       "code": 674,
       "name": "Nauru",
       "lengths": [
@@ -1537,7 +1537,7 @@
       "numberPattern": "55[4-9]\\d{4}"
     },
     {
-      "phone_country_id": "NP",
+      "country_id": "NP",
       "code": 977,
       "name": "Nepal",
       "lengths": [
@@ -1547,7 +1547,7 @@
       "numberPattern": "9(?:6[0-3]|7[245]|8[0-24-68])\\d{7}"
     },
     {
-      "phone_country_id": "NL",
+      "country_id": "NL",
       "code": 31,
       "name": "Netherlands",
       "lengths": [
@@ -1557,7 +1557,7 @@
       "numberPattern": "6[1-58]\\d{7}"
     },
     {
-      "phone_country_id": "NC",
+      "country_id": "NC",
       "code": 687,
       "name": "New Caledonia",
       "lengths": [
@@ -1567,7 +1567,7 @@
       "numberPattern": "(?:5[0-4]|[79]\\d|8[0-79])\\d{4}"
     },
     {
-      "phone_country_id": "NZ",
+      "country_id": "NZ",
       "code": 64,
       "name": "New Zealand",
       "lengths": [
@@ -1579,7 +1579,7 @@
       "numberPattern": "2[0-28]\\d{8}|2[0-27-9]\\d{7}|21\\d{6}"
     },
     {
-      "phone_country_id": "NI",
+      "country_id": "NI",
       "code": 505,
       "name": "Nicaragua",
       "lengths": [
@@ -1589,7 +1589,7 @@
       "numberPattern": "(?:5(?:5[0-7]|[78]\\d)|6(?:20|3[035]|4[045]|5[05]|77|8[1-9]|9[059])|(?:7[5-8]|8\\d)\\d)\\d{5}"
     },
     {
-      "phone_country_id": "NE",
+      "country_id": "NE",
       "code": 227,
       "name": "Niger",
       "lengths": [
@@ -1599,7 +1599,7 @@
       "numberPattern": "(?:8[04589]|9\\d)\\d{6}"
     },
     {
-      "phone_country_id": "NG",
+      "country_id": "NG",
       "code": 234,
       "name": "Nigeria",
       "lengths": [
@@ -1609,7 +1609,7 @@
       "numberPattern": "(?:707[0-3]|8(?:01|19)[01])\\d{6}|(?:70[1-689]|8(?:0[2-9]|1[0-8])|90[1-35-9])\\d{7}"
     },
     {
-      "phone_country_id": "NU",
+      "country_id": "NU",
       "code": 683,
       "name": "Niue",
       "lengths": [
@@ -1619,7 +1619,7 @@
       "numberPattern": "888[4-9]\\d{3}"
     },
     {
-      "phone_country_id": "NF",
+      "country_id": "NF",
       "code": 672,
       "name": "Norfolk Island",
       "lengths": [
@@ -1629,7 +1629,7 @@
       "numberPattern": "3[58]\\d{4}"
     },
     {
-      "phone_country_id": "KP",
+      "country_id": "KP",
       "code": 850,
       "name": "North Korea",
       "lengths": [
@@ -1639,7 +1639,7 @@
       "numberPattern": "19[1-3]\\d{7}"
     },
     {
-      "phone_country_id": "MK",
+      "country_id": "MK",
       "code": 389,
       "name": "North Macedonia",
       "lengths": [
@@ -1649,7 +1649,7 @@
       "numberPattern": "7(?:(?:[0-25-8]\\d|3[2-4]|9[23])\\d|421)\\d{4}"
     },
     {
-      "phone_country_id": "MP",
+      "country_id": "MP",
       "code": 1,
       "name": "Northern Mariana Islands",
       "lengths": [
@@ -1659,7 +1659,7 @@
       "numberPattern": "670(?:2(?:3[3-7]|56|8[5-8])|32[1-38]|4(?:33|8[348])|5(?:32|55|88)|6(?:64|70|82)|78[3589]|8[3-9]8|989)\\d{4}"
     },
     {
-      "phone_country_id": "NO",
+      "country_id": "NO",
       "code": 47,
       "name": "Norway",
       "lengths": [
@@ -1669,7 +1669,7 @@
       "numberPattern": "(?:4[015-8]|5[89]|9\\d)\\d{6}"
     },
     {
-      "phone_country_id": "OM",
+      "country_id": "OM",
       "code": 968,
       "name": "Oman",
       "lengths": [
@@ -1679,7 +1679,7 @@
       "numberPattern": "90[1-9]\\d{5}|(?:7[129]|9[1-9])\\d{6}"
     },
     {
-      "phone_country_id": "PK",
+      "country_id": "PK",
       "code": 92,
       "name": "Pakistan",
       "lengths": [
@@ -1689,7 +1689,7 @@
       "numberPattern": "3(?:[014]\\d|2[0-5]|3[0-7]|55|64)\\d{7}"
     },
     {
-      "phone_country_id": "PW",
+      "country_id": "PW",
       "code": 680,
       "name": "Palau",
       "lengths": [
@@ -1699,7 +1699,7 @@
       "numberPattern": "(?:6[2-4689]0|77\\d|88[0-4])\\d{4}"
     },
     {
-      "phone_country_id": "PS",
+      "country_id": "PS",
       "code": 970,
       "name": "Palestine",
       "lengths": [
@@ -1709,7 +1709,7 @@
       "numberPattern": "5[69]\\d{7}"
     },
     {
-      "phone_country_id": "PA",
+      "country_id": "PA",
       "code": 507,
       "name": "Panama",
       "lengths": [
@@ -1720,7 +1720,7 @@
       "numberPattern": "(?:1[16]1|21[89]|6(?:[02-9]\\d|1[0-6])\\d|8(?:1[01]|7[23]))\\d{4}"
     },
     {
-      "phone_country_id": "PG",
+      "country_id": "PG",
       "code": 675,
       "name": "Papua New Guinea",
       "lengths": [
@@ -1730,7 +1730,7 @@
       "numberPattern": "775\\d{5}|(?:7[0-689]|81)\\d{6}"
     },
     {
-      "phone_country_id": "PY",
+      "country_id": "PY",
       "code": 595,
       "name": "Paraguay",
       "lengths": [
@@ -1740,7 +1740,7 @@
       "numberPattern": "9(?:51|6[129]|[78][1-6]|9[1-5])\\d{6}"
     },
     {
-      "phone_country_id": "PE",
+      "country_id": "PE",
       "code": 51,
       "name": "Peru",
       "lengths": [
@@ -1750,7 +1750,7 @@
       "numberPattern": "9\\d{8}"
     },
     {
-      "phone_country_id": "PH",
+      "country_id": "PH",
       "code": 63,
       "name": "Philippines",
       "lengths": [
@@ -1760,7 +1760,7 @@
       "numberPattern": "(?:81[37]|9(?:0[5-9]|1[024-9]|2[0-35-9]|[35]\\d|4[235-9]|6[0-25-8]|7[1-9]|8[19]|9[4-9]))\\d{7}"
     },
     {
-      "phone_country_id": "PL",
+      "country_id": "PL",
       "code": 48,
       "name": "Poland",
       "lengths": [
@@ -1770,7 +1770,7 @@
       "numberPattern": "(?:45|5[0137]|6[069]|7[2389]|88)\\d{7}"
     },
     {
-      "phone_country_id": "PT",
+      "country_id": "PT",
       "code": 351,
       "name": "Portugal",
       "lengths": [
@@ -1780,7 +1780,7 @@
       "numberPattern": "9(?:[1-36]\\d\\d|480)\\d{5}"
     },
     {
-      "phone_country_id": "PR",
+      "country_id": "PR",
       "code": 1,
       "name": "Puerto Rico",
       "lengths": [
@@ -1790,7 +1790,7 @@
       "numberPattern": "(?:787|939)[2-9]\\d{6}"
     },
     {
-      "phone_country_id": "QA",
+      "country_id": "QA",
       "code": 974,
       "name": "Qatar",
       "lengths": [
@@ -1800,7 +1800,7 @@
       "numberPattern": "[35-7]\\d{7}"
     },
     {
-      "phone_country_id": "RO",
+      "country_id": "RO",
       "code": 40,
       "name": "Romania",
       "lengths": [
@@ -1810,7 +1810,7 @@
       "numberPattern": "7120\\d{5}|7(?:[02-7]\\d|1[01]|8[03-8]|99)\\d{6}"
     },
     {
-      "phone_country_id": "RU",
+      "country_id": "RU",
       "code": 7,
       "name": "Russia",
       "lengths": [
@@ -1820,7 +1820,7 @@
       "numberPattern": "9\\d{9}"
     },
     {
-      "phone_country_id": "RW",
+      "country_id": "RW",
       "code": 250,
       "name": "Rwanda",
       "lengths": [
@@ -1830,7 +1830,7 @@
       "numberPattern": "7[238]\\d{7}"
     },
     {
-      "phone_country_id": "RE",
+      "country_id": "RE",
       "code": 262,
       "name": "Reunion",
       "lengths": [
@@ -1840,7 +1840,7 @@
       "numberPattern": "69(?:2\\d\\d|3(?:0[0-46]|1[013]|2[0-2]|3[0-39]|4\\d|5[05]|6[0-26]|7[0-27]|8[0-38]|9[0-479]))\\d{4}"
     },
     {
-      "phone_country_id": "WS",
+      "country_id": "WS",
       "code": 685,
       "name": "Samoa",
       "lengths": [
@@ -1851,7 +1851,7 @@
       "numberPattern": "(?:7[25-7]|8(?:[3-7]|9\\d{3}))\\d{5}"
     },
     {
-      "phone_country_id": "SM",
+      "country_id": "SM",
       "code": 378,
       "name": "San Marino",
       "lengths": [
@@ -1861,7 +1861,7 @@
       "numberPattern": "6[16]\\d{6}"
     },
     {
-      "phone_country_id": "SA",
+      "country_id": "SA",
       "code": 966,
       "name": "Saudi Arabia",
       "lengths": [
@@ -1871,7 +1871,7 @@
       "numberPattern": "5(?:[013-689]\\d|7[0-36-8])\\d{6}"
     },
     {
-      "phone_country_id": "SN",
+      "country_id": "SN",
       "code": 221,
       "name": "Senegal",
       "lengths": [
@@ -1881,7 +1881,7 @@
       "numberPattern": "7(?:[06-8]\\d|21|90)\\d{6}"
     },
     {
-      "phone_country_id": "RS",
+      "country_id": "RS",
       "code": 381,
       "name": "Serbia",
       "lengths": [
@@ -1893,7 +1893,7 @@
       "numberPattern": "6(?:[0-689]|7\\d)\\d{6,7}"
     },
     {
-      "phone_country_id": "SC",
+      "country_id": "SC",
       "code": 248,
       "name": "Seychelles",
       "lengths": [
@@ -1903,7 +1903,7 @@
       "numberPattern": "2[5-8]\\d{5}"
     },
     {
-      "phone_country_id": "SL",
+      "country_id": "SL",
       "code": 232,
       "name": "Sierra Leone",
       "lengths": [
@@ -1913,7 +1913,7 @@
       "numberPattern": "(?:2[15]|3[013-5]|4[04]|5[05]|66|7[5-9]|8[08]|99)\\d{6}"
     },
     {
-      "phone_country_id": "SG",
+      "country_id": "SG",
       "code": 65,
       "name": "Singapore",
       "lengths": [
@@ -1923,7 +1923,7 @@
       "numberPattern": "(?:8[1-8]|9[0-8])\\d{6}"
     },
     {
-      "phone_country_id": "SX",
+      "country_id": "SX",
       "code": 1,
       "name": "Sint Maarten",
       "lengths": [
@@ -1933,7 +1933,7 @@
       "numberPattern": "7215(?:1[02]|2\\d|5[034679]|8[014-8])\\d{4}"
     },
     {
-      "phone_country_id": "SK",
+      "country_id": "SK",
       "code": 421,
       "name": "Slovakia",
       "lengths": [
@@ -1943,7 +1943,7 @@
       "numberPattern": "909[1-9]\\d{5}|9(?:0[1-8]|1[0-24-9]|[45]\\d)\\d{6}"
     },
     {
-      "phone_country_id": "SI",
+      "country_id": "SI",
       "code": 386,
       "name": "Slovenia",
       "lengths": [
@@ -1953,7 +1953,7 @@
       "numberPattern": "6(?:5(?:1\\d|55|[67]0)|9(?:10|[69]\\d))\\d{4}|(?:[37][01]|4[0139]|51|6[48])\\d{6}"
     },
     {
-      "phone_country_id": "SB",
+      "country_id": "SB",
       "code": 677,
       "name": "Solomon Islands",
       "lengths": [
@@ -1964,7 +1964,7 @@
       "numberPattern": "48\\d{3}|(?:(?:7[1-9]|8[4-9])\\d|9(?:1[2-9]|2[013-9]|3[0-2]|[46]\\d|5[0-46-9]|7[0-689]|8[0-79]|9[0-8]))\\d{4}"
     },
     {
-      "phone_country_id": "SO",
+      "country_id": "SO",
       "code": 252,
       "name": "Somalia",
       "lengths": [
@@ -1976,7 +1976,7 @@
       "numberPattern": "28\\d{5}|(?:6[1-9]|79)\\d{6,7}|(?:15|24|(?:3[59]|4[89]|8[08])\\d|60|7[1-8]|9(?:0[67]|[2-9]))\\d{6}"
     },
     {
-      "phone_country_id": "ZA",
+      "country_id": "ZA",
       "code": 27,
       "name": "South Africa",
       "lengths": [
@@ -1990,7 +1990,7 @@
       "numberPattern": "8[1-4]\\d{3,7}|(?:6\\d|7[0-46-9]|85)\\d{7}"
     },
     {
-      "phone_country_id": "KR",
+      "country_id": "KR",
       "code": 82,
       "name": "South Korea",
       "lengths": [
@@ -2001,7 +2001,7 @@
       "numberPattern": "1[0-26-9]\\d{7,8}"
     },
     {
-      "phone_country_id": "SS",
+      "country_id": "SS",
       "code": 211,
       "name": "South Sudan",
       "lengths": [
@@ -2011,7 +2011,7 @@
       "numberPattern": "(?:12|9[1257])\\d{7}"
     },
     {
-      "phone_country_id": "ES",
+      "country_id": "ES",
       "code": 34,
       "name": "Spain",
       "lengths": [
@@ -2021,7 +2021,7 @@
       "numberPattern": "9(?:6906(?:09|10)|7390\\d\\d)\\d\\d|(?:6\\d|7[1-48])\\d{7}"
     },
     {
-      "phone_country_id": "LK",
+      "country_id": "LK",
       "code": 94,
       "name": "Sri Lanka",
       "lengths": [
@@ -2031,7 +2031,7 @@
       "numberPattern": "7[0-25-8]\\d{7}"
     },
     {
-      "phone_country_id": "BL",
+      "country_id": "BL",
       "code": 590,
       "name": "St. Barthelemy",
       "lengths": [
@@ -2041,7 +2041,7 @@
       "numberPattern": "69(?:0\\d\\d|1(?:2[29]|3[0-5]))\\d{4}"
     },
     {
-      "phone_country_id": "SH",
+      "country_id": "SH",
       "code": 290,
       "name": "St. Helena",
       "lengths": [
@@ -2051,7 +2051,7 @@
       "numberPattern": "[56]\\d{4}"
     },
     {
-      "phone_country_id": "KN",
+      "country_id": "KN",
       "code": 1,
       "name": "St. Kitts & Nevis",
       "lengths": [
@@ -2061,7 +2061,7 @@
       "numberPattern": "869(?:5(?:5[6-8]|6[5-7])|66\\d|76[02-7])\\d{4}"
     },
     {
-      "phone_country_id": "LC",
+      "country_id": "LC",
       "code": 1,
       "name": "St. Lucia",
       "lengths": [
@@ -2071,7 +2071,7 @@
       "numberPattern": "758(?:28[4-7]|384|4(?:6[01]|8[4-9])|5(?:1[89]|20|84)|7(?:1[2-9]|2\\d|3[01]))\\d{4}"
     },
     {
-      "phone_country_id": "MF",
+      "country_id": "MF",
       "code": 590,
       "name": "St. Martin",
       "lengths": [
@@ -2081,7 +2081,7 @@
       "numberPattern": "69(?:0\\d\\d|1(?:2[29]|3[0-5]))\\d{4}"
     },
     {
-      "phone_country_id": "PM",
+      "country_id": "PM",
       "code": 508,
       "name": "St. Pierre & Miquelon",
       "lengths": [
@@ -2091,7 +2091,7 @@
       "numberPattern": "(?:4[02-4]|5[05])\\d{4}"
     },
     {
-      "phone_country_id": "VC",
+      "country_id": "VC",
       "code": 1,
       "name": "St. Vincent & Grenadines",
       "lengths": [
@@ -2101,7 +2101,7 @@
       "numberPattern": "784(?:4(?:3[0-5]|5[45]|89|9[0-8])|5(?:2[6-9]|3[0-4]))\\d{4}"
     },
     {
-      "phone_country_id": "SD",
+      "country_id": "SD",
       "code": 249,
       "name": "Sudan",
       "lengths": [
@@ -2111,7 +2111,7 @@
       "numberPattern": "(?:1[0-2]|9[0-3569])\\d{7}"
     },
     {
-      "phone_country_id": "SR",
+      "country_id": "SR",
       "code": 597,
       "name": "Suriname",
       "lengths": [
@@ -2121,7 +2121,7 @@
       "numberPattern": "(?:7[124-7]|8[125-9])\\d{5}"
     },
     {
-      "phone_country_id": "SJ",
+      "country_id": "SJ",
       "code": 47,
       "name": "Svalbard & Jan Mayen",
       "lengths": [
@@ -2131,7 +2131,7 @@
       "numberPattern": "(?:4[015-8]|5[89]|9\\d)\\d{6}"
     },
     {
-      "phone_country_id": "SE",
+      "country_id": "SE",
       "code": 46,
       "name": "Sweden",
       "lengths": [
@@ -2141,7 +2141,7 @@
       "numberPattern": "7[02369]\\d{7}"
     },
     {
-      "phone_country_id": "CH",
+      "country_id": "CH",
       "code": 41,
       "name": "Switzerland",
       "lengths": [
@@ -2151,7 +2151,7 @@
       "numberPattern": "7[35-9]\\d{7}"
     },
     {
-      "phone_country_id": "SY",
+      "country_id": "SY",
       "code": 963,
       "name": "Syria",
       "lengths": [
@@ -2161,7 +2161,7 @@
       "numberPattern": "9(?:22|[3-589]\\d|6[024-9])\\d{6}"
     },
     {
-      "phone_country_id": "ST",
+      "country_id": "ST",
       "code": 239,
       "name": "Sao Tome & Principe",
       "lengths": [
@@ -2171,7 +2171,7 @@
       "numberPattern": "900[5-9]\\d{3}|9(?:0[1-9]|[89]\\d)\\d{4}"
     },
     {
-      "phone_country_id": "TW",
+      "country_id": "TW",
       "code": 886,
       "name": "Taiwan",
       "lengths": [
@@ -2181,7 +2181,7 @@
       "numberPattern": "9[0-8]\\d{7}"
     },
     {
-      "phone_country_id": "TJ",
+      "country_id": "TJ",
       "code": 992,
       "name": "Tajikistan",
       "lengths": [
@@ -2191,7 +2191,7 @@
       "numberPattern": "41[18]\\d{6}|(?:5[05]|77|88|9[0-35-9])\\d{7}"
     },
     {
-      "phone_country_id": "TZ",
+      "country_id": "TZ",
       "code": 255,
       "name": "Tanzania",
       "lengths": [
@@ -2201,7 +2201,7 @@
       "numberPattern": "(?:6[2-9]|7[13-9])\\d{7}"
     },
     {
-      "phone_country_id": "TH",
+      "country_id": "TH",
       "code": 66,
       "name": "Thailand",
       "lengths": [
@@ -2211,7 +2211,7 @@
       "numberPattern": "(?:14|6[1-6]|[89]\\d)\\d{7}"
     },
     {
-      "phone_country_id": "TL",
+      "country_id": "TL",
       "code": 670,
       "name": "Timor-Leste",
       "lengths": [
@@ -2221,7 +2221,7 @@
       "numberPattern": "7[3-8]\\d{6}"
     },
     {
-      "phone_country_id": "TG",
+      "country_id": "TG",
       "code": 228,
       "name": "Togo",
       "lengths": [
@@ -2231,7 +2231,7 @@
       "numberPattern": "(?:7[09]|9[0-36-9])\\d{6}"
     },
     {
-      "phone_country_id": "TK",
+      "country_id": "TK",
       "code": 690,
       "name": "Tokelau",
       "lengths": [
@@ -2244,7 +2244,7 @@
       "numberPattern": "7[2-4]\\d{2,5}"
     },
     {
-      "phone_country_id": "TO",
+      "country_id": "TO",
       "code": 676,
       "name": "Tonga",
       "lengths": [
@@ -2254,7 +2254,7 @@
       "numberPattern": "(?:7[578]|8[46-9])\\d{5}"
     },
     {
-      "phone_country_id": "TT",
+      "country_id": "TT",
       "code": 1,
       "name": "Trinidad & Tobago",
       "lengths": [
@@ -2264,7 +2264,7 @@
       "numberPattern": "868(?:2(?:6[6-9]|[7-9]\\d)|[37](?:0[1-9]|1[02-9]|[2-9]\\d)|4[6-9]\\d|6(?:20|78|8\\d))\\d{4}"
     },
     {
-      "phone_country_id": "TA",
+      "country_id": "TA",
       "code": 290,
       "name": "Tristan da Cunha",
       "lengths": [
@@ -2272,7 +2272,7 @@
       ]
     },
     {
-      "phone_country_id": "TN",
+      "country_id": "TN",
       "code": 216,
       "name": "Tunisia",
       "lengths": [
@@ -2282,7 +2282,7 @@
       "numberPattern": "3(?:001|[12]40)\\d{4}|(?:(?:[259]\\d|4[0-6])\\d|3(?:1[1-35]|6[0-4]|91))\\d{5}"
     },
     {
-      "phone_country_id": "TR",
+      "country_id": "TR",
       "code": 90,
       "name": "Turkey",
       "lengths": [
@@ -2292,7 +2292,7 @@
       "numberPattern": "56161\\d{5}|5(?:0[15-7]|1[06]|24|[34]\\d|5[1-59]|9[46])\\d{7}"
     },
     {
-      "phone_country_id": "TM",
+      "country_id": "TM",
       "code": 993,
       "name": "Turkmenistan",
       "lengths": [
@@ -2302,7 +2302,7 @@
       "numberPattern": "6[1-9]\\d{6}"
     },
     {
-      "phone_country_id": "TC",
+      "country_id": "TC",
       "code": 1,
       "name": "Turks & Caicos Islands",
       "lengths": [
@@ -2312,7 +2312,7 @@
       "numberPattern": "649(?:2(?:3[129]|4[1-7])|3(?:3[1-389]|4[1-8])|4[34][1-3])\\d{4}"
     },
     {
-      "phone_country_id": "TV",
+      "country_id": "TV",
       "code": 688,
       "name": "Tuvalu",
       "lengths": [
@@ -2323,7 +2323,7 @@
       "numberPattern": "(?:7[01]\\d|90)\\d{4}"
     },
     {
-      "phone_country_id": "VI",
+      "country_id": "VI",
       "code": 1,
       "name": "U.S. Virgin Islands",
       "lengths": [
@@ -2333,7 +2333,7 @@
       "numberPattern": "340(?:2(?:01|2[06-8]|44|77)|3(?:32|44)|4(?:22|7[34])|5(?:1[34]|55)|6(?:26|4[23]|77|9[023])|7(?:1[2-57-9]|27|7\\d)|884|998)\\d{4}"
     },
     {
-      "phone_country_id": "UG",
+      "country_id": "UG",
       "code": 256,
       "name": "Uganda",
       "lengths": [
@@ -2343,7 +2343,7 @@
       "numberPattern": "7260\\d{5}|7(?:[0157-9]\\d|2[03]|30|4[0-4])\\d{6}"
     },
     {
-      "phone_country_id": "UA",
+      "country_id": "UA",
       "code": 380,
       "name": "Ukraine",
       "lengths": [
@@ -2353,7 +2353,7 @@
       "numberPattern": "(?:50|6[36-8]|7[1-3]|9[1-9])\\d{7}"
     },
     {
-      "phone_country_id": "AE",
+      "country_id": "AE",
       "code": 971,
       "name": "United Arab Emirates",
       "lengths": [
@@ -2363,7 +2363,7 @@
       "numberPattern": "5[024-68]\\d{7}"
     },
     {
-      "phone_country_id": "GB",
+      "country_id": "GB",
       "code": 44,
       "name": "United Kingdom",
       "lengths": [
@@ -2373,7 +2373,7 @@
       "numberPattern": "7(?:457[0-57-9]|700[01]|911[028])\\d{5}|7(?:[1-3]\\d\\d|4(?:[0-46-9]\\d|5[0-689])|5(?:0[0-8]|[13-9]\\d|2[0-35-9])|7(?:0[1-9]|[1-7]\\d|8[02-9]|9[0-689])|8(?:[014-9]\\d|[23][0-8])|9(?:[024-9]\\d|1[02-9]|3[0-689]))\\d{6}"
     },
     {
-      "phone_country_id": "US",
+      "country_id": "US",
       "code": 1,
       "name": "United States",
       "lengths": [
@@ -2383,7 +2383,7 @@
       "numberPattern": "(?:2(?:0[1-35-9]|1[02-9]|2[03-589]|3[149]|4[08]|5[1-46]|6[0279]|7[0269]|8[13])|3(?:0[1-57-9]|1[02-9]|2[0135]|3[0-24679]|4[67]|5[12]|6[014]|8[056])|4(?:0[124-9]|1[02-579]|2[3-5]|3[0245]|4[0235]|58|6[39]|7[0589]|8[04])|5(?:0[1-57-9]|1[0235-8]|20|3[0149]|4[01]|5[19]|6[1-47]|7[013-5]|8[056])|6(?:0[1-35-9]|1[024-9]|2[03689]|[34][016]|5[017]|6[0-279]|78|8[0-2])|7(?:0[1-46-8]|1[2-9]|2[04-7]|3[1247]|4[037]|5[47]|6[02359]|7[02-59]|8[156])|8(?:0[1-68]|1[02-8]|2[08]|3[0-28]|4[3578]|5[046-9]|6[02-5]|7[028])|9(?:0[1346-9]|1[02-9]|2[0589]|3[0146-8]|4[0179]|5[12469]|7[0-389]|8[04-69]))[2-9]\\d{6}"
     },
     {
-      "phone_country_id": "UY",
+      "country_id": "UY",
       "code": 598,
       "name": "Uruguay",
       "lengths": [
@@ -2393,7 +2393,7 @@
       "numberPattern": "9[1-9]\\d{6}"
     },
     {
-      "phone_country_id": "UZ",
+      "country_id": "UZ",
       "code": 998,
       "name": "Uzbekistan",
       "lengths": [
@@ -2403,7 +2403,7 @@
       "numberPattern": "(?:6(?:1(?:2(?:2[01]|98)|35[0-4]|50\\d|61[23]|7(?:[01][017]|4\\d|55|9[5-9]))|2(?:(?:11|7\\d)\\d|2(?:[12]1|9[01379])|5(?:[126]\\d|3[0-4]))|5(?:19[01]|2(?:27|9[26])|(?:30|59|7\\d)\\d)|6(?:2(?:1[5-9]|2[0367]|38|41|52|60)|(?:3[79]|9[0-3])\\d|4(?:56|83)|7(?:[07]\\d|1[017]|3[07]|4[047]|5[057]|67|8[0178]|9[79]))|7(?:2(?:24|3[237]|4[5-9]|7[15-8])|5(?:7[12]|8[0589])|7(?:0\\d|[39][07])|9(?:0\\d|7[079]))|9(?:2(?:1[1267]|3[01]|5\\d|7[0-4])|(?:5[67]|7\\d)\\d|6(?:2[0-26]|8\\d)))|7(?:0\\d{3}|1(?:13[01]|6(?:0[47]|1[67]|66)|71[3-69]|98\\d)|2(?:2(?:2[79]|95)|3(?:2[5-9]|6[0-6])|57\\d|7(?:0\\d|1[17]|2[27]|3[37]|44|5[057]|66|88))|3(?:2(?:1[0-6]|21|3[469]|7[159])|(?:33|9[4-6])\\d|5(?:0[0-4]|5[579]|9\\d)|7(?:[0-3579]\\d|4[0467]|6[67]|8[078]))|4(?:2(?:29|5[0257]|6[0-7]|7[1-57])|5(?:1[0-4]|8\\d|9[5-9])|7(?:0\\d|1[024589]|2[0-27]|3[0137]|[46][07]|5[01]|7[5-9]|9[079])|9(?:7[015-9]|[89]\\d))|5(?:112|2(?:0\\d|2[29]|[49]4)|3[1568]\\d|52[6-9]|7(?:0[01578]|1[017]|[23]7|4[047]|[5-7]\\d|8[78]|9[079]))|6(?:2(?:2[1245]|4[2-4])|39\\d|41[179]|5(?:[349]\\d|5[0-2])|7(?:0[017]|[13]\\d|22|44|55|67|88))|9(?:22[128]|3(?:2[0-4]|7\\d)|57[02569]|7(?:2[05-9]|3[37]|4\\d|60|7[2579]|87|9[07])))|9[0-57-9]\\d{3})\\d{4}"
     },
     {
-      "phone_country_id": "VU",
+      "country_id": "VU",
       "code": 678,
       "name": "Vanuatu",
       "lengths": [
@@ -2413,7 +2413,7 @@
       "numberPattern": "57[2-5]\\d{4}|(?:5[0-689]|7[013-7])\\d{5}"
     },
     {
-      "phone_country_id": "VA",
+      "country_id": "VA",
       "code": 39,
       "name": "Vatican City",
       "lengths": [
@@ -2425,7 +2425,7 @@
       "numberPattern": "33\\d{9}|3[1-9]\\d{8}|3[2-9]\\d{7}"
     },
     {
-      "phone_country_id": "VE",
+      "country_id": "VE",
       "code": 58,
       "name": "Venezuela",
       "lengths": [
@@ -2435,7 +2435,7 @@
       "numberPattern": "4(?:1[24-8]|2[46])\\d{7}"
     },
     {
-      "phone_country_id": "VN",
+      "country_id": "VN",
       "code": 84,
       "name": "Vietnam",
       "lengths": [
@@ -2445,7 +2445,7 @@
       "numberPattern": "(?:(?:3\\d|7[06-9])\\d|5(?:2[238]|[689]\\d)|8(?:[1-58]\\d|6[5-9]|79|9[689])|9(?:[0-8]\\d|9[013-9]))\\d{6}"
     },
     {
-      "phone_country_id": "WF",
+      "country_id": "WF",
       "code": 681,
       "name": "Wallis & Futuna",
       "lengths": [
@@ -2455,7 +2455,7 @@
       "numberPattern": "(?:50|68|72|8[23])\\d{4}"
     },
     {
-      "phone_country_id": "EH",
+      "country_id": "EH",
       "code": 212,
       "name": "Western Sahara",
       "lengths": [
@@ -2465,7 +2465,7 @@
       "numberPattern": "(?:6(?:[0-79]\\d|8[0-247-9])|7(?:0[06-8]|6[1267]|7[0-27]))\\d{6}"
     },
     {
-      "phone_country_id": "YE",
+      "country_id": "YE",
       "code": 967,
       "name": "Yemen",
       "lengths": [
@@ -2475,7 +2475,7 @@
       "numberPattern": "7[0137]\\d{7}"
     },
     {
-      "phone_country_id": "ZM",
+      "country_id": "ZM",
       "code": 260,
       "name": "Zambia",
       "lengths": [
@@ -2485,7 +2485,7 @@
       "numberPattern": "(?:76|9[5-8])\\d{7}"
     },
     {
-      "phone_country_id": "ZW",
+      "country_id": "ZW",
       "code": 263,
       "name": "Zimbabwe",
       "lengths": [
@@ -2495,7 +2495,7 @@
       "numberPattern": "7(?:1[2-9]|[37][1-9]|8[2-7])\\d{6}"
     },
     {
-      "phone_country_id": "AX",
+      "country_id": "AX",
       "code": 358,
       "name": "Aland Islands",
       "lengths": [

@@ -265,7 +265,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
               onPressed: isAgree && validPhone
                   ? () {
                       _loginBloc.dispatch(OtpRequested(
-                          phoneCountryId: selectedItem.phoneCountryId,
+                          countryId: selectedItem.countryId,
                           code: selectedItem.code,
                           phoneNumber: '+${selectedItem.code}${phoneNumber}'));
                     }
