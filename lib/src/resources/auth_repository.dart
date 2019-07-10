@@ -32,24 +32,19 @@ class AuthRepository {
   static const String _appId = 'appId';
 
   /* Login flow */
-  Future<void> getOtp(
-      {@required String countryId,
-      @required int code,
-      @required String number}) async {
+  Future<void> getOtp({@required String phoneCountryId,
+    @required String phoneNumber}) async {
     final String appId = await _getAppId();
     final String codeChallenge = await _generatePKCE();
     return _authApi.requestOtp(
         codeChallenge: codeChallenge,
         appId: appId,
-        countryId: countryId,
-        code: code,
-        number: number);
+        phoneCountryId: phoneCountryId,
+        phoneNumber: phoneNumber);
   }
 
-  Future<void> login(
-      {@required String number,
-      @required int code,
-      @required String otp}) async {
+  Future<void> login({@required String phoneNumber,
+    @required String otp, @required String phoneCountryId}) async {
     final String codeVerifier = await readData(_verifier);
     final String appId = await _getAppId();
 
@@ -62,11 +57,11 @@ class AuthRepository {
     }
 
     final TokenResponseModel tokenResponse = await _authApi.requestToken(
-      number: number,
-      code: code,
+      phoneNumber: phoneNumber,
       otp: otp,
       codeVerifier: codeVerifier,
       appId: appId,
+        phoneCountryId: phoneCountryId
     );
 
     await _storeTokens(tokenResponse: tokenResponse);

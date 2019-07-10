@@ -21,10 +21,9 @@ class AuthApi extends Api {
 
   static String _encodeMapToUrl(Map<String, dynamic> parameters) {
     final List<String> urlEncodedForm = <String>[];
-    parameters.forEach((String key, dynamic value) =>
-    value != null
-        ? urlEncodedForm
-        .add('${Uri.encodeFull(key)}=${Uri.encodeFull(value.toString())}')
+    parameters.forEach((String key, dynamic value) => value != null
+        ? urlEncodedForm.add(
+            '${Uri.encodeQueryComponent(key)}=${Uri.encodeQueryComponent(value.toString())}')
         : null);
 
     return urlEncodedForm.join('&');
@@ -45,9 +44,8 @@ class AuthApi extends Api {
   Future<void> requestOtp(
       {@required String codeChallenge,
       @required String appId,
-      @required String countryId,
-      @required int code,
-      @required String number}) async {
+      @required String phoneCountryId,
+      @required String phoneNumber}) async {
     try {
       final http.Response response = await client.post(
         _otpEndpoint,
@@ -55,9 +53,8 @@ class AuthApi extends Api {
         body: _encodeMapToUrl(<String, dynamic>{
           'code_challenge': codeChallenge,
           'app_id': appId,
-          'country_id': countryId,
-          'country_code': code,
-          'number': number,
+          'phone_country_id': phoneCountryId,
+          'phone_number': phoneNumber,
         }),
       );
 
@@ -70,12 +67,11 @@ class AuthApi extends Api {
   }
 
   Future<TokenResponseModel> requestToken(
-      {@required String number,
-      @required int code,
+      {@required String phoneNumber,
       @required String otp,
       @required String codeVerifier,
-      @required String appId}) async {
-    final String phone = '$code$number';
+      @required String appId,
+      @required String phoneCountryId}) async {
     try {
       final http.Response response = await client.post(
         _tokenEndpoint,
@@ -83,10 +79,11 @@ class AuthApi extends Api {
         body: _encodeMapToUrl(<String, dynamic>{
           'grant_type': 'otp',
           'client_id': clientId,
-          'phone': phone,
+          'phone_number': phoneNumber,
           'otp': otp,
           'code_verifier': codeVerifier,
           'app_id': appId,
+          'phone_country_id': phoneCountryId,
         }),
       );
 
@@ -125,13 +122,9 @@ class AuthApi extends Api {
 
   Future<void> logout({String accessToken}) async {
     try {
-      final http.Response response = await client.post(
-        _logoutEndpoint,
+      final http.Response response = await client.post(_logoutEndpoint,
           headers: _makeHeaders(),
-          body: _encodeMapToUrl(<String, dynamic>{
-            'accessToken': accessToken
-          })
-      );
+          body: _encodeMapToUrl(<String, dynamic>{'accessToken': accessToken}));
 
       if (response.statusCode != 204) {
         throw response;

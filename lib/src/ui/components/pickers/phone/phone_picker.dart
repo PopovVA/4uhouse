@@ -45,7 +45,8 @@ class _PhonePickerState extends State<PhonePicker> {
     if (item == null && widget.countryPhoneDataList != null) {
       setState(() {
         print(
-            '===> widget.countryPhoneDataList[0]: ${widget.countryPhoneDataList[0].countryId}');
+            '===> widget.countryPhoneDataList[0]: ${widget
+                .countryPhoneDataList[0].countryId}');
         item = _buildDataItem();
       });
     }
