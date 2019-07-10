@@ -3,7 +3,7 @@ import 'dart:async' show Stream;
 import 'package:meta/meta.dart' show required;
 import 'package:bloc/bloc.dart' show Bloc;
 
-import '../../models/auth/user_model.dart' show UserModel;
+import '../../models/auth/user_info.dart' show UserInfo;
 import '../../resources/auth_repository.dart' show AuthRepository;
 
 import 'auth_event.dart'
@@ -46,7 +46,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     final String refreshToken = await _authRepository.refreshToken;
     if (refreshToken is String && refreshToken.isNotEmpty) {
-      final UserModel userProfile = await _authRepository.userProfile;
+      final UserInfo userProfile = await _authRepository.userProfile;
       yield AuthAuthorized(userProfile);
     } else {
       // no token stored
@@ -56,7 +56,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Stream<AuthState> _mapUserLoggedInToState() async* {
     try {
-      final UserModel userProfile = await _authRepository.loadUserProfile();
+      final UserInfo userProfile = await _authRepository.loadUserProfile();
       yield AuthAuthorized(userProfile);
     } catch (error) {
       // set authorized state anyway

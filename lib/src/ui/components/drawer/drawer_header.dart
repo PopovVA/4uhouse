@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 
-import '../../../models/auth/user_model.dart' show UserModel;
+import '../../../models/auth/user_info.dart' show UserInfo;
 
 class Header extends StatelessWidget {
   const Header({this.userProfile});
 
-  final UserModel userProfile;
+  final UserInfo userProfile;
 
   @override
   Widget build(BuildContext context) {
-    if (userProfile != null)
+    if (userProfile?.phone != null)
       return Column(children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(top: 10, left: 19, bottom: 50.0),
@@ -27,7 +27,7 @@ class Header extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    userProfile.phone,
+                    userProfile.phone.number,
                     style: const TextStyle(
                         fontSize: 16.0, color: Color.fromRGBO(0, 0, 0, 0.87)),
                   ),
@@ -44,8 +44,8 @@ class Header extends StatelessWidget {
             ],
           ),
         ),
-        Divider(
-          color: const Color.fromRGBO(66, 65, 65, 0.38),
+        const Divider(
+          color: Color.fromRGBO(66, 65, 65, 0.38),
         ),
       ]);
 

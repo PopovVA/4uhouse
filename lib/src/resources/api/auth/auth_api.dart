@@ -5,7 +5,7 @@ import 'package:meta/meta.dart' show required;
 import 'package:http/http.dart' as http;
 
 import '../../../models/auth/token_response_model.dart' show TokenResponseModel;
-import '../../../models/auth/user_model.dart' show UserModel;
+import '../../../models/auth/user_info.dart' show UserInfo;
 import '../generic/api.dart' show Api;
 import 'constants/url.dart' show OAUTH_URL, USER_URL;
 
@@ -134,7 +134,7 @@ class AuthApi extends Api {
     }
   }
 
-  Future<UserModel> loadUserProfile({@required String accessToken}) async {
+  Future<UserInfo> loadUserProfile({@required String accessToken}) async {
     try {
       final http.Response response = await client.get(
         _userInfoEndpoint,
@@ -145,7 +145,7 @@ class AuthApi extends Api {
         throw response;
       }
 
-      return UserModel.fromJson(json.decode(response.body));
+      return UserInfo.fromJson(json.decode(response.body));
     } catch (error) {
       throw await inferError(error);
     }

@@ -3,7 +3,6 @@ import 'package:outline_material_icons/outline_material_icons.dart'
     show OMIcons;
 import 'package:flutter_bloc/flutter_bloc.dart'
     show BlocProvider, BlocBuilder, BlocListener, BlocListenerTree;
-import 'package:user_mobile/src/models/auth/user_model.dart';
 
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../../blocs/auth/auth_event.dart' show AuthEvent;
