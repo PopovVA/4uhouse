@@ -25,8 +25,8 @@ class ItemLayoutContainer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3.0),
       child: Container(
-        constraints: BoxConstraints(
-          minHeight: !disabled ? 35.0 : 0.0,
+        constraints: const BoxConstraints(
+          minHeight: 35.0,
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
