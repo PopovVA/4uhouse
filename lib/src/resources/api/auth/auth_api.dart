@@ -55,7 +55,7 @@ class AuthApi extends Api {
         body: _encodeMapToUrl(<String, dynamic>{
           'code_challenge': codeChallenge,
           'app_id': appId,
-          'country_id': countryId,
+          'phone_country_id': countryId,
           'phone_number': phoneNumber,
         }),
       );
