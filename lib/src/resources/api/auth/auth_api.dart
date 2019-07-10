@@ -46,7 +46,6 @@ class AuthApi extends Api {
       {@required String codeChallenge,
       @required String appId,
         @required String phoneCountryId,
-      @required int code,
         @required String phoneNumber}) async {
     try {
       final http.Response response = await client.post(
@@ -71,7 +70,8 @@ class AuthApi extends Api {
   Future<TokenResponseModel> requestToken({@required String phoneNumber,
       @required String otp,
       @required String codeVerifier,
-      @required String appId}) async {
+    @required String appId,
+    @required String phoneCountryId}) async {
     try {
       final http.Response response = await client.post(
         _tokenEndpoint,
@@ -83,6 +83,7 @@ class AuthApi extends Api {
           'otp': otp,
           'code_verifier': codeVerifier,
           'app_id': appId,
+          'phone_country_id': phoneCountryId,
         }),
       );
 

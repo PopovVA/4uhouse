@@ -45,7 +45,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       yield IsFetchingOtp();
       await _authRepository.getOtp(
           phoneCountryId: event.phoneCountryId,
-          code: event.code,
           phoneNumber: event.phoneNumber);
       yield OtpSent();
     } catch (error) {
@@ -58,7 +57,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       yield IsFetchingCode();
       await _authRepository.login(
-          phoneNumber: event.phoneNumber, otp: event.otp);
+          phoneNumber: event.phoneNumber,
+          otp: event.otp,
+          phoneCountryId: event.phoneCountryId);
       _authBloc.dispatch(UserLoggedIn());
     } catch (error) {
       yield CodeError(error.toString());

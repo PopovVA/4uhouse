@@ -33,7 +33,6 @@ class AuthRepository {
 
   /* Login flow */
   Future<void> getOtp({@required String phoneCountryId,
-      @required int code,
     @required String phoneNumber}) async {
     final String appId = await _getAppId();
     final String codeChallenge = await _generatePKCE();
@@ -41,12 +40,11 @@ class AuthRepository {
         codeChallenge: codeChallenge,
         appId: appId,
         phoneCountryId: phoneCountryId,
-        code: code,
         phoneNumber: phoneNumber);
   }
 
   Future<void> login({@required String phoneNumber,
-      @required String otp}) async {
+    @required String otp, @required String phoneCountryId}) async {
     final String codeVerifier = await readData(_verifier);
     final String appId = await _getAppId();
 
@@ -63,6 +61,7 @@ class AuthRepository {
       otp: otp,
       codeVerifier: codeVerifier,
       appId: appId,
+        phoneCountryId: phoneCountryId
     );
 
     await _storeTokens(tokenResponse: tokenResponse);

@@ -8,12 +8,10 @@ abstract class LoginEvent extends Equatable {
 
 class OtpRequested extends LoginEvent {
   OtpRequested({@required this.phoneCountryId,
-    @required this.code,
     @required this.phoneNumber})
-      : super(<dynamic>[code, code, phoneNumber]);
+      : super(<dynamic>[phoneNumber]);
 
   final String phoneCountryId;
-  final int code;
   final String phoneNumber;
 
   @override
@@ -21,10 +19,12 @@ class OtpRequested extends LoginEvent {
 }
 
 class SubmitCodeTapped extends LoginEvent {
-  SubmitCodeTapped({@required this.phoneNumber, @required this.otp})
-      : super(<dynamic>[phoneNumber, otp]);
+  SubmitCodeTapped(
+      {@required this.phoneNumber, @required this.otp, @required this.phoneCountryId})
+      : super(<dynamic>[phoneNumber, otp, phoneCountryId]);
 
   final String phoneNumber;
+  final String phoneCountryId;
   final String otp;
 
   @override
