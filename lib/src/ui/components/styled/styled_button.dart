@@ -29,8 +29,6 @@ class StyledButton extends StatelessWidget {
                   : Theme.of(context).primaryColor,
               disabledColor: const Color(0xE6CACACA),
               elevation: 8,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0)),
               onPressed: loading ? null : onPressed,
               child: buildChild(context),
             )),

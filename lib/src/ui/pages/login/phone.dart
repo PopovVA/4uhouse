@@ -269,7 +269,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                           phoneNumber: '+${selectedItem.code}${phoneNumber}'));
                     }
                   : null,
-              text: 'Submit',
+              text: 'SUBMIT',
             ),
           );
         });

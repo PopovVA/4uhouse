@@ -168,7 +168,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       phoneCountryId: widget.selectedItem.countryId,
                       otp: code.text));
                 },
-          text: 'Send',
+          text: 'SEND',
         ),
       ),
     ));
