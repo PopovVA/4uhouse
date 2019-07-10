@@ -21,10 +21,9 @@ class AuthApi extends Api {
 
   static String _encodeMapToUrl(Map<String, dynamic> parameters) {
     final List<String> urlEncodedForm = <String>[];
-    parameters.forEach((String key, dynamic value) =>
-    value != null
-        ? urlEncodedForm
-        .add('${Uri.encodeFull(key)}=${Uri.encodeFull(value.toString())}')
+    parameters.forEach((String key, dynamic value) => value != null
+        ? urlEncodedForm.add(
+            '${Uri.encodeQueryComponent(key)}=${Uri.encodeQueryComponent(value.toString())}')
         : null);
 
     return urlEncodedForm.join('&');
@@ -45,8 +44,8 @@ class AuthApi extends Api {
   Future<void> requestOtp(
       {@required String codeChallenge,
       @required String appId,
-        @required String phoneCountryId,
-        @required String phoneNumber}) async {
+      @required String phoneCountryId,
+      @required String phoneNumber}) async {
     try {
       final http.Response response = await client.post(
         _otpEndpoint,
@@ -67,11 +66,12 @@ class AuthApi extends Api {
     }
   }
 
-  Future<TokenResponseModel> requestToken({@required String phoneNumber,
+  Future<TokenResponseModel> requestToken(
+      {@required String phoneNumber,
       @required String otp,
       @required String codeVerifier,
-    @required String appId,
-    @required String phoneCountryId}) async {
+      @required String appId,
+      @required String phoneCountryId}) async {
     try {
       final http.Response response = await client.post(
         _tokenEndpoint,
@@ -122,13 +122,9 @@ class AuthApi extends Api {
 
   Future<void> logout({String accessToken}) async {
     try {
-      final http.Response response = await client.post(
-        _logoutEndpoint,
+      final http.Response response = await client.post(_logoutEndpoint,
           headers: _makeHeaders(),
-          body: _encodeMapToUrl(<String, dynamic>{
-            'accessToken': accessToken
-          })
-      );
+          body: _encodeMapToUrl(<String, dynamic>{'accessToken': accessToken}));
 
       if (response.statusCode != 204) {
         throw response;
