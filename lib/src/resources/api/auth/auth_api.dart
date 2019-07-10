@@ -45,7 +45,7 @@ class AuthApi extends Api {
   Future<void> requestOtp(
       {@required String codeChallenge,
       @required String appId,
-        @required String countryId,
+        @required String phoneCountryId,
       @required int code,
         @required String phoneNumber}) async {
     try {
@@ -55,7 +55,7 @@ class AuthApi extends Api {
         body: _encodeMapToUrl(<String, dynamic>{
           'code_challenge': codeChallenge,
           'app_id': appId,
-          'phone_country_id': countryId,
+          'phone_country_id': phoneCountryId,
           'phone_number': phoneNumber,
         }),
       );
