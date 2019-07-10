@@ -10,7 +10,7 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (userProfile != null)
+    if (userProfile?.phone != null)
       return Column(children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(top: 10, left: 19, bottom: 50.0),
@@ -44,8 +44,8 @@ class Header extends StatelessWidget {
             ],
           ),
         ),
-        Divider(
-          color: const Color.fromRGBO(66, 65, 65, 0.38),
+        const Divider(
+          color: Color.fromRGBO(66, 65, 65, 0.38),
         ),
       ]);
 
