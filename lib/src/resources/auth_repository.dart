@@ -46,7 +46,6 @@ class AuthRepository {
   }
 
   Future<void> login({@required String phoneNumber,
-      @required int code,
       @required String otp}) async {
     final String codeVerifier = await readData(_verifier);
     final String appId = await _getAppId();
@@ -61,7 +60,6 @@ class AuthRepository {
 
     final TokenResponseModel tokenResponse = await _authApi.requestToken(
       phoneNumber: phoneNumber,
-      code: code,
       otp: otp,
       codeVerifier: codeVerifier,
       appId: appId,

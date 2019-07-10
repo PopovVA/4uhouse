@@ -69,7 +69,6 @@ class AuthApi extends Api {
   }
 
   Future<TokenResponseModel> requestToken({@required String phoneNumber,
-      @required int code,
       @required String otp,
       @required String codeVerifier,
       @required String appId}) async {

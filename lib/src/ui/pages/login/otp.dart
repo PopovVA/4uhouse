@@ -163,7 +163,6 @@ class _OtpScreenState extends State<OtpScreen> {
               ? null
               : () {
                   widget.loginBloc.dispatch(SubmitCodeTapped(
-                      code: widget.selectedItem.code,
                       phoneNumber: '+${widget.selectedItem.code}${widget
                           .phoneNumber}',
                       otp: code.text));

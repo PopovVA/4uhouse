@@ -21,12 +21,10 @@ class OtpRequested extends LoginEvent {
 }
 
 class SubmitCodeTapped extends LoginEvent {
-  SubmitCodeTapped(
-      {@required this.phoneNumber, @required this.code, @required this.otp})
-      : super(<dynamic>[phoneNumber, code, otp]);
+  SubmitCodeTapped({@required this.phoneNumber, @required this.otp})
+      : super(<dynamic>[phoneNumber, otp]);
 
   final String phoneNumber;
-  final int code;
   final String otp;
 
   @override
