@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../constants/layout.dart' show standardHorizontalPadding;
 
 class ItemLayoutContainer extends StatelessWidget {
   const ItemLayoutContainer(this.child, {this.onTap, this.disabled});
@@ -26,11 +25,11 @@ class ItemLayoutContainer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3.0),
       child: Container(
-        constraints: BoxConstraints(
-          minHeight: !disabled ? 72.0 : 0.0,
+        constraints: const BoxConstraints(
+          minHeight: 35.0,
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: standardHorizontalPadding),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: child,
         ),
       ),
