@@ -1,6 +1,5 @@
 class CountryPhoneData {
-  CountryPhoneData(
-      {this.countryId,
+  CountryPhoneData({this.countryId,
       this.code,
       this.name,
       this.lengths,

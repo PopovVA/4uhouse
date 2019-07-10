@@ -32,13 +32,13 @@ class OtpScreen extends StatefulWidget {
       @required this.loginBloc,
       @required this.phoneBloc,
       @required this.selectedItem,
-      @required this.number,
+        @required this.phoneNumber,
       this.returnTo});
 
   final AuthBloc authBloc;
   final LoginBloc loginBloc;
   final CountryPhoneData selectedItem;
-  final String number;
+  final String phoneNumber;
   final PhoneBloc phoneBloc;
   final String returnTo;
 
@@ -146,7 +146,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 '+ (' +
                     widget.selectedItem.code.toString() +
                     ') ' +
-                    widget.number,
+                    widget.phoneNumber,
                 style: const TextStyle(fontSize: 16.0))
           ],
         ));
@@ -163,8 +163,9 @@ class _OtpScreenState extends State<OtpScreen> {
               ? null
               : () {
                   widget.loginBloc.dispatch(SubmitCodeTapped(
-                      code: widget.selectedItem.code,
-                      number: widget.number,
+                      phoneNumber: '+${widget.selectedItem.code}${widget
+                          .phoneNumber}',
+                      phoneCountryId: widget.selectedItem.countryId,
                       otp: code.text));
                 },
           text: 'Send',
