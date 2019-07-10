@@ -1,2 +1,4 @@
-double standardHorizontalPadding = 8.0;
-double standardVerticalPadding = 8.0;
+const double standardHorizontalPadding = 8.0;
+const double standardVerticalPadding = 8.0;
+
+const double borderRadius = 2.0;

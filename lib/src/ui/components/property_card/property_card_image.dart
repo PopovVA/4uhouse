@@ -2,6 +2,7 @@ import 'dart:convert' show base64Decode;
 import 'dart:typed_data' show Uint8List;
 import 'package:flutter/material.dart';
 
+import '../../../constants/layout.dart' show borderRadius;
 import '../../../utils/type_check.dart' show isNotNull;
 
 class PropertyImage extends StatelessWidget {
@@ -50,8 +51,9 @@ class PropertyImage extends StatelessWidget {
 
     if (pictureDecodingError) {
       return greyContainer(
-          child: const Center(child: Text(
-              'Error decoding image :(', style: TextStyle(fontSize: 16.0))));
+          child: const Center(
+              child: Text('Error decoding image :(',
+                  style: TextStyle(fontSize: 16.0))));
     }
 
     if (picture != null) {
@@ -77,6 +79,8 @@ class PropertyImage extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 color: Color(int.parse(statusColor)),
+                borderRadius:
+                    const BorderRadius.all(Radius.circular(borderRadius)),
               ),
               alignment: Alignment.center,
               height: 22.0,
@@ -117,6 +121,7 @@ class PropertyImage extends StatelessWidget {
                   const EdgeInsets.only(left: 3, top: 4, right: 3, bottom: 3),
               decoration: const BoxDecoration(
                 color: Color.fromRGBO(81, 81, 81, 0.54),
+                borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
               ),
               height: 22.0,
               margin: const EdgeInsets.only(left: 19.0),

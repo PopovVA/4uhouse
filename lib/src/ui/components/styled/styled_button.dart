@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:user_mobile/src/constants/layout.dart';
-import '../../../constants/layout.dart';
-import 'styled_circular_progress.dart';
+
+import '../../../constants/layout.dart'
+    show borderRadius, standardHorizontalPadding, standardVerticalPadding;
+import 'styled_circular_progress.dart' show StyledCircularProgress;
 
 class StyledButton extends StatelessWidget {
   const StyledButton(
@@ -29,6 +30,8 @@ class StyledButton extends StatelessWidget {
                   : Theme.of(context).primaryColor,
               disabledColor: const Color(0xE6CACACA),
               elevation: 8,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(borderRadius)),
               onPressed: loading ? null : onPressed,
               child: buildChild(context),
             )),
@@ -43,7 +46,8 @@ class StyledButton extends StatelessWidget {
 
     return Text(
       text,
-      style: const TextStyle(fontSize: 14.0,
+      style: const TextStyle(
+          fontSize: 14.0,
           fontStyle: FontStyle.normal,
           fontWeight: FontWeight.w600,
           color: Color(0xFFFFFFFFF)),

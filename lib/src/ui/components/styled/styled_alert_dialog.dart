@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../../../constants/layout.dart' show borderRadius;
 import '../../../typography.dart' show DISABLED_COLOR;
 
 class StyledAlertDialog extends StatelessWidget {
@@ -34,6 +36,8 @@ class StyledAlertDialog extends StatelessWidget {
                 Container(
                     decoration: BoxDecoration(
                         color: Colors.white,
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(borderRadius)),
                         boxShadow: <BoxShadow>[
                           BoxShadow(
                               color: Colors.black.withOpacity(0.2),
