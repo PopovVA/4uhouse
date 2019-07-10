@@ -96,7 +96,8 @@ class PhoneBloc extends Bloc<PhoneEvent, PhoneState> {
   CountryPhoneData getCountryPhoneDataByIp(
       List<CountryPhoneData> list, String countryIdByIp) {
     final int index =
-        list.indexWhere((CountryPhoneData it) => it.countryId == countryIdByIp);
+    list.indexWhere((CountryPhoneData it) =>
+    it.phoneCountryId == countryIdByIp);
     return index != -1 ? list[index] : null;
   }
 }

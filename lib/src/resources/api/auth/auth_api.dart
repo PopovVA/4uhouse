@@ -45,9 +45,9 @@ class AuthApi extends Api {
   Future<void> requestOtp(
       {@required String codeChallenge,
       @required String appId,
-      @required String countryId,
+        @required String phoneCountryId,
       @required int code,
-      @required String number}) async {
+        @required String phoneNumber}) async {
     try {
       final http.Response response = await client.post(
         _otpEndpoint,
@@ -55,9 +55,9 @@ class AuthApi extends Api {
         body: _encodeMapToUrl(<String, dynamic>{
           'code_challenge': codeChallenge,
           'app_id': appId,
-          'country_id': countryId,
+          'phone_country_id': phoneCountryId,
           'country_code': code,
-          'number': number,
+          'phone_number': phoneNumber,
         }),
       );
 
@@ -75,15 +75,15 @@ class AuthApi extends Api {
       @required String otp,
       @required String codeVerifier,
       @required String appId}) async {
-    final String phone = '$code$number';
     try {
+      final String phoneNumber = '+$code$number';
       final http.Response response = await client.post(
         _tokenEndpoint,
         headers: _makeHeaders(),
         body: _encodeMapToUrl(<String, dynamic>{
           'grant_type': 'otp',
           'client_id': clientId,
-          'phone': phone,
+          'phone_number': phoneNumber,
           'otp': otp,
           'code_verifier': codeVerifier,
           'app_id': appId,

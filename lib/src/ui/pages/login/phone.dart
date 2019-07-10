@@ -54,7 +54,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
   LoginBloc _loginBloc;
   PhoneBloc _phoneBloc;
   TextEditingController phoneController = TextEditingController();
-  String number;
+  String phoneNumber;
 
   void _phoneListener() {
     setState(() {
@@ -124,7 +124,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                                     loginBloc: _loginBloc,
                                     phoneBloc: _phoneBloc,
                                     selectedItem: selectedItem,
-                                    number: number,
+                                    phoneNumber: phoneNumber,
                                     returnTo: widget.returnTo,
                                   ),
                                   side: 'left'));
@@ -243,7 +243,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
           setState(() {
             selectedItem = countryPhone;
             validPhone = _isValid();
-            number = inputtedPhone;
+            phoneNumber = inputtedPhone;
           });
         },
         selectedItem: selectedItem,
@@ -265,9 +265,9 @@ class _PhoneScreenState extends State<PhoneScreen> {
               onPressed: isAgree && validPhone
                   ? () {
                       _loginBloc.dispatch(OtpRequested(
-                          countryId: selectedItem.countryId,
+                          phoneCountryId: selectedItem.phoneCountryId,
                           code: selectedItem.code,
-                          number: number));
+                          phoneNumber: '+${selectedItem.code}${phoneNumber}'));
                     }
                   : null,
               text: 'Submit',

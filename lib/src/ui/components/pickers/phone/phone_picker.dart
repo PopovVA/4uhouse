@@ -45,7 +45,8 @@ class _PhonePickerState extends State<PhonePicker> {
     if (item == null && widget.countryPhoneDataList != null) {
       setState(() {
         print(
-            '===> widget.countryPhoneDataList[0]: ${widget.countryPhoneDataList[0].countryId}');
+            '===> widget.countryPhoneDataList[0]: ${widget
+                .countryPhoneDataList[0].phoneCountryId}');
         item = _buildDataItem();
       });
     }
@@ -61,7 +62,7 @@ class _PhonePickerState extends State<PhonePicker> {
   CountryPhoneData _findItemById(List<CountryPhoneData> list) {
     return list.firstWhere(
             (CountryPhoneData foundItem) =>
-        foundItem.countryId == item.countryId,
+        foundItem.phoneCountryId == item.phoneCountryId,
         orElse: () => null);
   }
 
