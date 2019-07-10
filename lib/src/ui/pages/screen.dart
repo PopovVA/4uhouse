@@ -66,7 +66,7 @@ class _ScreenState extends State<Screen> {
         screenRepository: ScreenRepository(),
         authRepository: AuthRepository());
 //        screenRepository: TestScreenRepository(),
-//        authRepository: AuthRepository());
+    //       authRepository: AuthRepository());
     screenBloc.dispatch(ScreenRequested(route: widget.route));
   }
 
@@ -302,9 +302,7 @@ class _ScreenState extends State<Screen> {
                 body: RefreshIndicator(
                   onRefresh: () => _refresh(state),
                   color: Theme.of(context).primaryColor,
-                  child: Ink(
-                      color: const Color.fromRGBO(235, 236, 237, 1),
-                      child: buildBody(state)),
+                  child: Ink(color: Colors.white, child: buildBody(state)),
                 ),
                 goBack: getHandleGoBack(state),
                 title: buildTitle(state),

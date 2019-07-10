@@ -2,7 +2,7 @@ import 'dart:convert' show base64Decode;
 import 'dart:typed_data' show Uint8List;
 import 'package:flutter/material.dart';
 
-import '../../../utils/type_check.dart' show isNotNull;
+import '../../../src/utils/type_check.dart' show isNotNull;
 
 class PropertyImage extends StatelessWidget {
   factory PropertyImage(
@@ -50,8 +50,7 @@ class PropertyImage extends StatelessWidget {
 
     if (pictureDecodingError) {
       return greyContainer(
-          child: const Center(child: Text(
-              'Error decoding image :(', style: TextStyle(fontSize: 16.0))));
+          child: const Center(child: Text('Error decoding image :(')));
     }
 
     if (picture != null) {
@@ -70,13 +69,17 @@ class PropertyImage extends StatelessWidget {
     if (statusValue != null) {
       return Positioned(
         right: 0.0,
-        top: height * 0.1,
+        top: height * 0.085,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
               decoration: BoxDecoration(
                 color: Color(int.parse(statusColor)),
+                borderRadius: const BorderRadius.only(
+                  topLeft: radius,
+                  bottomLeft: radius,
+                ),
               ),
               alignment: Alignment.center,
               height: 22.0,
@@ -108,18 +111,18 @@ class PropertyImage extends StatelessWidget {
   Widget buildId(double height) {
     if (id != null) {
       return Positioned(
-        top: height * 0.1,
+        top: height * 0.085,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
-              padding:
-                  const EdgeInsets.only(left: 3, top: 4, right: 3, bottom: 3),
+              padding: const EdgeInsets.fromLTRB(3.0, 4.0, 6.0, 3.0),
               decoration: const BoxDecoration(
                 color: Color.fromRGBO(81, 81, 81, 0.54),
+                borderRadius: BorderRadius.all(radius),
               ),
               height: 22.0,
-              margin: const EdgeInsets.only(left: 19.0),
+              margin: const EdgeInsets.only(left: 16.0),
               child: Text('#$id',
                   style: const TextStyle(fontSize: 14.0, color: Colors.white)),
             ),
