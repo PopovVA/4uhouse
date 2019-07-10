@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 
-import '../../../src/models/auth/user_model.dart' show UserModel;
+import '../../../src/models/auth/user_info.dart' show UserInfo;
 
 class Header extends StatelessWidget {
   const Header({this.userProfile});
 
-  final UserModel userProfile;
+  final UserInfo userProfile;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class Header extends StatelessWidget {
                 children: <Widget>[
                   userProfile != null
                       ? Text(
-                          userProfile.phone,
+                          userProfile.phone.number,
                           style: const TextStyle(
                               fontSize: 20.0,
                               color: Color.fromRGBO(0, 0, 0, 0.87)),

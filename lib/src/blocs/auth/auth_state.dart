@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart' show immutable;
 
-import 'package:user_mobile/src/models/auth/user_model.dart' show UserModel;
+import 'package:user_mobile/src/models/auth/user_info.dart' show UserInfo;
 
 @immutable
 abstract class AuthState extends Equatable {
@@ -19,9 +19,9 @@ class AuthUnauthorized extends AuthState {
 class AuthAuthorized extends AuthState {
   AuthAuthorized([this.userProfile]) : super(<dynamic>[userProfile]);
 
-  final UserModel userProfile;
+  final UserInfo userProfile;
 
-  UserModel get usPr => userProfile;
+  UserInfo get usPr => userProfile;
 
   @override
   String toString() => 'AuthAuthorized';

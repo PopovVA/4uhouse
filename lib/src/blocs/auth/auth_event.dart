@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart' show immutable, required;
 
-import '../../models/auth/user_model.dart' show UserModel;
+import '../../models/auth/phone_model.dart' show UserModel;
 
 @immutable
 abstract class AuthEvent extends Equatable {

@@ -11,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart'
 import 'package:uuid/uuid.dart' show Uuid;
 
 import '../models/auth/token_response_model.dart' show TokenResponseModel;
-import '../models/auth/user_model.dart' show UserModel;
+import '../models/auth/user_info.dart' show UserInfo;
 import 'api/auth/auth_api.dart' show AuthApi;
 import 'services/secure_storage.dart' show SecureStorageService;
 
@@ -23,7 +23,7 @@ class AuthRepository {
 
   Future<String> get refreshToken async => await readData(_refresh);
 
-  Future<UserModel> get userProfile async => await readCredentials();
+  Future<UserInfo> get userProfile async => await readCredentials();
 
   static const String _access = 'accessToken';
   static const String _refresh = 'refreshToken';
@@ -145,14 +145,14 @@ class AuthRepository {
     await _authApi.logout(accessToken: accessToken);
   }
 
-  Future<UserModel> loadUserProfile() async {
+  Future<UserInfo> loadUserProfile() async {
     final String accessToken = await this.accessToken;
     if (!(accessToken is String && accessToken.isNotEmpty)) {
       throw Exception(
           'auth_repository.loadUserProfile: accessToken is not specified.');
     }
 
-    final UserModel userProfile =
+    final UserInfo userProfile =
         await _authApi.loadUserProfile(accessToken: accessToken);
     await storeCredentials(userProfile: userProfile);
     return userProfile;
@@ -171,11 +171,11 @@ class AuthRepository {
     await _storage.deleteAll();
   }
 
-  Future<void> storeCredentials({@required UserModel userProfile}) {
+  Future<void> storeCredentials({@required UserInfo userProfile}) {
     return storeData(_userProfile, json.encode(userProfile.toJson()));
   }
 
-  Future<UserModel> readCredentials() async {
+  Future<UserInfo> readCredentials() async {
     final String jsonString = await readData(_userProfile);
 
     if (!(jsonString is String && jsonString.isNotEmpty)) {
@@ -183,7 +183,7 @@ class AuthRepository {
           'auth_repository.getCredentials: no user profile stored.');
     }
 
-    return UserModel.fromJson(json.decode(jsonString));
+    return UserInfo.fromJson(json.decode(jsonString));
   }
 
   Future<void> clearCredentials() async {
