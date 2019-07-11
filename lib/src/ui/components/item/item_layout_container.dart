@@ -10,7 +10,7 @@ class ItemLayoutContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Ink(
-      color: Colors.blue,
+      color: Colors.white,
       child: InkWell(
         onTap: onTap is Function ? onTap : null,
         child: buildContainer(child),
