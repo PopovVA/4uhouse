@@ -28,20 +28,33 @@ class Header extends StatelessWidget {
   Widget buildUserInfo(AuthState state) {
     return (state is AuthAuthorized)
         ? Expanded(
-            child: ListTile(
-              title: Text(
-                state.userProfile.phone.number,
-                style: const TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontSize: 16.0,
-                    color: Color.fromRGBO(0, 0, 0, 0.87)),
-              ),
-              leading: Icon(
-                OMIcons.phone,
-                color: const Color.fromRGBO(117, 116, 116, 1),
-              ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 32),
+                  child: Container(
+                    width: 24,
+                    height: 24,
+                    child: Center(
+                        child: Icon(
+                      OMIcons.phone,
+                      color: const Color.fromRGBO(117, 116, 116, 1),
+                    )),
+                  ),
+                ),
+                Text(
+                  state.userProfile.phone.number,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 16.0,
+                      color: Color.fromRGBO(0, 0, 0, 0.87)),
+                ),
+              ],
             ),
           )
-        : Container();
+        : Container(
+            height: 19,
+          );
   }
 }

@@ -6,8 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart'
 
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../../blocs/auth/auth_event.dart' show AuthEvent;
-import '../../../blocs/auth/auth_state.dart'
-    show AuthState, AuthUnauthorized;
+import '../../../blocs/auth/auth_state.dart' show AuthState, AuthUnauthorized;
 import '../../../blocs/logout/logout_bloc.dart' show LogOutBloc;
 import '../../../blocs/logout/logout_event.dart'
     show LogOutEvent, LogoutButtonTapped;
@@ -73,7 +72,9 @@ class _DrawerState extends State<DrawerOnly> {
                         colorText: const Color.fromRGBO(63, 180, 188, 1),
                         onTap: () {},
                       ),
-                      buildDivider(),
+                      const Divider(
+                        color: Color.fromRGBO(66, 65, 65, 0.38),
+                      ),
                       buildListTile(context, 'Property',
                           onTap: () {}, icon: OMIcons.search, position: 2),
                       buildListTile(context, 'Favorits',
@@ -99,8 +100,7 @@ class _DrawerState extends State<DrawerOnly> {
                   ),
                 ),
                 Padding(
-                    padding:
-                        const EdgeInsets.only(bottom: 8.0, left: 16, right: 16),
+                    padding: const EdgeInsets.only(bottom: 24.0, right: 16),
                     child: Align(
                         alignment: FractionalOffset.bottomCenter,
                         child: Column(
@@ -182,7 +182,7 @@ class _DrawerState extends State<DrawerOnly> {
     Color colorIcon = const Color.fromRGBO(117, 116, 116, 1),
     Color colorText = const Color.fromRGBO(0, 0, 0, 0.87),
   }) {
-    return ListTile(
+    return InkWell(
       onTap: loading
           ? null
           : () {
@@ -192,28 +192,40 @@ class _DrawerState extends State<DrawerOnly> {
               onTap();
               Navigator.canPop(context);
             },
-      selected: _selectedDrawerIndex == position,
-      dense: true,
-      leading: Container(
-          width: 20,
-          height: 20,
-          child: loading
-              ? StyledCircularProgress(
-                  size: 'small', color: Theme.of(context).primaryColor)
-              : Icon(
-                  icon,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 32),
+              child: Container(
+                width: 24,
+                height: 24,
+                child: Center(
+                    child: loading
+                        ? StyledCircularProgress(
+                            size: 'small',
+                            color: Theme.of(context).primaryColor)
+                        : Icon(
+                            icon,
+                            color: _selectedDrawerIndex == position
+                                ? const Color.fromRGBO(63, 180, 188, 1)
+                                : colorIcon,
+                          )),
+              ),
+            ),
+            Text(
+              title,
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
                   color: _selectedDrawerIndex == position
                       ? const Color.fromRGBO(63, 180, 188, 1)
-                      : colorIcon,
-                )),
-      title: Text(
-        title,
-        style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.normal,
-            color: _selectedDrawerIndex == position
-                ? const Color.fromRGBO(63, 180, 188, 1)
-                : colorText),
+                      : colorText),
+            ),
+          ],
+        ),
       ),
     );
   }
