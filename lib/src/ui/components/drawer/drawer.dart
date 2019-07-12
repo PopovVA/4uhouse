@@ -6,8 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart'
 
 import '../../../blocs/auth/auth_bloc.dart' show AuthBloc;
 import '../../../blocs/auth/auth_event.dart' show AuthEvent;
-import '../../../blocs/auth/auth_state.dart'
-    show AuthState, AuthUnauthorized, AuthAuthorized;
+import '../../../blocs/auth/auth_state.dart' show AuthState, AuthUnauthorized;
 import '../../../blocs/logout/logout_bloc.dart' show LogOutBloc;
 import '../../../blocs/logout/logout_event.dart'
     show LogOutEvent, LogoutButtonTapped;
@@ -53,61 +52,65 @@ class _DrawerState extends State<DrawerOnly> {
                 Expanded(
                   child: ListView(
                     children: <Widget>[
-                      (state is AuthAuthorized)
-                          ? Header(userProfile: state.userProfile)
-                          : Container(),
-                      buildListTile(context, 'Market',
-                          icon: OMIcons.search, position: 0),
-                      buildListTile(context, 'Likes',
-                          icon: OMIcons.favoriteBorder, position: 1),
+                      Header(
+                        state: state,
+                      ),
+                      buildListTile(
+                        context,
+                        'Add property',
+                        icon: OMIcons.addCircleOutline,
+                        position: 0,
+                        colorIcon: const Color.fromRGBO(63, 180, 188, 1),
+                        colorText: const Color.fromRGBO(63, 180, 188, 1),
+                      ),
+                      buildListTile(
+                        context,
+                        'Contact us',
+                        icon: OMIcons.mailOutline,
+                        position: 1,
+                        colorIcon: const Color.fromRGBO(63, 180, 188, 1),
+                        colorText: const Color.fromRGBO(63, 180, 188, 1),
+                        onTap: () {},
+                      ),
+                      const Divider(
+                        color: Color.fromRGBO(66, 65, 65, 0.38),
+                      ),
+                      buildListTile(context, 'Property',
+                          onTap: () {}, icon: OMIcons.search, position: 2),
+                      buildListTile(context, 'Favorits',
+                          onTap: () {},
+                          icon: OMIcons.favoriteBorder,
+                          position: 3),
                       buildDivider(),
                       buildListTile(
                         context,
                         'Message',
+                        onTap: () {},
                         icon: OMIcons.forum,
-                        position: 2,
+                        position: 4,
                       ),
-                      buildListTile(context, 'Meeting',
-                          icon: OMIcons.supervisorAccount, position: 3),
+                      buildListTile(context, 'Calendar',
+                          onTap: () {}, icon: OMIcons.event, position: 5),
                       buildDivider(),
                       buildListTile(context, 'My account',
-                          icon: OMIcons.accountCircle, position: 3),
-                      buildListTile(context, 'Settings',
-                          icon: OMIcons.settings, position: 6),
-                      buildDivider(),
-                      state is AuthUnauthorized
-                          ? buildSignIn(context: context)
-                          : buildSignOut(context: context)
+                          onTap: () {},
+                          icon: OMIcons.accountCircle,
+                          position: 6),
                     ],
                   ),
                 ),
                 Padding(
-                    padding:
-                        const EdgeInsets.only(bottom: 8.0, left: 16, right: 16),
+                    padding: const EdgeInsets.only(bottom: 24.0, right: 16),
                     child: Align(
-                      alignment: FractionalOffset.bottomCenter,
-                      child: Container(
-                        height: 48.0,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: const Color.fromRGBO(63, 180, 188, 1),
-                              width: 2),
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                        child: OutlineButton(
-                            //elevation: 8,
-                            color: Colors.white,
-                            onPressed: () {},
-                            child: const Text(
-                              'ADD PROPERTY',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Color.fromRGBO(63, 180, 188, 1),
-                              ),
-                            )),
-                      ),
-                    ))
+                        alignment: FractionalOffset.bottomCenter,
+                        child: Column(
+                          children: <Widget>[
+                            buildDivider(),
+                            state is AuthUnauthorized
+                                ? buildSignIn(context: context)
+                                : buildSignOut(context: context),
+                          ],
+                        )))
               ],
             ),
           );
@@ -131,7 +134,7 @@ class _DrawerState extends State<DrawerOnly> {
           builder: (BuildContext context, LogOutState state) {
             if (state is LogOutNotActive || state is LogOutError) {
               return buildListTile(context, 'Sign out',
-                  icon: OMIcons.exitToApp, position: 8, onTap: () async {
+                  icon: OMIcons.exitToApp, position: 7, onTap: () async {
                 final bool logoutApproved = await showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -164,36 +167,65 @@ class _DrawerState extends State<DrawerOnly> {
 
   Widget buildSignIn({@required BuildContext context}) {
     return buildListTile(context, 'Sign in',
-        icon: OMIcons.exitToApp, position: 8, onTap: () {
+        icon: OMIcons.exitToApp, position: 7, onTap: () {
       Navigator.of(context).pushNamed('login');
     });
   }
 
-  Widget buildListTile(BuildContext context, String title,
-      {IconData icon, int position, Function onTap, bool loading = false}) {
-    return ListTile(
+  Widget buildListTile(
+    BuildContext context,
+    String title, {
+    IconData icon,
+    int position,
+    Function onTap,
+    bool loading = false,
+    Color colorIcon = const Color.fromRGBO(117, 116, 116, 1),
+    Color colorText = const Color.fromRGBO(0, 0, 0, 0.87),
+  }) {
+    return InkWell(
       onTap: loading
           ? null
           : () {
-              _selectedDrawerIndex = position;
+              setState(() {
+                _selectedDrawerIndex = position;
+              });
               onTap();
               Navigator.canPop(context);
             },
-      selected: _selectedDrawerIndex == position,
-      dense: true,
-      leading: Container(
-          width: 20,
-          height: 20,
-          child: loading
-              ? StyledCircularProgress(
-                  size: 'small', color: Theme.of(context).primaryColor)
-              : Icon(
-                  icon,
-                  color: const Color.fromRGBO(117, 116, 116, 1),
-                )),
-      title: Text(
-        title,
-        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 32),
+              child: Container(
+                width: 24,
+                height: 24,
+                child: Center(
+                    child: loading
+                        ? StyledCircularProgress(
+                            size: 'small',
+                            color: Theme.of(context).primaryColor)
+                        : Icon(
+                            icon,
+                            color: _selectedDrawerIndex == position
+                                ? const Color.fromRGBO(63, 180, 188, 1)
+                                : colorIcon,
+                          )),
+              ),
+            ),
+            Text(
+              title,
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                  color: _selectedDrawerIndex == position
+                      ? const Color.fromRGBO(63, 180, 188, 1)
+                      : colorText),
+            ),
+          ],
+        ),
       ),
     );
   }
