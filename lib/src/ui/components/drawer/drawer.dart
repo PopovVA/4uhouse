@@ -195,7 +195,7 @@ class _DrawerState extends State<DrawerOnly> {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12.0),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 32),

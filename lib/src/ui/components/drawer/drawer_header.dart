@@ -29,7 +29,7 @@ class Header extends StatelessWidget {
     return (state is AuthAuthorized)
         ? Expanded(
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(left: 16, right: 32),
