@@ -14,6 +14,7 @@ import '../../../blocs/component/component_event.dart'
 import '../../../blocs/component/component_state.dart'
     show ComponentState, ComponentIsFetching, ComponentFetchingError;
 import '../../../blocs/screen/screen_bloc.dart' show ScreenBloc;
+import '../../../constants/layout.dart' show heightSwitch;
 import '../../../models/screen/components/item_model.dart';
 import '../../../resources/auth_repository.dart' show AuthRepository;
 import '../../../resources/component_repository.dart' show ComponentRepository;
@@ -133,7 +134,17 @@ class _ItemState extends State<Item> {
 
   Object buildSuffix(BuildContext context, ComponentState state) {
     if (state is ComponentIsFetching) {
-      return const StyledCircularProgress(size: 'sm');
+      return Container(
+        height: heightSwitch,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Container(
+                padding: const EdgeInsets.only(right: 12),
+                child: const StyledCircularProgress(size: 'sm')),
+          ],
+        ),
+      );
     }
 
     final ItemModel item = widget.item;
@@ -151,12 +162,15 @@ class _ItemState extends State<Item> {
     }
   }
 
-  Switch renderSwitch(BuildContext context) {
+  Widget renderSwitch(BuildContext context) {
     final ItemModel item = widget.item;
-    return Switch(
-      activeColor: Theme.of(context).primaryColor,
-      value: item.value,
-      onChanged: item.isInput ? onChanged : null,
+    return Container(
+      height: heightSwitch,
+      child: Switch(
+        activeColor: Theme.of(context).primaryColor,
+        value: item.value,
+        onChanged: item.isInput ? onChanged : null,
+      ),
     );
   }
 
