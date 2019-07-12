@@ -135,8 +135,16 @@ class _ItemState extends State<Item> {
   Object buildSuffix(BuildContext context, ComponentState state) {
     if (state is ComponentIsFetching) {
       return Container(
-          height: heightSwitch,
-          child: const StyledCircularProgress(size: 'sm'));
+        height: heightSwitch,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Container(
+                padding: const EdgeInsets.only(right: 12),
+                child: const StyledCircularProgress(size: 'sm')),
+          ],
+        ),
+      );
     }
 
     final ItemModel item = widget.item;
@@ -158,12 +166,10 @@ class _ItemState extends State<Item> {
     final ItemModel item = widget.item;
     return Container(
       height: heightSwitch,
-      child: Center(
-        child: Switch(
-          activeColor: Theme.of(context).primaryColor,
-          value: item.value,
-          onChanged: item.isInput ? onChanged : null,
-        ),
+      child: Switch(
+        activeColor: Theme.of(context).primaryColor,
+        value: item.value,
+        onChanged: item.isInput ? onChanged : null,
       ),
     );
   }
