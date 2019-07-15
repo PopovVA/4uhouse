@@ -29,7 +29,7 @@ Future<void> slideAnimation(
             side: side,
           ));
   overlayState.insert(overlayEntry);
-  await Future<void>.delayed(Duration(milliseconds: 800));
+  await Future<void>.delayed(Duration(milliseconds: 1000));
   clearStack(overlayEntry);
 }
 
@@ -72,15 +72,10 @@ class _SlideAnimationState extends State<SlideAnimation>
   Animation<Offset> offset;
 
   @override
-  void didUpdateWidget(SlideAnimation oldWidget) {
-    super.didUpdateWidget(oldWidget);
-  }
-
-  @override
   void initState() {
     super.initState();
     controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 800));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 900));
 
     offset = widget.side == 'right'
         ? Tween<Offset>(end: Offset.zero, begin: const Offset(1, 0.0))
