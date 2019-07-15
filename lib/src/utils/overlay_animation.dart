@@ -47,8 +47,11 @@ class _CircularLoadingState extends State<CircularLoading>
     return Stack(
       children: <Widget>[
         Center(
-          child: const StyledCircularProgress(),
-        )
+            child: Container(
+              width: 60,
+              height: 60,
+              child: const StyledCircularProgress(size: 'md'),
+            ))
       ],
     );
   }

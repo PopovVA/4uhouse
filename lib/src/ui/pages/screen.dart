@@ -92,8 +92,6 @@ class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
 
     if (state is ScreenDataLoaded) {
       query = state.data.path;
-    } else if (state is ScreenLoading) {
-      query = state.query;
     } else if (state is ScreenModel) {
       query = state.path;
     }
@@ -118,6 +116,7 @@ class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
                 topLeft: Radius.circular(0),
                 topRight: Radius.circular(0),
                 bottomRight: Radius.circular(0),
+                  bottomLeft: Radius.circular(0)
               ),
               child: Align(
                   alignment: Alignment.bottomCenter,
