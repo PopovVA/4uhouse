@@ -60,6 +60,8 @@ class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
   ComponentBloc componentBloc;
   String scrollToId;
 
+  bool animationIsOn = false;
+
   @override
   void initState() {
     super.initState();
@@ -103,6 +105,10 @@ class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
 
   Future<void> makeAnimation(
       {@required String newPath, @required String currentPath}) async {
+    if (animationIsOn) {
+      return;
+    }
+    animationIsOn = true;
     final List<String> countNewPath = newPath.split('/');
     final List<String> countCurrentPath = currentPath.split('/');
     if (countNewPath.length != countCurrentPath.length) {
@@ -113,11 +119,10 @@ class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
       await slideAnimation(
           body: ClipRRect(
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(0),
-                topRight: Radius.circular(0),
-                bottomRight: Radius.circular(0),
-                  bottomLeft: Radius.circular(0)
-              ),
+                  topLeft: Radius.circular(0),
+                  topRight: Radius.circular(0),
+                  bottomRight: Radius.circular(0),
+                  bottomLeft: Radius.circular(0)),
               child: Align(
                   alignment: Alignment.bottomCenter,
                   heightFactor: 0.9,
@@ -148,6 +153,7 @@ class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
           countNewPath.length > countCurrentPath.length ? 'right' : 'left',
           context: context);
       screenBloc.dispatch(ScreenRequested(route: newPath));
+      animationIsOn = false;
     } else {
       screenBloc.dispatch(ScreenRequested(route: newPath));
     }
@@ -255,8 +261,6 @@ class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
         await makeAnimation(
             newPath: path.substring(0, path.lastIndexOf('/')),
             currentPath: path);
-        screenBloc.dispatch(
-            ScreenRequested(route: path.substring(0, path.lastIndexOf('/'))));
       };
     }
     return null;
