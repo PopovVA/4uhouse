@@ -52,9 +52,9 @@ class ScreenBloc extends Bloc<ScreenEvent, ScreenState> {
   Stream<ScreenState> _requestScreen(ScreenRequested event,
       {bool tryToRefresh = false}) async* {
     try {
-      if (!(currentState is ScreenLoading)) {
-        yield ScreenLoading();
-      }
+//      if (!(currentState is ScreenLoading)) {
+//        yield ScreenLoading();
+//      }
 
       final String token = await authRepository.accessToken;
       final ScreenModel screen =

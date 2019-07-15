@@ -28,6 +28,8 @@ import '../../models/screen/components/property_model.dart' show PropertyModel;
 import '../../models/screen/screen_model.dart' show ScreenModel;
 import '../../resources/auth_repository.dart' show AuthRepository;
 import '../../resources/screen_repository.dart' show ScreenRepository;
+import '../../utils/overlay_animation.dart'
+    show slideAnimation, circularLoading;
 import '../../utils/show_alert.dart' show showError;
 
 import '../components/button.dart' show Button;
@@ -52,7 +54,7 @@ class Screen extends StatefulWidget {
   }
 }
 
-class _ScreenState extends State<Screen> {
+class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
   GlobalKey scrollItemKey;
   ScreenBloc screenBloc;
   ComponentBloc componentBloc;
@@ -63,10 +65,10 @@ class _ScreenState extends State<Screen> {
     super.initState();
     screenBloc = ScreenBloc(
         authBloc: widget.authBloc,
-       screenRepository: ScreenRepository(),
+        screenRepository: ScreenRepository(),
         authRepository: AuthRepository());
 //        screenRepository: TestScreenRepository(),
-//           authRepository: AuthRepository());
+//        authRepository: AuthRepository());
     screenBloc.dispatch(ScreenRequested(route: widget.route));
   }
 
@@ -84,7 +86,7 @@ class _ScreenState extends State<Screen> {
     }
   }
 
-  Future<void> _refresh(ScreenState state) async {
+  Future<void> _refresh(dynamic state) async {
     scrollToId = null;
     String query;
 
@@ -92,6 +94,8 @@ class _ScreenState extends State<Screen> {
       query = state.data.path;
     } else if (state is ScreenLoading) {
       query = state.query;
+    } else if (state is ScreenModel) {
+      query = state.path;
     }
 
     if (query != null) {
@@ -99,14 +103,65 @@ class _ScreenState extends State<Screen> {
     }
   }
 
-  Function makeTransition(String path) => (BuildContext context, String id) {
-        screenBloc.dispatch(
-            ScreenRequested(route: '$path${id is String ? '/$id' : ''}'));
+  Future<void> makeAnimation(
+      {@required String newPath, @required String currentPath}) async {
+    final List<String> countNewPath = newPath.split('/');
+    final List<String> countCurrentPath = currentPath.split('/');
+    if (countNewPath.length != countCurrentPath.length) {
+      await circularLoading(context: context);
+      final String token = await screenBloc.authRepository.accessToken;
+      final ScreenModel screen = await screenBloc.screenRepository
+          .fetchScreen(query: newPath, token: token);
+      await slideAnimation(
+          body: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(0),
+                topRight: Radius.circular(0),
+                bottomRight: Radius.circular(0),
+              ),
+              child: Align(
+                  alignment: Alignment.bottomCenter,
+                  heightFactor: 0.9,
+                  widthFactor: 1,
+                  child: PageTemplate(
+                    drawer: getDrawer(screen),
+                    actions: <Widget>[
+                      IconButton(
+                        icon: const Icon(OMIcons.addCircleOutline),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: const Icon(OMIcons.settingsInputComponent),
+                        onPressed: () {},
+                      ),
+                    ],
+                    body: RefreshIndicator(
+                      onRefresh: () => _refresh(screen),
+                      color: Theme
+                          .of(context)
+                          .primaryColor,
+                      child: Ink(color: Colors.white, child: buildBody(screen)),
+                    ),
+                    goBack: getHandleGoBack(screen),
+                    title: buildTitle(screen),
+                  ))),
+          side:
+          countNewPath.length > countCurrentPath.length ? 'right' : 'left',
+          context: context);
+      screenBloc.dispatch(ScreenRequested(route: newPath));
+    } else {
+      screenBloc.dispatch(ScreenRequested(route: newPath));
+    }
+  }
+
+  Function makeTransition(String path) =>
+          (BuildContext context, String id) async {
+        final String newPath = '$path${id is String ? '/$id' : ''}';
+        await makeAnimation(newPath: newPath, currentPath: path);
       };
 
-  Widget buildComponents(ScreenDataLoaded state) {
-    final ScreenModel data = state.data;
-
+  Widget buildComponents(dynamic state) {
+    final ScreenModel data = state is ScreenDataLoaded ? state.data : state;
     if (data != null) {
       final String path = data.path;
       final List<Widget> items = <Widget>[];
@@ -158,7 +213,6 @@ class _ScreenState extends State<Screen> {
         SchedulerBinding.instance
             .addPostFrameCallback((_) => _scrollToItem(scrollItemKey));
       }
-
       return Stack(
         children: <Widget>[
           Column(
@@ -194,21 +248,23 @@ class _ScreenState extends State<Screen> {
     return null;
   }
 
-  Function getHandleGoBack(ScreenState state) {
+  Function getHandleGoBack(dynamic state) {
     if (state is ScreenDataLoaded && !isHomePage(state.data.path)) {
-      return () {
+      return () async {
         final String path = state.data.path;
         scrollToId = path.substring(path.lastIndexOf('/') + 1);
+        await makeAnimation(
+            newPath: path.substring(0, path.lastIndexOf('/')),
+            currentPath: path);
         screenBloc.dispatch(
             ScreenRequested(route: path.substring(0, path.lastIndexOf('/'))));
       };
     }
-
     return null;
   }
 
-  Widget buildBody(ScreenState state) {
-    if (state is ScreenDataLoaded) {
+  Widget buildBody(dynamic state) {
+    if (state is ScreenDataLoaded || state is ScreenModel) {
       return buildComponents(state);
     }
 
@@ -239,17 +295,27 @@ class _ScreenState extends State<Screen> {
     );
   }
 
-  String buildTitle(ScreenState state) {
+  String buildTitle(dynamic state) {
     if (state is ScreenDataLoaded) {
       return state.data.value;
+    }
+
+    if (state is ScreenModel) {
+      return state.value;
     }
 
     return 'Loading';
   }
 
-  Widget getDrawer(ScreenState state) {
+  Widget getDrawer(dynamic state) {
     if (state is ScreenDataLoaded) {
       return isHomePage(state.data.path)
+          ? DrawerOnly(authBloc: widget.authBloc)
+          : null;
+    }
+
+    if (state is ScreenModel) {
+      return isHomePage(state.path)
           ? DrawerOnly(authBloc: widget.authBloc)
           : null;
     }
@@ -288,7 +354,7 @@ class _ScreenState extends State<Screen> {
             builder: (BuildContext context, ScreenState state) {
               return PageTemplate(
                 drawer: getDrawer(state),
-                loading: state is ScreenLoading,
+//                loading: state is ScreenLoading,
                 actions: <Widget>[
                   IconButton(
                     icon: const Icon(OMIcons.addCircleOutline),
