@@ -67,10 +67,10 @@ class _ScreenState extends State<Screen> with SingleTickerProviderStateMixin {
     super.initState();
     screenBloc = ScreenBloc(
         authBloc: widget.authBloc,
-        screenRepository: ScreenRepository(),
-        authRepository: AuthRepository());
-//        screenRepository: TestScreenRepository(),
+//        screenRepository: ScreenRepository(),
 //        authRepository: AuthRepository());
+        screenRepository: TestScreenRepository(),
+        authRepository: AuthRepository());
     screenBloc.dispatch(ScreenRequested(route: widget.route));
   }
 
